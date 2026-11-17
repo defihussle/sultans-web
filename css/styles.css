@@ -62,7 +62,7 @@
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* --- TYPE SCALE (fluid: grows with the screen, no media queries needed) --- */
-  --fs-hero:  clamp(2.3rem, 6.4vw, 4.4rem);
+  --fs-hero:  clamp(2.15rem, 4.6vw, 3.5rem);
   --fs-h2:    clamp(1.85rem, 4vw, 2.9rem);
   --fs-h3:    clamp(1.2rem, 2vw, 1.45rem);
   --fs-lede:  clamp(1.05rem, 1.6vw, 1.22rem);
@@ -462,7 +462,9 @@ a:hover { color: var(--purple-700); }
 .hero-title {
   font-size: var(--fs-hero);
   font-weight: 600;
+  line-height: 1.08;
   color: var(--white);
+  max-width: 17ch;
   margin-bottom: var(--sp-5);
 }
 .hero-title em {
@@ -968,8 +970,17 @@ a.contact-value:hover { color: var(--gold-400); text-decoration: underline; }
   margin-bottom: var(--sp-5);
 }
 
-.field { display: grid; gap: 0.4rem; margin-bottom: var(--sp-4); border: 0; padding: 0; }
-.field label,
+/* align-content:start stops the browser stretching the label and the input
+   when one field in a pair is taller than the other. */
+.field {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  margin-bottom: var(--sp-4);
+  border: 0;
+  padding: 0;
+}
+.field > label,
 .field legend {
   font-size: var(--fs-micro);
   font-weight: 700;
@@ -1006,9 +1017,10 @@ a.contact-value:hover { color: var(--gold-400); text-decoration: underline; }
 
 .field-pair { display: grid; gap: var(--sp-4); }
 
-.field-radios { gap: var(--sp-3); }
-.field-radios legend { margin-bottom: var(--sp-2); }
-.radio {
+/* Service radios sit on one row, under their legend. */
+.field-radios { display: block; }
+.field-radios legend { display: block; margin-bottom: var(--sp-3); }
+.field-radios .radio {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -1019,7 +1031,12 @@ a.contact-value:hover { color: var(--gold-400); text-decoration: underline; }
   text-transform: none;
   color: var(--text);
 }
-.radio input { width: auto; accent-color: var(--purple-600); }
+.field-radios .radio input {
+  width: auto;
+  min-height: 1.1rem;
+  padding: 0;
+  accent-color: var(--purple-600);
+}
 
 .form-note {
   margin: var(--sp-4) 0 0;
