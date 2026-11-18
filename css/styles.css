@@ -129,7 +129,7 @@
   /* Page width, side gutter, and the height of the fixed header. */
   --maxw: 1200px;
   --gutter: clamp(1.15rem, 4vw, 2.75rem);
-  --header-h: 4rem;
+  --header-h: 5rem;
 
   /* --- CORNERS & SHADOWS ---------------------------------------------------
      Shadows are tinted purple rather than grey, so they sit in the palette. */
@@ -468,7 +468,7 @@ a:hover { color: var(--plum-700); }
    height below - the width follows on its own. */
 .brand-logo {
   display: block;
-  height: 2.8rem;
+  height: 3.2rem;
   width: auto;
   max-width: 100%;
 }
@@ -1811,8 +1811,9 @@ a.contact-value:hover { color: var(--gold-400); }
 
 /* --- Tablets (720px) --- */
 @media (min-width: 720px) {
-  :root { --header-h: 4.5rem; }
-  .brand-logo { height: 3rem; }
+  :root { --header-h: 5.75rem; }
+  .brand-logo { height: 3.6rem; }
+  .nav-toggle { width: 3rem; height: 3rem; }
   .footer-logo { height: 3.2rem; }
 
   .stats {
@@ -1940,8 +1941,8 @@ a.contact-value:hover { color: var(--gold-400); }
 
 /* --- Large desktop (1180px) --- */
 @media (min-width: 1180px) {
-  :root { --header-h: 5rem; }
-  .brand-logo { height: 3.4rem; }
+  :root { --header-h: 6.5rem; }
+  .brand-logo { height: 4.1rem; }
   .section-head { margin-bottom: clamp(3rem, 5vw, 4.5rem); }
   .loc-grid { gap: var(--sp-5); }
 }
