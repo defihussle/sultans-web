@@ -229,6 +229,60 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   );
 
   /* -------------------------------------------------------------------------
+     3c. LOCATION FILTER PILLS (phones)
+     Each pill carries a data-filter; each card a data-area. Tapping a pill
+     shows only the cards whose area matches, and hides any group left with
+     nothing in it. "all" puts everything back.
+
+     The pills are hidden by CSS on wider screens, so if the window is
+     widened everything is shown again - otherwise cards could stay hidden
+     with no visible way to bring them back.
+     ------------------------------------------------------------------------- */
+  var locFilters = document.getElementById('locFilters');
+
+  if (locFilters) {
+    var locCards = Array.prototype.slice.call(document.querySelectorAll('.loc[data-area]'));
+    var locGroups = Array.prototype.slice.call(document.querySelectorAll('[data-loc-group]'));
+    var locEmpty = document.getElementById('locEmpty');
+
+    function applyFilter(area) {
+      locCards.forEach(function (card) {
+        card.hidden = !(area === 'all' || card.getAttribute('data-area') === area);
+      });
+
+      // Hide a group once every card inside it is hidden.
+      var anyShown = false;
+      locGroups.forEach(function (group) {
+        var shown = group.querySelectorAll('.loc[data-area]:not([hidden])').length > 0;
+        group.hidden = !shown;
+        if (shown) anyShown = true;
+        // Back to the start, so a filtered row does not open mid-scroll.
+        var row = group.querySelector('[data-scroller]');
+        if (row) row.scrollLeft = 0;
+      });
+
+      if (locEmpty) locEmpty.hidden = anyShown;
+
+      Array.prototype.forEach.call(locFilters.querySelectorAll('.loc-filter'), function (pill) {
+        pill.classList.toggle('is-active', pill.getAttribute('data-filter') === area);
+      });
+    }
+
+    locFilters.addEventListener('click', function (event) {
+      var pill = event.target.closest('.loc-filter');
+      if (pill) applyFilter(pill.getAttribute('data-filter'));
+    });
+
+    // If the pills get hidden (wider window), show everything again.
+    window.addEventListener('resize', function () {
+      if (getComputedStyle(locFilters).display === 'none') {
+        var active = locFilters.querySelector('.loc-filter.is-active');
+        if (active && active.getAttribute('data-filter') !== 'all') applyFilter('all');
+      }
+    });
+  }
+
+  /* -------------------------------------------------------------------------
      4. FOOTER YEAR - no need to update the copyright by hand
      ------------------------------------------------------------------------- */
   var yearEl = document.getElementById('year');
@@ -258,7 +312,7 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
 
     // Sections that have a matching link in the nav, across both pages.
     // Ids that do not exist on the current page are simply skipped.
-    ['packages', 'menu', 'how', 'locations', 'request'].forEach(function (id) {
+    ['about', 'packages', 'menu', 'how', 'locations', 'request'].forEach(function (id) {
       var section = document.getElementById(id);
       if (section) observer.observe(section);
     });

@@ -631,6 +631,21 @@ a:hover { color: var(--plum-700); }
 body.nav-is-open { overflow: hidden; }
 
 /* ---------------------------------------------------------------------------
+   6b. THE HOME PAGE IS WHITE
+   The catering page keeps the warm cream background; the home page is plain
+   white top to bottom. Scoped to the body class "page-home" so the two do
+   not affect each other.
+   --------------------------------------------------------------------------- */
+.page-home { background: var(--paper); }
+.page-home .section-alt {
+  background: var(--paper);
+  border-block-color: var(--line);
+}
+/* Panels that were a shade off-white now need a hairline to read on white. */
+.page-home .loc { background: var(--paper); }
+
+
+/* ---------------------------------------------------------------------------
    7a. THE FULL-SCREEN HERO VIDEO
    The first thing people see: the film, edge to edge, with only the top bar
    over it.
@@ -702,6 +717,59 @@ body.nav-is-open { overflow: hidden; }
       rgba(21, 10, 36, 0.2) calc(var(--header-h) + 7rem),
       rgba(21, 10, 36, 0.16) 62%,
       rgba(21, 10, 36, 0.5) 100%);
+}
+
+
+/* --- The three buttons over the film ---
+   Parked in the lower third: clear of the logo at the top, and clear of the
+   very bottom edge where phone browsers put their own controls. */
+.hero-video-actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(3.5rem, 14vh, 8rem);
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding-inline: var(--gutter);
+}
+/* On a narrow phone the three have to share one line, so they drop the
+   minimum width and tighten their padding. They widen again from 560px. */
+.hero-video-actions .btn {
+  min-width: 0;
+  padding-inline: 1.15rem;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 22px rgba(21, 10, 36, 0.45);
+}
+@media (min-width: 560px) {
+  .hero-video-actions { gap: var(--sp-4); }
+  .hero-video-actions .btn {
+    min-width: 8.5rem;
+    padding-inline: 2rem;
+    font-size: 1rem;
+  }
+}
+
+
+/* ---------------------------------------------------------------------------
+   7b. ABOUT US
+   --------------------------------------------------------------------------- */
+.about-inner { display: grid; gap: var(--sp-6); }
+/* The grid gap already spaces these, so the heading drops its own bottom
+   margin. Scoped through .about-inner so it beats the wide-screen
+   .section-head rule further down the file. */
+.about-inner .section-head { margin-bottom: 0; }
+.about-copy { max-width: 56ch; }
+.about-lead {
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  color: var(--text);
+}
+.about-copy p + p {
+  font-size: var(--fs-body);
+  color: var(--text-muted);
 }
 
 
@@ -795,6 +863,10 @@ body.nav-is-open { overflow: hidden; }
 }
 
 /* --- THE THREE CHOICE CARDS -------------------------------------------------
+   NOT CURRENTLY USED. These styled the three cards that used to sit on the
+   screen below the video. That job is now done by the three purple buttons
+   over the video itself (.hero-video-actions). Kept in case the cards are
+   wanted back; safe to delete otherwise.
    The main thing to act on in the first screen. On phones they are full-width
    rows (icon, words, arrow) so all three fit without scrolling; on desktop
    they become three upright cards. */
@@ -940,6 +1012,17 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-small);
   font-weight: 500;
   color: rgba(239, 234, 246, 0.9);
+}
+
+/* The same strip of facts, on a light background. */
+.trust-bar-light {
+  padding-inline: 0;
+  border-top-color: var(--line);
+}
+.trust-bar-light li { color: var(--text-muted); }
+.trust-bar-light li::before {
+  border-left-color: var(--accent-text);
+  border-bottom-color: var(--accent-text);
 }
 /* Gold tick drawn with two borders, so there is no icon file to manage. */
 .trust-bar li::before {
@@ -1456,6 +1539,46 @@ body.nav-is-open { overflow: hidden; }
 /* ---------------------------------------------------------------------------
    12. LOCATIONS
    --------------------------------------------------------------------------- */
+/* --- Filter pills (phones only) ---
+   Hidden on wider screens, where the two groups and their arrows do the
+   same job with more room. */
+.loc-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-6);
+}
+.loc-filter {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--plum-700);
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--t-fast), border-color var(--t-fast),
+              color var(--t-fast);
+}
+.loc-filter:hover { border-color: var(--plum-500); }
+.loc-filter.is-active {
+  background: var(--plum-500);
+  border-color: var(--plum-500);
+  color: var(--paper);
+}
+
+/* A whole group hides itself when a filter empties it. */
+.loc-group[hidden] { display: none; }
+.loc-empty {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
 /* The group heading, with its scroll arrows on the right. */
 .loc-group-head {
   display: flex;
@@ -1949,7 +2072,9 @@ a.contact-value:hover { color: var(--gold-400); }
   .book-grid { grid-template-columns: 1fr 1fr; }
   .book-steps { padding: var(--sp-7) var(--sp-6); }
 
-  /* Mouse users get arrows; the row still scrolls and snaps. */
+  /* Mouse users get arrows and the grouped rows, so the pills are not
+     needed - the groups already say which area is which. */
+  .loc-filters { display: none; }
   .loc-nav { display: flex; }
   .loc-grid { gap: var(--sp-4); }
   .loc { width: 17rem; }
