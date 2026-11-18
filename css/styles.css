@@ -27,47 +27,59 @@
    --------------------------------------------------------------------------- */
 :root {
 
-  /* --- DEEP PURPLE: the primary brand colour -------------------------------
-     A single hue, stepped from near-black to a pale tint. Low numbers are
-     dark, high numbers are light. */
-  --plum-950: #120620;   /* deepest - footer                        */
-  --plum-900: #1C0C33;   /* dark section backgrounds                */
-  --plum-800: #27123F;   /* raised dark surfaces                    */
-  --plum-700: #35195A;   /* THE brand purple - headings, buttons    */
-  --plum-600: #482474;   /* hover state on purple                   */
-  --plum-500: #5E3391;   /* purple accents                          */
-  --plum-300: #A98FD0;   /* purple text on dark backgrounds         */
-  --plum-100: #EDE7F7;   /* pale tint - badges, soft panels         */
-  --plum-050: #F6F3FB;   /* barely-there purple wash                */
+  /* --- PURPLE: the primary brand colour ------------------------------------
+     Sampled from sultansvictoria.ca. Low numbers are dark, high are light.
+
+     The brand actually runs on TWO purples, and the scale reflects that:
+       950-700  deep plum  - headings, dark bands, the footer
+       600-400  bright violet - links, buttons, focus rings, anything you
+                click. #6B3FA0 is the wordmark violet from the brand site.
+       300-050  pale violet tints for pills and soft panels           */
+  --plum-950: #150A24;   /* deepest - footer                        */
+  --plum-900: #1D0E30;   /* dark section backgrounds                */
+  --plum-800: #241338;   /* raised dark surfaces                    */
+  --plum-700: #2B1645;   /* THE deep plum - headings, dark bands    */
+  --plum-600: #5A3289;   /* violet, pressed/hover                   */
+  --plum-500: #6B3FA0;   /* THE brand violet - interactive          */
+  --plum-400: #8A62B8;   /* lighter violet                          */
+  --plum-300: #B9A0DC;   /* violet text on dark backgrounds         */
+  --plum-100: #F4EEFB;   /* pale violet - pills, soft panels        */
+  --plum-050: #FAF7FD;   /* barely-there violet wash                */
 
   /* --- WARM GOLD: the accent -----------------------------------------------
-     gold-700/600 are dark enough to use as TEXT on white.
-     gold-500/400 are for fills and for text on dark purple. */
-  --gold-700: #8A6316;
-  --gold-600: #A87A1E;   /* gold text on light backgrounds          */
-  --gold-500: #C9972F;   /* THE accent - button fills, rules        */
-  --gold-400: #E0B452;   /* gold text on dark, hover state          */
-  --gold-300: #EFCF84;
-  --gold-100: #F8EFD9;   /* pale gold wash - badges                 */
+     gold-500 (#C8A24A) is the brand gold, taken from the brand site. It is
+     too light to read as text on a pale background, so:
+       gold-700/600  dark enough to use as TEXT on cream or white
+       gold-500/400  fills, rules, icons, and text on deep purple        */
+  --gold-700: #715515;   /* darkest gold text                       */
+  --gold-600: #8E6A1B;   /* gold text on light backgrounds          */
+  --gold-500: #C8A24A;   /* THE accent - button fills, rules        */
+  --gold-400: #D9BC77;   /* gold text on dark, hover state          */
+  --gold-300: #E9D9AE;   /* soft gold                               */
+  --gold-100: #F7EFDC;   /* pale gold wash - badges                 */
 
-  /* --- CLEAN OFF-WHITES & INK ---------------------------------------------- */
-  --paper:    #FFFFFF;
-  --sand-50:  #FBF9F6;   /* warm off-white - alternating sections   */
-  --sand-100: #F4F0E9;   /* slightly deeper warm neutral            */
-  --ink-900:  #16101D;   /* body text                               */
-  --ink-600:  #4E4557;   /* secondary text                          */
-  --ink-400:  #7A7186;   /* captions, placeholders                  */
-  --line:     #E7E2DA;   /* warm hairline borders                   */
+  /* --- WARM CREAM & INK ----------------------------------------------------
+     The page sits on cream, not white. White is kept for cards, so they
+     lift off the background instead of blending into it. */
+  --paper:    #FFFFFF;   /* cards and panels only                   */
+  --sand-50:  #FAF8F4;   /* THE page background - warm cream        */
+  --sand-100: #F3F1EE;   /* alternating band, a shade deeper        */
+  --ink-900:  #2A2233;   /* body text - warm near-black             */
+  --ink-600:  #574E63;   /* secondary text                          */
+  --ink-400:  #6F667D;   /* captions, labels, placeholders          */
+  --line:     #EBE5EF;   /* hairline borders, faintly lavender      */
   --line-dark: rgba(255, 255, 255, 0.14);  /* hairlines on dark     */
 
-  /* --- SUPPORTING ACCENT: dietary tags, "now open" ------------------------- */
-  --sage-700: #2C6B4D;
-  --sage-100: #E3F0E9;
+  /* --- SUCCESS GREEN -------------------------------------------------------
+     The one non-brand colour, used only for the "message sent" line on the
+     form, where green carries meaning. Everything else is purple or gold. */
+  --sage-700: #2F7D4F;
 
   /* --- SEMANTIC ROLES ------------------------------------------------------
      What the colours are USED FOR. Re-point these to restyle quickly. */
-  --bg:           var(--paper);
-  --bg-alt:       var(--sand-50);
+  --bg:           var(--sand-50);   /* cream, not white */
+  --bg-alt:       var(--sand-100);  /* the alternating band */
+  --surface:      var(--paper);     /* cards sitting on either band */
   --bg-dark:      var(--plum-900);
   --text:         var(--ink-900);
   --text-muted:   var(--ink-600);
@@ -121,10 +133,10 @@
   --r-md: 16px;
   --r-lg: 24px;
   --r-pill: 999px;
-  --shadow-xs: 0 1px 2px rgba(18, 6, 32, 0.04);
-  --shadow-sm: 0 1px 2px rgba(18, 6, 32, 0.04), 0 3px 10px rgba(18, 6, 32, 0.045);
-  --shadow-md: 0 2px 6px rgba(18, 6, 32, 0.05), 0 12px 28px rgba(18, 6, 32, 0.07);
-  --shadow-lg: 0 6px 18px rgba(18, 6, 32, 0.07), 0 28px 64px rgba(18, 6, 32, 0.13);
+  --shadow-xs: 0 1px 2px rgba(43, 22, 69, 0.05);
+  --shadow-sm: 0 1px 2px rgba(43, 22, 69, 0.05), 0 3px 10px rgba(43, 22, 69, 0.05);
+  --shadow-md: 0 2px 6px rgba(43, 22, 69, 0.06), 0 12px 28px rgba(43, 22, 69, 0.08);
+  --shadow-lg: 0 6px 18px rgba(43, 22, 69, 0.08), 0 28px 64px rgba(43, 22, 69, 0.15);
 
   /* --- MOTION --------------------------------------------------------------
      Kept short and subtle on purpose. */
@@ -230,8 +242,8 @@ a:hover { color: var(--plum-700); }
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(60% 70% at 12% 0%, rgba(94, 51, 145, 0.75) 0%, transparent 65%),
-    radial-gradient(50% 60% at 95% 100%, rgba(201, 151, 47, 0.16) 0%, transparent 70%);
+    radial-gradient(60% 70% at 12% 0%, rgba(107, 63, 160, 0.75) 0%, transparent 65%),
+    radial-gradient(50% 60% at 95% 100%, rgba(200, 162, 74, 0.16) 0%, transparent 70%);
 }
 .section-invert .section-title { color: var(--paper); }
 .section-invert .section-lede { color: var(--text-on-dark-muted); }
@@ -330,19 +342,19 @@ a:hover { color: var(--plum-700); }
 .btn-gold {
   background: var(--gold-500);
   color: var(--plum-950);
-  box-shadow: 0 1px 2px rgba(18, 6, 32, 0.12), 0 6px 18px rgba(138, 99, 22, 0.24);
+  box-shadow: 0 1px 2px rgba(21, 10, 36, 0.12), 0 6px 18px rgba(142, 106, 27, 0.24);
 }
 .btn-gold:hover {
   background: var(--gold-400);
   color: var(--plum-950);
-  box-shadow: 0 2px 4px rgba(18, 6, 32, 0.12), 0 10px 26px rgba(138, 99, 22, 0.32);
+  box-shadow: 0 2px 4px rgba(21, 10, 36, 0.12), 0 10px 26px rgba(142, 106, 27, 0.32);
 }
 
 /* Secondary on light backgrounds. */
 .btn-outline {
-  background: var(--paper);
+  background: var(--surface);
   color: var(--plum-700);
-  border-color: rgba(53, 25, 90, 0.22);
+  border-color: rgba(107, 63, 160, 0.22);
 }
 .btn-outline:hover {
   background: var(--plum-700);
@@ -350,11 +362,11 @@ a:hover { color: var(--plum-700); }
   color: var(--paper);
 }
 
-/* Solid purple, for a strong action on a light background. */
+/* Solid brand violet, for a strong action on a light background. */
 .btn-dark {
-  background: var(--plum-700);
+  background: var(--plum-500);
   color: var(--paper);
-  box-shadow: 0 1px 2px rgba(18, 6, 32, 0.14), 0 8px 20px rgba(53, 25, 90, 0.2);
+  box-shadow: 0 1px 2px rgba(21, 10, 36, 0.14), 0 8px 20px rgba(107, 63, 160, 0.28);
 }
 .btn-dark:hover { background: var(--plum-600); color: var(--paper); }
 
@@ -396,7 +408,7 @@ a:hover { color: var(--plum-700); }
 /* Scrolled state, and whenever the mobile menu is open. */
 .site-header.is-stuck,
 .site-header.nav-open {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(250, 248, 244, 0.94);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: var(--line);
   box-shadow: var(--shadow-xs);
@@ -430,7 +442,7 @@ a:hover { color: var(--plum-700); }
   height: 2.4rem;
   border-radius: var(--r-xs);
   background: linear-gradient(150deg, var(--plum-600), var(--plum-900));
-  box-shadow: inset 0 0 0 1px rgba(224, 180, 82, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(217, 188, 119, 0.35);
   color: var(--gold-400);
   font-family: var(--font-display);
   font-size: 1.25rem;
@@ -469,7 +481,7 @@ a:hover { color: var(--plum-700); }
 }
 .site-header.is-stuck .nav-toggle,
 .site-header.nav-open .nav-toggle {
-  background: var(--paper);
+  background: var(--surface);
   border-color: var(--line);
 }
 
@@ -481,7 +493,7 @@ a:hover { color: var(--plum-700); }
   width: 1.15rem;
   height: 2px;
   margin-left: -0.575rem;
-  background: var(--paper);
+  background: var(--surface);
   border-radius: 2px;
   transition: transform var(--t-base), opacity var(--t-fast),
               background-color var(--t-base);
@@ -507,7 +519,7 @@ a:hover { color: var(--plum-700); }
   left: 0;
   right: 0;
   display: none;
-  background: var(--paper);
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
   box-shadow: var(--shadow-md);
 }
@@ -555,10 +567,10 @@ a:hover { color: var(--plum-700); }
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(55% 60% at 78% 18%, rgba(224, 180, 82, 0.5) 0%, transparent 62%),
-    radial-gradient(45% 50% at 95% 72%, rgba(201, 151, 47, 0.22) 0%, transparent 65%),
-    radial-gradient(80% 90% at 2% 92%, rgba(94, 51, 145, 0.95) 0%, transparent 60%),
-    linear-gradient(158deg, var(--plum-700) 0%, var(--plum-950) 100%);
+    radial-gradient(55% 60% at 78% 18%, rgba(217, 188, 119, 0.5) 0%, transparent 62%),
+    radial-gradient(45% 50% at 95% 72%, rgba(200, 162, 74, 0.24) 0%, transparent 65%),
+    radial-gradient(85% 95% at 0% 90%, rgba(107, 63, 160, 1) 0%, transparent 62%),
+    linear-gradient(158deg, var(--plum-600) 0%, var(--plum-800) 48%, var(--plum-950) 100%);
 }
 /* Any photo or video dropped into the slot fills the area edge to edge. */
 .hero-asset {
@@ -574,8 +586,8 @@ a:hover { color: var(--plum-700); }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(100deg, rgba(18, 6, 32, 0.88) 0%, rgba(18, 6, 32, 0.74) 34%, rgba(18, 6, 32, 0.34) 72%, rgba(18, 6, 32, 0.3) 100%),
-    linear-gradient(to top, rgba(18, 6, 32, 0.6) 0%, transparent 28%);
+    linear-gradient(100deg, rgba(21, 10, 36, 0.76) 0%, rgba(21, 10, 36, 0.58) 34%, rgba(21, 10, 36, 0.24) 72%, rgba(21, 10, 36, 0.2) 100%),
+    linear-gradient(to top, rgba(21, 10, 36, 0.55) 0%, transparent 30%);
 }
 .hero-scrim::after {
   content: "";
@@ -649,19 +661,19 @@ a:hover { color: var(--plum-700); }
 }
 .choice:hover {
   background: rgba(255, 255, 255, 0.13);
-  border-color: rgba(224, 180, 82, 0.65);
+  border-color: rgba(217, 188, 119, 0.65);
   color: var(--paper);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(18, 6, 32, 0.4);
+  box-shadow: 0 10px 30px rgba(21, 10, 36, 0.4);
 }
 .choice:active { transform: translateY(0); }
 
 /* The one highlighted card. Move the class "choice-primary" in the HTML to
    highlight a different one. */
 .choice-primary {
-  border-color: rgba(224, 180, 82, 0.5);
+  border-color: rgba(217, 188, 119, 0.5);
   background:
-    linear-gradient(110deg, rgba(201, 151, 47, 0.22) 0%, rgba(255, 255, 255, 0.07) 70%);
+    linear-gradient(110deg, rgba(200, 162, 74, 0.22) 0%, rgba(255, 255, 255, 0.07) 70%);
 }
 
 .choice-icon {
@@ -676,7 +688,7 @@ a:hover { color: var(--plum-700); }
   transition: background-color var(--t-base), color var(--t-base);
 }
 .choice-icon svg { width: 1.5rem; height: 1.5rem; }
-.choice-primary .choice-icon { background: rgba(224, 180, 82, 0.2); }
+.choice-primary .choice-icon { background: rgba(217, 188, 119, 0.2); }
 /* On hover the icon tile fills gold - the one bit of colour movement. */
 .choice:hover .choice-icon {
   background: var(--gold-500);
@@ -720,7 +732,7 @@ a:hover { color: var(--plum-700); }
   color: var(--paper);
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid rgba(224, 180, 82, 0.6);
+  border-bottom: 1px solid rgba(217, 188, 119, 0.6);
   padding-bottom: 1px;
   transition: border-color var(--t-fast), color var(--t-fast);
 }
@@ -760,9 +772,10 @@ a:hover { color: var(--plum-700); }
 /* ---------------------------------------------------------------------------
    8. DISH TICKER
    --------------------------------------------------------------------------- */
+/* Deep plum strip, the same treatment the brand site uses for its marquee. */
 .ticker {
   overflow: hidden;
-  background: var(--plum-950);
+  background: var(--plum-700);
   padding-block: 0.8rem;
 }
 .ticker-track {
@@ -831,7 +844,7 @@ a:hover { color: var(--plum-700); }
 .feature {
   position: relative;
   padding: var(--sp-5);
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-xs);
@@ -852,7 +865,7 @@ a:hover { color: var(--plum-700); }
 }
 .feature:hover {
   transform: translateY(-3px);
-  border-color: rgba(201, 151, 47, 0.45);
+  border-color: rgba(200, 162, 74, 0.45);
   box-shadow: var(--shadow-md);
 }
 .feature:hover::before { width: 2.5rem; }
@@ -885,12 +898,14 @@ a:hover { color: var(--plum-700); }
   text-transform: uppercase;
   color: var(--ink-400);
 }
+/* Violet pills, matching how the brand site tags dietary options. */
 .tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .tag-row li {
   padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(107, 63, 160, 0.3);
   border-radius: var(--r-pill);
-  background: var(--sage-100);
-  color: var(--sage-700);
+  background: var(--plum-100);
+  color: var(--plum-500);
   font-size: var(--fs-micro);
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -914,7 +929,7 @@ a:hover { color: var(--plum-700); }
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-sm);
@@ -924,7 +939,7 @@ a:hover { color: var(--plum-700); }
 }
 .pkg:hover {
   transform: translateY(-4px);
-  border-color: rgba(53, 25, 90, 0.18);
+  border-color: rgba(107, 63, 160, 0.18);
   box-shadow: var(--shadow-md);
 }
 
@@ -954,7 +969,7 @@ a:hover { color: var(--plum-700); }
 
 /* The featured package: a gold hairline across the top. */
 .pkg-feature {
-  border-color: rgba(201, 151, 47, 0.5);
+  border-color: rgba(200, 162, 74, 0.5);
   box-shadow: var(--shadow-md);
 }
 .pkg-feature::before {
@@ -1044,7 +1059,7 @@ a:hover { color: var(--plum-700); }
   display: grid;
   gap: var(--sp-5);
   padding: var(--sp-6);
-  border: 1px solid rgba(53, 25, 90, 0.12);
+  border: 1px solid rgba(107, 63, 160, 0.12);
   border-radius: var(--r-lg);
   background:
     linear-gradient(135deg, var(--plum-050) 0%, var(--paper) 50%, var(--gold-100) 100%);
@@ -1138,7 +1153,7 @@ a:hover { color: var(--plum-700); }
   padding: 0.35rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--r-xs);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--plum-700);
   font-size: var(--fs-micro);
   font-weight: 600;
@@ -1169,7 +1184,7 @@ a:hover { color: var(--plum-700); }
 .loc {
   position: relative;
   padding: var(--sp-5);
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   transition: border-color var(--t-base), box-shadow var(--t-base),
@@ -1188,7 +1203,7 @@ a:hover { color: var(--plum-700); }
 }
 .loc:hover {
   transform: translateY(-2px);
-  border-color: rgba(201, 151, 47, 0.45);
+  border-color: rgba(200, 162, 74, 0.45);
   box-shadow: var(--shadow-sm);
 }
 .loc:hover::before { background: var(--gold-500); width: 2.2rem; }
@@ -1209,8 +1224,8 @@ a:hover { color: var(--plum-700); }
   margin: var(--sp-3) 0 0;
   padding: 0.2rem 0.6rem;
   border-radius: var(--r-pill);
-  background: var(--sage-100);
-  color: var(--sage-700);
+  background: var(--gold-100);
+  color: var(--gold-700);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -1262,7 +1277,7 @@ a.contact-value:hover { color: var(--gold-400); }
 
 /* --- The form card --- */
 .request-form {
-  background: var(--paper);
+  background: var(--surface);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-lg);
   color: var(--text);
@@ -1331,14 +1346,14 @@ a.contact-value:hover { color: var(--gold-400); }
 
 .field input:hover,
 .field select:hover,
-.field textarea:hover { border-color: #D9D2C7; }
+.field textarea:hover { border-color: #DDD4E3; }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  background: var(--paper);
+  background: var(--surface);
   border-color: var(--plum-500);
-  box-shadow: 0 0 0 3px rgba(94, 51, 145, 0.14);
+  box-shadow: 0 0 0 3px rgba(107, 63, 160, 0.14);
   outline: none;
 }
 .field textarea { resize: vertical; min-height: 5.5rem; }
@@ -1365,7 +1380,7 @@ a.contact-value:hover { color: var(--gold-400); }
   cursor: pointer;
   transition: border-color var(--t-fast), background-color var(--t-fast);
 }
-.field-radios .radio:hover { border-color: #D9D2C7; }
+.field-radios .radio:hover { border-color: #DDD4E3; }
 /* The selected option highlights, so the choice is obvious at a glance. */
 .field-radios .radio:has(input:checked) {
   background: var(--plum-050);
@@ -1597,11 +1612,11 @@ a.contact-value:hover { color: var(--gold-400); }
     transition: width var(--t-base);
   }
   .site-nav a:not(.btn):hover,
-  .site-nav a.is-current { color: var(--gold-400); }
+  .site-nav a:not(.btn).is-current { color: var(--gold-400); }
   .site-header.is-stuck .site-nav a:not(.btn):hover,
-  .site-header.is-stuck .site-nav a.is-current { color: var(--accent-text); }
+  .site-header.is-stuck .site-nav a:not(.btn).is-current { color: var(--accent-text); }
   .site-nav a:not(.btn):hover::after,
-  .site-nav a.is-current::after { width: 100%; }
+  .site-nav a:not(.btn).is-current::after { width: 100%; }
 
   /* The header phone number sits apart from the page links. */
   .nav-phone {

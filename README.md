@@ -243,27 +243,47 @@ Open `css/styles.css`. The first block, under **BRAND TOKENS**, holds every
 colour and font on the site. Change a value there once and it updates
 everywhere — you never hunt through the file.
 
+The colours are sampled from the Sultan's brand site, sultansvictoria.ca, so
+the two sit side by side without clashing.
+
 ```css
---plum-700: #35195A;   /* the main brand purple */
---gold-500: #C9972F;   /* the main accent gold  */
+--plum-700: #2B1645;   /* deep plum  - headings, dark bands */
+--plum-500: #6B3FA0;   /* brand violet - anything you click */
+--gold-500: #C8A24A;   /* the accent gold */
+--sand-50:  #FAF8F4;   /* the page background - warm cream */
 ```
 
-The purple and gold come from the existing Sultan's branding, rebuilt as a
-proper scale. Low numbers are dark, high numbers are light:
+**The brand runs on two purples**, and the scale is built to reflect that.
+Low numbers are dark, high numbers are light:
+
+| Steps | What they are | Used for |
+|---|---|---|
+| `--plum-950` … `--plum-700` | deep plum, `#150A24` → `#2B1645` | headings, the dark hero, the footer |
+| `--plum-600` … `--plum-400` | bright violet, `#5A3289` → `#8A62B8` | links, buttons, focus rings, dietary pills |
+| `--plum-100`, `--plum-050` | pale violet tints | pill backgrounds, soft panels |
 
 | Family | Dark end | Main | Light end |
 |---|---|---|---|
-| Purple | `--plum-950` `#120620` | `--plum-700` `#35195A` | `--plum-100` `#EDE7F7` |
-| Gold | `--gold-700` `#8A6316` | `--gold-500` `#C9972F` | `--gold-100` `#F8EFD9` |
-| Ink / neutral | `--ink-900` `#16101D` | `--ink-600` `#4E4457` | `--sand-50` `#FBF9F6` |
+| Gold | `--gold-700` `#715515` | `--gold-500` `#C8A24A` | `--gold-100` `#F7EFDC` |
+| Cream / ink | `--ink-900` `#2A2233` | `--ink-600` `#574E63` | `--sand-50` `#FAF8F4` |
 
-Two gold rules worth knowing: use `--gold-600` or `--gold-700` for gold **text
-on a white background** (the lighter golds fail contrast and get hard to read),
-and `--gold-400` for gold text **on dark purple**.
+**The page sits on cream, not white.** `--sand-50` is the background and
+`--sand-100` (`#F3F1EE`) is the alternating band. White is reserved for cards,
+so they lift off the page instead of blending into it.
+
+**Two gold rules worth knowing.** `--gold-500` is the real brand gold, but it
+is too light to read as text on cream — so use `--gold-600` or `--gold-700`
+for gold **text on a light background**, and `--gold-400` for gold text **on
+deep purple**. Every text and button pairing on the site has been checked and
+clears the WCAG AA contrast minimum.
+
+Green appears in exactly one place, the "message sent" line on the form, where
+green carries meaning. Everything else is purple, gold or cream.
 
 Below the colours there is a second group called **SEMANTIC ROLES**
-(`--accent`, `--text`, `--bg-alt`, and so on). Those say what each colour is
-*used for*. Re-pointing one of those changes the whole site at once.
+(`--accent`, `--text`, `--bg`, `--bg-alt`, `--surface` and so on). Those say
+what each colour is *used for*. Re-pointing one of those changes the whole
+site at once.
 
 Headings use **Fraunces** (a warm serif), body text uses **Inter**. Both load
 free from Google Fonts via the `<link>` in `index.html`. To change them, swap
