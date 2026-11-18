@@ -54,6 +54,9 @@
      ==== EDIT: HEADER & NAVIGATION ====   *** SHARED WITH index.html ***
      Any change here must be repeated in index.html.
 
+     The bar holds the logo in the middle and the menu button on the right.
+     Every nav link lives in the slide-out panel below, at all screen sizes.
+
      On this page the links point at sections of THIS page (#packages),
      except Home and Locations, which go back to the home page.
      ========================================================================= -->
@@ -68,28 +71,42 @@
       <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
       <span class="nav-toggle-bars" aria-hidden="true"></span>
-      <span class="sr-only">Menu</span>
     </button>
-
-    <nav class="site-nav" id="siteNav" aria-label="Main">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="index.html#locations">Locations</a></li>
-
-        <!-- ==== EDIT: HEADER PHONE NUMBER ====
-             Keep the tel: part in full international form (+1 then the number). -->
-        <li class="nav-phone"><a href="tel:+16479293924">647&#8209;929&#8209;3924</a></li>
-
-        <li class="nav-cta"><a class="btn btn-gold btn-sm" href="#request">Request a quote</a></li>
-      </ul>
-    </nav>
 
   </div>
 </header>
+
+<!-- =========================================================================
+     ==== EDIT: SLIDE-OUT MENU ====   *** SHARED WITH index.html ***
+     The panel that slides in from the right when the menu button is tapped.
+     It sits outside the header on purpose, so it can run the full height of
+     the screen.
+     ========================================================================= -->
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<nav class="site-nav" id="siteNav" aria-label="Main">
+
+  <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <ul class="nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="index.html#locations">Locations</a></li>
+  </ul>
+
+  <!-- ==== EDIT: MENU PHONE NUMBER & BUTTON ====
+       Keep the tel: part in full international form (+1 then the number). -->
+  <div class="nav-foot">
+    <a class="nav-phone" href="tel:+16479293924">647-929-3924</a>
+    <a class="btn btn-gold btn-block" href="#request">Request a quote</a>
+  </div>
+
+</nav>
 
 <main id="main">
 

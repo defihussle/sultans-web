@@ -25,6 +25,17 @@ README.md           This file.
 To see the site, double-click `index.html` — it opens in your browser. Edit a
 file, save it, then press refresh in the browser to see the change.
 
+### The menu
+
+Every nav link lives in the panel that slides in from the right when the
+menu button is tapped — on phones **and** on desktop. There is no separate
+horizontal menu to keep in step. The header itself holds only the centred
+logo and that button.
+
+The panel markup sits just after `</header>`, marked
+`EDIT: SLIDE-OUT MENU`. It closes on the X, on the dimmed area behind it, on
+the Escape key, and after any link is tapped.
+
 ### ⚠ The header and footer exist twice
 
 There is no shared template, because there is no build step — that is the
@@ -59,7 +70,8 @@ them. The sections, in page order:
 | Search for | What it controls |
 |---|---|
 | `EDIT: PAGE TITLE` | The browser tab text and the Google description |
-| `EDIT: HEADER & NAVIGATION` | The menu links — *shared, see the warning above* |
+| `EDIT: HEADER & NAVIGATION` | The logo bar — *shared, see the warning above* |
+| `EDIT: SLIDE-OUT MENU` | The nav links, phone and button in the panel — *shared* |
 | `EDIT: HERO` | The headline and the video/photo slot |
 | `EDIT: THE THREE CHOICE CARDS` | Catering / Locations / Menu — the first thing visitors act on |
 | `EDIT: HERO TRUST BAR` | The four short proof points under the hero |

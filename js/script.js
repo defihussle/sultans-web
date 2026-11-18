@@ -91,20 +91,54 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   var nav = document.getElementById('siteNav');
 
   /* -------------------------------------------------------------------------
-     2. MOBILE MENU
+     2. THE SLIDE-OUT MENU
+     Opens the panel, dims the page behind it, and stops that page scrolling
+     while it is open. Closes on the X, on the dimmed area, on Escape, and
+     after tapping any link.
      ------------------------------------------------------------------------- */
+  var backdrop = document.getElementById('navBackdrop');
+  var navClose = document.getElementById('navClose');
+
   function setNav(open) {
     if (!nav || !toggle) return;
+
     nav.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    // The header needs a solid background while the panel is open.
-    if (header) header.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-is-open', open);
+
+    if (backdrop) {
+      if (open) {
+        backdrop.hidden = false;
+        // One frame later, so the fade actually runs.
+        requestAnimationFrame(function () { backdrop.classList.add('is-visible'); });
+      } else {
+        backdrop.classList.remove('is-visible');
+        setTimeout(function () {
+          if (!nav.classList.contains('is-open')) backdrop.hidden = true;
+        }, 340);
+      }
+    }
+
+    // Send focus where the person is looking. Opening waits two frames: the
+    // panel is still hidden when the class is added, and a hidden element
+    // cannot take focus. Two frames puts us safely after the style pass.
+    if (open && navClose) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { navClose.focus(); });
+      });
+    } else if (!open && document.activeElement && nav.contains(document.activeElement)) {
+      toggle.focus();
+    }
   }
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
       setNav(!nav.classList.contains('is-open'));
     });
+
+    if (navClose) navClose.addEventListener('click', function () { setNav(false); });
+    if (backdrop) backdrop.addEventListener('click', function () { setNav(false); });
 
     // Tapping a link closes the menu, so the page is not left covered.
     nav.addEventListener('click', function (event) {
