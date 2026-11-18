@@ -116,40 +116,46 @@
 <main id="main">
 
 <!-- =========================================================================
-     ==== EDIT: HERO ====
-     The most important text on the site. Keep the headline short and punchy.
+     ==== EDIT: HERO VIDEO ====
+     The full-screen video people land on. Nothing sits over it but the bar
+     at the top, so the footage does all the talking.
 
-     ---- TO ADD A HERO VIDEO OR PHOTO (slot is ready below) ----
-     Until you add one, the hero shows a deep purple gradient, which is a
-     finished look on its own - nothing looks broken or missing.
+     TWO FILES, ONE VIDEO:
+       assets/hero-mobile.mp4  upright crop, used on phones
+       assets/hero.mp4         wide version, used on tablets and computers
+     The browser picks one and downloads only that one.
 
-     FOR A VIDEO: put the file in the assets folder, then delete the
-     <!- - and - -> around the <video> block and set the two file names.
-     Use a short, quiet, looping clip (8-15 seconds, no sound, under 5 MB).
+     TO REPLACE THE VIDEO: swap the files in the assets folder, keeping the
+     same names. Keep them small - about 5 MB each is the ceiling, and the
+     web host refuses anything over 25 MB.
 
-     FOR A PHOTO: do the same with the <img> block instead.
-     Use a wide, bright photo of a full catering spread, about 2000px wide.
+     The video is silent on purpose. Phones will not auto-play a clip that
+     has sound, so the "muted" below is what makes it start on its own.
 
-     Use ONE of the two, not both. The dark overlay above it keeps the
-     headline readable whatever you choose.
+     If the video ever fails to load, the poster image shows; if that fails
+     too, the deep purple gradient behind it does. Nothing looks broken.
      ========================================================================= -->
-<section class="hero" id="top">
+<section class="hero-video" id="top">
 
-  <div class="hero-media" aria-hidden="true">
+  <video class="hero-video-asset"
+         autoplay muted loop playsinline preload="metadata"
+         aria-label="Food being prepared at Sultan's Mediterranean Grill">
+    <source src="assets/hero-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
 
-    <!-- VIDEO SLOT
-    <video class="hero-asset" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-      <source src="assets/hero.mp4" type="video/mp4">
-    </video>
-    -->
+  <!-- Dark overlay, so the logo and menu button stay readable over the film. -->
+  <div class="hero-video-scrim" aria-hidden="true"></div>
 
-    <!-- PHOTO SLOT
-    <img class="hero-asset" src="assets/hero.jpg" alt="">
-    -->
+</section>
 
-  </div>
+<!-- =========================================================================
+     ==== EDIT: INTRO & THE THREE CHOICE CARDS ====
+     The screen directly below the video.
+     ========================================================================= -->
+<section class="hero">
 
-  <!-- Dark overlay that keeps text readable on top of any photo or video. -->
+  <div class="hero-media" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
 
   <div class="wrap hero-inner">

@@ -20,6 +20,22 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   'use strict';
 
   /* -------------------------------------------------------------------------
+     0. THE HERO VIDEO
+     One courtesy: if someone has asked their device to reduce motion, the
+     film is paused so they get the still behind it instead.
+
+     Nothing is needed for a video that fails to load. The still and the
+     gradient are the background of the section itself, so they simply show
+     through the empty video. See "7a" in the stylesheet.
+     ------------------------------------------------------------------------- */
+  var heroVideo = document.querySelector('.hero-video-asset');
+  if (heroVideo && window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
+
+  /* -------------------------------------------------------------------------
      1. START AT THE TOP OF THE PAGE
 
      Browsers normally remember where you were scrolled to and put you back

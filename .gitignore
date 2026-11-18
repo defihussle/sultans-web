@@ -35,3 +35,11 @@ node_modules/
 *-backup.html
 *.bak
 *.orig
+
+# Video masters. Camera/export files are hundreds of megabytes - far past
+# what GitHub accepts (100 MB) or the web host will serve (25 MB). Keep the
+# master in cloud storage and commit only the compressed web versions
+# (assets/hero.mp4 and assets/hero-mobile.mp4).
+*.mov
+*.MOV
+assets/*-master.*
