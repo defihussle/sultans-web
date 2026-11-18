@@ -87,7 +87,7 @@
   /* --- TYPE SCALE ----------------------------------------------------------
      Fluid: these grow smoothly with the screen, so there is no jump between
      phone and desktop sizes. */
-  --fs-hero:  clamp(2.35rem, 5.4vw, 4.1rem);
+  --fs-hero:  clamp(2.05rem, 4.4vw, 3.5rem);
   --fs-h2:    clamp(1.95rem, 3.6vw, 2.95rem);
   --fs-h3:    clamp(1.15rem, 1.7vw, 1.35rem);
   --fs-lede:  clamp(1.06rem, 1.4vw, 1.2rem);
@@ -590,9 +590,12 @@ a:hover { color: var(--plum-700); }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: calc(var(--header-h) + clamp(3rem, 11vw, 6rem));
-  padding-bottom: clamp(3rem, 9vw, 5rem);
+  padding-top: calc(var(--header-h) + clamp(2rem, 8vw, 4.5rem));
+  padding-bottom: clamp(2.5rem, 7vw, 4rem);
 }
+
+/* The short headline that sits above the three choices. */
+.hero-copy { margin-bottom: var(--sp-5); }
 
 .hero-title {
   font-size: var(--fs-hero);
@@ -615,16 +618,99 @@ a:hover { color: var(--plum-700); }
   line-height: 1.6;
   max-width: 46ch;
   color: rgba(239, 234, 246, 0.86);
-  margin-bottom: var(--sp-6);
+  margin-bottom: 0;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
+/* --- THE THREE CHOICE CARDS -------------------------------------------------
+   The main thing to act on in the first screen. On phones they are full-width
+   rows (icon, words, arrow) so all three fit without scrolling; on desktop
+   they become three upright cards. */
+.choices {
+  display: grid;
   gap: var(--sp-3);
   margin-bottom: var(--sp-5);
 }
-.hero-actions .btn { flex: 1 1 13rem; }
+
+.choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 4.75rem;          /* a generous tap target on phones */
+  padding: var(--sp-4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  color: var(--paper);
+  text-decoration: none;
+  transition: background-color var(--t-base), border-color var(--t-base),
+              transform var(--t-base), box-shadow var(--t-base);
+}
+.choice:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(224, 180, 82, 0.65);
+  color: var(--paper);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(18, 6, 32, 0.4);
+}
+.choice:active { transform: translateY(0); }
+
+/* The one highlighted card. Move the class "choice-primary" in the HTML to
+   highlight a different one. */
+.choice-primary {
+  border-color: rgba(224, 180, 82, 0.5);
+  background:
+    linear-gradient(110deg, rgba(201, 151, 47, 0.22) 0%, rgba(255, 255, 255, 0.07) 70%);
+}
+
+.choice-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gold-400);
+  transition: background-color var(--t-base), color var(--t-base);
+}
+.choice-icon svg { width: 1.5rem; height: 1.5rem; }
+.choice-primary .choice-icon { background: rgba(224, 180, 82, 0.2); }
+/* On hover the icon tile fills gold - the one bit of colour movement. */
+.choice:hover .choice-icon {
+  background: var(--gold-500);
+  color: var(--plum-950);
+}
+
+.choice-body { display: grid; gap: 0.1rem; min-width: 0; }
+.choice-title {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+}
+.choice-desc {
+  font-size: var(--fs-small);
+  line-height: 1.4;
+  color: rgba(239, 234, 246, 0.68);
+}
+
+.choice-arrow {
+  flex: none;
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  color: rgba(239, 234, 246, 0.5);
+  transition: transform var(--t-base), color var(--t-base);
+}
+.choice-arrow svg { width: 1.25rem; height: 1.25rem; }
+.choice:hover .choice-arrow {
+  color: var(--gold-400);
+  transform: translateX(4px);
+}
 
 .hero-aside {
   font-size: var(--fs-small);
@@ -1393,6 +1479,21 @@ a.contact-value:hover { color: var(--gold-400); }
   .trust-bar { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3) var(--sp-5); }
   .field-pair { grid-template-columns: 1fr 1fr; }
   .loc-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* The three choices become upright cards side by side. */
+  .choices {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    max-width: 58rem;
+  }
+  .choice {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-4);
+    min-height: 11.5rem;
+    padding: var(--sp-5);
+  }
+  .choice-arrow { margin: auto 0 0; }
 }
 
 /* --- Tablets (720px) --- */
@@ -1430,9 +1531,13 @@ a.contact-value:hover { color: var(--gold-400); }
 
 /* --- Small desktop (900px) --- */
 @media (min-width: 900px) {
-  .hero { min-height: min(44rem, 88vh); }
-  .hero-title { max-width: 15ch; }
-  .hero-actions .btn { flex: 0 1 auto; }
+  .hero { min-height: min(46rem, 92vh); }
+  .hero-title { max-width: 22ch; }
+  .hero-copy { margin-bottom: var(--sp-6); }
+  /* Full width, so the three choices are the focus of the first screen. */
+  .choices { max-width: none; gap: var(--sp-5); }
+  .choice { min-height: 12.5rem; padding: var(--sp-6); }
+  .choice-title { font-size: 1.4rem; }
   .trust-bar { grid-template-columns: repeat(4, 1fr); }
 
   .loc-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }

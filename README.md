@@ -43,7 +43,8 @@ them. The sections, in page order:
 | `EDIT: PAGE TITLE` | The browser tab text and the Google description |
 | `EDIT: HEADER & NAVIGATION` | The menu links |
 | `EDIT: HEADER PHONE NUMBER` | The phone number in the top bar |
-| `EDIT: HERO` | The big headline, intro line, buttons — and the video/photo slot |
+| `EDIT: HERO` | The headline and the video/photo slot |
+| `EDIT: THE THREE CHOICE CARDS` | Catering / Locations / Menu — the first thing visitors act on |
 | `EDIT: HERO TRUST BAR` | The four short proof points across the bottom of the hero |
 | `EDIT: DISH TICKER` | The slow-scrolling line of dish names |
 | `EDIT: WHY SULTAN'S` | The three numbers and four reason cards |
@@ -107,6 +108,47 @@ from the current one first, or you will get two wide cards.
    ```html
    <p class="loc-meta">Mon–Fri 10am–7pm &middot; 416-000-0000</p>
    ```
+
+### Change the three choice cards
+
+The first screen asks one question — *where would you like to start?* — and
+offers three answers: **Catering**, **Locations** and **Menu**. These are the
+most important links on the site.
+
+Search for `EDIT: THE THREE CHOICE CARDS`. Each one is a single
+`<a class="choice"> … </a>` block holding an icon, a title, one line of
+description, and an arrow.
+
+- **To change the words** — edit the text inside `<span class="choice-title">`
+  and `<span class="choice-desc">`. Keep the description to about six words so
+  it stays on one or two lines on a phone.
+- **To re-point a card** — change its `href`. It can be a section on this page
+  (`#locations`) or a whole other page (`menu.html`).
+- **To reorder** — move a whole `<a>` block up or down.
+- **To change which one is highlighted** — the class `choice-primary` gives a
+  card the gold treatment. It is on Catering. Put it on one card only.
+- **The icons** are inline SVG, so there are no image files to manage. If you
+  are not comfortable editing SVG, leave the `<span class="choice-icon">`
+  blocks alone and only change the words.
+
+Three is the right number. A fourth will squash them on a phone, and the point
+of the screen is a quick, easy choice.
+
+### Turn the Menu card into a real page
+
+The Menu card currently points at `#menu`, which is the catering menu block
+further down this page (the one with the PDF button). That is a real
+destination, so nothing is broken — but a proper menu page would be better.
+
+When you build one:
+
+1. Create `menu.html` in the same folder as `index.html`.
+2. Change `href="#menu"` to `href="menu.html"` in **two** places — the Menu
+   choice card, and the Menu link in the header navigation. Both are marked
+   with a comment saying so.
+
+That is the only change needed. You can leave the `id="menu"` on the catering
+menu block either way.
 
 ### Add the hero video or photo
 
@@ -190,6 +232,8 @@ These are marked `[PLACEHOLDER]` in the files — search for that word.
 - [ ] **Social share image** (`assets/share-image.jpg`, 1200×630).
 - [ ] **Browser tab icon** (`assets/favicon.png`).
 - [ ] Decide on the form service (section 4 above).
+- [ ] **The Menu card** points at the catering PDF block for now. Decide
+      whether to build a real `menu.html` page (see section 3).
 
 ---
 

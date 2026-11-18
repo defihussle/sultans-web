@@ -69,10 +69,12 @@
 
     <nav class="site-nav" id="siteNav" aria-label="Main">
       <ul>
-        <li><a href="#why">Why Sultan's</a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#how">How to book</a></li>
+        <li><a href="#packages">Catering</a></li>
+        <!-- Same placeholder link as the Menu card in the hero: change this to
+             menu.html at the same time you change that one. -->
+        <li><a href="#menu">Menu</a></li>
         <li><a href="#locations">Locations</a></li>
+        <li><a href="#how">How to book</a></li>
 
         <!-- ==== EDIT: HEADER PHONE NUMBER ====
              Keep the tel: part in full international form (+1 then the number). -->
@@ -125,26 +127,105 @@
   <div class="hero-scrim" aria-hidden="true"></div>
 
   <div class="wrap hero-inner">
-    <p class="eyebrow eyebrow-light">Catering by Sultan's Mediterranean Grill</p>
+    <div class="hero-copy">
+      <p class="eyebrow eyebrow-light">Sultan's Mediterranean Grill</p>
 
-    <h1 class="hero-title">
-      Catering your team
-      <em>actually looks forward to.</em>
-    </h1>
+      <h1 class="hero-title">
+        Modern Mediterranean,
+        <em>fit for royalty.</em>
+      </h1>
 
-    <p class="hero-lede">
-      Halal Mediterranean spreads for Toronto offices, client meetings and
-      events &mdash; cooked fresh the morning of, delivered hot, set up ready to serve.
-    </p>
-
-    <!-- Hero buttons. Change the text; keep each href pointing at a section id. -->
-    <div class="hero-actions">
-      <a class="btn btn-gold btn-lg" href="#request">Request catering</a>
-      <a class="btn btn-ghost btn-lg" href="#packages">View packages</a>
+      <p class="hero-lede">
+        Where would you like to start?
+      </p>
     </div>
 
+    <!-- ==== EDIT: THE THREE CHOICE CARDS ====
+         This is the first thing visitors act on, so keep it to three.
+
+         Each card is one <a class="choice"> ... </a> block.
+         TO RETITLE      change the text inside <span class="choice-title">
+         TO RE-POINT     change href="#..." to another section id, or to a
+                         full page such as href="menu.html"
+         TO REORDER      move a whole <a> block up or down
+         TO HIGHLIGHT    the class "choice-primary" gives a card the gold
+                         treatment. Put it on one card only.
+
+         The little pictures are inline SVG icons - there are no image files
+         to manage. If you are not comfortable with SVG, leave the
+         <span class="choice-icon"> blocks alone and only change the words. -->
+    <nav class="choices" aria-label="Choose where to start">
+
+      <!-- ---- CHOICE 1: CATERING ---- -->
+      <a class="choice choice-primary" href="#packages">
+        <span class="choice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.75 18.5h18.5"/>
+            <path d="M4.5 18.5a7.5 7.5 0 0 1 15 0"/>
+            <path d="M12 6.4V5.2"/>
+            <circle cx="12" cy="4.1" r="1.15"/>
+          </svg>
+        </span>
+        <span class="choice-body">
+          <span class="choice-title">Catering</span>
+          <span class="choice-desc">Packages for offices, meetings and events</span>
+        </span>
+        <span class="choice-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 12h14"/><path d="m12.5 6 6 6-6 6"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- ---- CHOICE 2: LOCATIONS ---- -->
+      <a class="choice" href="#locations">
+        <span class="choice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21.2s7-5.7 7-11.2a7 7 0 1 0-14 0c0 5.5 7 11.2 7 11.2Z"/>
+            <circle cx="12" cy="9.8" r="2.6"/>
+          </svg>
+        </span>
+        <span class="choice-body">
+          <span class="choice-title">Locations</span>
+          <span class="choice-desc">Ten kitchens across Ontario</span>
+        </span>
+        <span class="choice-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 12h14"/><path d="m12.5 6 6 6-6 6"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- ---- CHOICE 3: MENU ----
+           [PLACEHOLDER LINK] This points at #menu, which is the catering
+           menu block further down the page (the PDF callout).
+
+           WHEN A FULL MENU PAGE EXISTS: build it as menu.html next to this
+           file, then change the href below from "#menu" to "menu.html".
+           That is the only change needed here. -->
+      <a class="choice" href="#menu">
+        <span class="choice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.25 3.4h11.5a1 1 0 0 1 1 1v15.2a1 1 0 0 1-1 1H6.25a1 1 0 0 1-1-1V4.4a1 1 0 0 1 1-1Z"/>
+            <path d="M8.75 8.5h6.5"/><path d="M8.75 12h6.5"/><path d="M8.75 15.5h4"/>
+          </svg>
+        </span>
+        <span class="choice-body">
+          <span class="choice-title">Menu</span>
+          <span class="choice-desc">Trays, bowls, wraps and pricing</span>
+        </span>
+        <span class="choice-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 12h14"/><path d="m12.5 6 6 6-6 6"/>
+          </svg>
+        </span>
+      </a>
+
+    </nav>
+
     <p class="hero-aside">
-      Or call <a href="tel:+16478032323">647-803-2323</a> &mdash; most orders need 48 hours notice.
+      Ready to book? Call <a href="tel:+16478032323">647-803-2323</a>
+      or <a href="#request">request a quote</a>.
     </p>
   </div>
 
@@ -386,15 +467,17 @@
     </div>
 
     <!-- ==== EDIT: A LA CARTE / FULL MENU CALLOUT ====
+         id="menu" is what the Menu card in the hero jumps to, so keep that id
+         on this block until a dedicated menu page exists.
          When a new catering PDF is uploaded, update the link in BOTH places
          (here and in the footer). -->
-    <aside class="menu-note">
+    <aside class="menu-note" id="menu">
       <div class="menu-note-copy">
-        <h3>Also available a la carte</h3>
+        <h3>The full catering menu</h3>
         <p>
           Trays of mains, salads, sides and dips by the half, medium or full
-          pan, plus individual bowls and wraps for boxed lunches. The full item
-          list and current pricing are in the catering menu.
+          pan, plus individual bowls and wraps for boxed lunches, available a la
+          carte. Every item and current pricing is in the menu.
         </p>
       </div>
       <a class="btn btn-dark" href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">View catering menu (PDF)</a>
