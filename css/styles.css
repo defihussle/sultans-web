@@ -724,6 +724,15 @@ a:hover { color: var(--plum-700); }
   transform: translateX(4px);
 }
 
+/* Button pair, used in the hero on catering.html. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+.hero-actions .btn { flex: 1 1 13rem; }
+
 .hero-aside {
   font-size: var(--fs-small);
   color: rgba(239, 234, 246, 0.62);
@@ -737,6 +746,11 @@ a:hover { color: var(--plum-700); }
   transition: border-color var(--t-fast), color var(--t-fast);
 }
 .hero-aside a:hover { color: var(--gold-400); border-bottom-color: var(--gold-400); }
+
+/* Shorter hero, used on inner pages such as catering.html where the page
+   content matters more than the opening image. */
+.hero-compact { min-height: 0; }
+.hero-compact .hero-inner { padding-bottom: clamp(2rem, 6vw, 3.5rem); }
 
 /* --- The strip of proof points across the bottom of the hero --- */
 .trust-bar {
@@ -1412,6 +1426,26 @@ a.contact-value:hover { color: var(--gold-400); }
 
 
 /* ---------------------------------------------------------------------------
+   13b. CATERING CALL-TO-ACTION BAND (the closing block on the home page)
+   --------------------------------------------------------------------------- */
+/* A shallower band than a full section - it is a signpost, not a chapter. */
+.section-cta { padding-block: clamp(3rem, 7vw, 5rem); }
+
+.cta-band {
+  display: grid;
+  gap: var(--sp-6);
+}
+.cta-band-copy { max-width: 46ch; }
+.cta-band-copy .section-lede { margin-bottom: 0; }
+.cta-band-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+.cta-band-actions .btn { flex: 1 1 14rem; }
+
+
+/* ---------------------------------------------------------------------------
    14. FOOTER
    --------------------------------------------------------------------------- */
 .site-footer {
@@ -1547,6 +1581,17 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Small desktop (900px) --- */
 @media (min-width: 900px) {
   .hero { min-height: min(46rem, 92vh); }
+  .hero-compact { min-height: min(30rem, 62vh); }
+  .hero-actions .btn { flex: 0 1 auto; }
+
+  .cta-band {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--sp-8);
+  }
+  .cta-band-actions { flex-direction: column; min-width: 17rem; }
+  .cta-band-actions .btn { flex: 0 0 auto; width: 100%; }
+
   .hero-title { max-width: 22ch; }
   .hero-copy { margin-bottom: var(--sp-6); }
   /* Full width, so the three choices are the focus of the first screen. */

@@ -97,8 +97,9 @@ var CATERING_EMAIL = 'catering@sultansgrill.ca';
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
 
-    // Only sections that have a matching link in the nav.
-    ['packages', 'locations', 'how', 'request'].forEach(function (id) {
+    // Sections that have a matching link in the nav, across both pages.
+    // Ids that do not exist on the current page are simply skipped.
+    ['packages', 'menu', 'how', 'locations', 'request'].forEach(function (id) {
       var section = document.getElementById(id);
       if (section) observer.observe(section);
     });

@@ -9,8 +9,12 @@ opening one file and typing over the old words.
 ## 1. The files
 
 ```
-index.html          All the text and structure of the page. 90% of your edits.
-css/styles.css      Colours, fonts, spacing, layout.
+index.html          The home page: the three choice cards, why Sultan's,
+                    locations, and a band pointing at catering.
+catering.html       The catering page: packages, the practical details, the
+                    menu, how to book, and the quote form. Most catering
+                    edits happen here.
+css/styles.css      Colours, fonts, spacing, layout. Shared by both pages.
 js/script.js        A small script: the mobile menu, the sticky header and
                     the quote form. Nothing else depends on it.
 assets/             Images and PDFs. See assets/README.md.
@@ -19,6 +23,17 @@ README.md           This file.
 
 To see the site, double-click `index.html` — it opens in your browser. Edit a
 file, save it, then press refresh in the browser to see the change.
+
+### ⚠ The header and footer exist twice
+
+There is no shared template, because there is no build step — that is the
+trade-off for a site you can edit with nothing but a text editor.
+
+So the navigation bar and the footer are written out in **both**
+`index.html` and `catering.html`. If you change a nav link, the phone number
+or a footer link, **make the same change in both files.** Both copies are
+marked with a comment saying `*** SHARED WITH ... ***` so they are easy to
+find.
 
 **Edit the files with a plain text editor**, not Word. Free options: VS Code
 (recommended), Notepad++, or Notepad on Windows / TextEdit on Mac.
@@ -38,22 +53,32 @@ Every section of `index.html` starts with a comment banner that looks like this:
 Use your editor's Find (Ctrl+F / Cmd+F) and search for `EDIT:` to jump between
 them. The sections, in page order:
 
+**In `index.html` (the home page):**
+
 | Search for | What it controls |
 |---|---|
 | `EDIT: PAGE TITLE` | The browser tab text and the Google description |
-| `EDIT: HEADER & NAVIGATION` | The menu links |
-| `EDIT: HEADER PHONE NUMBER` | The phone number in the top bar |
+| `EDIT: HEADER & NAVIGATION` | The menu links — *shared, see the warning above* |
 | `EDIT: HERO` | The headline and the video/photo slot |
 | `EDIT: THE THREE CHOICE CARDS` | Catering / Locations / Menu — the first thing visitors act on |
-| `EDIT: HERO TRUST BAR` | The four short proof points across the bottom of the hero |
+| `EDIT: HERO TRUST BAR` | The four short proof points under the hero |
 | `EDIT: DISH TICKER` | The slow-scrolling line of dish names |
 | `EDIT: WHY SULTAN'S` | The three numbers and four reason cards |
-| `EDIT: CATERING PACKAGES` | The package cards — **the section you'll edit most** |
-| `EDIT: A LA CARTE` | The catering PDF callout |
-| `EDIT: HOW TO BOOK` | The four numbered steps |
 | `EDIT: LOCATIONS` | Every store address |
+| `EDIT: CATERING CALL TO ACTION` | The closing band that sends people to the catering page |
+| `EDIT: FOOTER` | Footer links — *shared, see the warning above* |
+
+**In `catering.html` (the catering page):**
+
+| Search for | What it controls |
+|---|---|
+| `EDIT: PAGE TITLE` | The browser tab text and the Google description |
+| `EDIT: CATERING HERO` | The catering headline, buttons and video/photo slot |
+| `EDIT: CATERING PACKAGES` | The package cards — **the section you'll edit most** |
+| `EDIT: GOOD TO KNOW` | Minimums, notice, delivery, payment, dietary tags |
+| `EDIT: FULL CATERING MENU` | The menu summary and the PDF link |
+| `EDIT: HOW TO BOOK` | The four numbered steps |
 | `EDIT: REQUEST A QUOTE` | Phone, email, and the enquiry form |
-| `EDIT: FOOTER` | Footer links and contact details |
 
 ### The golden rules
 
@@ -86,7 +111,7 @@ them:
 </article>
 ```
 
-1. Search for `EDIT: CATERING PACKAGES`.
+1. Open **`catering.html`** and search for `EDIT: CATERING PACKAGES`.
 2. Select one whole `<article class="pkg">` … `</article>` block.
 3. Copy it and paste it directly after the last `</article>`.
 4. Change the name, the meta line, the description and the included rows.
@@ -136,19 +161,34 @@ of the screen is a quick, easy choice.
 
 ### Turn the Menu card into a real page
 
-The Menu card currently points at `#menu`, which is the catering menu block
-further down this page (the one with the PDF button). That is a real
-destination, so nothing is broken — but a proper menu page would be better.
+The Menu card points at `catering.html#menu`, the menu section of the catering
+page. That is a real destination with the PDF on it, so nothing is broken —
+but a proper menu page would be better.
 
 When you build one:
 
 1. Create `menu.html` in the same folder as `index.html`.
-2. Change `href="#menu"` to `href="menu.html"` in **two** places — the Menu
-   choice card, and the Menu link in the header navigation. Both are marked
-   with a comment saying so.
+2. Change the href to `menu.html` in **three** places: the Menu choice card on
+   the home page, the Menu link in the home page header, and the Menu link in
+   the catering page header. Each is marked with a comment.
 
-That is the only change needed. You can leave the `id="menu"` on the catering
-menu block either way.
+You can leave the `id="menu"` on the catering page either way.
+
+### Change the phone number or email
+
+The phone number appears in **both** files. Search each for `647` and update
+every match, then check these spots in particular:
+
+- `index.html` — the header bar, the line under the hero choice cards, the
+  footer.
+- `catering.html` — the header bar, the line under the hero buttons, step 2 of
+  "How to book", the contact list, the footer.
+
+Also update `CATERING_EMAIL` on the first few lines of `js/script.js`.
+
+In a phone link, keep the `tel:` format with the country code —
+`<a href="tel:+16478032323">647-803-2323</a>`. The part after `>` is what
+people see; the part in `tel:` is what their phone dials.
 
 ### Add the hero video or photo
 
@@ -156,8 +196,12 @@ The hero currently shows a deep purple gradient. That is a finished look on its
 own — nothing appears broken or missing — but a real video or photo behind it
 lifts the page a lot.
 
+Both pages have a slot: `index.html` (`EDIT: HERO`) and `catering.html`
+(`EDIT: CATERING HERO`). They are independent, so you can use a different
+picture on each, or fill in just one.
+
 1. Put the file in the `assets` folder.
-2. Search `index.html` for `EDIT: HERO`.
+2. Search the page you want for `EDIT: HERO`.
 3. You'll find a **VIDEO SLOT** and a **PHOTO SLOT**, both commented out.
    Pick one, remove the `<!--` and `-->` around it, and set the file names.
 4. Use one or the other, never both.
@@ -168,26 +212,13 @@ For a photo: wide, bright, around 2000px across.
 The dark overlay on top keeps the headline readable either way, so you do not
 need to edit any CSS.
 
-### Change the phone number or email
-
-The phone number appears in **four** places. Update all of them:
-
-1. The header bar (`EDIT: HEADER PHONE NUMBER`).
-2. The line under the hero buttons.
-3. The "How to book" step 2.
-4. The contact list in `EDIT: REQUEST A QUOTE`, and the footer.
-
-Also update `CATERING_EMAIL` on the first few lines of `js/script.js`.
-
-In a phone link, keep the `tel:` format with the country code —
-`<a href="tel:+16478032323">647-803-2323</a>`. The part after `>` is what
-people see; the part in `tel:` is what their phone dials.
 
 ### Upload a new catering menu PDF
 
-Put the PDF in `assets/`, then search `index.html` for `.pdf` and update
-**both** links (the packages section and the footer) to
-`assets/your-new-file.pdf`.
+Put the PDF in `assets/`, then search **both** `index.html` and
+`catering.html` for `.pdf` and update every link to
+`assets/your-new-file.pdf`. There are three: the menu callout and the footer
+on `catering.html`, and the footer on `index.html`.
 
 ---
 
@@ -203,7 +234,7 @@ recommend **Option B**:
 1. Sign up free at [formspree.io](https://formspree.io) (or Basin, or use
    Netlify Forms if hosting on Netlify).
 2. They give you a URL like `https://formspree.io/f/abcdwxyz`.
-3. In `index.html`, find `<form class="request-form" id="requestForm"` and
+3. In `catering.html`, find `<form class="request-form" id="requestForm"` and
    change that line to:
    ```html
    <form class="request-form" id="requestForm" action="https://formspree.io/f/abcdwxyz" method="post">

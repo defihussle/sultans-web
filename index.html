@@ -22,8 +22,8 @@
 
   <!-- ==== EDIT: PAGE TITLE & SEARCH DESCRIPTION ==== -->
   <title>Halal Mediterranean Catering in Toronto | Sultan's Mediterranean Grill</title>
-  <meta name="description" content="Halal Mediterranean catering for Toronto offices and events. Buffet spreads, platters and boxed meals, delivered hot to the Financial District and the PATH.">
-  <meta name="theme-color" content="#1C0C33">
+  <meta name="description" content="Halal Mediterranean grill and catering across Toronto, North York, Waterloo and St. Catharines. Browse catering packages, find a location, or see the menu.">
+  <meta name="theme-color" content="#1D0E30">
 
   <!-- Preview card shown when someone shares the link.
        Add a 1200x630 image to the assets folder, then this works automatically. -->
@@ -49,7 +49,11 @@
 
      To rename a link, change its text only.
      To remove one, delete its whole <li> line.
-     Each href="#id" must match a section id further down this page.
+     An href="#id" jumps to a section on THIS page. An href="catering.html"
+     opens the catering page.
+
+     *** SHARED WITH catering.html *** - any change here must be repeated in
+     the header of catering.html, which has its own copy of this block.
      ========================================================================= -->
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
@@ -69,18 +73,16 @@
 
     <nav class="site-nav" id="siteNav" aria-label="Main">
       <ul>
-        <li><a href="#packages">Catering</a></li>
-        <!-- Same placeholder link as the Menu card in the hero: change this to
-             menu.html at the same time you change that one. -->
-        <li><a href="#menu">Menu</a></li>
+        <li><a href="catering.html">Catering</a></li>
+        <li><a href="catering.html#menu">Menu</a></li>
         <li><a href="#locations">Locations</a></li>
-        <li><a href="#how">How to book</a></li>
+        <li><a href="catering.html#how">How to book</a></li>
 
         <!-- ==== EDIT: HEADER PHONE NUMBER ====
              Keep the tel: part in full international form (+1 then the number). -->
         <li class="nav-phone"><a href="tel:+16478032323">647&#8209;803&#8209;2323</a></li>
 
-        <li class="nav-cta"><a class="btn btn-gold btn-sm" href="#request">Request a quote</a></li>
+        <li class="nav-cta"><a class="btn btn-gold btn-sm" href="catering.html#request">Request a quote</a></li>
       </ul>
     </nav>
 
@@ -157,7 +159,7 @@
     <nav class="choices" aria-label="Choose where to start">
 
       <!-- ---- CHOICE 1: CATERING ---- -->
-      <a class="choice choice-primary" href="#packages">
+      <a class="choice choice-primary" href="catering.html">
         <span class="choice-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2.75 18.5h18.5"/>
@@ -197,13 +199,13 @@
       </a>
 
       <!-- ---- CHOICE 3: MENU ----
-           [PLACEHOLDER LINK] This points at #menu, which is the catering
-           menu block further down the page (the PDF callout).
+           [PLACEHOLDER LINK] This points at the menu section of the catering
+           page, which holds the category summaries and the PDF.
 
            WHEN A FULL MENU PAGE EXISTS: build it as menu.html next to this
-           file, then change the href below from "#menu" to "menu.html".
-           That is the only change needed here. -->
-      <a class="choice" href="#menu">
+           file, then change the href below to "menu.html". Change the Menu
+           link in the header at the same time. -->
+      <a class="choice" href="catering.html#menu">
         <span class="choice-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6.25 3.4h11.5a1 1 0 0 1 1 1v15.2a1 1 0 0 1-1 1H6.25a1 1 0 0 1-1-1V4.4a1 1 0 0 1 1-1Z"/>
@@ -225,7 +227,7 @@
 
     <p class="hero-aside">
       Ready to book? Call <a href="tel:+16478032323">647-803-2323</a>
-      or <a href="#request">request a quote</a>.
+      or <a href="catering.html#request">request a quote</a>.
     </p>
   </div>
 
@@ -322,219 +324,6 @@
 </section>
 
 <!-- =========================================================================
-     ==== EDIT: CATERING PACKAGES ====   *** THE MOST-EDITED SECTION ***
-
-     The first package is the wide featured one. The other two sit side by
-     side below it.
-
-     All three cards are built the same way, so you can copy any of them:
-         <div class="pkg-main">   the badge, name, meta line and description
-         <div class="pkg-aside">  the "what's included" rows
-         <div class="pkg-foot">   the price line and the button
-
-     TO ADD A PACKAGE     copy a whole <article class="pkg"> ... </article>
-                          block, paste it after the last one, change the words.
-     TO REMOVE A PACKAGE  delete its whole <article> block.
-     TO ADD A BADGE       <span class="pkg-badge">Best-selling</span>
-     TO REMOVE A BADGE    delete that <span> line.
-
-     Only ONE package should carry class "pkg-feature" - that is the wide one
-     at the top. If you move the feature to a different package, remove
-     pkg-feature from this one first.
-
-     PRICING: prices are deliberately not printed here, the same way the
-     Victoria catering page does it. The "pkg-price" line is a placeholder.
-     Leave it reading "on request" or replace it with a current figure.
-     ========================================================================= -->
-<section class="section section-alt" id="packages">
-  <div class="wrap">
-
-    <header class="section-head section-head-wide">
-      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Catering packages</p>
-      <h2 class="section-title">Feed the whole room, effortlessly.</h2>
-      <p class="section-lede">
-        Three ways to cater, from a full buffet to a platter that travels well.
-        Not sure which one fits? Send a guest count and we'll recommend one.
-      </p>
-    </header>
-
-    <div class="pkg-grid">
-
-      <!-- ---------- PACKAGE 1 (the wide featured one) ---------- -->
-      <article class="pkg pkg-feature">
-
-        <div class="pkg-main">
-          <span class="pkg-badge">Best-selling</span>
-          <h3 class="pkg-name">Sultan's Spread</h3>
-          <p class="pkg-meta">Buffet-style &middot; Per person &middot; Min. 20 guests</p>
-          <p class="pkg-desc">
-            The flagship buffet, and the easiest way to feed a full room. Choose
-            two proteins and we build the rest around them, with vegan,
-            vegetarian, gluten-free and dairy-free options included as standard.
-          </p>
-        </div>
-
-        <!-- What's included. Each <div class="pkg-row"> is one line: label + detail. -->
-        <div class="pkg-aside">
-          <p class="pkg-aside-title">What's included</p>
-          <dl class="pkg-contents">
-            <div class="pkg-row">
-              <dt>Proteins</dt>
-              <dd>Choice of 2 &mdash; chicken shawarma, beef shawarma, chicken kebab, kofta kebab</dd>
-            </div>
-            <div class="pkg-row">
-              <dt>Salads</dt>
-              <dd>Greek salad, cabbage salad</dd>
-            </div>
-            <div class="pkg-row">
-              <dt>Sides</dt>
-              <dd>Seasoned rice, garlic potatoes, falafel, garnish &amp; pickles, pita bread</dd>
-            </div>
-            <div class="pkg-row">
-              <dt>Dips</dt>
-              <dd>Hummus, garlic, shawarma sauce, tahini, hot sauce</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="pkg-foot">
-          <p class="pkg-price">[PLACEHOLDER] Per-person pricing on request</p>
-          <a class="btn btn-gold btn-block" href="#request">Get spread pricing</a>
-        </div>
-
-      </article>
-
-      <!-- ---------- PACKAGE 2 ---------- -->
-      <article class="pkg">
-        <div class="pkg-main">
-          <span class="pkg-badge pkg-badge-new">New</span>
-          <h3 class="pkg-name">Mediterranean Platter</h3>
-          <p class="pkg-meta">Serves 15&ndash;20 &middot; Min. 4 days notice</p>
-          <p class="pkg-desc">
-            Made for early meetings and lighter bites. Pick two mains, served
-            with pita, sliced vegetables, feta and pickles.
-          </p>
-        </div>
-
-        <div class="pkg-aside">
-          <p class="pkg-aside-title">What's included</p>
-          <dl class="pkg-contents">
-            <div class="pkg-row">
-              <dt>Pick 2</dt>
-              <dd>Falafel, stuffed grape leaves, fried cauliflower, fried eggplant</dd>
-            </div>
-            <div class="pkg-row">
-              <dt>Served with</dt>
-              <dd>Pita, sliced veggies, feta, pickles</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="pkg-foot">
-          <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
-          <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
-        </div>
-      </article>
-
-      <!-- ---------- PACKAGE 3 ---------- -->
-      <article class="pkg">
-        <div class="pkg-main">
-          <span class="pkg-badge pkg-badge-new">New</span>
-          <h3 class="pkg-name">Hummus Dip Platter</h3>
-          <p class="pkg-meta">Serves up to 25 &middot; Min. 4 days notice</p>
-          <p class="pkg-desc">
-            The easy add-on. House hummus with sliced vegetables and pita chips
-            &mdash; good for receptions, long meetings and anything stand-up.
-          </p>
-        </div>
-
-        <div class="pkg-aside">
-          <p class="pkg-aside-title">What's included</p>
-          <dl class="pkg-contents">
-            <div class="pkg-row">
-              <dt>Includes</dt>
-              <dd>Hummus, sliced veggies, pita chips</dd>
-            </div>
-          </dl>
-        </div>
-
-        <div class="pkg-foot">
-          <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
-          <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- ==== EDIT: A LA CARTE / FULL MENU CALLOUT ====
-         id="menu" is what the Menu card in the hero jumps to, so keep that id
-         on this block until a dedicated menu page exists.
-         When a new catering PDF is uploaded, update the link in BOTH places
-         (here and in the footer). -->
-    <aside class="menu-note" id="menu">
-      <div class="menu-note-copy">
-        <h3>The full catering menu</h3>
-        <p>
-          Trays of mains, salads, sides and dips by the half, medium or full
-          pan, plus individual bowls and wraps for boxed lunches, available a la
-          carte. Every item and current pricing is in the menu.
-        </p>
-      </div>
-      <a class="btn btn-dark" href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">View catering menu (PDF)</a>
-    </aside>
-
-    <p class="fineprint">
-      Items and pricing vary by location and are subject to change without notice. All prices plus HST.
-    </p>
-
-  </div>
-</section>
-
-<!-- =========================================================================
-     ==== EDIT: HOW TO BOOK ====
-     To add a step, copy a whole <li class="step"> block. The numbers are
-     drawn automatically by the stylesheet - never renumber them by hand.
-     ========================================================================= -->
-<section class="section" id="how">
-  <div class="wrap">
-
-    <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>How to book</p>
-      <h2 class="section-title">Four simple steps.</h2>
-      <p class="section-lede">
-        No account, no online checkout, no back and forth. A real person
-        handles your order from first message to delivery.
-      </p>
-    </header>
-
-    <ol class="steps">
-      <li class="step">
-        <h3>Browse the menu</h3>
-        <p>Pick a buffet spread, platters or boxed meals based on your guest count.</p>
-      </li>
-      <li class="step">
-        <h3>Submit your order</h3>
-        <p>Call <a href="tel:+16478032323">647-803-2323</a> or send the request form below.</p>
-      </li>
-      <li class="step">
-        <h3>Confirm the details</h3>
-        <p>A rep sends an invoice to review. Approve it and a payment link locks in the date.</p>
-      </li>
-      <li class="step">
-        <h3>Eat &amp; enjoy</h3>
-        <p>Everything is prepared fresh for pickup or hot delivery at your scheduled time.</p>
-      </li>
-    </ol>
-
-    <p class="pay-note">
-      <span class="pay-label">We accept</span>
-      <strong>Visa</strong><strong>Mastercard</strong><strong>Interac</strong>
-    </p>
-
-  </div>
-</section>
-
-<!-- =========================================================================
      ==== EDIT: LOCATIONS ====
      One <li class="loc"> block per location. Copy a block to add a store,
      delete a block to close one. The <p class="loc-tag"> line is optional.
@@ -623,131 +412,27 @@
 </section>
 
 <!-- =========================================================================
-     ==== EDIT: REQUEST A QUOTE / CONTACT ====
-
-     IMPORTANT - THE FORM CANNOT SEND EMAIL BY ITSELF.
-     A plain HTML page has no way to send mail. Choose one option:
-
-       OPTION A (no setup, working right now)
-         On submit the form opens the visitor's own email app with every
-         answer filled in, addressed to the address set as CATERING_EMAIL
-         at the top of js/script.js.
-
-       OPTION B (recommended once live)
-         Create a free form endpoint (Formspree, Basin, Netlify Forms), then
-         on the <form> tag below add:
-             action="https://formspree.io/f/YOURCODE" method="post"
-         and delete  data-mailto-fallback="true".
-
-     Keep the phone number and email the same here, in the header and in the
-     footer.
+     ==== EDIT: CATERING CALL TO ACTION ====
+     The closing band that sends people to the catering page. The full
+     catering content - packages, details, menu, how to book and the quote
+     form - all lives in catering.html now.
      ========================================================================= -->
-<section class="section section-invert" id="request">
-  <div class="wrap request-inner">
+<section class="section section-invert section-cta" id="catering">
+  <div class="wrap cta-band">
 
-    <div class="request-copy">
-      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>Ready to order?</p>
-      <h2 class="section-title">Let's plan your next event.</h2>
+    <div class="cta-band-copy">
+      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>Catering</p>
+      <h2 class="section-title">Feeding a room, not just a table?</h2>
       <p class="section-lede">
-        Send a date and a guest count. We'll come back with a recommendation
-        and an invoice, usually within one business day.
+        Buffet spreads, platters and boxed meals for offices, client meetings
+        and events. 100% halal, with vegan and gluten-free options throughout.
       </p>
-
-      <!-- ==== EDIT: CONTACT DETAILS ==== -->
-      <ul class="contact-list">
-        <li>
-          <span class="contact-label">Call or text</span>
-          <a class="contact-value" href="tel:+16478032323">647-803-2323</a>
-        </li>
-        <li>
-          <span class="contact-label">Email</span>
-          <!-- [PLACEHOLDER] Confirm the real catering inbox, then update this
-               link, its text, and CATERING_EMAIL in js/script.js -->
-          <a class="contact-value" href="mailto:catering@sultansgrill.ca">catering@sultansgrill.ca</a>
-        </li>
-        <li>
-          <span class="contact-label">Instagram</span>
-          <a class="contact-value" href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">@sultans.ca</a>
-        </li>
-        <li>
-          <span class="contact-label">Notice needed</span>
-          <span class="contact-value">48 hours standard &middot; 4 days for platters</span>
-        </li>
-      </ul>
     </div>
 
-    <!-- ==== EDIT: THE FORM ====
-         To add a field, copy a whole <p class="field"> block.
-         To add a package choice, copy one <option> line. -->
-    <form class="request-form" id="requestForm" data-mailto-fallback="true" novalidate>
-
-      <div class="form-head">
-        <h3 class="form-title">Request a quote</h3>
-        <p class="form-sub">Takes about a minute. No payment now.</p>
-      </div>
-
-      <div class="form-body">
-
-        <p class="field">
-          <label for="f-name">Full name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required>
-        </p>
-
-        <div class="field-pair">
-          <p class="field">
-            <label for="f-phone">Phone</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
-          </p>
-          <p class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
-          </p>
-        </div>
-
-        <div class="field-pair">
-          <p class="field">
-            <label for="f-date">Event date</label>
-            <input id="f-date" name="date" type="date">
-          </p>
-          <p class="field">
-            <label for="f-guests">Guests</label>
-            <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 25">
-          </p>
-        </div>
-
-        <p class="field">
-          <label for="f-package">Package</label>
-          <select id="f-package" name="package">
-            <option>Not sure yet &mdash; please advise</option>
-            <option>Sultan's Spread (buffet)</option>
-            <option>Mediterranean Platter</option>
-            <option>Hummus Dip Platter</option>
-            <option>A la carte trays</option>
-            <option>Individual bowls</option>
-            <option>Wraps</option>
-          </select>
-        </p>
-
-        <fieldset class="field field-radios">
-          <legend>Service</legend>
-          <div class="radio-row">
-            <label class="radio"><input type="radio" name="service" value="Delivery" checked> <span>Delivery</span></label>
-            <label class="radio"><input type="radio" name="service" value="Pickup"> <span>Pickup</span></label>
-          </div>
-        </fieldset>
-
-        <p class="field">
-          <label for="f-notes">Notes <span class="optional">(address, dietary needs, timing)</span></label>
-          <textarea id="f-notes" name="notes" rows="3"></textarea>
-        </p>
-
-        <button class="btn btn-gold btn-block btn-lg" type="submit">Send request</button>
-
-        <p class="form-note">We'll reply with an invoice, usually within one business day.</p>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-
-      </div>
-    </form>
+    <div class="cta-band-actions">
+      <a class="btn btn-gold btn-lg" href="catering.html">See catering packages</a>
+      <a class="btn btn-ghost btn-lg" href="catering.html#request">Request a quote</a>
+    </div>
 
   </div>
 </section>
@@ -755,8 +440,9 @@
 </main>
 
 <!-- =========================================================================
-     ==== EDIT: FOOTER ====
-     Keep the phone, email and links in step with the sections above.
+     ==== EDIT: FOOTER ====   *** SHARED WITH catering.html ***
+     Any change here must be repeated in the footer of catering.html, which
+     has its own copy of this block.
      ========================================================================= -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -775,16 +461,16 @@
       <div class="footer-col">
         <h2>Catering</h2>
         <ul>
-          <li><a href="#packages">Packages</a></li>
-          <li><a href="#how">How to book</a></li>
-          <li><a href="#request">Request a quote</a></li>
+          <li><a href="catering.html#packages">Packages</a></li>
+          <li><a href="catering.html#how">How to book</a></li>
+          <li><a href="catering.html#request">Request a quote</a></li>
           <li><a href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">Catering menu (PDF)</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>Company</h2>
         <ul>
-          <li><a href="https://sultansgrill.ca/" target="_blank" rel="noopener">Main site</a></li>
+          <li><a href="#top">Home</a></li>
           <li><a href="https://sultansgrill.ca/about/" target="_blank" rel="noopener">Our story</a></li>
           <li><a href="#locations">Locations</a></li>
           <li><a href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">Instagram</a></li>
