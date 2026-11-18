@@ -11,7 +11,8 @@ opening one file and typing over the old words.
 ```
 index.html          All the text and structure of the page. 90% of your edits.
 css/styles.css      Colours, fonts, spacing, layout.
-js/script.js        A small script: the mobile menu and the quote form.
+js/script.js        A small script: the mobile menu, the sticky header and
+                    the quote form. Nothing else depends on it.
 assets/             Images and PDFs. See assets/README.md.
 README.md           This file.
 ```
@@ -40,13 +41,14 @@ them. The sections, in page order:
 | Search for | What it controls |
 |---|---|
 | `EDIT: PAGE TITLE` | The browser tab text and the Google description |
-| `EDIT: TOP BAR` | The thin announcement strip at the very top |
 | `EDIT: HEADER & NAVIGATION` | The menu links |
-| `EDIT: HERO` | The big headline, intro line, buttons, three benefits |
-| `EDIT: HERO IMAGE` | Swapping in the main photo |
+| `EDIT: HEADER PHONE NUMBER` | The phone number in the top bar |
+| `EDIT: HERO` | The big headline, intro line, buttons — and the video/photo slot |
+| `EDIT: HERO TRUST BAR` | The four short proof points across the bottom of the hero |
 | `EDIT: DISH TICKER` | The slow-scrolling line of dish names |
 | `EDIT: WHY SULTAN'S` | The three numbers and four reason cards |
 | `EDIT: CATERING PACKAGES` | The package cards — **the section you'll edit most** |
+| `EDIT: A LA CARTE` | The catering PDF callout |
 | `EDIT: HOW TO BOOK` | The four numbered steps |
 | `EDIT: LOCATIONS` | Every store address |
 | `EDIT: REQUEST A QUOTE` | Phone, email, and the enquiry form |
@@ -72,14 +74,27 @@ them. The sections, in page order:
 
 ### Add a new catering package
 
+Every package card is built from the same three pieces, so you can copy any of
+them:
+
+```
+<article class="pkg">
+  <div class="pkg-main">   badge, name, the meta line, the description
+  <div class="pkg-aside">  the tinted "what's included" panel
+  <div class="pkg-foot">   the price line and the button
+</article>
+```
+
 1. Search for `EDIT: CATERING PACKAGES`.
 2. Select one whole `<article class="pkg">` … `</article>` block.
 3. Copy it and paste it directly after the last `</article>`.
-4. Change the name, the meta line, the description and the contents rows.
+4. Change the name, the meta line, the description and the included rows.
 5. Delete the `<span class="pkg-badge">` line unless you want a badge on it.
 
-Only **one** package should have `pkg-feature` on its `<article>` tag — that is
-the one that sits raised and outlined in gold on desktop.
+Only **one** package should carry `pkg-feature` on its `<article>` tag. That is
+the wide one at the top, where the "what's included" panel moves to the right
+on desktop. If you want a different package featured, remove `pkg-feature`
+from the current one first, or you will get two wide cards.
 
 ### Add or remove a location
 
@@ -93,13 +108,32 @@ the one that sits raised and outlined in gold on desktop.
    <p class="loc-meta">Mon–Fri 10am–7pm &middot; 416-000-0000</p>
    ```
 
+### Add the hero video or photo
+
+The hero currently shows a deep purple gradient. That is a finished look on its
+own — nothing appears broken or missing — but a real video or photo behind it
+lifts the page a lot.
+
+1. Put the file in the `assets` folder.
+2. Search `index.html` for `EDIT: HERO`.
+3. You'll find a **VIDEO SLOT** and a **PHOTO SLOT**, both commented out.
+   Pick one, remove the `<!--` and `-->` around it, and set the file names.
+4. Use one or the other, never both.
+
+For video: short, quiet, looping, **no sound**, 8–15 seconds, under 5 MB.
+For a photo: wide, bright, around 2000px across.
+
+The dark overlay on top keeps the headline readable either way, so you do not
+need to edit any CSS.
+
 ### Change the phone number or email
 
-They appear in **three** places. Update all three:
+The phone number appears in **four** places. Update all of them:
 
-1. The "How to book" step 2.
-2. The contact list in the `EDIT: REQUEST A QUOTE` section.
-3. The footer.
+1. The header bar (`EDIT: HEADER PHONE NUMBER`).
+2. The line under the hero buttons.
+3. The "How to book" step 2.
+4. The contact list in `EDIT: REQUEST A QUOTE`, and the footer.
 
 Also update `CATERING_EMAIL` on the first few lines of `js/script.js`.
 
@@ -151,7 +185,8 @@ These are marked `[PLACEHOLDER]` in the files — search for that word.
       tray, $200 delivery threshold). Check they are still accurate.
 - [ ] **Location list.** Ten addresses were taken from sultansgrill.ca. Four
       are missing postal codes there, and none have phone numbers or hours.
-- [ ] **Hero photo** — see `assets/README.md`.
+- [ ] **Hero video or photo** — optional but recommended. See the section
+      above, and `assets/README.md`.
 - [ ] **Social share image** (`assets/share-image.jpg`, 1200×630).
 - [ ] **Browser tab icon** (`assets/favicon.png`).
 - [ ] Decide on the form service (section 4 above).
@@ -165,13 +200,26 @@ colour and font on the site. Change a value there once and it updates
 everywhere — you never hunt through the file.
 
 ```css
---purple-700: #2D1B4E;   /* the main brand purple  */
---gold-500:   #D4A23C;   /* the main accent gold   */
+--plum-700: #35195A;   /* the main brand purple */
+--gold-500: #C9972F;   /* the main accent gold  */
 ```
 
-The purple and gold come from the existing Sultan's branding. The neutrals are
-a warm off-white (`--cream`) and a soft near-black (`--ink`), chosen so text
-stays easy to read.
+The purple and gold come from the existing Sultan's branding, rebuilt as a
+proper scale. Low numbers are dark, high numbers are light:
+
+| Family | Dark end | Main | Light end |
+|---|---|---|---|
+| Purple | `--plum-950` `#120620` | `--plum-700` `#35195A` | `--plum-100` `#EDE7F7` |
+| Gold | `--gold-700` `#8A6316` | `--gold-500` `#C9972F` | `--gold-100` `#F8EFD9` |
+| Ink / neutral | `--ink-900` `#16101D` | `--ink-600` `#4E4457` | `--sand-50` `#FBF9F6` |
+
+Two gold rules worth knowing: use `--gold-600` or `--gold-700` for gold **text
+on a white background** (the lighter golds fail contrast and get hard to read),
+and `--gold-400` for gold text **on dark purple**.
+
+Below the colours there is a second group called **SEMANTIC ROLES**
+(`--accent`, `--text`, `--bg-alt`, and so on). Those say what each colour is
+*used for*. Re-pointing one of those changes the whole site at once.
 
 Headings use **Fraunces** (a warm serif), body text uses **Inter**. Both load
 free from Google Fonts via the `<link>` in `index.html`. To change them, swap

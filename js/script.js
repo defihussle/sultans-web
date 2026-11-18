@@ -1,59 +1,82 @@
 /* ===========================================================================
    SULTAN'S CATERING - SITE SCRIPT
    ===========================================================================
-   Kept deliberately small. Four jobs only:
+   Kept deliberately small. Five jobs only:
      1. The mobile menu button
-     2. The copyright year in the footer
-     3. Highlighting the nav link for the section you are looking at
-     4. The quote form (basic checks + an email fallback)
+     2. Turning the header white once you scroll past the hero
+     3. The copyright year in the footer
+     4. Highlighting the nav link for the section you are looking at
+     5. The quote form (basic checks + an email fallback)
 
    THE ONLY LINE MOST PEOPLE NEED TO EDIT IS THE NEXT ONE.
    =========================================================================== */
 
-/* ==== EDIT: where quote requests should go when the form has no service
-   connected. See the big comment above the form in index.html. ==== */
+/* ==== EDIT: where quote requests go when no form service is connected.
+   See the big comment above the form in index.html. ==== */
 var CATERING_EMAIL = 'catering@sultansgrill.ca';
 
 (function () {
   'use strict';
 
-  /* -------------------------------------------------------------------------
-     1. MOBILE MENU
-     ------------------------------------------------------------------------- */
+  var header = document.getElementById('siteHeader');
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('siteNav');
 
-  function closeNav() {
+  /* -------------------------------------------------------------------------
+     1. MOBILE MENU
+     ------------------------------------------------------------------------- */
+  function setNav(open) {
     if (!nav || !toggle) return;
-    nav.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // The header needs a solid background while the panel is open.
+    if (header) header.classList.toggle('nav-open', open);
   }
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
-      var isOpen = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      setNav(!nav.classList.contains('is-open'));
     });
 
-    // Tapping a link closes the menu so the page is not left covered.
+    // Tapping a link closes the menu, so the page is not left covered.
     nav.addEventListener('click', function (event) {
-      if (event.target.closest('a')) closeNav();
+      if (event.target.closest('a')) setNav(false);
     });
 
     // Escape closes it too.
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') closeNav();
+      if (event.key === 'Escape') setNav(false);
     });
   }
 
   /* -------------------------------------------------------------------------
-     2. FOOTER YEAR - no need to update the copyright by hand
+     2. STICKY HEADER
+     The bar sits see-through over the hero, then turns white once you have
+     scrolled a little. Change the 40 below to adjust when it switches.
+     ------------------------------------------------------------------------- */
+  if (header) {
+    var lastStuck = null;
+
+    function updateHeader() {
+      var stuck = window.scrollY > 40;
+      if (stuck !== lastStuck) {
+        header.classList.toggle('is-stuck', stuck);
+        lastStuck = stuck;
+      }
+    }
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+  }
+
+  /* -------------------------------------------------------------------------
+     3. FOOTER YEAR - no need to update the copyright by hand
      ------------------------------------------------------------------------- */
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   /* -------------------------------------------------------------------------
-     3. ACTIVE NAV LINK
+     4. ACTIVE NAV LINK
      Adds the class "is-current" to the nav link of the section on screen.
      Purely cosmetic - safe to delete this whole block.
      ------------------------------------------------------------------------- */
@@ -81,7 +104,7 @@ var CATERING_EMAIL = 'catering@sultansgrill.ca';
   }
 
   /* -------------------------------------------------------------------------
-     4. QUOTE FORM
+     5. QUOTE FORM
      If the form has a real action="..." (a form service), this script stays
      out of the way and the browser submits it normally.
      If it does not, we check the required fields and open the visitor's email
@@ -100,7 +123,7 @@ var CATERING_EMAIL = 'catering@sultansgrill.ca';
     form.addEventListener('submit', function (event) {
       var usesMailto = form.getAttribute('data-mailto-fallback') === 'true';
 
-      // Check the required fields ourselves so the message is friendly.
+      // Check the required fields ourselves, so the message is friendly.
       var missing = [];
       Array.prototype.forEach.call(
         form.querySelectorAll('[required]'),

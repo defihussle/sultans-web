@@ -7,12 +7,12 @@
 
   HOW TO EDIT THIS FILE
   - Every section below starts with a comment banner like:
-        <!== EDIT: SECTION NAME ==>
-    Find the banner, change the text between the tags. Leave the tags alone.
-  - Text you can safely change is the plain English between > and <.
-  - Anything marked [PLACEHOLDER] must be reviewed before the site goes live.
-  - Colours, fonts and spacing live in css/styles.css (top of that file).
-  - See README.md for a plain-language walkthrough.
+        ==== EDIT: SECTION NAME ====
+    Use Find (Ctrl+F) and search for  EDIT:  to jump between them.
+  - Change the plain English between > and <. Leave the tags alone.
+  - Anything marked [PLACEHOLDER] must be reviewed before launch.
+  - Colours, fonts and spacing live at the top of css/styles.css.
+  - See README.md for a full plain-language walkthrough.
   ============================================================================
 -->
 <html lang="en">
@@ -22,19 +22,20 @@
 
   <!-- ==== EDIT: PAGE TITLE & SEARCH DESCRIPTION ==== -->
   <title>Halal Mediterranean Catering in Toronto | Sultan's Mediterranean Grill</title>
-  <meta name="description" content="Fresh, 100% halal Mediterranean catering for office lunches, meetings and events across Toronto. Buffet spreads, platters, boxed bowls and wraps from Sultan's Mediterranean Grill.">
-  <meta name="theme-color" content="#2D1B4E">
+  <meta name="description" content="Halal Mediterranean catering for Toronto offices and events. Buffet spreads, platters and boxed meals, delivered hot to the Financial District and the PATH.">
+  <meta name="theme-color" content="#1C0C33">
 
-  <!-- Social sharing preview. Add a 1200x630 image to /assets, then update the path. -->
+  <!-- Preview card shown when someone shares the link.
+       Add a 1200x630 image to the assets folder, then this works automatically. -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Halal Mediterranean Catering in Toronto | Sultan's">
-  <meta property="og:description" content="Catering that feeds the whole room, effortlessly. 100% halal. Vegan and gluten-free options.">
+  <meta property="og:description" content="Catering that feeds the whole room, effortlessly. 100% halal, with vegan and gluten-free options.">
   <meta property="og:image" content="assets/share-image.jpg">
 
-  <!-- Fonts. To change the typefaces, swap these and the two font stacks in css/styles.css -->
+  <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -43,27 +44,21 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- =========================================================================
-     ==== EDIT: TOP BAR (one-line announcement) ====
-     Short, high-value message. Delete this whole <div> to remove the bar.
-     ========================================================================= -->
-<div class="topbar">
-  <p>100% Halal &nbsp;&middot;&nbsp; Free PATH delivery on orders over $200 &nbsp;&middot;&nbsp; Serving Toronto's Financial District</p>
-</div>
-
-<!-- =========================================================================
      ==== EDIT: HEADER & NAVIGATION ====
-     To rename a nav link, change its text only.
-     To remove a link, delete its whole <li> line.
+     The bar sits see-through over the hero, then turns white as you scroll.
+
+     To rename a link, change its text only.
+     To remove one, delete its whole <li> line.
      Each href="#id" must match a section id further down this page.
      ========================================================================= -->
-<header class="site-header" id="top">
+<header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
 
     <a class="brand" href="#top" aria-label="Sultan's Mediterranean Grill, home">
       <span class="brand-mark" aria-hidden="true">S</span>
       <span class="brand-text">
         <span class="brand-name">Sultan's</span>
-        <span class="brand-sub">Mediterranean Grill</span>
+        <span class="brand-sub">Catering</span>
       </span>
     </a>
 
@@ -78,6 +73,11 @@
         <li><a href="#packages">Packages</a></li>
         <li><a href="#how">How to book</a></li>
         <li><a href="#locations">Locations</a></li>
+
+        <!-- ==== EDIT: HEADER PHONE NUMBER ====
+             Keep the tel: part in full international form (+1 then the number). -->
+        <li class="nav-phone"><a href="tel:+16478032323">647&#8209;803&#8209;2323</a></li>
+
         <li class="nav-cta"><a class="btn btn-gold btn-sm" href="#request">Request a quote</a></li>
       </ul>
     </nav>
@@ -88,64 +88,81 @@
 <main id="main">
 
 <!-- =========================================================================
-     ==== EDIT: HERO (the first thing people see) ====
-     This is the most important text on the site. Keep the headline short.
+     ==== EDIT: HERO ====
+     The most important text on the site. Keep the headline short and punchy.
+
+     ---- TO ADD A HERO VIDEO OR PHOTO (slot is ready below) ----
+     Until you add one, the hero shows a deep purple gradient, which is a
+     finished look on its own - nothing looks broken or missing.
+
+     FOR A VIDEO: put the file in the assets folder, then delete the
+     <!- - and - -> around the <video> block and set the two file names.
+     Use a short, quiet, looping clip (8-15 seconds, no sound, under 5 MB).
+
+     FOR A PHOTO: do the same with the <img> block instead.
+     Use a wide, bright photo of a full catering spread, about 2000px wide.
+
+     Use ONE of the two, not both. The dark overlay above it keeps the
+     headline readable whatever you choose.
      ========================================================================= -->
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
+<section class="hero" id="top">
 
-    <div class="hero-copy">
-      <p class="eyebrow eyebrow-light">Catering by Sultan's Mediterranean Grill</p>
+  <div class="hero-media" aria-hidden="true">
 
-      <h1 class="hero-title">
-        Make meetings <em>memorable.</em>
-        <span class="hero-title-line">Halal Mediterranean catering in Toronto.</span>
-      </h1>
+    <!-- VIDEO SLOT
+    <video class="hero-asset" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    -->
 
-      <p class="hero-lede">
-        Generous, fresh-cooked spreads for corporate lunches, client meetings and
-        team events &mdash; simple to order, and genuinely good to serve.
-      </p>
-
-      <!-- Hero buttons. Change the text; keep href pointing at a section id. -->
-      <div class="hero-actions">
-        <a class="btn btn-gold btn-lg" href="#request">Request a quote</a>
-        <a class="btn btn-ghost btn-lg" href="#packages">See packages</a>
-      </div>
-
-      <!-- ==== EDIT: HERO KEY BENEFITS (three short proof points) ==== -->
-      <ul class="hero-benefits">
-        <li>100% Halal</li>
-        <li>Vegan &amp; gluten-free options</li>
-        <li>Free PATH delivery $200+</li>
-      </ul>
-    </div>
-
-    <!-- ==== EDIT: HERO IMAGE ====
-         TO ADD THE PHOTO: put the file in the assets folder, then delete the
-         <div class="media-ph"> block below and un-comment the <img> line.
-         Best choice: a wide, bright, well-lit photo of a full catering spread. -->
-    <div class="hero-media">
-      <!-- <img src="assets/hero-trays.jpg" alt="Catering trays of chicken shawarma, salads, rice and dips" width="900" height="1100"> -->
-      <div class="media-ph media-ph-hero">
-        <span class="ph-file">assets/hero-trays.jpg</span>
-        <span class="ph-note">Add a wide photo of a full catering spread</span>
-      </div>
-
-      <!-- Halal badge. Delete this whole block if it is not wanted. -->
-      <div class="halal-badge">
-        <strong>Certified Halal</strong>
-        <span>Every tray, every time</span>
-      </div>
-    </div>
+    <!-- PHOTO SLOT
+    <img class="hero-asset" src="assets/hero.jpg" alt="">
+    -->
 
   </div>
+
+  <!-- Dark overlay that keeps text readable on top of any photo or video. -->
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow eyebrow-light">Catering by Sultan's Mediterranean Grill</p>
+
+    <h1 class="hero-title">
+      Catering your team
+      <em>actually looks forward to.</em>
+    </h1>
+
+    <p class="hero-lede">
+      Halal Mediterranean spreads for Toronto offices, client meetings and
+      events &mdash; cooked fresh the morning of, delivered hot, set up ready to serve.
+    </p>
+
+    <!-- Hero buttons. Change the text; keep each href pointing at a section id. -->
+    <div class="hero-actions">
+      <a class="btn btn-gold btn-lg" href="#request">Request catering</a>
+      <a class="btn btn-ghost btn-lg" href="#packages">View packages</a>
+    </div>
+
+    <p class="hero-aside">
+      Or call <a href="tel:+16478032323">647-803-2323</a> &mdash; most orders need 48 hours notice.
+    </p>
+  </div>
+
+  <!-- ==== EDIT: HERO TRUST BAR (the strip of short proof points) ====
+       Four items fit comfortably. Add or delete a whole <li>. -->
+  <ul class="trust-bar">
+    <li>100% Halal</li>
+    <li>Vegan &amp; gluten-free options</li>
+    <li>Free PATH delivery over $200</li>
+    <li>Serving 10 Ontario locations</li>
+  </ul>
+
 </section>
 
 <!-- =========================================================================
      ==== EDIT: DISH TICKER (the slow scrolling line of dish names) ====
-     Add or remove dish names in BOTH copies below, so the loop stays seamless.
+     Add or remove dishes in BOTH copies below so the loop stays seamless.
+     To remove the ticker entirely, delete this whole <div>.
      ========================================================================= -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
@@ -156,17 +173,17 @@
 
 <!-- =========================================================================
      ==== EDIT: WHY SULTAN'S ====
-     Section heading, short intro, three numbers, four cards, dietary tags.
+     Heading, intro, three numbers, four cards, dietary tags.
      The three numbers date fastest - check them before launch.
      ========================================================================= -->
 <section class="section" id="why">
   <div class="wrap">
 
     <header class="section-head">
-      <p class="eyebrow">Why Sultan's</p>
-      <h2 class="section-title">Catering shouldn't be one more thing to worry about.</h2>
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Why Sultan's</p>
+      <h2 class="section-title">Catering shouldn't be one more thing to manage.</h2>
       <p class="section-lede">
-        A Sultan is a king &mdash; and every guest at your table should feel like one.
+        A Sultan is a king, and every guest at your table should feel like one.
         We handle the food, the timing and the trays. You run the meeting.
       </p>
     </header>
@@ -182,8 +199,8 @@
         <span class="stat-label">Guests served per full tray</span>
       </li>
       <li>
-        <span class="stat-num">$200</span>
-        <span class="stat-label">Free PATH delivery threshold</span>
+        <span class="stat-num">48h</span>
+        <span class="stat-label">Typical notice to book</span>
       </li>
     </ul>
 
@@ -191,140 +208,196 @@
          To add or remove a card, copy or delete a whole <li class="feature"> block. -->
     <ul class="feature-grid">
       <li class="feature">
-        <h3>Fresh, never pre-packed</h3>
-        <p>Authentic recipes and quality ingredients, cooked for your order rather than pulled from a fridge.</p>
+        <h3>Cooked fresh, never pre&#8209;packed</h3>
+        <p>Authentic recipes and quality ingredients, prepared the morning of your event rather than pulled from a fridge.</p>
       </li>
       <li class="feature">
         <h3>Built for office schedules</h3>
-        <p>Quick, reliable service for busy professionals. Hot delivery or pickup at the time you set.</p>
+        <p>Hot delivery or pickup at the exact time you set, with setup that takes minutes, not half your lunch hour.</p>
       </li>
       <li class="feature">
         <h3>Everyone at the table eats</h3>
         <p>Vegan, vegetarian, gluten-free and dairy-free options across the menu, and fully halal throughout.</p>
       </li>
       <li class="feature">
-        <h3>One point of contact</h3>
-        <p>A real person confirms the order, sends a single invoice, and makes sure it lands on time.</p>
+        <h3>One person, one invoice</h3>
+        <p>A real contact confirms the order, sends a single invoice for accounting, and makes sure it lands on time.</p>
       </li>
     </ul>
 
     <!-- ==== EDIT: DIETARY TAGS ==== -->
-    <ul class="tag-row" aria-label="Dietary options">
-      <li>Vegan</li>
-      <li>Vegetarian</li>
-      <li>Gluten-free</li>
-      <li>Dairy-free</li>
-      <li>Halal</li>
-    </ul>
+    <div class="tag-block">
+      <p class="tag-label">Options available</p>
+      <ul class="tag-row">
+        <li>Vegan</li>
+        <li>Vegetarian</li>
+        <li>Gluten-free</li>
+        <li>Dairy-free</li>
+        <li>Halal</li>
+      </ul>
+    </div>
 
   </div>
 </section>
 
 <!-- =========================================================================
      ==== EDIT: CATERING PACKAGES ====   *** THE MOST-EDITED SECTION ***
-     Each package is one <article class="pkg"> ... </article> block.
 
-     TO ADD A PACKAGE     copy a whole <article> block, paste it after the last
-                          one, then change the wording.
+     The first package is the wide featured one. The other two sit side by
+     side below it.
+
+     All three cards are built the same way, so you can copy any of them:
+         <div class="pkg-main">   the badge, name, meta line and description
+         <div class="pkg-aside">  the "what's included" rows
+         <div class="pkg-foot">   the price line and the button
+
+     TO ADD A PACKAGE     copy a whole <article class="pkg"> ... </article>
+                          block, paste it after the last one, change the words.
      TO REMOVE A PACKAGE  delete its whole <article> block.
      TO ADD A BADGE       <span class="pkg-badge">Best-selling</span>
      TO REMOVE A BADGE    delete that <span> line.
-     TO MAKE ONE STAND    add class pkg-feature to the <article> tag
-     OUT                  (only one package should have it).
+
+     Only ONE package should carry class "pkg-feature" - that is the wide one
+     at the top. If you move the feature to a different package, remove
+     pkg-feature from this one first.
 
      PRICING: prices are deliberately not printed here, the same way the
-     reference catering site does it. The "pkg-price" line is a placeholder.
-     Either leave it reading "on request" or replace it with a current figure.
-     The full item list and pricing live in the catering PDF linked below.
+     Victoria catering page does it. The "pkg-price" line is a placeholder.
+     Leave it reading "on request" or replace it with a current figure.
      ========================================================================= -->
 <section class="section section-alt" id="packages">
   <div class="wrap">
 
-    <header class="section-head">
-      <p class="eyebrow">Catering packages</p>
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Catering packages</p>
       <h2 class="section-title">Feed the whole room, effortlessly.</h2>
       <p class="section-lede">
         Three ways to cater, from a full buffet to a platter that travels well.
-        Not sure which one fits? Send your guest count and we'll recommend one.
+        Not sure which one fits? Send a guest count and we'll recommend one.
       </p>
     </header>
 
     <div class="pkg-grid">
 
-      <!-- ---------- PACKAGE 1 ---------- -->
+      <!-- ---------- PACKAGE 1 (the wide featured one) ---------- -->
       <article class="pkg pkg-feature">
-        <span class="pkg-badge">Best-selling</span>
-        <h3 class="pkg-name">Sultan's Spread</h3>
-        <p class="pkg-meta">Buffet-style &middot; Charged per person &middot; Min. 20 guests</p>
-        <p class="pkg-desc">
-          The flagship buffet. A flexible group spread with vegan, vegetarian,
-          gluten-free and dairy-free options built in.
-        </p>
 
-        <!-- Contents. Each <div class="pkg-row"> is one line: label + detail. -->
-        <dl class="pkg-contents">
-          <div class="pkg-row"><dt>Proteins</dt><dd>Choice of 2 &mdash; chicken shawarma, beef shawarma, chicken kebab, kofta kebab</dd></div>
-          <div class="pkg-row"><dt>Salads</dt><dd>Greek salad, cabbage salad</dd></div>
-          <div class="pkg-row"><dt>Sides</dt><dd>Seasoned rice, garlic potatoes, falafel, garnish &amp; pickles, pita bread</dd></div>
-          <div class="pkg-row"><dt>Dips</dt><dd>Hummus, garlic, shawarma sauce, tahini, hot sauce</dd></div>
-        </dl>
+        <div class="pkg-main">
+          <span class="pkg-badge">Best-selling</span>
+          <h3 class="pkg-name">Sultan's Spread</h3>
+          <p class="pkg-meta">Buffet-style &middot; Per person &middot; Min. 20 guests</p>
+          <p class="pkg-desc">
+            The flagship buffet, and the easiest way to feed a full room. Choose
+            two proteins and we build the rest around them, with vegan,
+            vegetarian, gluten-free and dairy-free options included as standard.
+          </p>
+        </div>
 
-        <p class="pkg-price">[PLACEHOLDER] Per-person pricing on request</p>
-        <a class="btn btn-gold btn-block" href="#request">Get spread pricing</a>
+        <!-- What's included. Each <div class="pkg-row"> is one line: label + detail. -->
+        <div class="pkg-aside">
+          <p class="pkg-aside-title">What's included</p>
+          <dl class="pkg-contents">
+            <div class="pkg-row">
+              <dt>Proteins</dt>
+              <dd>Choice of 2 &mdash; chicken shawarma, beef shawarma, chicken kebab, kofta kebab</dd>
+            </div>
+            <div class="pkg-row">
+              <dt>Salads</dt>
+              <dd>Greek salad, cabbage salad</dd>
+            </div>
+            <div class="pkg-row">
+              <dt>Sides</dt>
+              <dd>Seasoned rice, garlic potatoes, falafel, garnish &amp; pickles, pita bread</dd>
+            </div>
+            <div class="pkg-row">
+              <dt>Dips</dt>
+              <dd>Hummus, garlic, shawarma sauce, tahini, hot sauce</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="pkg-foot">
+          <p class="pkg-price">[PLACEHOLDER] Per-person pricing on request</p>
+          <a class="btn btn-gold btn-block" href="#request">Get spread pricing</a>
+        </div>
+
       </article>
 
       <!-- ---------- PACKAGE 2 ---------- -->
       <article class="pkg">
-        <span class="pkg-badge pkg-badge-new">New</span>
-        <h3 class="pkg-name">Mediterranean Platter</h3>
-        <p class="pkg-meta">Serves 15&ndash;20 &middot; Min. 4 days notice</p>
-        <p class="pkg-desc">
-          Made for early meetings and lighter bites. Pick two mains, served with
-          pita, sliced vegetables, feta and pickles.
-        </p>
+        <div class="pkg-main">
+          <span class="pkg-badge pkg-badge-new">New</span>
+          <h3 class="pkg-name">Mediterranean Platter</h3>
+          <p class="pkg-meta">Serves 15&ndash;20 &middot; Min. 4 days notice</p>
+          <p class="pkg-desc">
+            Made for early meetings and lighter bites. Pick two mains, served
+            with pita, sliced vegetables, feta and pickles.
+          </p>
+        </div>
 
-        <dl class="pkg-contents">
-          <div class="pkg-row"><dt>Pick 2</dt><dd>Falafel, stuffed grape leaves, fried cauliflower, fried eggplant</dd></div>
-          <div class="pkg-row"><dt>Served with</dt><dd>Pita, sliced veggies, feta, pickles</dd></div>
-        </dl>
+        <div class="pkg-aside">
+          <p class="pkg-aside-title">What's included</p>
+          <dl class="pkg-contents">
+            <div class="pkg-row">
+              <dt>Pick 2</dt>
+              <dd>Falafel, stuffed grape leaves, fried cauliflower, fried eggplant</dd>
+            </div>
+            <div class="pkg-row">
+              <dt>Served with</dt>
+              <dd>Pita, sliced veggies, feta, pickles</dd>
+            </div>
+          </dl>
+        </div>
 
-        <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
-        <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
+        <div class="pkg-foot">
+          <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
+          <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
+        </div>
       </article>
 
       <!-- ---------- PACKAGE 3 ---------- -->
       <article class="pkg">
-        <span class="pkg-badge pkg-badge-new">New</span>
-        <h3 class="pkg-name">Hummus Dip Platter</h3>
-        <p class="pkg-meta">Serves up to 25 &middot; Min. 4 days notice</p>
-        <p class="pkg-desc">
-          The easy add-on. House hummus with sliced vegetables and pita chips,
-          good for receptions, long meetings and anything stand-up.
-        </p>
+        <div class="pkg-main">
+          <span class="pkg-badge pkg-badge-new">New</span>
+          <h3 class="pkg-name">Hummus Dip Platter</h3>
+          <p class="pkg-meta">Serves up to 25 &middot; Min. 4 days notice</p>
+          <p class="pkg-desc">
+            The easy add-on. House hummus with sliced vegetables and pita chips
+            &mdash; good for receptions, long meetings and anything stand-up.
+          </p>
+        </div>
 
-        <dl class="pkg-contents">
-          <div class="pkg-row"><dt>Includes</dt><dd>Hummus, sliced veggies, pita chips</dd></div>
-        </dl>
+        <div class="pkg-aside">
+          <p class="pkg-aside-title">What's included</p>
+          <dl class="pkg-contents">
+            <div class="pkg-row">
+              <dt>Includes</dt>
+              <dd>Hummus, sliced veggies, pita chips</dd>
+            </div>
+          </dl>
+        </div>
 
-        <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
-        <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
+        <div class="pkg-foot">
+          <p class="pkg-price">[PLACEHOLDER] Pricing on request</p>
+          <a class="btn btn-outline btn-block" href="#request">Order this platter</a>
+        </div>
       </article>
 
     </div>
 
-    <!-- ==== EDIT: A LA CARTE / FULL MENU NOTE ====
-         When a new catering PDF is uploaded, update the href in BOTH places
+    <!-- ==== EDIT: A LA CARTE / FULL MENU CALLOUT ====
+         When a new catering PDF is uploaded, update the link in BOTH places
          (here and in the footer). -->
     <aside class="menu-note">
       <div class="menu-note-copy">
         <h3>Also available a la carte</h3>
         <p>
-          Trays of mains, salads, sides and dips by the half, medium or full pan,
-          plus individual bowls and wraps for boxed lunches. The full item list
-          and current pricing are in the catering menu.
+          Trays of mains, salads, sides and dips by the half, medium or full
+          pan, plus individual bowls and wraps for boxed lunches. The full item
+          list and current pricing are in the catering menu.
         </p>
       </div>
-      <a class="btn btn-outline" href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">View catering menu (PDF)</a>
+      <a class="btn btn-dark" href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">View catering menu (PDF)</a>
     </aside>
 
     <p class="fineprint">
@@ -335,16 +408,20 @@
 </section>
 
 <!-- =========================================================================
-     ==== EDIT: HOW TO BOOK (numbered steps) ====
-     To add a step, copy a whole <li class="step"> block. The step numbers are
-     drawn automatically by the stylesheet - you never renumber them by hand.
+     ==== EDIT: HOW TO BOOK ====
+     To add a step, copy a whole <li class="step"> block. The numbers are
+     drawn automatically by the stylesheet - never renumber them by hand.
      ========================================================================= -->
 <section class="section" id="how">
   <div class="wrap">
 
     <header class="section-head">
-      <p class="eyebrow">How to book catering</p>
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>How to book</p>
       <h2 class="section-title">Four simple steps.</h2>
+      <p class="section-lede">
+        No account, no online checkout, no back and forth. A real person
+        handles your order from first message to delivery.
+      </p>
     </header>
 
     <ol class="steps">
@@ -367,7 +444,7 @@
     </ol>
 
     <p class="pay-note">
-      <span>We accept</span>
+      <span class="pay-label">We accept</span>
       <strong>Visa</strong><strong>Mastercard</strong><strong>Interac</strong>
     </p>
 
@@ -377,18 +454,17 @@
 <!-- =========================================================================
      ==== EDIT: LOCATIONS ====
      One <li class="loc"> block per location. Copy a block to add a store,
-     delete a block to close one. The <p class="loc-tag"> line is optional -
-     use it for "Now open" or delete it.
+     delete a block to close one. The <p class="loc-tag"> line is optional.
 
      NOTE: the old site published no phone numbers or opening hours per
-     location. When you have them, add a line inside each block, e.g.
-         <p class="loc-meta">Mon-Fri 10am-7pm &middot; 416-000-0000</p>
+     location. When you have them, add a line inside a block like this:
+         <p class="loc-meta">Mon&ndash;Fri 10am&ndash;7pm</p>
      ========================================================================= -->
 <section class="section section-alt" id="locations">
   <div class="wrap">
 
     <header class="section-head">
-      <p class="eyebrow">Locations</p>
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Locations</p>
       <h2 class="section-title">Ten kitchens, one standard.</h2>
       <p class="section-lede">
         Most catering runs out of the Financial District and the PATH, with
@@ -469,10 +545,10 @@
      IMPORTANT - THE FORM CANNOT SEND EMAIL BY ITSELF.
      A plain HTML page has no way to send mail. Choose one option:
 
-       OPTION A (no setup, works right now)
-         Leave the form as it is. On submit it opens the visitor's own email
-         app with every answer filled in, addressed to the address set as
-         CATERING_EMAIL at the top of js/script.js.
+       OPTION A (no setup, working right now)
+         On submit the form opens the visitor's own email app with every
+         answer filled in, addressed to the address set as CATERING_EMAIL
+         at the top of js/script.js.
 
        OPTION B (recommended once live)
          Create a free form endpoint (Formspree, Basin, Netlify Forms), then
@@ -480,17 +556,18 @@
              action="https://formspree.io/f/YOURCODE" method="post"
          and delete  data-mailto-fallback="true".
 
-     Keep the phone number and email the same here and in the footer.
+     Keep the phone number and email the same here, in the header and in the
+     footer.
      ========================================================================= -->
 <section class="section section-invert" id="request">
   <div class="wrap request-inner">
 
     <div class="request-copy">
-      <p class="eyebrow eyebrow-light">Ready to order?</p>
+      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>Ready to order?</p>
       <h2 class="section-title">Let's plan your next event.</h2>
       <p class="section-lede">
-        Send the date and a guest count and we'll come back with a
-        recommendation and an invoice, usually within one business day.
+        Send a date and a guest count. We'll come back with a recommendation
+        and an invoice, usually within one business day.
       </p>
 
       <!-- ==== EDIT: CONTACT DETAILS ==== -->
@@ -511,7 +588,7 @@
         </li>
         <li>
           <span class="contact-label">Notice needed</span>
-          <span class="contact-value">48 hours for most orders &middot; 4 days for platters</span>
+          <span class="contact-value">48 hours standard &middot; 4 days for platters</span>
         </li>
       </ul>
     </div>
@@ -520,63 +597,73 @@
          To add a field, copy a whole <p class="field"> block.
          To add a package choice, copy one <option> line. -->
     <form class="request-form" id="requestForm" data-mailto-fallback="true" novalidate>
-      <h3 class="form-title">Request a quote</h3>
 
-      <p class="field">
-        <label for="f-name">Full name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
-      </p>
-
-      <div class="field-pair">
-        <p class="field">
-          <label for="f-phone">Phone</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
-        </p>
-        <p class="field">
-          <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
-        </p>
+      <div class="form-head">
+        <h3 class="form-title">Request a quote</h3>
+        <p class="form-sub">Takes about a minute. No payment now.</p>
       </div>
 
-      <div class="field-pair">
+      <div class="form-body">
+
         <p class="field">
-          <label for="f-date">Event date</label>
-          <input id="f-date" name="date" type="date">
+          <label for="f-name">Full name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
         </p>
+
+        <div class="field-pair">
+          <p class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+          </p>
+          <p class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </p>
+        </div>
+
+        <div class="field-pair">
+          <p class="field">
+            <label for="f-date">Event date</label>
+            <input id="f-date" name="date" type="date">
+          </p>
+          <p class="field">
+            <label for="f-guests">Guests</label>
+            <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 25">
+          </p>
+        </div>
+
         <p class="field">
-          <label for="f-guests">Guests</label>
-          <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric">
+          <label for="f-package">Package</label>
+          <select id="f-package" name="package">
+            <option>Not sure yet &mdash; please advise</option>
+            <option>Sultan's Spread (buffet)</option>
+            <option>Mediterranean Platter</option>
+            <option>Hummus Dip Platter</option>
+            <option>A la carte trays</option>
+            <option>Individual bowls</option>
+            <option>Wraps</option>
+          </select>
         </p>
+
+        <fieldset class="field field-radios">
+          <legend>Service</legend>
+          <div class="radio-row">
+            <label class="radio"><input type="radio" name="service" value="Delivery" checked> <span>Delivery</span></label>
+            <label class="radio"><input type="radio" name="service" value="Pickup"> <span>Pickup</span></label>
+          </div>
+        </fieldset>
+
+        <p class="field">
+          <label for="f-notes">Notes <span class="optional">(address, dietary needs, timing)</span></label>
+          <textarea id="f-notes" name="notes" rows="3"></textarea>
+        </p>
+
+        <button class="btn btn-gold btn-block btn-lg" type="submit">Send request</button>
+
+        <p class="form-note">We'll reply with an invoice, usually within one business day.</p>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+
       </div>
-
-      <p class="field">
-        <label for="f-package">Package</label>
-        <select id="f-package" name="package">
-          <option>Not sure yet &mdash; please advise</option>
-          <option>Sultan's Spread (buffet)</option>
-          <option>Mediterranean Platter</option>
-          <option>Hummus Dip Platter</option>
-          <option>A la carte trays</option>
-          <option>Individual bowls</option>
-          <option>Wraps</option>
-        </select>
-      </p>
-
-      <fieldset class="field field-radios">
-        <legend>Service</legend>
-        <label class="radio"><input type="radio" name="service" value="Delivery" checked> Delivery</label>
-        <label class="radio"><input type="radio" name="service" value="Pickup"> Pickup</label>
-      </fieldset>
-
-      <p class="field">
-        <label for="f-notes">Notes <span class="optional">(address, dietary needs, timing)</span></label>
-        <textarea id="f-notes" name="notes" rows="3"></textarea>
-      </p>
-
-      <button class="btn btn-gold btn-block" type="submit">Send request</button>
-
-      <p class="form-note">We'll reply with an invoice, usually within one business day.</p>
-      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
     </form>
 
   </div>
@@ -586,7 +673,7 @@
 
 <!-- =========================================================================
      ==== EDIT: FOOTER ====
-     Keep the phone, email and links in step with the section above.
+     Keep the phone, email and links in step with the sections above.
      ========================================================================= -->
 <footer class="site-footer">
   <div class="wrap footer-inner">
@@ -594,6 +681,10 @@
     <div class="footer-brand">
       <span class="brand-mark" aria-hidden="true">S</span>
       <p class="footer-name">Sultan's Mediterranean Grill</p>
+      <p class="footer-blurb">
+        Modern Mediterranean, fit for royalty. Catering across Toronto,
+        North York, Waterloo and St. Catharines.
+      </p>
       <p class="footer-tag">#eatlikeasultan</p>
     </div>
 
