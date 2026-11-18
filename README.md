@@ -312,3 +312,5 @@ Already handled, worth not breaking:
 - No images, no frameworks and no trackers, so the page loads in well under a
   second. Keep new photos compressed to keep it that way.
 - The page prints cleanly (nav, form and decoration are hidden).
+
+<!-- deploy trigger -->
