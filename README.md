@@ -328,9 +328,22 @@ Below the colours there is a second group called **SEMANTIC ROLES**
 what each colour is *used for*. Re-pointing one of those changes the whole
 site at once.
 
-Headings use **Fraunces** (a warm serif), body text uses **Inter**. Both load
-free from Google Fonts via the `<link>` in `index.html`. To change them, swap
-that `<link>` and the two `--font-...` lines in the CSS.
+Headings and the logo wordmark use **Fertigo Pro**, the brand serif, loaded
+from Adobe Fonts via the `<link>` in each page head. **Inter** is used for
+body text and for large numerals (Fertigo only has old-style figures, which
+make "10" read like "IO").
+
+Fraunces is still listed after Fertigo as a safety net, so headings never
+fall back to a plain system serif if the Adobe kit is ever unreachable. Once
+Fertigo is confirmed working on the live domain you can drop `"Fraunces"`
+from the `--font-display` line and delete the Google Fonts `<link>`.
+
+### The logo
+
+Two files in `assets`, one shown at a time: `logo-white.png` while the top
+bar is see-through over the hero and in the footer, `logo-purple.png` once
+the bar turns cream. To resize it, change the `height` on `.brand-logo` (and
+`.footer-logo`) in the CSS — the width follows automatically.
 
 Do not edit anything below the **RESET & BASE** heading unless you are
 comfortable with CSS — that part is the layout.

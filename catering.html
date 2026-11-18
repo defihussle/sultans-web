@@ -41,6 +41,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Fertigo Pro (Adobe Fonts). Headings and the brand use this. -->
+  <link rel="stylesheet" href="https://use.typekit.net/kht7bch.css">
+
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -57,12 +60,12 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
 
+    <!-- The official logo. Two versions: the white one shows while the bar is
+         see-through over the hero, the purple one once the bar turns cream.
+         Both live in the assets folder. -->
     <a class="brand" href="index.html" aria-label="Sultan's Mediterranean Grill, home">
-      <span class="brand-mark" aria-hidden="true">S</span>
-      <span class="brand-text">
-        <span class="brand-name">Sultan's</span>
-        <span class="brand-sub">Catering</span>
-      </span>
+      <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
+      <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
     </a>
 
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">
@@ -645,8 +648,7 @@
   <div class="wrap footer-inner">
 
     <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true">S</span>
-      <p class="footer-name">Sultan's Mediterranean Grill</p>
+      <img class="footer-logo" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
       <p class="footer-blurb">
         Modern Mediterranean, fit for royalty. Catering across Toronto,
         North York, Waterloo and St. Catharines.

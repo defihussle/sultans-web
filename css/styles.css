@@ -91,9 +91,14 @@
   --focus:        var(--gold-500);
 
   /* --- TYPEFACES -----------------------------------------------------------
-     Display = headings (a warm serif). Body = everything else.
-     If you change these, also change the <link> in the <head> of index.html. */
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+     Display = the brand serif, Fertigo Pro, used for every heading. It loads
+     from Adobe Fonts through the <link> in the <head> of both pages.
+     Fraunces is listed after it as a safety net: if the Adobe kit is ever
+     unavailable, headings fall back to something close rather than to a
+     system serif. Once Fertigo is confirmed live you can drop Fraunces from
+     this line and remove its Google Fonts <link>.
+     Body = Inter, used for everything else. */
+  --font-display: fertigo-pro, "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* --- TYPE SCALE ----------------------------------------------------------
@@ -434,39 +439,22 @@ a:hover { color: var(--plum-700); }
 .site-header.is-stuck .brand,
 .site-header.nav-open .brand { color: var(--plum-700); }
 
-.brand-mark {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: var(--r-xs);
-  background: linear-gradient(150deg, var(--plum-600), var(--plum-900));
-  box-shadow: inset 0 0 0 1px rgba(217, 188, 119, 0.35);
-  color: var(--gold-400);
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1;
+/* --- The logo ---
+   Two files, one shown at a time. White while the bar is see-through over
+   the hero, purple once it turns cream. To resize the logo, change the
+   height below - the width follows on its own. */
+.brand-logo {
+  display: block;
+  height: 2.6rem;
+  width: auto;
+  max-width: 100%;
 }
+.brand-logo-on-light { display: none; }
 
-.brand-text { display: flex; flex-direction: column; line-height: 1.08; }
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: currentColor;
-}
-.brand-sub {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold-400);
-  transition: color var(--t-base);
-}
-.site-header.is-stuck .brand-sub,
-.site-header.nav-open .brand-sub { color: var(--accent-text); }
+.site-header.is-stuck .brand-logo-on-dark,
+.site-header.nav-open .brand-logo-on-dark { display: none; }
+.site-header.is-stuck .brand-logo-on-light,
+.site-header.nav-open .brand-logo-on-light { display: block; }
 
 /* --- Mobile menu button (hamburger drawn in CSS, no image file) --- */
 .nav-toggle {
@@ -849,7 +837,10 @@ a:hover { color: var(--plum-700); }
 .stat-num {
   flex: none;
   min-width: 4.25rem;
-  font-family: var(--font-display);
+  /* Big numerals use the body font on purpose. Fertigo Pro only carries
+     old-style figures, where "1" looks like a small capital I - "10" reads
+     as "IO". Inter keeps them unambiguous. */
+  font-family: var(--font-body);
   font-size: clamp(2.1rem, 5.5vw, 2.9rem);
   font-weight: 700;
   line-height: 1;
@@ -994,11 +985,39 @@ a:hover { color: var(--plum-700); }
   color: var(--ink-400);
 }
 
-/* The featured package: a gold hairline across the top. */
+/* --- The featured package: the dark, menu-style card ---
+   Deep plum with light type and gold accents, the way the Sultan's Spread
+   is presented in the printed catering menu. Only this one card is dark;
+   the other packages stay white. */
 .pkg-feature {
-  border-color: rgba(200, 162, 74, 0.5);
-  box-shadow: var(--shadow-md);
+  border-color: rgba(200, 162, 74, 0.4);
+  box-shadow: var(--shadow-lg);
+  background:
+    radial-gradient(80% 90% at 85% 0%, rgba(200, 162, 74, 0.16) 0%, transparent 60%),
+    linear-gradient(155deg, var(--plum-700) 0%, var(--plum-950) 100%);
+  color: var(--text-on-dark);
 }
+.pkg-feature:hover { border-color: rgba(200, 162, 74, 0.65); }
+
+.pkg-feature .pkg-name { color: var(--paper); }
+.pkg-feature .pkg-meta { color: var(--gold-400); }
+.pkg-feature .pkg-desc { color: rgba(239, 234, 246, 0.76); }
+.pkg-feature .pkg-price { color: var(--paper); }
+
+.pkg-feature .pkg-badge {
+  background: rgba(200, 162, 74, 0.2);
+  color: var(--gold-300);
+}
+
+/* The "what's included" panel, as a slightly lighter inset on the dark card. */
+.pkg-feature .pkg-aside {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.pkg-feature .pkg-aside-title { color: var(--gold-400); }
+.pkg-feature .pkg-row { border-bottom-color: rgba(255, 255, 255, 0.1); }
+.pkg-feature .pkg-row dt { color: rgba(239, 234, 246, 0.5); }
+.pkg-feature .pkg-row dd { color: var(--text-on-dark); }
 .pkg-feature::before {
   content: "";
   position: absolute;
@@ -1133,7 +1152,9 @@ a:hover { color: var(--plum-700); }
   position: absolute;
   left: 0;
   top: -0.4rem;
-  font-family: var(--font-display);
+  /* Body font for the same reason as .stat-num - Fertigo's old-style
+     figures would render "01" as something closer to "OI". */
+  font-family: var(--font-body);
   font-size: 2rem;
   font-weight: 700;
   line-height: 1;
@@ -1606,12 +1627,13 @@ a.contact-value:hover { color: var(--gold-400); }
 }
 .footer-inner { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
 
-.footer-brand .brand-mark { margin-bottom: var(--sp-4); }
-.footer-name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  color: var(--paper);
-  margin-bottom: var(--sp-3);
+/* The white logo again, on the dark footer. */
+.footer-logo {
+  display: block;
+  height: 2.9rem;
+  width: auto;
+  max-width: 100%;
+  margin-bottom: var(--sp-4);
 }
 .footer-blurb {
   max-width: 34ch;
@@ -1698,6 +1720,8 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Tablets (720px) --- */
 @media (min-width: 720px) {
   :root { --header-h: 4.5rem; }
+  .brand-logo { height: 3rem; }
+  .footer-logo { height: 3.2rem; }
 
   .stats {
     grid-template-columns: repeat(3, 1fr);
@@ -1865,7 +1889,7 @@ a.contact-value:hover { color: var(--gold-400); }
     grid-row: 1 / -1;
     padding: var(--sp-7);
     border-block: 0;
-    border-left: 1px solid var(--border);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
   }
   .pkg-feature .pkg-name { font-size: 2.1rem; }
 
@@ -1877,6 +1901,7 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Large desktop (1180px) --- */
 @media (min-width: 1180px) {
   :root { --header-h: 5rem; }
+  .brand-logo { height: 3.4rem; }
   .section-head { margin-bottom: clamp(3rem, 5vw, 4.5rem); }
   .loc-grid { gap: var(--sp-5); }
 }
