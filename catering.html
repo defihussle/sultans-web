@@ -39,7 +39,7 @@
   <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -79,7 +79,7 @@
 
         <!-- ==== EDIT: HEADER PHONE NUMBER ====
              Keep the tel: part in full international form (+1 then the number). -->
-        <li class="nav-phone"><a href="tel:+16478032323">647&#8209;803&#8209;2323</a></li>
+        <li class="nav-phone"><a href="tel:+16479293924">647&#8209;929&#8209;3924</a></li>
 
         <li class="nav-cta"><a class="btn btn-gold btn-sm" href="#request">Request a quote</a></li>
       </ul>
@@ -143,7 +143,7 @@
     </div>
 
     <p class="hero-aside">
-      Or call <a href="tel:+16478032323">647-803-2323</a> &mdash; 48 hours notice for most orders.
+      Or call <a href="tel:+16479293924">647-929-3924</a> &mdash; 48 hours notice for most orders.
     </p>
   </div>
 
@@ -303,6 +303,77 @@
 </section>
 
 <!-- =========================================================================
+     ==== EDIT: BOOK YOUR CATERING (two columns) ====
+     Left: a short statement with a food picture under it.
+     Right: the four booking steps.
+     They stack into one column on a phone, picture first.
+
+     TO ADD A STEP: copy a whole <li class="step"> block. The numbers are
+     drawn automatically by the stylesheet - never renumber them by hand.
+
+     ---- TO ADD THE PICTURE (slot is ready below) ----
+     Until you add one, the panel shows a soft purple-and-gold wash, which
+     is a finished look on its own - nothing appears broken.
+     Put a file in the assets folder, then delete the <!- - and - -> around
+     the <img> line and set the file name. A close-up of a full tray or a
+     table of food works best. About 1200px wide.
+     ========================================================================= -->
+<section class="section" id="how">
+  <div class="wrap book-grid">
+
+    <!-- ---------- LEFT: statement + picture ---------- -->
+    <div class="book-copy">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Catering by Sultan's</p>
+      <h2 class="section-title">Make meetings memorable.</h2>
+      <p class="section-lede">
+        Halal Mediterranean food for Toronto offices and events, cooked fresh
+        and delivered hot.
+      </p>
+
+      <figure class="book-figure">
+        <!-- <img src="assets/book-catering.jpg" alt="A Sultan's catering tray laid out for an office lunch"> -->
+        <figcaption class="book-figure-tag">
+          <strong>Certified Halal</strong>
+          <span>Every tray, every time</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- ---------- RIGHT: the booking steps ---------- -->
+    <div class="book-steps">
+      <h3 class="book-steps-title">Book your catering</h3>
+
+      <ol class="steps steps-stacked">
+        <li class="step">
+          <h3>Browse the menu</h3>
+          <p>Pick a spread, platters or boxed meals for your guest count.</p>
+        </li>
+        <li class="step">
+          <h3>Submit your order</h3>
+          <p>Call <a href="tel:+16479293924">647-929-3924</a> or send the request form below.</p>
+        </li>
+        <li class="step">
+          <h3>Confirm the details</h3>
+          <p>We send an invoice. Approve it and a payment link locks in the date.</p>
+        </li>
+        <li class="step">
+          <h3>Eat &amp; enjoy</h3>
+          <p>Prepared fresh for pickup or hot delivery at your time.</p>
+        </li>
+      </ol>
+
+      <a class="btn btn-gold btn-block" href="#request">Request a quote</a>
+
+      <p class="pay-note">
+        <span class="pay-label">We accept</span>
+        <strong>Visa</strong><strong>Mastercard</strong><strong>Interac</strong>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
      ==== EDIT: GOOD TO KNOW (minimums, notice, delivery, dietary) ====
      The practical questions people ask before they order.
 
@@ -415,49 +486,6 @@
 </section>
 
 <!-- =========================================================================
-     ==== EDIT: HOW TO BOOK ====
-     To add a step, copy a whole <li class="step"> block. The numbers are
-     drawn automatically by the stylesheet - never renumber them by hand.
-     ========================================================================= -->
-<section class="section" id="how">
-  <div class="wrap">
-
-    <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>How to book</p>
-      <h2 class="section-title">Four simple steps.</h2>
-      <p class="section-lede">
-        A real person handles your order from first message to delivery.
-      </p>
-    </header>
-
-    <ol class="steps">
-      <li class="step">
-        <h3>Browse the menu</h3>
-        <p>Pick a spread, platters or boxed meals for your guest count.</p>
-      </li>
-      <li class="step">
-        <h3>Submit your order</h3>
-        <p>Call <a href="tel:+16478032323">647-803-2323</a> or send the request form below.</p>
-      </li>
-      <li class="step">
-        <h3>Confirm the details</h3>
-        <p>We send an invoice. Approve it and a payment link locks in the date.</p>
-      </li>
-      <li class="step">
-        <h3>Eat &amp; enjoy</h3>
-        <p>Prepared fresh for pickup or hot delivery at your time.</p>
-      </li>
-    </ol>
-
-    <p class="pay-note">
-      <span class="pay-label">We accept</span>
-      <strong>Visa</strong><strong>Mastercard</strong><strong>Interac</strong>
-    </p>
-
-  </div>
-</section>
-
-<!-- =========================================================================
      ==== EDIT: REQUEST A QUOTE / CONTACT ====
 
      IMPORTANT - THE FORM CANNOT SEND EMAIL BY ITSELF.
@@ -491,13 +519,13 @@
       <ul class="contact-list">
         <li>
           <span class="contact-label">Call or text</span>
-          <a class="contact-value" href="tel:+16478032323">647-803-2323</a>
+          <a class="contact-value" href="tel:+16479293924">647-929-3924</a>
         </li>
         <li>
           <span class="contact-label">Email</span>
-          <!-- [PLACEHOLDER] Confirm the real catering inbox, then update this
-               link, its text, and CATERING_EMAIL in js/script.js -->
-          <a class="contact-value" href="mailto:catering@sultansgrill.ca">catering@sultansgrill.ca</a>
+          <!-- If this address changes, update it here, in the footer, and as
+               CATERING_EMAIL at the top of js/script.js -->
+          <a class="contact-value" href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a>
         </li>
         <li>
           <span class="contact-label">Instagram</span>
@@ -559,6 +587,27 @@
             <option>A la carte trays</option>
             <option>Individual bowls</option>
             <option>Wraps</option>
+          </select>
+        </p>
+
+        <!-- ==== EDIT: PREFERRED ORDER LOCATION ====
+             The kitchen the order should come from. Keep this list in step
+             with the Locations section on the home page - if a location
+             opens or closes, add or delete its <option> line here too. -->
+        <p class="field">
+          <label for="f-location">Preferred order location</label>
+          <select id="f-location" name="location">
+            <option>No preference &mdash; closest to me</option>
+            <option>TD Centre &mdash; 100 Wellington St W</option>
+            <option>Royal Bank Plaza &mdash; 200 Bay St</option>
+            <option>Victoria Towers &mdash; 44 Victoria St</option>
+            <option>Simcoe Place &mdash; 200 Front St W</option>
+            <option>Exchange Tower &mdash; 130 King St W</option>
+            <option>Financial Centre &mdash; 120 Bremner Blvd</option>
+            <option>Commerce Court &mdash; 199 Bay St</option>
+            <option>North York Centre &mdash; 5150 Yonge St</option>
+            <option>Waterloo &mdash; 253 King St N</option>
+            <option>St. Catharines &mdash; 491 Merritt St</option>
           </select>
         </p>
 
@@ -627,8 +676,8 @@
       <div class="footer-col">
         <h2>Get in touch</h2>
         <ul>
-          <li><a href="tel:+16478032323">647-803-2323</a></li>
-          <li><a href="mailto:catering@sultansgrill.ca">catering@sultansgrill.ca</a></li>
+          <li><a href="tel:+16479293924">647-929-3924</a></li>
+          <li><a href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a></li>
           <li><a href="https://www.facebook.com/sultans.ca" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>

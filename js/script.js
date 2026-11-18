@@ -14,7 +14,7 @@
 
 /* ==== EDIT: where quote requests go when no form service is connected.
    See the big comment above the form in index.html. ==== */
-var CATERING_EMAIL = 'catering@sultansgrill.ca';
+var CATERING_EMAIL = 'info@sultansgrill.ca';
 
 (function () {
   'use strict';
@@ -136,6 +136,47 @@ var CATERING_EMAIL = 'catering@sultansgrill.ca';
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
   }
+
+  /* -------------------------------------------------------------------------
+     3b. LOCATION ROW ARROWS
+     The location rows scroll and snap on their own - swiping works with no
+     JavaScript at all. This only drives the two round arrow buttons shown
+     to mouse users, and greys them out at each end of the row.
+     Safe to delete this whole block; the rows still swipe.
+     ------------------------------------------------------------------------- */
+  Array.prototype.forEach.call(
+    document.querySelectorAll('[data-scroller-nav]'),
+    function (nav) {
+      // The row this set of arrows belongs to.
+      var row = nav.closest('.loc-group-head');
+      row = row && row.nextElementSibling;
+      if (!row || !row.hasAttribute('data-scroller')) return;
+
+      function step() {
+        var card = row.querySelector('.loc');
+        var gap = parseFloat(getComputedStyle(row).columnGap) || 16;
+        return card ? card.getBoundingClientRect().width + gap : row.clientWidth * 0.8;
+      }
+
+      function refresh() {
+        var max = row.scrollWidth - row.clientWidth - 2;
+        Array.prototype.forEach.call(nav.querySelectorAll('.loc-nav-btn'), function (btn) {
+          var back = btn.getAttribute('data-dir') === '-1';
+          btn.disabled = back ? row.scrollLeft <= 2 : row.scrollLeft >= max;
+        });
+      }
+
+      nav.addEventListener('click', function (event) {
+        var btn = event.target.closest('.loc-nav-btn');
+        if (!btn) return;
+        row.scrollBy({ left: step() * Number(btn.getAttribute('data-dir')), behavior: 'smooth' });
+      });
+
+      row.addEventListener('scroll', refresh, { passive: true });
+      window.addEventListener('resize', refresh);
+      refresh();
+    }
+  );
 
   /* -------------------------------------------------------------------------
      4. FOOTER YEAR - no need to update the copyright by hand

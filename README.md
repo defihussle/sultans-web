@@ -76,10 +76,11 @@ them. The sections, in page order:
 | `EDIT: PAGE TITLE` | The browser tab text and the Google description |
 | `EDIT: CATERING HERO` | The catering headline, buttons and video/photo slot |
 | `EDIT: CATERING PACKAGES` | The package cards — **the section you'll edit most** |
+| `EDIT: BOOK YOUR CATERING` | The "Make meetings memorable" block, its picture slot, and the four booking steps |
 | `EDIT: GOOD TO KNOW` | Minimums, notice, delivery, payment, dietary tags |
 | `EDIT: FULL CATERING MENU` | The menu summary and the PDF link |
-| `EDIT: HOW TO BOOK` | The four numbered steps |
 | `EDIT: REQUEST A QUOTE` | Phone, email, and the enquiry form |
+| `EDIT: PREFERRED ORDER LOCATION` | The location dropdown in the form — keep it in step with the Locations section on the home page |
 
 ### The golden rules
 
@@ -124,6 +125,16 @@ on desktop. If you want a different package featured, remove `pkg-feature`
 from the current one first, or you will get two wide cards.
 
 ### Add or remove a location
+
+The location rows on the home page **swipe sideways**. You do not have to do
+anything special to keep that working — add a card and the row just gets
+longer. On a phone people swipe; on a computer the two round arrows beside
+the group heading scroll it.
+
+If you add or close a location, also update the **Preferred order location**
+dropdown in the form on `catering.html` (search for
+`EDIT: PREFERRED ORDER LOCATION`) so the two lists match.
+
 
 1. Search for `EDIT: LOCATIONS`.
 2. Copy one whole `<li class="loc">` … `</li>` block and change the name and
@@ -188,7 +199,7 @@ every match, then check these spots in particular:
 Also update `CATERING_EMAIL` on the first few lines of `js/script.js`.
 
 In a phone link, keep the `tel:` format with the country code —
-`<a href="tel:+16478032323">647-803-2323</a>`. The part after `>` is what
+`<a href="tel:+16479293924">647-929-3924</a>`. The part after `>` is what
 people see; the part in `tel:` is what their phone dials.
 
 ### Add the hero video or photo
@@ -227,7 +238,7 @@ on `catering.html`, and the footer on `index.html`.
 
 **A plain HTML page cannot send email on its own.** Right now the form is set to
 "Option A": when someone presses *Send request*, it opens **their** email app
-with all the answers filled in, addressed to `catering@sultansgrill.ca`.
+with all the answers filled in, addressed to `info@sultansgrill.ca`.
 
 That works everywhere, but some people will abandon it. Before launch we
 recommend **Option B**:
@@ -250,8 +261,8 @@ Requests then land in your inbox with no email app involved.
 
 These are marked `[PLACEHOLDER]` in the files — search for that word.
 
-- [ ] **The catering email address.** `catering@sultansgrill.ca` is a guess; the
-      old site published no email. Fix it in `index.html` and `js/script.js`.
+- [x] **Contact details confirmed.** Phone 647-929-3924 and
+      info@sultansgrill.ca are the client's own, set throughout.
 - [ ] **Package pricing.** The three package cards say "pricing on request",
       matching the Victoria catering site. Replace with real figures or leave
       as is — your call.

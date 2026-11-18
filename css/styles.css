@@ -648,66 +648,79 @@ a:hover { color: var(--plum-700); }
   display: flex;
   align-items: center;
   gap: var(--sp-4);
-  min-height: 4.75rem;          /* a generous tap target on phones */
-  padding: var(--sp-4);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--r-md);
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(8px);
+  min-height: 5rem;             /* a generous tap target on phones */
+  padding: var(--sp-5) var(--sp-4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-lg);
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(10px);
   color: var(--paper);
   text-decoration: none;
   transition: background-color var(--t-base), border-color var(--t-base),
               transform var(--t-base), box-shadow var(--t-base);
 }
 .choice:hover {
-  background: rgba(255, 255, 255, 0.13);
-  border-color: rgba(217, 188, 119, 0.65);
+  background: rgba(255, 255, 255, 0.085);
+  border-color: rgba(217, 188, 119, 0.4);
   color: var(--paper);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(21, 10, 36, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(21, 10, 36, 0.3);
 }
 .choice:active { transform: translateY(0); }
 
 /* The one highlighted card. Move the class "choice-primary" in the HTML to
    highlight a different one. */
 .choice-primary {
-  border-color: rgba(217, 188, 119, 0.5);
+  border-color: rgba(217, 188, 119, 0.3);
   background:
-    linear-gradient(110deg, rgba(200, 162, 74, 0.22) 0%, rgba(255, 255, 255, 0.07) 70%);
+    linear-gradient(115deg, rgba(200, 162, 74, 0.13) 0%, rgba(255, 255, 255, 0.045) 68%);
 }
 
+/* No tile behind the icon - a plain gold mark with a soft halo instead,
+   which reads as a mark rather than an app button. */
 .choice-icon {
+  position: relative;
   flex: none;
   display: grid;
   place-items: center;
-  width: 2.9rem;
-  height: 2.9rem;
-  border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.1);
+  width: 2.25rem;
+  height: 2.25rem;
   color: var(--gold-400);
-  transition: background-color var(--t-base), color var(--t-base);
+  transition: color var(--t-base), transform var(--t-base);
 }
-.choice-icon svg { width: 1.5rem; height: 1.5rem; }
-.choice-primary .choice-icon { background: rgba(217, 188, 119, 0.2); }
-/* On hover the icon tile fills gold - the one bit of colour movement. */
-.choice:hover .choice-icon {
-  background: var(--gold-500);
-  color: var(--plum-950);
+.choice-icon::before {
+  content: "";
+  position: absolute;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 188, 119, 0.16) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--t-base);
 }
+.choice-icon svg {
+  position: relative;
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke-width: 1.3;            /* finer line = less app icon, more mark */
+}
+.choice:hover .choice-icon { color: var(--gold-300); }
+.choice:hover .choice-icon::before { opacity: 1; }
 
-.choice-body { display: grid; gap: 0.1rem; min-width: 0; }
+.choice-body { display: grid; gap: 0.2rem; min-width: 0; }
 .choice-title {
   font-family: var(--font-display);
-  font-size: 1.22rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  font-size: 1.28rem;
+  font-weight: 400;             /* lighter serif reads as elegant, not UI */
+  line-height: 1.25;
+  letter-spacing: -0.005em;
   color: var(--paper);
 }
 .choice-desc {
   font-size: var(--fs-small);
-  line-height: 1.4;
-  color: rgba(239, 234, 246, 0.68);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(239, 234, 246, 0.6);
 }
 
 .choice-arrow {
@@ -715,10 +728,10 @@ a:hover { color: var(--plum-700); }
   margin-left: auto;
   display: grid;
   place-items: center;
-  color: rgba(239, 234, 246, 0.5);
+  color: rgba(239, 234, 246, 0.35);
   transition: transform var(--t-base), color var(--t-base);
 }
-.choice-arrow svg { width: 1.25rem; height: 1.25rem; }
+.choice-arrow svg { width: 1.05rem; height: 1.05rem; stroke-width: 1.4; }
 .choice:hover .choice-arrow {
   color: var(--gold-400);
   transform: translateX(4px);
@@ -1175,8 +1188,95 @@ a:hover { color: var(--plum-700); }
 
 
 /* ---------------------------------------------------------------------------
+   11b. BOOK YOUR CATERING (the two-column block on the catering page)
+   Statement and picture on the left, the booking steps on the right.
+   --------------------------------------------------------------------------- */
+.book-grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  align-items: start;
+}
+.book-copy .section-lede { margin-bottom: var(--sp-6); }
+
+/* The picture panel. With no photo in it, the gradient and the halal tag
+   make it look deliberate rather than empty. */
+.book-figure {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 80% at 80% 15%, rgba(200, 162, 74, 0.3) 0%, transparent 62%),
+    linear-gradient(150deg, var(--plum-600) 0%, var(--plum-900) 100%);
+  box-shadow: var(--shadow-md);
+}
+.book-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Small white tag sitting on the picture. Delete the <figcaption> to remove. */
+.book-figure-tag {
+  position: absolute;
+  left: var(--sp-4);
+  bottom: var(--sp-4);
+  display: grid;
+  gap: 2px;
+  padding: var(--sp-3) var(--sp-5);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+}
+.book-figure-tag strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--plum-700);
+}
+.book-figure-tag span {
+  font-size: var(--fs-micro);
+  color: var(--text-muted);
+}
+
+/* The steps panel. */
+.book-steps {
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+.book-steps-title {
+  font-size: var(--fs-h3);
+  color: var(--plum-700);
+  padding-bottom: var(--sp-4);
+  margin-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+/* Always one column here, however wide the screen gets. */
+.steps-stacked {
+  grid-template-columns: 1fr !important;
+  gap: var(--sp-5) !important;
+  margin-bottom: var(--sp-5);
+}
+.steps-stacked .step:not(:last-child)::after { display: block !important; }
+.book-steps .pay-note { margin-top: var(--sp-5); justify-content: flex-start; }
+
+
+/* ---------------------------------------------------------------------------
    12. LOCATIONS
    --------------------------------------------------------------------------- */
+/* The group heading, with its scroll arrows on the right. */
+.loc-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
 .loc-group-title {
   font-family: var(--font-body);
   font-size: var(--fs-micro);
@@ -1184,23 +1284,73 @@ a:hover { color: var(--plum-700); }
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink-400);
-  padding-bottom: var(--sp-3);
-  margin-bottom: var(--sp-5);
-  border-bottom: 1px solid var(--border);
+  margin: 0;
 }
-.loc-grid {
+
+/* Arrows are for mouse users. On a phone you just swipe, so they are
+   hidden until there is room for them. */
+.loc-nav { display: none; gap: var(--sp-2); }
+.loc-nav-btn {
+  width: 2.25rem;
+  height: 2.25rem;
   display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--plum-700);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--t-fast), border-color var(--t-fast),
+              color var(--t-fast), opacity var(--t-fast);
+}
+.loc-nav-btn:hover {
+  background: var(--plum-500);
+  border-color: var(--plum-500);
+  color: var(--paper);
+}
+.loc-nav-btn[disabled] { opacity: 0.35; cursor: default; }
+.loc-nav-btn[disabled]:hover {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--plum-700);
+}
+
+/* --- The swipeable row ---
+   One row that scrolls sideways, with each card snapping into place.
+   The negative margins let the cards run to the screen edge on a phone,
+   so the row reads as something you can swipe. */
+.loc-grid {
+  display: flex;
   gap: var(--sp-3);
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  padding-block: 0.35rem;        /* room for the hover lift */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--gutter);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;   /* swiping the row will not page back */
+  /* No scrollbar: the half-visible next card already says "swipe me", and
+     mouse users get the arrows beside the heading. */
+  scrollbar-width: none;
 }
+.loc-grid::-webkit-scrollbar { display: none; }
 .loc-grid:last-child { margin-bottom: 0; }
 
+/* Each card is a fixed width so the row scrolls predictably and the next
+   card peeks in from the right, hinting that there is more to swipe. */
 .loc {
   position: relative;
+  flex: 0 0 auto;
+  width: min(16rem, 72vw);
+  scroll-snap-align: start;
   padding: var(--sp-5);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   transition: border-color var(--t-base), box-shadow var(--t-base),
               transform var(--t-base);
 }
@@ -1527,7 +1677,7 @@ a.contact-value:hover { color: var(--gold-400); }
 @media (min-width: 560px) {
   .trust-bar { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3) var(--sp-5); }
   .field-pair { grid-template-columns: 1fr 1fr; }
-  .loc-grid { grid-template-columns: repeat(2, 1fr); }
+  /* locations stay a swipeable row at every width - see section 12 */
 
   /* The three choices become upright cards side by side. */
   .choices {
@@ -1538,9 +1688,9 @@ a.contact-value:hover { color: var(--gold-400); }
   .choice {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--sp-4);
-    min-height: 11.5rem;
-    padding: var(--sp-5);
+    gap: var(--sp-5);
+    min-height: 12rem;
+    padding: var(--sp-6);
   }
   .choice-arrow { margin: auto 0 0; }
 }
@@ -1596,11 +1746,18 @@ a.contact-value:hover { color: var(--gold-400); }
   .hero-copy { margin-bottom: var(--sp-6); }
   /* Full width, so the three choices are the focus of the first screen. */
   .choices { max-width: none; gap: var(--sp-5); }
-  .choice { min-height: 12.5rem; padding: var(--sp-6); }
-  .choice-title { font-size: 1.4rem; }
+  .choice { min-height: 13rem; padding: var(--sp-7) var(--sp-6); }
+  .choice-title { font-size: 1.45rem; }
   .trust-bar { grid-template-columns: repeat(4, 1fr); }
 
-  .loc-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+  /* Statement and picture on the left, steps on the right. */
+  .book-grid { grid-template-columns: 1fr 1fr; }
+  .book-steps { padding: var(--sp-7) var(--sp-6); }
+
+  /* Mouse users get arrows; the row still scrolls and snaps. */
+  .loc-nav { display: flex; }
+  .loc-grid { gap: var(--sp-4); }
+  .loc { width: 17rem; }
 
   .request-inner {
     grid-template-columns: 1fr 1.05fr;
