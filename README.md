@@ -15,7 +15,8 @@ catering.html       The catering page: packages, the practical details, the
                     menu, how to book, and the quote form. Most catering
                     edits happen here.
 css/styles.css      Colours, fonts, spacing, layout. Shared by both pages.
-js/script.js        A small script: the mobile menu, the sticky header and
+js/script.js        A small script: starting each page at the top, the
+                    mobile menu, the sticky header and
                     the quote form. Nothing else depends on it.
 assets/             Images and PDFs. See assets/README.md.
 README.md           This file.
@@ -350,7 +351,28 @@ with `css`, `js` and `assets` as folders beside it.
 - **Prices and the full item list were deliberately left out** of this page.
   They change often and live in the catering PDF, which is linked twice.
 
-## 9. Accessibility and performance notes
+## 9. Why pages always open at the top
+
+Browsers normally drop you back where you were scrolled to when you refresh a
+page. On a long page that leaves people stranded in the middle of a section,
+so every page load now starts at the hero.
+
+The one exception is a link from one page of this site to a section of
+another, like the **Request a quote** button on the home page going to
+`catering.html#request`. Those still land on the section they name.
+
+Two things worth knowing:
+
+- A link someone **shares or bookmarks** with a `#section` on the end, such as
+  `catering.html#request`, opens at the top rather than at the form. That is
+  the trade-off for a predictable start position.
+- The **Back button** no longer restores your old scroll position either.
+
+Both come from the same block of code. It is clearly commented at the top of
+`js/script.js` under `1. START AT THE TOP OF THE PAGE`, and deleting that
+block restores normal browser behaviour.
+
+## 10. Accessibility and performance notes
 
 Already handled, worth not breaking:
 
