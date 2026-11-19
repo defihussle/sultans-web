@@ -194,6 +194,13 @@ h1, h2, h3, h4 {
    bold. Headings are covered by the rule just above; the list below catches
    the handful of other places the brand serif is used.
 
+   WEIGHT 400 IS NOT A PREFERENCE, IT IS THE WHOLE TYPEFACE.
+   The Adobe kit (kht7bch) ships exactly two faces: regular and regular
+   italic. There is no bold to load. So font-weight: 600 or 700 on anything
+   in Fertigo does not pick a heavier cut - the browser fakes one by
+   smearing the outlines, which thickens the serifs unevenly and looks
+   like a rendering fault. Italic is real and safe: .hero-title em uses it.
+
    Capitals need a little air between the letters or they look cramped, so
    each of these carries a small positive letter-spacing. Inter is left
    alone: body text, labels and numbers keep their normal case.
@@ -201,17 +208,30 @@ h1, h2, h3, h4 {
    THE THREE DELIBERATE EXCEPTIONS
    These look like misses in an audit and are not. Leave them in Inter.
 
-   1. SMALL CAPS LABELS stay Inter at weight 700, around 12px: .eyebrow,
-      .tag-label, .dish-kind, .loc-filter, .tag-row li, and the two
-      headings that are really labels - .loc-group-title ("DOWNTOWN
-      TORONTO & THE PATH") and the footer column headings. They are
-      markup headings but design labels, and Fertigo at that size reads
-      faint and loses the job of pointing at what follows. One typeface
-      for every small label is what keeps them reading as a set.
+   1. SMALL CAPS LABELS stay Inter, uppercase, around 11-14px. Fertigo at
+      that size reads faint and loses the job of pointing at what follows.
+      One typeface for every small label is what keeps them reading as a
+      set. The full list, so an audit does not "fix" one of them:
 
-   2. BIG NUMERALS (.stat-num) stay Inter. Fertigo Pro carries only
-      old-style figures, where "1" looks like a small capital I, so "10"
-      reads as "IO". The reason is repeated at that rule.
+        .eyebrow            .tag-label          .tag-row li
+        .dish-kind          .loc-filter         .menu-jump a
+        .pkg-badge          .pkg-meta           .pkg-aside-title
+        .pkg-row dt         .pay-label          .contact-label
+        .field > label       .field legend
+
+      Two of those are markup headings but design labels, and belong here
+      all the same: .loc-group-title ("DOWNTOWN TORONTO & THE PATH") and
+      the footer column headings (.footer-nav h2).
+
+      .loc-head .eyebrow is deliberately the one large label on the site,
+      a size up from the rest. The client asked for that; it is still
+      Inter at 700, so it stays inside the set.
+
+   2. NUMERALS stay Inter: .stat-num and .menu-price. Fertigo Pro carries
+      only old-style figures, where "1" looks like a small capital I, so
+      "10" reads as "IO" and "$18" sits oddly low. The reason is repeated
+      at the .stat-num rule. Note this is why a menu row is mixed on
+      purpose - .menu-item in Fertigo, the price beside it in Inter.
 
    3. BUTTONS are Inter, except the three over the hero video. Those are
       a brand statement; the rest are interface.
@@ -231,6 +251,16 @@ h1, h2, h3, h4 {
    file, so they would win here. The matching ".btn.hero-cta" rule in
    section 7a is deliberately more specific, and is what actually puts
    these three buttons into Fertigo Pro. Change it there, not here. */
+
+/* A guard, not a style. Writing <strong> or <b> into a heading is the one
+   easy way to get a faked bold Fertigo back into the page - the tags carry
+   weight 700 by default and nothing above would stop them. Emphasis inside
+   a heading set in capitals does not read as emphasis anyway. Delete this
+   only if the brand serif ever gains a real bold cut. */
+h1 strong, h2 strong, h3 strong, h4 strong,
+h1 b, h2 b, h3 b, h4 b,
+.menu-item strong, .menu-item b,
+.nav-list a strong, .nav-list a b { font-weight: inherit; }
 
 p { margin: 0 0 var(--sp-4); }
 p:last-child { margin-bottom: 0; }
@@ -904,7 +934,11 @@ body.nav-is-open { overflow: hidden; }
 }
 
 /* The short headline that sits above the three choices. */
+/* The menu page hero ends on the headline, with no lede under it. Without
+   this the headline keeps its own bottom margin on top of .hero-copy's own
+   and the gap below it doubles. */
 .hero-copy { margin-bottom: var(--sp-5); }
+.hero-copy > :last-child { margin-bottom: 0; }
 
 .hero-title {
   font-size: var(--fs-hero);
@@ -1051,7 +1085,11 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-small);
   color: rgba(239, 234, 246, 0.62);
 }
-.hero-aside a {
+/* The :not(.btn) matters. The menu page puts a small gold button in this
+   line instead of a text link, and without the exclusion these rules win
+   on specificity and repaint the button - pale text on gold, with a stray
+   underline. Plain links in the catering hero still get the gold rule. */
+.hero-aside a:not(.btn) {
   color: var(--paper);
   font-weight: 600;
   text-decoration: none;
@@ -1059,7 +1097,16 @@ body.nav-is-open { overflow: hidden; }
   padding-bottom: 1px;
   transition: border-color var(--t-fast), color var(--t-fast);
 }
-.hero-aside a:hover { color: var(--gold-400); border-bottom-color: var(--gold-400); }
+.hero-aside a:not(.btn):hover { color: var(--gold-400); border-bottom-color: var(--gold-400); }
+
+/* Menu page only: a line of text beside a small button, so it lays out as
+   a row rather than a sentence with a link in it. */
+.hero-aside-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3) var(--sp-4);
+}
 
 /* Shorter hero, used on inner pages such as catering.html where the page
    content matters more than the opening image. */
