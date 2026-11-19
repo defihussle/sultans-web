@@ -904,6 +904,32 @@ body.nav-is-open { overflow: hidden; }
   color: var(--text-muted);
 }
 
+/* A SOLID PURPLE BAND
+   The brand violet, flat - the same fill as the round buttons over the
+   film at the top of the home page (.btn-dark, var(--plum-500)). Solid on
+   purpose: no gradient, no glow, no photo behind it. Used on About Us.
+   Everything below just re-colours the text that sits on it; the layout
+   is untouched. */
+.section-solid {
+  background: var(--plum-500);
+  color: var(--text-on-dark);
+}
+.section-solid .section-title { color: var(--paper); }
+.section-solid .about-lead { color: var(--paper); }
+.section-solid .about-copy p + p { color: rgba(255, 255, 255, 0.84); }
+/* Gold-400 is not quite bright enough on this violet, so the eyebrow and
+   its little rule step up to gold-300. */
+.section-solid .eyebrow { color: var(--gold-300); }
+.section-solid .eyebrow-rule { background: var(--gold-300); }
+/* The trust bar keeps its .trust-bar-light modifier because that is what
+   zeroes its side padding inside .wrap - only the colours change here. */
+.section-solid .trust-bar-light { border-top-color: rgba(255, 255, 255, 0.24); }
+.section-solid .trust-bar-light li { color: rgba(255, 255, 255, 0.88); }
+.section-solid .trust-bar-light li::before {
+  border-left-color: var(--gold-300);
+  border-bottom-color: var(--gold-300);
+}
+
 
 /* ---------------------------------------------------------------------------
    7. HERO
