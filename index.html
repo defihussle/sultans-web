@@ -148,21 +148,39 @@
 
   <!-- ==== EDIT: THE THREE BUTTONS OVER THE VIDEO ====
        These sit in the lower third of the film, clear of the logo at the
-       top. Three is the right number - a fourth starts to wrap awkwardly
-       on a phone.
+       top. They are arranged as a triangle: Catering alone on top, Menu
+       and Locations side by side beneath it.
+
+       THE SHAPE COMES FROM THE TWO WRAPPERS, NOT FROM THE BUTTONS.
+       The first row holds one button, the second holds two. To move a
+       button between rows, move its whole <a> line into the other row.
+       Three is the right number - a fourth makes the lower row wrap.
+
+       The text is set in Fertigo Pro, uppercase, regular weight, like
+       every other brand element. Type the labels in normal sentence case
+       below; the stylesheet puts them in capitals.
 
        To rename one, change its text only.
        To re-point one, change its href. -->
   <nav class="hero-video-actions" aria-label="Where to start">
-    <a class="btn btn-dark btn-lg" href="catering.html">Catering</a>
 
-    <!-- [PLACEHOLDER LINK] There is no menu page yet, so this points at the
-         menu section of the catering page, which has the PDF on it.
-         WHEN A MENU PAGE EXISTS: build menu.html and change this href to
-         "menu.html". Change the Menu link in the slide-out menu to match. -->
-    <a class="btn btn-dark btn-lg" href="catering.html#menu">Menu</a>
+    <!-- Top of the triangle. -->
+    <div class="hero-video-row">
+      <a class="btn btn-dark btn-lg hero-cta" href="catering.html">Catering</a>
+    </div>
 
-    <a class="btn btn-dark btn-lg" href="#locations">Locations</a>
+    <!-- Base of the triangle. -->
+    <div class="hero-video-row">
+      <!-- [PLACEHOLDER LINK] There is no menu page yet, so this points at the
+           menu section of the catering page, which has the PDF on it.
+           WHEN A MENU PAGE EXISTS: build menu.html and change this href to
+           "menu.html". Change the Menu link in the slide-out menu, and the
+           button at the foot of the menu teaser, to match. -->
+      <a class="btn btn-dark btn-lg hero-cta" href="catering.html#menu">Menu</a>
+
+      <a class="btn btn-dark btn-lg hero-cta" href="#locations">Locations</a>
+    </div>
+
   </nav>
 
 </section>
@@ -220,137 +238,6 @@
   </div>
 </section>
 
-
-<!-- =========================================================================
-     ==== EDIT: LOCATIONS ====
-     One <li class="loc"> block per location. Copy a block to add a store,
-     delete a block to close one.
-
-     EVERY CARD NEEDS A data-area VALUE. That is what the filter pills on
-     phones match against. The four values in use are:
-         downtown        Downtown Toronto & the PATH
-         north-york      North York
-         waterloo        Waterloo
-         st-catharines   St. Catharines
-     If you add a new area, add a matching pill in the list just below, with
-     the same value in its data-filter.
-
-     On a phone the pills filter the list. On a computer the pills are
-     hidden and the two groups scroll sideways, using the round arrows.
-
-     NOTE: the main site publishes no phone numbers or opening hours per
-     location. When you have them, add a line inside a block like this:
-         <p class="loc-meta">Mon&ndash;Fri 10am&ndash;7pm</p>
-     ========================================================================= -->
-<section class="section section-alt" id="locations">
-  <div class="wrap">
-
-    <header class="section-head">
-      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Locations</p>
-      <h2 class="section-title">Eleven kitchens, one standard.</h2>
-      <p class="section-lede">
-        Mostly downtown Toronto and the PATH, plus North York, Waterloo
-        and St. Catharines.
-      </p>
-    </header>
-
-    <!-- ==== EDIT: FILTER PILLS (phones only) ====
-         Each data-filter must match a data-area on the cards below. -->
-    <div class="loc-filters" id="locFilters" role="group" aria-label="Filter locations by area">
-      <button type="button" class="loc-filter is-active" data-filter="all">All</button>
-      <button type="button" class="loc-filter" data-filter="downtown">Downtown &amp; PATH</button>
-      <button type="button" class="loc-filter" data-filter="north-york">North York</button>
-      <button type="button" class="loc-filter" data-filter="waterloo">Waterloo</button>
-      <button type="button" class="loc-filter" data-filter="st-catharines">St. Catharines</button>
-    </div>
-
-    <!-- ---------- GROUP 1 ---------- -->
-    <div class="loc-group" data-loc-group>
-      <div class="loc-group-head">
-        <h3 class="loc-group-title">Downtown Toronto &amp; the PATH</h3>
-        <div class="loc-nav" data-scroller-nav>
-          <button type="button" class="loc-nav-btn" data-dir="-1" aria-label="Scroll downtown locations left">&#8249;</button>
-          <button type="button" class="loc-nav-btn" data-dir="1" aria-label="Scroll downtown locations right">&#8250;</button>
-        </div>
-      </div>
-      <ul class="loc-grid" data-scroller tabindex="0" aria-label="Downtown Toronto and the PATH locations">
-
-        <li class="loc" data-area="downtown">
-          <h4>TD Centre</h4>
-          <p class="loc-addr">100 Wellington St W<br>Toronto, ON M5J 2R2</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Royal Bank Plaza</h4>
-          <p class="loc-addr">200 Bay St, Unit F4<br>Toronto, ON M5J 2T6</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Commerce Court</h4>
-          <p class="loc-addr">199 Bay St<br>Toronto, ON M5L 1G9</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Exchange Tower</h4>
-          <p class="loc-addr">130 King St W<br>Toronto, ON M5X 2A2</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Victoria St</h4>
-          <p class="loc-addr">44 Victoria St<br>Toronto, ON M5C 3A1</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Simcoe Place</h4>
-          <p class="loc-addr">200 Front St W<br>Toronto, ON M5V 3G5</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>Southcore Financial Centre</h4>
-          <p class="loc-addr">120 Bremner Blvd<br>Toronto, ON M5J 0B2</p>
-        </li>
-
-        <li class="loc" data-area="downtown">
-          <h4>700 University</h4>
-          <p class="loc-addr">700 University Ave, Unit HSC01<br>Toronto, ON M5G 1X6</p>
-        </li>
-
-      </ul>
-    </div>
-
-    <!-- ---------- GROUP 2 ---------- -->
-    <div class="loc-group" data-loc-group>
-      <div class="loc-group-head">
-        <h3 class="loc-group-title">Greater Toronto &amp; beyond</h3>
-        <div class="loc-nav" data-scroller-nav>
-          <button type="button" class="loc-nav-btn" data-dir="-1" aria-label="Scroll other locations left">&#8249;</button>
-          <button type="button" class="loc-nav-btn" data-dir="1" aria-label="Scroll other locations right">&#8250;</button>
-        </div>
-      </div>
-      <ul class="loc-grid" data-scroller tabindex="0" aria-label="Greater Toronto and beyond locations">
-
-        <li class="loc" data-area="north-york">
-          <h4>North York Centre</h4>
-          <p class="loc-addr">5150 Yonge St, Unit F-6<br>North York, ON M2N 6L7</p>
-        </li>
-
-        <li class="loc" data-area="waterloo">
-          <h4>Waterloo</h4>
-          <p class="loc-addr">253 King St N, Unit FC2<br>Waterloo, ON N2J 2Y8</p>
-        </li>
-
-        <li class="loc" data-area="st-catharines">
-          <h4>St. Catharines</h4>
-          <p class="loc-addr">224 Glenridge Ave, Unit 10<br>St. Catharines, ON L2T 3J9</p>
-        </li>
-
-      </ul>
-    </div>
-
-    <p class="loc-empty" id="locEmpty" hidden>No locations in that area yet.</p>
-
-  </div>
-</section>
 
 <!-- =========================================================================
      ==== EDIT: WHY SULTAN'S ====
@@ -419,6 +306,220 @@
 
   </div>
 </section>
+
+<!-- =========================================================================
+     ==== EDIT: LOCATIONS ====
+     One <li class="loc"> block per location. Copy a block to add a store,
+     delete a block to close one.
+
+     EVERY CARD NEEDS A data-area VALUE. That is what the filter pills on
+     phones match against. There are two, one per group:
+         downtown   Downtown Toronto & the PATH
+         beyond     Everywhere else - North York, Waterloo, St. Catharines
+     If you add a third area, add a matching pill in the list just below,
+     with the same value in its data-filter.
+
+     On a phone the pills filter the list, and the first pill is on as soon
+     as the page opens - there is no "All". The pills themselves swipe
+     sideways if more are added. On a computer the pills are hidden and the
+     two groups scroll sideways, using the round arrows.
+
+     NOTE: the main site publishes no phone numbers or opening hours per
+     location. When you have them, add a line inside a block like this:
+         <p class="loc-meta">Mon&ndash;Fri 10am&ndash;7pm</p>
+     ========================================================================= -->
+<section class="section section-alt" id="locations">
+  <div class="wrap">
+
+    <header class="section-head">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Locations</p>
+      <h2 class="section-title">Eleven kitchens, one standard.</h2>
+      <p class="section-lede">
+        Mostly downtown Toronto and the PATH, plus North York, Waterloo
+        and St. Catharines.
+      </p>
+    </header>
+
+    <!-- ==== EDIT: FILTER PILLS (phones only) ====
+         Each data-filter must match a data-area on the cards below.
+         The one carrying "is-active" is the area shown when the page
+         opens. Exactly one pill should have it. -->
+    <div class="loc-filters" id="locFilters" role="group" aria-label="Filter locations by area">
+      <button type="button" class="loc-filter is-active" data-filter="downtown">Downtown &amp; PATH</button>
+      <button type="button" class="loc-filter" data-filter="beyond">GTA &amp; Beyond</button>
+    </div>
+
+    <!-- ---------- GROUP 1 ---------- -->
+    <div class="loc-group" data-loc-group>
+      <div class="loc-group-head">
+        <h3 class="loc-group-title">Downtown Toronto &amp; the PATH</h3>
+        <div class="loc-nav" data-scroller-nav>
+          <button type="button" class="loc-nav-btn" data-dir="-1" aria-label="Scroll downtown locations left">&#8249;</button>
+          <button type="button" class="loc-nav-btn" data-dir="1" aria-label="Scroll downtown locations right">&#8250;</button>
+        </div>
+      </div>
+      <ul class="loc-grid" data-scroller tabindex="0" aria-label="Downtown Toronto and the PATH locations">
+
+        <li class="loc" data-area="downtown">
+          <h4>TD Centre</h4>
+          <p class="loc-addr">100 Wellington St W<br>Toronto, ON M5J 2R2</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Royal Bank Plaza</h4>
+          <p class="loc-addr">200 Bay St, Unit F4<br>Toronto, ON M5J 2T6</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Commerce Court</h4>
+          <p class="loc-addr">199 Bay St<br>Toronto, ON M5L 1G9</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Exchange Tower</h4>
+          <p class="loc-addr">130 King St W<br>Toronto, ON M5X 2A2</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Victoria St</h4>
+          <p class="loc-addr">44 Victoria St<br>Toronto, ON M5C 3A1</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Simcoe Place</h4>
+          <p class="loc-addr">200 Front St W<br>Toronto, ON M5V 3G5</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>Southcore Financial Centre</h4>
+          <p class="loc-addr">120 Bremner Blvd<br>Toronto, ON M5J 0B2</p>
+        </li>
+
+        <li class="loc" data-area="downtown">
+          <h4>700 University</h4>
+          <p class="loc-addr">700 University Ave, Unit HSC01<br>Toronto, ON M5G 1X6</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- ---------- GROUP 2 ---------- -->
+    <div class="loc-group" data-loc-group>
+      <div class="loc-group-head">
+        <h3 class="loc-group-title">Greater Toronto &amp; beyond</h3>
+        <div class="loc-nav" data-scroller-nav>
+          <button type="button" class="loc-nav-btn" data-dir="-1" aria-label="Scroll other locations left">&#8249;</button>
+          <button type="button" class="loc-nav-btn" data-dir="1" aria-label="Scroll other locations right">&#8250;</button>
+        </div>
+      </div>
+      <ul class="loc-grid" data-scroller tabindex="0" aria-label="Greater Toronto and beyond locations">
+
+        <li class="loc" data-area="beyond">
+          <h4>North York Centre</h4>
+          <p class="loc-addr">5150 Yonge St, Unit F-6<br>North York, ON M2N 6L7</p>
+        </li>
+
+        <li class="loc" data-area="beyond">
+          <h4>Waterloo</h4>
+          <p class="loc-addr">253 King St N, Unit FC2<br>Waterloo, ON N2J 2Y8</p>
+        </li>
+
+        <li class="loc" data-area="beyond">
+          <h4>St. Catharines</h4>
+          <p class="loc-addr">224 Glenridge Ave, Unit 10<br>St. Catharines, ON L2T 3J9</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <p class="loc-empty" id="locEmpty" hidden>No locations in that area yet.</p>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     ==== EDIT: MENU TEASER ====
+     A short, visual taste of the menu - not the menu itself. These are the
+     best-known individual items from the catering menu, taken from the
+     "Individual Meals" page of the catering PDF.
+
+     DELIBERATELY NO PRICES. They change, they differ by location, and the
+     rest of the site keeps pricing in one place (the PDF, and soon the
+     menu page). Do not add them here.
+
+     ONE <li class="dish"> IS ONE ITEM:
+       <span class="dish-kind">  the small gold label - Bowl, Wrap, Dessert
+       <h3>                      the item name, exactly as the menu spells it
+       <p>                       one short line, no more
+
+     Six is the right number: it fills two rows on a computer and swipes
+     neatly on a phone. Adding a seventh leaves a gap on the last row.
+     ========================================================================= -->
+<section class="section" id="menu-teaser">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>The menu</p>
+      <h2 class="section-title">The ones everyone orders.</h2>
+      <p class="section-lede">
+        Bowls and wraps built one at a time, for the days a tray is more
+        than you need.
+      </p>
+    </header>
+
+    <ul class="dish-row">
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Chicken Shawarma</h3>
+        <p>Seasoned rice, two salads, garlic potatoes, hummus and garlic dip.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Mix Shawarma</h3>
+        <p>Chicken and beef in one bowl, with the full set of sides.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Chicken Kebab</h3>
+        <p>Off the skewer, on rice, with salads and dips.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Wrap</span>
+        <h3>Kofta Kebab</h3>
+        <p>Wrapped whole to carry, or cut in three to share.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Falafel</h3>
+        <p>The vegan one. Same rice, salads, potatoes and dips.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Dessert</span>
+        <h3>Pistachio Baklava</h3>
+        <p>By the piece. Orders of any size.</p>
+      </li>
+
+    </ul>
+
+    <!-- ==== EDIT: THE BUTTON UNDER THE ITEMS ====
+         [PLACEHOLDER LINK] Same placeholder as the Menu button over the
+         video and the Menu link in the slide-out panel: there is no menu
+         page yet, so this goes to the menu section of the catering page.
+         WHEN A MENU PAGE EXISTS: change this href to "menu.html", and
+         change those other two to match. -->
+    <div class="dish-cta">
+      <a class="btn btn-gold btn-lg" href="catering.html#menu">See the full menu</a>
+    </div>
+
+  </div>
+</section>
+
 
 
 <!-- =========================================================================

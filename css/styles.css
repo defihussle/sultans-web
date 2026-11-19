@@ -12,13 +12,14 @@
 
    CONTENTS
      1  Brand tokens            9  Why Sultan's
-     2  Reset & base           10  Catering packages
-     3  Layout helpers         11  How to book
-     4  Section headings       12  Locations
-     5  Buttons                13  Request a quote + form
-     6  Header & navigation    14  Footer
-     7  Hero                   15  Wider screens
-     8  Dish ticker            16  Print
+     2  Reset & base           9b  Menu teaser (home page)
+     3  Layout helpers         10  Catering packages
+     4  Section headings       11  How to book
+     5  Buttons                12  Locations
+     6  Header & navigation    13  Request a quote + form
+     7  Hero                   14  Footer
+     8  Dish ticker            15  Wider screens
+                               16  Print
    =========================================================================== */
 
 
@@ -201,11 +202,17 @@ h1, h2, h3, h4 {
 .ticker-group,
 .pkg-price,
 .book-figure-tag strong,
-.contact-value {
+.contact-value,
+.hero-cta {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+/* .hero-cta is the odd one out: it is also a .btn, and the button rules
+   further down set Inter at weight 600. Those rules come later in the
+   file, so they would win here. The matching ".btn.hero-cta" rule in
+   section 7a is deliberately more specific, and is what actually puts
+   these three buttons into Fertigo Pro. Change it there, not here. */
 
 p { margin: 0 0 var(--sp-4); }
 p:last-child { margin-bottom: 0; }
@@ -722,7 +729,12 @@ body.nav-is-open { overflow: hidden; }
 
 /* --- The three buttons over the film ---
    Parked in the lower third: clear of the logo at the top, and clear of the
-   very bottom edge where phone browsers put their own controls. */
+   very bottom edge where phone browsers put their own controls.
+
+   The shape is a triangle - one button centred on top, two side by side
+   beneath it. That is two stacked rows, each centring whatever it holds,
+   so moving a button between the rows in the HTML is all it takes to
+   change the arrangement. */
 .hero-video-actions {
   position: absolute;
   left: 0;
@@ -730,26 +742,51 @@ body.nav-is-open { overflow: hidden; }
   bottom: clamp(3.5rem, 14vh, 8rem);
   z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: var(--sp-3);
   padding-inline: var(--gutter);
 }
-/* On a narrow phone the three have to share one line, so they drop the
+.hero-video-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3);
+}
+/* The top button is set to the width of the two beneath it plus the gap,
+   so the triangle reads as a deliberate shape rather than a short line
+   above a long one. */
+.hero-video-row:first-child .btn { min-width: 14.5rem; }
+
+/* The brand serif on the three buttons: uppercase, regular weight, like
+   every other Fertigo Pro element on the site. Written as ".btn.hero-cta"
+   so it beats the plain .btn rules in section 5, which set Inter at
+   weight 600. Capitals in Fertigo sit slightly small beside Inter at the
+   same size, so these run a little larger. */
+.btn.hero-cta {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* On a narrow phone the lower two have to share one line, so they drop the
    minimum width and tighten their padding. They widen again from 560px. */
 .hero-video-actions .btn {
   min-width: 0;
   padding-inline: 1.15rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   box-shadow: 0 6px 22px rgba(21, 10, 36, 0.45);
 }
 @media (min-width: 560px) {
-  .hero-video-actions { gap: var(--sp-4); }
+  .hero-video-actions,
+  .hero-video-row { gap: var(--sp-4); }
   .hero-video-actions .btn {
-    min-width: 8.5rem;
+    min-width: 9rem;
     padding-inline: 2rem;
-    font-size: 1rem;
+    font-size: 1.08rem;
   }
+  .hero-video-row:first-child .btn { min-width: calc(18rem + var(--sp-4)); }
 }
 
 
@@ -1184,6 +1221,76 @@ body.nav-is-open { overflow: hidden; }
 
 
 /* ---------------------------------------------------------------------------
+   9b. MENU TEASER (home page)
+   Six well-known individual items, as a row that swipes on a phone and
+   settles into a grid of three on a computer. Type-led on purpose: the
+   name does the work, so no photography is needed, and nothing looks
+   unfinished while there is none.
+   --------------------------------------------------------------------------- */
+.dish-row {
+  display: flex;
+  gap: var(--sp-3);
+  /* Same trick as the location row: run to the screen edge so the next
+     card peeks in and the row reads as swipeable. */
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  padding-block: 0.35rem;         /* room for the hover lift */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--gutter);
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.dish-row::-webkit-scrollbar { display: none; }
+
+.dish {
+  flex: 0 0 auto;
+  width: min(15rem, 68vw);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--t-base), border-color var(--t-base),
+              box-shadow var(--t-base);
+}
+.dish:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 162, 74, 0.45);
+  box-shadow: var(--shadow-md);
+}
+
+/* The small gold label above the name: Bowl, Wrap, Dessert. */
+.dish-kind {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.dish h3 {
+  font-size: var(--fs-h3);
+  color: var(--plum-700);
+  margin: 0;
+}
+.dish p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.dish-cta { margin-top: clamp(2rem, 4vw, 2.75rem); }
+.dish-cta .btn { display: flex; width: 100%; }
+
+
+/* ---------------------------------------------------------------------------
    10. CATERING PACKAGES
    The first card is the wide featured one; the rest sit in a grid below it.
    --------------------------------------------------------------------------- */
@@ -1541,14 +1648,30 @@ body.nav-is-open { overflow: hidden; }
    --------------------------------------------------------------------------- */
 /* --- Filter pills (phones only) ---
    Hidden on wider screens, where the two groups and their arrows do the
-   same job with more room. */
+   same job with more room.
+
+   The pills sit on one line and swipe sideways rather than wrapping onto
+   a second line, so the row keeps its height however many areas there
+   are. The negative margin and matching padding let the row run to both
+   edges of the screen, so a pill scrolling away is cut off by the edge
+   rather than by an invisible box, which is what tells people it moves. */
 .loc-filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--sp-2);
   margin-bottom: var(--sp-6);
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.loc-filters::-webkit-scrollbar { display: none; }
 .loc-filter {
+  flex: none;                  /* never squeeze a label onto two lines */
+  scroll-snap-align: start;
   min-height: 2.5rem;
   padding: 0.45rem 0.95rem;
   border: 1px solid var(--border);
@@ -2030,6 +2153,18 @@ a.contact-value:hover { color: var(--gold-400); }
   .stat-num { min-width: 0; }
 
   .feature-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+
+  /* Enough room now for the dishes to stop swiping and sit two across. */
+  .dish-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-4);
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+  .dish { width: auto; }
+
   .steps { grid-template-columns: repeat(2, 1fr); gap: var(--sp-7) var(--sp-6); }
   .step:not(:last-child)::after { display: none; }
 
@@ -2073,8 +2208,23 @@ a.contact-value:hover { color: var(--gold-400); }
   .book-steps { padding: var(--sp-7) var(--sp-6); }
 
   /* Mouse users get arrows and the grouped rows, so the pills are not
-     needed - the groups already say which area is which. */
+     needed - the groups already say which area is which. The script puts
+     every location back on screen as soon as they disappear. */
   .loc-filters { display: none; }
+
+  /* The dish cards stop swiping and lay out three across, two rows deep.
+     The negative margins go, so the grid lines up with everything else. */
+  .dish-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+  .dish { width: auto; }
+  .dish-cta { display: flex; justify-content: center; }
+  .dish-cta .btn { display: inline-flex; width: auto; }
   .loc-nav { display: flex; }
   .loc-grid { gap: var(--sp-4); }
   .loc { width: 17rem; }

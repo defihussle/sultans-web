@@ -232,11 +232,17 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
      3c. LOCATION FILTER PILLS (phones)
      Each pill carries a data-filter; each card a data-area. Tapping a pill
      shows only the cards whose area matches, and hides any group left with
-     nothing in it. "all" puts everything back.
+     nothing in it.
 
-     The pills are hidden by CSS on wider screens, so if the window is
-     widened everything is shown again - otherwise cards could stay hidden
-     with no visible way to bring them back.
+     THERE IS NO "ALL" PILL. One area is always showing, and whichever pill
+     carries class="is-active" in the HTML is the one the page opens on.
+
+     The pills are hidden by CSS on wider screens, where the grouped rows
+     and their arrows do the same job. So the filter is applied only while
+     the pills are actually on screen: widen the window and everything is
+     shown again, because otherwise cards would stay hidden with no visible
+     way to bring them back. "all" is the internal name for that
+     show-everything state - it needs no pill of its own.
      ------------------------------------------------------------------------- */
   var locFilters = document.getElementById('locFilters');
 
@@ -263,9 +269,14 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
 
       if (locEmpty) locEmpty.hidden = anyShown;
 
-      Array.prototype.forEach.call(locFilters.querySelectorAll('.loc-filter'), function (pill) {
-        pill.classList.toggle('is-active', pill.getAttribute('data-filter') === area);
-      });
+      /* Light up the pill for this area. Skipped for "all", which has no
+         pill of its own - switching every pill off there would lose the
+         person's choice while the window is wide. */
+      if (area !== 'all') {
+        Array.prototype.forEach.call(locFilters.querySelectorAll('.loc-filter'), function (pill) {
+          pill.classList.toggle('is-active', pill.getAttribute('data-filter') === area);
+        });
+      }
     }
 
     locFilters.addEventListener('click', function (event) {
@@ -273,13 +284,21 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
       if (pill) applyFilter(pill.getAttribute('data-filter'));
     });
 
-    // If the pills get hidden (wider window), show everything again.
-    window.addEventListener('resize', function () {
-      if (getComputedStyle(locFilters).display === 'none') {
-        var active = locFilters.querySelector('.loc-filter.is-active');
-        if (active && active.getAttribute('data-filter') !== 'all') applyFilter('all');
-      }
-    });
+    /* Pills on screen  -> filter to the pill that is switched on.
+       Pills hidden     -> show every location.
+       The chosen pill keeps its class either way, so widening the window
+       and narrowing it again returns to the same area. */
+    function syncFilters() {
+      var pillsVisible = getComputedStyle(locFilters).display !== 'none';
+      var active = locFilters.querySelector('.loc-filter.is-active') ||
+                   locFilters.querySelector('.loc-filter');
+      applyFilter(pillsVisible && active
+        ? active.getAttribute('data-filter')
+        : 'all');
+    }
+
+    syncFilters();
+    window.addEventListener('resize', syncFilters);
   }
 
   /* -------------------------------------------------------------------------
