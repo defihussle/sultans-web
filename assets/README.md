@@ -72,3 +72,29 @@ in `index.html`:
   `Buffet Table.JPG`.
 - Always write a short `alt="..."` description on every `<img>`. It is what
   screen readers announce and what Google reads.
+
+## Brand marks (added November 2026)
+
+| File | What it is | Where it shows |
+| --- | --- | --- |
+| `icon-shawarma.png` | Gold shawarma spit | The section label above every menu: "The menu" (home), "By the tray" (catering), "Individual meals" (menu) |
+| `icon-pin.png` | Gold location pin | The "Locations" section label on the home page |
+| `icon-instagram.png` | Instagram glyph | Footer, every page |
+| `icon-facebook.png` | Facebook glyph | Footer, every page |
+| `halal-badge.png` | The two-tone purple halal mark | Catering page, beside the dietary options |
+| `pattern-tile.png` | One seamless tile of the geometric pattern | Behind the two full-width purple bands |
+
+**The four icons are used as masks, not pictures.** The file supplies the shape
+and the stylesheet supplies the colour, which is how the same Instagram file
+can be white in the footer and how the shawarma always matches the brand gold
+exactly. To replace one, save a new PNG **with a transparent background** over
+the old file name. Any colour in the file is ignored.
+
+The halal badge is the exception: it is a normal picture and keeps its own
+purple, so it needs a light background. Do not display it below about 5rem
+wide, or the ring turns to mush.
+
+`pattern-tile.png` is a single 453x266 tile cut from the artwork, not the whole
+sheet. It repeats seamlessly, so it is a few KB instead of a few hundred. If a
+new pattern is supplied, the tile has to be cut on the pattern's own repeat or
+the joins will show.

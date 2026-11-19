@@ -19,7 +19,8 @@
      6  Header & navigation    13  Request a quote + form
      7  Hero                   14  Footer
      8  Dish ticker            15  Wider screens
-                               16  Print
+                               16  Brand marks
+                               17  Print
    =========================================================================== */
 
 
@@ -2940,12 +2941,143 @@ a.contact-value:hover { color: var(--gold-400); }
 
 
 /* ===========================================================================
-   16. PRINT
+   16. BRAND MARKS - icons, the halal badge, the geometric pattern
+   ===========================================================================
+   THE ICONS ARE MASKS, NOT PICTURES.
+   Each icon PNG is used as a -webkit-mask-image / mask-image: the file
+   supplies the SHAPE and the CSS supplies the COLOUR. That is why one
+   file can be gold on a cream section and white in the footer, and why
+   the gold always matches --gold-500 exactly rather than almost.
+
+   TO REPLACE AN ICON: drop a new PNG with a transparent background over
+   the old file name. There is no colour in the file to match.
+
+   Every rule below is written twice, -webkit- first and then the
+   standard property. Safari still needs the prefixed one. Do not merge
+   them into a shorthand list.
+   =========================================================================== */
+.icon {
+  display: inline-block;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+}
+.icon-shawarma {
+  -webkit-mask-image: url("../assets/icon-shawarma.png");
+          mask-image: url("../assets/icon-shawarma.png");
+}
+.icon-pin {
+  -webkit-mask-image: url("../assets/icon-pin.png");
+          mask-image: url("../assets/icon-pin.png");
+}
+.icon-instagram {
+  -webkit-mask-image: url("../assets/icon-instagram.png");
+          mask-image: url("../assets/icon-instagram.png");
+}
+.icon-facebook {
+  -webkit-mask-image: url("../assets/icon-facebook.png");
+          mask-image: url("../assets/icon-facebook.png");
+}
+
+/* --- An icon standing in for the little gold rule in a section label ----
+   The shawarma marks a menu, the pin marks locations. Used in the
+   eyebrow, in place of .eyebrow-rule - one or the other, never both.
+   The colour tracks whatever .eyebrow-rule would have been on the same
+   background, so the labels stay a set. */
+.eyebrow-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: var(--gold-500);
+}
+.eyebrow-light .eyebrow-icon { background-color: var(--gold-400); }
+.section-solid .eyebrow-icon { background-color: var(--gold-300); }
+
+/* --- The halal badge ----------------------------------------------------
+   Used at the one place on the site that talks about what is in the food.
+   It is a picture, not a mask: it is the client's two-tone purple mark and
+   it is not recoloured. It needs a light background and room to be read -
+   do not shrink it below about 5rem or the ring turns to mush. */
+.halal-badge {
+  width: clamp(5rem, 13vw, 6.5rem);
+  height: auto;
+  flex: none;
+}
+
+/* --- The geometric pattern ----------------------------------------------
+   The file is ONE SEAMLESS TILE (453x266) cut from the artwork the client
+   sent, so it repeats with no visible seam. Used as a mask again, filled
+   white and held at 7% so it reads as texture in the purple rather than
+   as a picture of a pattern.
+
+   It goes on the full-width purple bands and nowhere else: the About Us
+   band on the home page and the quote band on the catering page. Adding
+   it to a third place is how this stops being elegant. */
+.section-solid,
+.section-invert {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.section-solid::after,
+.section-invert::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-color: #FFFFFF;
+  -webkit-mask-image: url("../assets/pattern-tile.png");
+          mask-image: url("../assets/pattern-tile.png");
+  -webkit-mask-repeat: repeat;
+          mask-repeat: repeat;
+  -webkit-mask-size: 226px auto;
+          mask-size: 226px auto;
+}
+
+/* --- Instagram and Facebook, under the footer logo ----------------------
+   The only icons in the footer, on every page. They replaced the two text
+   links that used to sit in different columns. */
+.footer-social {
+  display: flex;
+  gap: var(--sp-3);
+  list-style: none;
+  margin: var(--sp-5) 0 0;
+  padding: 0;
+}
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r-pill);
+  color: rgba(239, 234, 246, 0.8);
+  transition: color var(--t-fast), background-color var(--t-fast), border-color var(--t-fast);
+}
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: var(--plum-950);
+  background-color: var(--gold-500);
+  border-color: var(--gold-500);
+}
+.footer-social .icon { width: 1.1rem; height: 1.1rem; }
+
+
+/* ===========================================================================
+   17. PRINT
    So a quote request or the package list prints cleanly on paper.
    =========================================================================== */
 @media print {
   .site-header, .ticker, .trust-bar, .request-form, .hero-media,
   .hero-scrim, .nav-toggle, .back-to-top, .skip-link { display: none !important; }
+  .section-solid::after, .section-invert::after,
+  .eyebrow-icon, .footer-social { display: none !important; }
 
   body { color: #000; background: #fff; font-size: 11pt; }
   .hero, .section-invert, .site-footer, .section-alt {
