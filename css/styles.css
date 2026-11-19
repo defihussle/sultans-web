@@ -1325,10 +1325,21 @@ body.nav-is-open { overflow: hidden; }
 
 /* ---------------------------------------------------------------------------
    9c. THE MENU PAGE (menu.html)
-   Two patterns do all the work:
-     .price-table  a dish with several tray sizes, so several prices
-     .menu-list    a dish with one price
-   Plus .menu-jump, the row of chips under the hero.
+   The menu page is individual meals only - bowls, wraps, dessert and
+   drinks. Everything there is one dish at one price, so .menu-list and
+   .menu-jump are the two things actually in use.
+
+     .menu-jump    the row of chips under the hero
+     .menu-list    a dish with one price            <- the menu page
+     .price-table  a dish with several tray sizes   <- NOT IN USE TODAY
+
+   ABOUT .price-table: nothing on the site uses it at the moment. It was
+   built for the a la carte tray pricing, which has been taken off the
+   menu page because trays are catering, not a menu. The tray pricing is
+   due to move to the catering page, and this is what it is styled with,
+   so it is kept here rather than deleted and written again. If that move
+   is dropped for good, .price-table, .price-serves, .menu-sub-title and
+   .menu-min can all go, along with the .price-table block in section 15.
    --------------------------------------------------------------------------- */
 
 /* --- The jump links ---
@@ -1392,7 +1403,8 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-small);
   color: var(--text-muted);
 }
-/* "By the piece" and other headings inside a course. */
+/* "By the piece" and other headings inside a course.
+   Not in use today - see the note at the top of section 9c. */
 .menu-sub-title {
   margin-top: var(--sp-6);
   margin-bottom: var(--sp-3);
@@ -1423,7 +1435,8 @@ body.nav-is-open { overflow: hidden; }
   text-transform: uppercase;
   color: var(--plum-700);
 }
-/* The minimum-order line under a name. */
+/* The minimum-order line under a name ("Min. 12 pcs").
+   Not in use today - see the note at the top of section 9c. */
 .menu-min {
   display: block;
   font-family: var(--font-body);
@@ -1445,7 +1458,10 @@ body.nav-is-open { overflow: hidden; }
   color: var(--text-muted);
 }
 
-/* --- A dish with several tray sizes ---
+/* --- A dish with several tray sizes ---   NOT IN USE TODAY
+   Kept for the tray pricing when it moves to the catering page. See the
+   note at the top of section 9c before deleting any of it.
+
    THE TABLE IS TWO LAYOUTS IN ONE.
 
    On a phone it is NOT a table: each dish becomes its own card, the size
@@ -2456,7 +2472,10 @@ a.contact-value:hover { color: var(--gold-400); }
   }
   .form-head, .form-body { padding: var(--sp-6); }
 
-  /* --- The price tables become real tables ---
+  /* --- The price tables become real tables ---   NOT IN USE TODAY
+     Goes with the .price-table block in section 9c; read the note there
+     before deleting either.
+
      Enough width now for the sizes to sit along the top and the prices to
      line up underneath them, which is far quicker to compare than the
      stack of cards the phone gets. The data-size labels are switched off
