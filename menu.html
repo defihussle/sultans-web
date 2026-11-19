@@ -50,7 +50,26 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Menu | Sultan's Mediterranean Grill">
   <meta property="og:description" content="Shawarma and kebab bowls, wraps, baklava and drinks - made for one, all 100% halal.">
-  <meta property="og:image" content="assets/share-image.jpg">
+  <meta property="og:site_name" content="Sultan's Mediterranean Grill">
+  <meta property="og:url" content="https://sultansgrill.ca/menu.html">
+
+  <!-- The share image is assets/share-image.jpg: the white logo on the
+       brand plum, 1200x630, which is the size every platform crops from.
+       It is a full https:// address on purpose - Facebook, LinkedIn and
+       WhatsApp will not resolve a relative one. If the site ever moves to
+       another domain, these URLs move with it.
+
+       Stating the size lets the big card render on the first scrape
+       instead of after a re-crawl. Change them if you replace the image. -->
+  <meta property="og:image" content="https://sultansgrill.ca/assets/share-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Sultan's Mediterranean Grill">
+
+  <!-- Without this, X and several chat apps show a small square thumbnail
+       instead of the wide card. The rest they read from the og: tags. -->
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

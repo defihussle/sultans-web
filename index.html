@@ -25,12 +25,30 @@
   <meta name="description" content="Halal Mediterranean grill and catering across Toronto, North York, Waterloo and St. Catharines. Browse catering packages, find a location, or see the menu.">
   <meta name="theme-color" content="#1D0E30">
 
-  <!-- Preview card shown when someone shares the link.
-       Add a 1200x630 image to the assets folder, then this works automatically. -->
+  <!-- Preview card shown when someone shares the link. -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Halal Mediterranean Catering in Toronto | Sultan's">
   <meta property="og:description" content="Catering that feeds the whole room, effortlessly. 100% halal, with vegan and gluten-free options.">
-  <meta property="og:image" content="assets/share-image.jpg">
+  <meta property="og:site_name" content="Sultan's Mediterranean Grill">
+  <meta property="og:url" content="https://sultansgrill.ca/">
+
+  <!-- The share image is assets/share-image.jpg: the white logo on the
+       brand plum, 1200x630, which is the size every platform crops from.
+       It is a full https:// address on purpose - Facebook, LinkedIn and
+       WhatsApp will not resolve a relative one. If the site ever moves to
+       another domain, these URLs move with it.
+
+       Stating the size lets the big card render on the first scrape
+       instead of after a re-crawl. Change them if you replace the image. -->
+  <meta property="og:image" content="https://sultansgrill.ca/assets/share-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Sultan's Mediterranean Grill">
+
+  <!-- Without this, X and several chat apps show a small square thumbnail
+       instead of the wide card. The rest they read from the og: tags. -->
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,7 +268,7 @@
     <!-- ==== EDIT: THE THREE NUMBERS ==== -->
     <ul class="stats">
       <li>
-        <span class="stat-num">10</span>
+        <span class="stat-num">11</span>
         <span class="stat-label">Locations in Ontario</span>
       </li>
       <li>

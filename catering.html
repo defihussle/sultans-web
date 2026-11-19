@@ -34,7 +34,26 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catering Packages | Sultan's Mediterranean Grill">
   <meta property="og:description" content="Buffet spreads, platters and boxed meals. 100% halal, with vegan and gluten-free options.">
-  <meta property="og:image" content="assets/share-image.jpg">
+  <meta property="og:site_name" content="Sultan's Mediterranean Grill">
+  <meta property="og:url" content="https://sultansgrill.ca/catering.html">
+
+  <!-- The share image is assets/share-image.jpg: the white logo on the
+       brand plum, 1200x630, which is the size every platform crops from.
+       It is a full https:// address on purpose - Facebook, LinkedIn and
+       WhatsApp will not resolve a relative one. If the site ever moves to
+       another domain, these URLs move with it.
+
+       Stating the size lets the big card render on the first scrape
+       instead of after a re-crawl. Change them if you replace the image. -->
+  <meta property="og:image" content="https://sultansgrill.ca/assets/share-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Sultan's Mediterranean Grill">
+
+  <!-- Without this, X and several chat apps show a small square thumbnail
+       instead of the wide card. The rest they read from the og: tags. -->
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +102,11 @@
      The panel that slides in from the right when the menu button is tapped.
      It sits outside the header on purpose, so it can run the full height of
      the screen.
+
+     Two links here are not like the others. "Catering" is this page, so it
+     jumps down to the packages rather than reloading. "Menu" leaves for
+     menu.html, the same as it does on every other page - it no longer
+     points at the a la carte block further down this file.
      ========================================================================= -->
 <div class="nav-backdrop" id="navBackdrop" hidden></div>
 
@@ -94,8 +118,8 @@
 
   <ul class="nav-list">
     <li><a href="index.html">Home</a></li>
-    <li><a href="#packages">Packages</a></li>
-    <li><a href="#menu">Menu</a></li>
+    <li><a href="#packages">Catering</a></li>
+    <li><a href="menu.html">Menu</a></li>
     <li><a href="index.html#locations">Locations</a></li>
   </ul>
 
@@ -453,8 +477,10 @@
 
 <!-- =========================================================================
      ==== EDIT: FULL CATERING MENU ====
-     id="menu" is what the Menu links in the header and on the home page jump
-     to. Keep that id on this block until a dedicated menu page exists.
+     Nothing links here any more. The Menu links in the nav and on the home
+     page all go to menu.html now, which carries the individual meals; this
+     block is the by-the-tray pricing and stays on the catering page where
+     it belongs. The id is kept so any old bookmark still lands somewhere.
 
      When a new catering PDF is uploaded, update the link in BOTH places
      (here and in the footer of this file AND index.html).
