@@ -197,6 +197,24 @@ h1, h2, h3, h4 {
    Capitals need a little air between the letters or they look cramped, so
    each of these carries a small positive letter-spacing. Inter is left
    alone: body text, labels and numbers keep their normal case.
+
+   THE THREE DELIBERATE EXCEPTIONS
+   These look like misses in an audit and are not. Leave them in Inter.
+
+   1. SMALL CAPS LABELS stay Inter at weight 700, around 12px: .eyebrow,
+      .tag-label, .dish-kind, .loc-filter, .tag-row li, and the two
+      headings that are really labels - .loc-group-title ("DOWNTOWN
+      TORONTO & THE PATH") and the footer column headings. They are
+      markup headings but design labels, and Fertigo at that size reads
+      faint and loses the job of pointing at what follows. One typeface
+      for every small label is what keeps them reading as a set.
+
+   2. BIG NUMERALS (.stat-num) stay Inter. Fertigo Pro carries only
+      old-style figures, where "1" looks like a small capital I, so "10"
+      reads as "IO". The reason is repeated at that rule.
+
+   3. BUTTONS are Inter, except the three over the hero video. Those are
+      a brand statement; the rest are interface.
    --------------------------------------------------------------------------- */
 .choice-title,
 .ticker-group,
@@ -753,11 +771,6 @@ body.nav-is-open { overflow: hidden; }
   justify-content: center;
   gap: var(--sp-3);
 }
-/* The top button is set to the width of the two beneath it plus the gap,
-   so the triangle reads as a deliberate shape rather than a short line
-   above a long one. */
-.hero-video-row:first-child .btn { min-width: 14.5rem; }
-
 /* The brand serif on the three buttons: uppercase, regular weight, like
    every other Fertigo Pro element on the site. Written as ".btn.hero-cta"
    so it beats the plain .btn rules in section 5, which set Inter at
@@ -770,23 +783,41 @@ body.nav-is-open { overflow: hidden; }
   letter-spacing: 0.06em;
 }
 
-/* On a narrow phone the lower two have to share one line, so they drop the
-   minimum width and tighten their padding. They widen again from 560px. */
+/* ALL THREE BUTTONS ARE THE SAME SIZE.
+   --cta-w is the one width they share, so the top of the triangle is no
+   bigger than its base. It is sized for the longest label, LOCATIONS, and
+   has to let two sit side by side on the narrowest phone: at 320px that
+   is 40vw each, 128px, plus the gap between them.
+
+   THE 8rem FLOOR IS LOAD-BEARING. On a 320px screen - the narrowest
+   phone still in use - two buttons plus the gap between them come to
+   268px against 283px of room. Raise that floor and the pair wraps onto
+   two lines, and the triangle collapses into a column.
+
+   CHANGING THE LABELS? If a longer word is added, raise the 11rem
+   ceiling. Buttons never wrap their text, so a label too long for the
+   width makes the button grow instead of breaking - the three would stop
+   matching, which is the thing to watch for. */
+.hero-video-actions {
+  --cta-w: clamp(8rem, 40vw, 11rem);
+}
 .hero-video-actions .btn {
+  width: var(--cta-w);
   min-width: 0;
-  padding-inline: 1.15rem;
+  padding-inline: 1rem;
   font-size: 1rem;
   box-shadow: 0 6px 22px rgba(21, 10, 36, 0.45);
 }
 @media (min-width: 560px) {
-  .hero-video-actions,
+  .hero-video-actions {
+    --cta-w: 11.5rem;
+    gap: var(--sp-4);
+  }
   .hero-video-row { gap: var(--sp-4); }
   .hero-video-actions .btn {
-    min-width: 9rem;
-    padding-inline: 2rem;
+    padding-inline: 1.5rem;
     font-size: 1.08rem;
   }
-  .hero-video-row:first-child .btn { min-width: calc(18rem + var(--sp-4)); }
 }
 
 
@@ -1646,6 +1677,24 @@ body.nav-is-open { overflow: hidden; }
 /* ---------------------------------------------------------------------------
    12. LOCATIONS
    --------------------------------------------------------------------------- */
+/* --- The heading of this section only ---
+   Locations is a list, not a story, so the usual balance is reversed: the
+   LOCATIONS label is bigger than it is elsewhere and the heading under it
+   is smaller, which brings the cards themselves further up the screen.
+   There is no intro line under the heading - see the note in the HTML.
+   These two rules affect this section alone; every other section keeps
+   the sizes set in section 4. */
+.loc-head .eyebrow {
+  font-size: var(--fs-small);
+  letter-spacing: 0.2em;
+  gap: 0.85rem;
+}
+.loc-head .eyebrow-rule { width: 2.25rem; }
+.loc-head .section-title {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin-bottom: 0;
+}
+
 /* --- Filter pills (phones only) ---
    Hidden on wider screens, where the two groups and their arrows do the
    same job with more room.
@@ -1752,12 +1801,27 @@ body.nav-is-open { overflow: hidden; }
   color: var(--plum-700);
 }
 
-/* --- The swipeable row ---
-   One row that scrolls sideways, with each card snapping into place.
+/* --- The swipeable rows ---
+   On a phone the cards are laid out TWO DEEP and scroll sideways: one
+   column of two cards fills the view, and swiping brings the next column
+   across. Eight downtown locations are four swipes rather than eight,
+   which is the whole point of it.
+
+   It is a grid with two rows, filled top to bottom and then left to
+   right ("grid-auto-flow: column"). An odd number of cards simply leaves
+   the last column half full - the group of three fills one column and
+   starts another, which is correct.
+
+   From 900px it goes back to being a single flex row: the arrows and the
+   wider screen make two rows unnecessary there. See section 15.
+
    The negative margins let the cards run to the screen edge on a phone,
    so the row reads as something you can swipe. */
 .loc-grid {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: min(16rem, 72vw);
   gap: var(--sp-3);
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
   margin-inline: calc(-1 * var(--gutter));
@@ -2055,10 +2119,17 @@ a.contact-value:hover { color: var(--gold-400); }
   line-height: 1.6;
   margin-bottom: var(--sp-4);
 }
+/* #eatlikeasultan is a brand mark, not a UI label, so it is set in the
+   brand serif - the same way it appears in the dish ticker. Fertigo caps
+   read smaller than Inter's at the same size, so it is nudged up a step.
+
+   NOTE: the footer is shared with catering.html, so this sets the tag in
+   both footers. That is the intention - the two are meant to match. */
 .footer-tag {
   margin: 0;
-  font-size: var(--fs-micro);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-500);
@@ -2211,6 +2282,14 @@ a.contact-value:hover { color: var(--gold-400); }
      needed - the groups already say which area is which. The script puts
      every location back on screen as soon as they disappear. */
   .loc-filters { display: none; }
+
+  /* Back to one row of cards. Two rows are a phone measure, for fitting
+     eight downtown locations into a few swipes; here the row is wide and
+     the arrows do the work. */
+  .loc-grid {
+    display: flex;
+    grid-auto-flow: row;
+  }
 
   /* The dish cards stop swiping and lay out three across, two rows deep.
      The negative margins go, so the grid lines up with everything else. */
