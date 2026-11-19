@@ -753,7 +753,31 @@ body.nav-is-open { overflow: hidden; }
   object-fit: cover;
   object-position: center;
   z-index: -2;
+  /* Stops the long-press "save video" sheet on the film, which is the one
+     other piece of browser UI this hero can produce. */
+  pointer-events: none;
 }
+
+/* ---- NO PLAY BUTTON, EVER ----
+   The film has no "controls" attribute, but that is not enough on its own:
+   Safari draws a large play button over any inline video the moment it is
+   paused, and on iOS it draws one before the film has started at all. The
+   rules below remove every piece of that furniture.
+
+   EACH SELECTOR HAS ITS OWN RULE ON PURPOSE. These are non-standard
+   pseudo-elements, and browsers do not all recognise the same ones. In a
+   comma-separated list, one name a browser does not know throws away the
+   whole rule - including the parts it does understand. Written separately,
+   each one stands or falls by itself. Do not merge them.
+
+   js/script.js section 0 is the other half of this: hiding the button
+   stops it being seen, restarting the film stops it being needed. */
+.hero-video-asset::-webkit-media-controls { display: none !important; }
+.hero-video-asset::-webkit-media-controls-panel { display: none !important; }
+.hero-video-asset::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+.hero-video-asset::-webkit-media-controls-overlay-play-button { display: none !important; -webkit-appearance: none; }
+.hero-video-asset::-webkit-media-controls-play-button { display: none !important; }
+.hero-video-asset::-internal-media-controls-overlay-cast-button { display: none !important; }
 
 /* Darkens the film so the logo and menu button stay legible. Heaviest at
    the very top, where the bar sits, and lifting through the middle so the

@@ -146,13 +146,30 @@
      The video is silent on purpose. Phones will not auto-play a clip that
      has sound, so the "muted" below is what makes it start on its own.
 
+     WHY THERE ARE SO MANY ATTRIBUTES. This is wallpaper, not something to
+     watch, so it must never show a play button or any other control:
+       muted + playsinline   what makes a phone allow it to start by itself
+                             and keep it in the page rather than taking over
+                             the screen
+       webkit-playsinline    the same thing, spelled the old way, for iOS
+       autoplay + loop       start on its own, run forever
+       no "controls"         leave it off and nothing is drawn over the film
+       disablepictureinpicture / disableremoteplayback
+                             stop the picture-in-picture and AirPlay buttons
+                             appearing on the film in Safari and Chrome
+
+     Safari draws its own big play button on a paused inline video even with
+     no controls. Section 7a of the stylesheet hides it, and section 0 of
+     js/script.js restarts the film whenever the browser stops it.
+
      If the video ever fails to load, the poster image shows; if that fails
      too, the deep purple gradient behind it does. Nothing looks broken.
      ========================================================================= -->
 <section class="hero-video" id="top">
 
   <video class="hero-video-asset"
-         autoplay muted loop playsinline preload="metadata"
+         autoplay muted loop playsinline webkit-playsinline
+         disablepictureinpicture disableremoteplayback preload="metadata"
          aria-label="Food being prepared at Sultan's Mediterranean Grill">
     <source src="assets/hero-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
     <source src="assets/hero.mp4" type="video/mp4">

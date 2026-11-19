@@ -1,7 +1,8 @@
 /* ===========================================================================
    SULTAN'S CATERING - SITE SCRIPT
    ===========================================================================
-   Kept deliberately small. Six jobs only:
+   Kept deliberately small. Seven jobs only:
+     0. Keeping the hero film playing, with no controls ever shown
      1. Starting every page load at the top of the page
      2. The mobile menu button
      3. Turning the header white once you scroll past the hero
@@ -21,18 +22,102 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
 
   /* -------------------------------------------------------------------------
      0. THE HERO VIDEO
-     One courtesy: if someone has asked their device to reduce motion, the
-     film is paused so they get the still behind it instead.
 
-     Nothing is needed for a video that fails to load. The still and the
-     gradient are the background of the section itself, so they simply show
-     through the empty video. See "7a" in the stylesheet.
+     The film is wallpaper, not something anyone chooses to watch, so it
+     must never show a play button or any other control. The markup says
+     autoplay, muted, loop and playsinline, which is enough to start it -
+     but not enough to keep it running.
+
+     WHAT STOPS IT. Browsers pause an inline video whenever the page stops
+     being the thing in front of you: switching tabs, switching apps,
+     locking the phone, answering a call. Safari is the strictest, and it
+     is also the one that then draws a large play button over the paused
+     film. On iOS it does this before the film has started at all. Coming
+     back to the page does not always restart it.
+
+     SO: whenever the browser stops the film, start it again. Section 7a of
+     the stylesheet hides the button, this keeps it from being needed, and
+     between them nothing is ever drawn over the hero. There is no custom
+     play or pause control anywhere - that is the point.
+
+     THE ONE COURTESY. If someone has asked their device to reduce motion,
+     the film stays paused and they get the still behind it instead. That
+     has to be checked every time rather than once at load, or the restart
+     below would undo it; it also now follows the setting if it is changed
+     while the page is open.
+
+     WHAT THIS CANNOT DO. If the browser refuses to play at all - iOS Low
+     Power Mode is the common one, and it overrides autoplay outright -
+     then nothing here can force it. The film stays on its first frame and
+     the poster still shows through. The play button stays hidden either
+     way, so the hero looks deliberate rather than broken. Nothing is
+     needed for a video that fails to load, for the same reason: the still
+     and the gradient are the background of the section itself. See "7a".
      ------------------------------------------------------------------------- */
   var heroVideo = document.querySelector('.hero-video-asset');
-  if (heroVideo && window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    heroVideo.removeAttribute('autoplay');
-    heroVideo.pause();
+
+  if (heroVideo) {
+    var motionQuery = window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)')
+      : null;
+
+    /* Has this visitor asked for less movement? Read live, never cached. */
+    var wantsTheStill = function () {
+      return !!(motionQuery && motionQuery.matches);
+    };
+
+    var playHeroVideo = function () {
+      if (wantsTheStill()) { return; }
+      /* No point asking while the page is in the background - the browser
+         will refuse, and it is about to pause it again anyway. */
+      if (document.visibilityState === 'hidden') { return; }
+      if (!heroVideo.paused && !heroVideo.ended) { return; }
+
+      var started = heroVideo.play();
+      /* play() returns a promise in modern browsers and nothing in older
+         ones. It rejects when the browser will not allow playback, which
+         is not an error we can do anything about - swallow it, or it is
+         logged as an unhandled rejection on every visit in Low Power
+         Mode. A refused play() does not fire another "pause" event, so
+         this cannot turn into a loop. */
+      if (started && started.catch) { started.catch(function () {}); }
+    };
+
+    var applyMotionPreference = function () {
+      if (wantsTheStill()) {
+        heroVideo.removeAttribute('autoplay');
+        heroVideo.pause();
+      } else {
+        heroVideo.setAttribute('autoplay', '');
+        playHeroVideo();
+      }
+    };
+
+    applyMotionPreference();
+
+    /* Follow the setting if it changes while the page is open. The two
+       spellings are the current one and the one Safari used until 14. */
+    if (motionQuery) {
+      if (motionQuery.addEventListener) {
+        motionQuery.addEventListener('change', applyMotionPreference);
+      } else if (motionQuery.addListener) {
+        motionQuery.addListener(applyMotionPreference);
+      }
+    }
+
+    /* Every way back to the page, and the pause itself.
+         visibilitychange  tab switched, app switched, phone locked
+         pageshow          the Back button, including Safari's bfcache,
+                           which restores the page with the film paused
+         focus             window brought forward on a computer
+         pause             the catch-all: whatever stopped it, undo it
+         loadeddata        the first frames have arrived - if autoplay was
+                           going to be refused, this is where we try again */
+    document.addEventListener('visibilitychange', playHeroVideo);
+    window.addEventListener('pageshow', playHeroVideo);
+    window.addEventListener('focus', playHeroVideo);
+    heroVideo.addEventListener('pause', playHeroVideo);
+    heroVideo.addEventListener('loadeddata', playHeroVideo);
   }
 
   /* -------------------------------------------------------------------------
