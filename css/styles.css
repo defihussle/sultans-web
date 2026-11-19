@@ -661,8 +661,10 @@ body.nav-is-open { overflow: hidden; }
    white top to bottom. Scoped to the body class "page-home" so the two do
    not affect each other.
    --------------------------------------------------------------------------- */
-.page-home { background: var(--paper); }
-.page-home .section-alt {
+.page-home,
+.page-menu { background: var(--paper); }
+.page-home .section-alt,
+.page-menu .section-alt {
   background: var(--paper);
   border-block-color: var(--line);
 }
@@ -1319,6 +1321,211 @@ body.nav-is-open { overflow: hidden; }
 
 .dish-cta { margin-top: clamp(2rem, 4vw, 2.75rem); }
 .dish-cta .btn { display: flex; width: 100%; }
+
+
+/* ---------------------------------------------------------------------------
+   9c. THE MENU PAGE (menu.html)
+   Two patterns do all the work:
+     .price-table  a dish with several tray sizes, so several prices
+     .menu-list    a dish with one price
+   Plus .menu-jump, the row of chips under the hero.
+   --------------------------------------------------------------------------- */
+
+/* --- The jump links ---
+   Sits right under the hero. On a phone it swipes sideways, the same way
+   the location pills do, so eight courses stay on one line. */
+.menu-jump {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.menu-jump-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.menu-jump-inner::-webkit-scrollbar { display: none; }
+.menu-jump a {
+  flex: none;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--plum-700);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color var(--t-fast), border-color var(--t-fast),
+              color var(--t-fast);
+}
+.menu-jump a:hover {
+  background: var(--plum-500);
+  border-color: var(--plum-500);
+  color: var(--paper);
+}
+
+/* --- One course --- */
+.menu-block + .menu-block { margin-top: clamp(2.75rem, 6vw, 4rem); }
+.menu-block-title {
+  font-size: clamp(1.45rem, 2.6vw, 1.9rem);
+  color: var(--plum-700);
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  border-bottom: 2px solid var(--gold-500);
+}
+/* The italic line under a course heading: what comes with it. */
+.menu-block-note {
+  max-width: 54ch;
+  margin-bottom: var(--sp-5);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.menu-block-foot {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+/* "By the piece" and other headings inside a course. */
+.menu-sub-title {
+  margin-top: var(--sp-6);
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-micro);
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-400);
+}
+
+/* --- A dish with one price ---
+   Name on the left, price on the right, a hairline between rows. */
+.menu-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+.menu-list li:last-child { border-bottom: 0; }
+.menu-item {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--plum-700);
+}
+/* The minimum-order line under a name. */
+.menu-min {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ink-400);
+}
+.menu-price {
+  flex: none;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+/* "/ skewer", "/ dozen" - lighter, so the number stays the thing you see. */
+.menu-unit {
+  font-weight: 400;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+/* --- A dish with several tray sizes ---
+   THE TABLE IS TWO LAYOUTS IN ONE.
+
+   On a phone it is NOT a table: each dish becomes its own card, the size
+   headings are hidden, and every price carries its own label, taken from
+   the data-size on the cell. A five-column table cannot be read on a
+   360px screen, and a table that scrolls sideways hides the column you
+   are trying to compare against.
+
+   From 720px it becomes a real table again, with the sizes along the top
+   and the prices in columns, which is the quickest thing to scan when
+   there is room for it. See section 15. */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.price-table thead { display: none; }
+.price-table tr {
+  display: block;
+  padding: var(--sp-4) var(--sp-5);
+  margin-bottom: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.price-table tbody th {
+  display: block;
+  margin-bottom: var(--sp-3);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--plum-700);
+}
+/* Each price becomes a small labelled chip. */
+.price-table td {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0 var(--sp-2) var(--sp-2) 0;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-pill);
+  background: var(--plum-100);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--plum-700);
+}
+/* The label is the cell's own data-size - see the note in the HTML. */
+.price-table td::before {
+  content: attr(data-size);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--plum-500);
+  opacity: 0.85;
+}
+
+/* The "serves 15-20" line under a size heading. Hidden with the rest of
+   the head on phones; it comes back with the table at 720px. */
+.price-serves {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--ink-400);
+}
+
+/* --- The closing lines --- */
+.menu-pdf-line {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.menu-columns { display: grid; gap: clamp(2.75rem, 6vw, 4rem); }
+/* Inside the two-column layout the blocks are already spaced by the grid. */
+.menu-columns .menu-block + .menu-block { margin-top: 0; }
 
 
 /* ---------------------------------------------------------------------------
@@ -2248,6 +2455,61 @@ a.contact-value:hover { color: var(--gold-400); }
     padding: var(--sp-7);
   }
   .form-head, .form-body { padding: var(--sp-6); }
+
+  /* --- The price tables become real tables ---
+     Enough width now for the sizes to sit along the top and the prices to
+     line up underneath them, which is far quicker to compare than the
+     stack of cards the phone gets. The data-size labels are switched off
+     here, because the column heading says the same thing once. */
+  .price-table { border-spacing: 0; }
+  .price-table thead { display: table-header-group; }
+  .price-table tr {
+    display: table-row;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+  }
+  .price-table thead th {
+    padding: 0 var(--sp-3) var(--sp-3);
+    font-family: var(--font-body);
+    font-size: var(--fs-micro);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: right;
+    vertical-align: bottom;
+    color: var(--plum-500);
+    border-bottom: 1px solid var(--border);
+  }
+  /* The first heading sits over the dish names, so it reads left. */
+  .price-table thead th:first-child { text-align: left; padding-left: 0; }
+  .price-table tbody th {
+    display: table-cell;
+    margin: 0;
+    padding: 0.85rem var(--sp-3) 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .price-table td {
+    display: table-cell;
+    margin: 0;
+    padding: 0.85rem var(--sp-3);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: none;
+    text-align: right;
+    font-weight: 600;
+    color: var(--text);
+    vertical-align: middle;
+  }
+  .price-table td::before { content: none; }
+  .price-table tbody tr:last-child th,
+  .price-table tbody tr:last-child td { border-bottom: 0; }
+  /* A quiet tint across the row being read. */
+  .price-table tbody tr:hover th,
+  .price-table tbody tr:hover td { background: var(--plum-050); }
 }
 
 /* --- Small desktop (900px) --- */
@@ -2289,6 +2551,12 @@ a.contact-value:hover { color: var(--gold-400); }
   .loc-grid {
     display: flex;
     grid-auto-flow: row;
+  }
+
+  /* Bowls, wraps, dessert and drinks sit two across on the menu page. */
+  .menu-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(2.75rem, 5vw, 4rem) var(--sp-8);
   }
 
   /* The dish cards stop swiping and lay out three across, two rows deep.

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  SULTAN'S MEDITERRANEAN GRILL - MENU PAGE
+  ============================================================================
+  This is the menu. The home page is index.html, catering is catering.html.
+
+  HOW TO EDIT THIS FILE
+  - Every section starts with a comment banner like:
+        ==== EDIT: SECTION NAME ====
+    Use Find (Ctrl+F) and search for  EDIT:  to jump between them.
+  - Change the plain English between > and <. Leave the tags alone.
+  - Colours, fonts and spacing live at the top of css/styles.css.
+
+  !! IMPORTANT !!
+  The header and the footer appear on ALL THREE pages. There is no shared
+  template, so if you change a nav link, the phone number or a footer link
+  here, make the SAME change in index.html and catering.html. Those two
+  blocks are marked "SHARED" below.
+
+  WHERE THE PRICES CAME FROM
+  Every item and price on this page was taken from the catering PDF
+  (Sultans-Catering-2026-V3). Nothing here is invented. When a new PDF is
+  issued, update this page and the PDF link at the foot of it together.
+
+  The small print at the bottom of the page - prices varying by location,
+  items subject to availability - is the PDF's own wording. Keep it.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==== EDIT: PAGE TITLE & SEARCH DESCRIPTION ==== -->
+  <title>Menu | Sultan's Mediterranean Grill</title>
+  <meta name="description" content="The full Sultan's menu: shawarma and kebab trays, sides, salads and dips by the tray, plus individual bowls, wraps, dessert and drinks. 100% halal.">
+  <meta name="theme-color" content="#1D0E30">
+
+  <!-- Preview card shown when someone shares the link. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Menu | Sultan's Mediterranean Grill">
+  <meta property="og:description" content="Trays, bowls and wraps. Shawarma, kebabs, salads and dips - all 100% halal, with vegan and gluten-free options.">
+  <meta property="og:image" content="assets/share-image.jpg">
+
+  <!-- Fonts. To change the typefaces, swap this link and the two --font rules in the CSS. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fertigo Pro (Adobe Fonts). Headings and the brand use this. -->
+  <link rel="stylesheet" href="https://use.typekit.net/kht7bch.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="page-menu">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- =========================================================================
+     ==== EDIT: HEADER & NAVIGATION ====   *** SHARED WITH index.html ***
+     Any change here must be repeated in index.html and catering.html.
+
+     The bar holds the logo in the middle and the menu button on the right.
+     Every nav link lives in the slide-out panel below, at all screen sizes.
+
+     On this page Menu is the page you are already on, so it is marked with
+     aria-current and does not link anywhere.
+     ========================================================================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+
+    <!-- The official logo. Two versions: the white one shows while the bar is
+         see-through over the hero, the purple one once the bar turns cream.
+         Both live in the assets folder. -->
+    <a class="brand" href="index.html" aria-label="Sultan's Mediterranean Grill, home">
+      <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
+      <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
+    </a>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- =========================================================================
+     ==== EDIT: SLIDE-OUT MENU ====   *** SHARED WITH index.html ***
+     The panel that slides in from the right when the menu button is tapped.
+     ========================================================================= -->
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<nav class="site-nav" id="siteNav" aria-label="Main">
+
+  <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <ul class="nav-list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="catering.html">Catering</a></li>
+    <li><a href="menu.html" aria-current="page">Menu</a></li>
+    <li><a href="index.html#locations">Locations</a></li>
+    <li><a href="index.html#about">About Us</a></li>
+  </ul>
+
+</nav>
+
+<main id="main">
+
+<!-- =========================================================================
+     ==== EDIT: MENU HERO ====
+     Short on purpose. People who land here want the food, not a speech.
+
+     ---- TO ADD A HERO PHOTO (slot is ready below) ----
+     Until you add one, the hero shows a deep purple gradient, which is a
+     finished look on its own - nothing looks broken or missing.
+     Put a file in the assets folder, then delete the <!- - and - -> around
+     the <img> line and set the file name.
+     ========================================================================= -->
+<section class="hero hero-compact" id="top">
+
+  <div class="hero-media" aria-hidden="true">
+    <!-- PHOTO SLOT
+    <img class="hero-asset" src="assets/menu-hero.jpg" alt="">
+    -->
+  </div>
+
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>The menu</p>
+
+      <h1 class="hero-title">
+        Trays for the room,
+        <em>bowls for one.</em>
+      </h1>
+
+      <p class="hero-lede">
+        Everything we cook, by the tray or on its own. All 100% halal,
+        with vegan and gluten-free options throughout.
+      </p>
+    </div>
+
+    <p class="hero-aside">
+      Ordering for a crowd? <a href="catering.html">See the catering packages</a>
+      &mdash; or call <a href="tel:+16479293924">647-929-3924</a>.
+    </p>
+  </div>
+
+</section>
+
+<!-- =========================================================================
+     ==== EDIT: JUMP LINKS ====
+     The row of chips under the hero. Each one jumps to a block further down
+     the page. On a phone the row swipes sideways.
+
+     Each href="#id" must match the id on a <section> or <div class="menu-block">
+     below. If you add a course, add a chip here too - or the course simply
+     will not be in this list, which is the only thing that breaks.
+     ========================================================================= -->
+<nav class="menu-jump" aria-label="Jump to a part of the menu">
+  <div class="wrap menu-jump-inner">
+    <a href="#mains">Mains</a>
+    <a href="#sides">Sides</a>
+    <a href="#salads">Salads</a>
+    <a href="#dips">Dips</a>
+    <a href="#bowls">Bowls</a>
+    <a href="#wraps">Wraps</a>
+    <a href="#dessert">Dessert</a>
+    <a href="#drinks">Drinks</a>
+  </div>
+</nav>
+
+<!-- =========================================================================
+     ==== EDIT: A LA CARTE (everything by the tray) ====
+
+     HOW A PRICE TABLE WORKS
+     Each course below is one <div class="menu-block">, and inside it one
+     <table class="price-table">.
+
+       <thead>  the size names and how many people each serves
+       <tbody>  one <tr> per dish
+
+     ONE ROW LOOKS LIKE THIS:
+         <tr>
+           <th scope="row">Chicken Shawarma</th>
+           <td data-size="Small">$70</td>
+           <td data-size="Half">$100</td>
+         </tr>
+
+     THE data-size ON EVERY <td> IS NOT OPTIONAL. On a phone the table
+     turns into a stack of cards and the size names in <thead> are hidden,
+     so each price shows its own label instead - that label is the
+     data-size. If you add a column, give every cell in it a data-size
+     that matches the new heading, or the prices on phones lose their
+     names and the column reads as a bare number.
+
+     TO ADD A DISH     copy a whole <tr> block and change the words.
+     TO REMOVE A DISH  delete its whole <tr> block.
+     TO CHANGE A PRICE just change the number.
+
+     An item with a single price (no tray sizes) belongs in a
+     <ul class="menu-list"> instead - see "By the piece" below.
+     ========================================================================= -->
+<section class="section section-alt" id="alacarte">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>A la carte</p>
+      <h2 class="section-title">By the tray.</h2>
+      <p class="section-lede">
+        Pick the size by the number of people you are feeding. Every tray
+        is cooked the morning of your order.
+      </p>
+    </header>
+
+    <!-- ---------- MAINS ---------- -->
+    <div class="menu-block" id="mains">
+      <h3 class="menu-block-title">Mains</h3>
+      <p class="menu-block-note">
+        Proteins only. Served with a side of shawarma sauce or tahini sauce.
+      </p>
+
+      <table class="price-table">
+        <caption class="sr-only">Main dishes by tray size</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tray</th>
+            <th scope="col">Small <span class="price-serves">Serves 8&ndash;10</span></th>
+            <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
+            <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
+            <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Chicken Shawarma</th>
+            <td data-size="Small">$70</td>
+            <td data-size="Half">$100</td>
+            <td data-size="Med">$175</td>
+            <td data-size="Full">$235</td>
+          </tr>
+          <tr>
+            <th scope="row">Beef Shawarma</th>
+            <td data-size="Small">$80</td>
+            <td data-size="Half">$110</td>
+            <td data-size="Med">$185</td>
+            <td data-size="Full">$250</td>
+          </tr>
+          <tr>
+            <th scope="row">Shawarma Mix</th>
+            <td data-size="Small">$80</td>
+            <td data-size="Half">$110</td>
+            <td data-size="Med">$185</td>
+            <td data-size="Full">$250</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ==== EDIT: BY THE PIECE ====
+           Items sold one at a time rather than by the tray. The small grey
+           line under a name is its minimum order. -->
+      <h4 class="menu-sub-title">By the piece</h4>
+      <ul class="menu-list">
+        <li>
+          <span class="menu-item">Chicken Kebab <span class="menu-min">Min. 12 pcs</span></span>
+          <span class="menu-price">$6.25 <span class="menu-unit">/ skewer</span></span>
+        </li>
+        <li>
+          <span class="menu-item">Kofta Kebab <span class="menu-min">Min. 12 pcs</span></span>
+          <span class="menu-price">$6.25 <span class="menu-unit">/ skewer</span></span>
+        </li>
+        <li>
+          <span class="menu-item">Quarter Chicken <span class="menu-min">Min. 12 pcs</span></span>
+          <span class="menu-price">$6.25 <span class="menu-unit">/ pc</span></span>
+        </li>
+        <li>
+          <span class="menu-item">Falafel <span class="menu-min">Min. 12 pcs</span></span>
+          <span class="menu-price">$1 <span class="menu-unit">/ ball</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ---------- SIDES ---------- -->
+    <div class="menu-block" id="sides">
+      <h3 class="menu-block-title">Sides</h3>
+
+      <table class="price-table">
+        <caption class="sr-only">Sides by tray size</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tray</th>
+            <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
+            <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
+            <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Seasoned Rice</th>
+            <td data-size="Half">$50</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$90</td>
+          </tr>
+          <tr>
+            <th scope="row">Lentil Rice</th>
+            <td data-size="Half">$50</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$90</td>
+          </tr>
+          <tr>
+            <th scope="row">Garlic Potatoes</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$85</td>
+            <td data-size="Full">$100</td>
+          </tr>
+          <tr>
+            <th scope="row">Mixed Pickles</th>
+            <td data-size="Half">$50</td>
+            <td data-size="Med">$80</td>
+            <td data-size="Full">$80</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="menu-list">
+        <li>
+          <span class="menu-item">Veggie Samosas</span>
+          <span class="menu-price">$16 <span class="menu-unit">/ dozen</span></span>
+        </li>
+        <li>
+          <span class="menu-item">Pita Bread</span>
+          <span class="menu-price">$1 <span class="menu-unit">/ pc</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ---------- SALADS ---------- -->
+    <div class="menu-block" id="salads">
+      <h3 class="menu-block-title">Salads</h3>
+
+      <table class="price-table">
+        <caption class="sr-only">Salads by tray size</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tray</th>
+            <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
+            <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
+            <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Greek</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Garden</th>
+            <td data-size="Half">$45</td>
+            <td data-size="Med">$65</td>
+            <td data-size="Full">$75</td>
+          </tr>
+          <tr>
+            <th scope="row">Fattoush</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Tabouleh</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Cabbage</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Pasta</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Chickpea</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Beets</th>
+            <td data-size="Half">$55</td>
+            <td data-size="Med">$75</td>
+            <td data-size="Full">$85</td>
+          </tr>
+          <tr>
+            <th scope="row">Mango</th>
+            <td data-size="Half">$65</td>
+            <td data-size="Med">$85</td>
+            <td data-size="Full">$95</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ---------- DIPS ----------
+         Note the sizes here are different from the trays above: Bowl, Half
+         and Full, with their own serving numbers. -->
+    <div class="menu-block" id="dips">
+      <h3 class="menu-block-title">Dips</h3>
+
+      <table class="price-table">
+        <caption class="sr-only">Dips by size</caption>
+        <thead>
+          <tr>
+            <th scope="col">Size</th>
+            <th scope="col">Bowl <span class="price-serves">Serves 8&ndash;10</span></th>
+            <th scope="col">Half <span class="price-serves">Serves 18&ndash;20</span></th>
+            <th scope="col">Full <span class="price-serves">Serves 30&ndash;35</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Hummus w/ Pita</th>
+            <td data-size="Bowl">$18</td>
+            <td data-size="Half">$45</td>
+            <td data-size="Full">$65</td>
+          </tr>
+          <tr>
+            <th scope="row">Garlic Dip</th>
+            <td data-size="Bowl">$15</td>
+            <td data-size="Half">$45</td>
+            <td data-size="Full">$65</td>
+          </tr>
+          <tr>
+            <th scope="row">Sauces</th>
+            <td data-size="Bowl">$10</td>
+            <td data-size="Half">$20</td>
+            <td data-size="Full">$40</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     ==== EDIT: INDIVIDUAL MEALS ====
+     One person, one price. These are the simple lists: a name on the left
+     and a price on the right, so there are no data-size labels to keep in
+     step here.
+
+     TO ADD AN ITEM     copy a whole <li> block and change the words.
+     TO REMOVE AN ITEM  delete its whole <li> block.
+     ========================================================================= -->
+<section class="section" id="individual">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Individual meals</p>
+      <h2 class="section-title">One at a time.</h2>
+      <p class="section-lede">
+        For the days a tray is more than you need. Boxed individually, so
+        everyone gets their own.
+      </p>
+    </header>
+
+    <div class="menu-columns">
+
+      <!-- ---------- BOWLS ---------- -->
+      <div class="menu-block" id="bowls">
+        <h3 class="menu-block-title">Bowls</h3>
+        <p class="menu-block-note">
+          Served with seasoned rice, 2 choices of salads, garlic potatoes,
+          hummus and garlic dip.
+        </p>
+        <ul class="menu-list">
+          <li><span class="menu-item">Mix Shawarma</span><span class="menu-price">$18</span></li>
+          <li><span class="menu-item">Chicken Shawarma</span><span class="menu-price">$17</span></li>
+          <li><span class="menu-item">Beef Shawarma</span><span class="menu-price">$17</span></li>
+          <li><span class="menu-item">Chicken Kebab</span><span class="menu-price">$18</span></li>
+          <li><span class="menu-item">Kofta Kebab</span><span class="menu-price">$17</span></li>
+          <li><span class="menu-item">Falafel</span><span class="menu-price">$15</span></li>
+        </ul>
+      </div>
+
+      <!-- ---------- WRAPS ---------- -->
+      <div class="menu-block" id="wraps">
+        <h3 class="menu-block-title">Wraps</h3>
+        <p class="menu-block-note">
+          Wrap platters to share, cut in third or wrapped individually.
+        </p>
+        <ul class="menu-list">
+          <li><span class="menu-item">Mix Shawarma</span><span class="menu-price">$13</span></li>
+          <li><span class="menu-item">Chicken Shawarma</span><span class="menu-price">$13</span></li>
+          <li><span class="menu-item">Beef Shawarma</span><span class="menu-price">$13</span></li>
+          <li><span class="menu-item">Chicken Kebab</span><span class="menu-price">$13</span></li>
+          <li><span class="menu-item">Kofta Kebab</span><span class="menu-price">$13</span></li>
+          <li><span class="menu-item">Falafel</span><span class="menu-price">$12</span></li>
+        </ul>
+        <p class="menu-block-foot">
+          Pair it with a side of salad or garlic potatoes &mdash; add $5 per piece.
+        </p>
+      </div>
+
+      <!-- ---------- DESSERT ---------- -->
+      <div class="menu-block" id="dessert">
+        <h3 class="menu-block-title">Dessert</h3>
+        <ul class="menu-list">
+          <li>
+            <span class="menu-item">Pistachio Baklava</span>
+            <span class="menu-price">$2.50 <span class="menu-unit">/ pc</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ---------- DRINKS ---------- -->
+      <div class="menu-block" id="drinks">
+        <h3 class="menu-block-title">Drinks</h3>
+        <ul class="menu-list">
+          <li><span class="menu-item">Assorted Pop</span><span class="menu-price">$2</span></li>
+          <li><span class="menu-item">Bottled Water</span><span class="menu-price">$2.50</span></li>
+          <li><span class="menu-item">Sparkling Water</span><span class="menu-price">$3</span></li>
+          <li><span class="menu-item">Flavored Sparkling Water</span><span class="menu-price">$3</span></li>
+          <li><span class="menu-item">Nectar Juices</span><span class="menu-price">$3</span></li>
+          <li><span class="menu-item">Ayran</span><span class="menu-price">$3</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ==== EDIT: THE SMALL PRINT ====
+         This is the catering PDF's own wording. Keep it: it is what covers
+         the prices above changing between one location and the next. -->
+    <p class="fineprint">
+      Prices may vary from one location to another. Items are subject to
+      availability per location. Prices are subject to change without notice.
+      Prices shown are before HST.
+    </p>
+
+    <!-- ==== EDIT: WHAT TO DO NEXT ====
+         Two ways on from the menu: the catering packages, or the PDF.
+         WHEN A NEW CATERING PDF IS ISSUED, change the link in BOTH places:
+         here and in the footer of all three pages. -->
+    <aside class="menu-note">
+      <div class="menu-note-copy">
+        <h3>Feeding a whole room?</h3>
+        <p>
+          Buffet spreads and platters are priced per person, not per tray.
+          Minimum 20 guests, 48 hours notice for most orders.
+        </p>
+      </div>
+      <a class="btn btn-gold btn-lg" href="catering.html">See catering packages</a>
+    </aside>
+
+    <p class="menu-pdf-line">
+      Prefer the printed version?
+      <a href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">Download the catering menu (PDF)</a>
+    </p>
+
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================================
+     ==== EDIT: FOOTER ====   *** SHARED WITH index.html AND catering.html ***
+     Any change here must be repeated in the footer of the other two pages,
+     which each have their own copy of this block.
+     ========================================================================= -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+
+    <div class="footer-brand">
+      <img class="footer-logo" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
+      <p class="footer-blurb">
+        Catering across Toronto, North York, Waterloo and St. Catharines.
+      </p>
+      <p class="footer-tag">#eatlikeasultan</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <h2>Catering</h2>
+        <ul>
+          <li><a href="catering.html#packages">Packages</a></li>
+          <li><a href="catering.html#how">How to book</a></li>
+          <li><a href="catering.html#request">Request a quote</a></li>
+          <li><a href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">Catering menu (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="https://sultansgrill.ca/about/" target="_blank" rel="noopener">Our story</a></li>
+          <li><a href="index.html#locations">Locations</a></li>
+          <li><a href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="tel:+16479293924">647-929-3924</a></li>
+          <li><a href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a></li>
+          <li><a href="https://www.facebook.com/sultans.ca" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer-bottom">
+      <!-- The year fills itself in. Change the business name only. -->
+      <p>&copy; <span id="year">2026</span> Sultan's Mediterranean Grill. All rights reserved.</p>
+      <a class="back-to-top" href="#top">Back to top &uarr;</a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
