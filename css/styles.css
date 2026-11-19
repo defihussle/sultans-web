@@ -1137,6 +1137,49 @@ body.nav-is-open { overflow: hidden; }
 .hero-compact { min-height: 0; }
 .hero-compact .hero-inner { padding-bottom: clamp(2rem, 6vw, 3.5rem); }
 
+/* --- The split hero: pitch on the left, food photo on the right ---
+   One column on a phone, and the photo is not there at all. Two columns
+   from 900px, where there is room for the picture to be worth its space.
+   The desktop half of this is in section 15.
+
+   THE PHOTO IS A BACKGROUND, NOT AN <img>, ON PURPOSE. A background image
+   inside a media query that does not match is never downloaded, so a phone
+   pays nothing for a picture it will not see. An <img> would be fetched
+   whatever CSS said about it afterwards. */
+.hero-split-inner {
+  display: grid;
+  /* .hero-inner is a flex column with justify-content: center, which
+     centres it vertically. On a grid that same property centres the
+     COLUMNS instead and would shrink the copy to its own width, so the
+     two jobs are set again here in grid terms. */
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  justify-content: stretch;
+}
+.hero-photo { display: none; }
+
+/* The trust line inside the hero copy, rather than a strip across the
+   bottom of the section. Three facts, close under the buttons. */
+.trust-bar-hero {
+  /* Not a strip across the section: a flex row that sizes to its words,
+     so "Vegan & gluten-free options" stays on one line instead of being
+     squeezed into a grid column four words deep. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  width: auto;
+  max-width: none;
+  margin: var(--sp-5) 0 0;
+  padding: var(--sp-5) 0 0;
+  border-top: 1px solid var(--line-dark);
+}
+.trust-bar-hero li { padding-right: 0; }
+
+/* The buttons sat directly against the lede: .hero-actions used to be a
+   sibling of .hero-copy and took its gap from that margin, and in the
+   split hero it is inside .hero-copy instead. */
+.hero-split .hero-lede { margin-bottom: var(--sp-6); }
+
 /* --- The strip of proof points across the bottom of the hero --- */
 .trust-bar {
   display: grid;
@@ -1251,6 +1294,36 @@ body.nav-is-open { overflow: hidden; }
   display: grid;
   gap: var(--sp-4);
   margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* --- The "before you order" facts ---
+   A quieter thing than .feature above: a label and one line, divided by a
+   hairline rather than boxed into a card. Four cards for four short facts
+   read as an interface; four lines read as a note. Goes two-up at 720px
+   and four-up at 900px - see section 15. */
+.fact-row {
+  display: grid;
+  gap: 0;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+.fact {
+  padding-block: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+.fact:last-child { border-bottom: 1px solid var(--line); }
+.fact dt {
+  margin-bottom: 0.15rem;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.fact dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 .feature {
   position: relative;
@@ -1395,27 +1468,32 @@ body.nav-is-open { overflow: hidden; }
 
 
 /* ---------------------------------------------------------------------------
-   9c. THE MENU PAGE (menu.html)
-   The menu page is individual meals only - bowls, wraps, dessert and
-   drinks. Everything there is one dish at one price, so .menu-list and
-   .menu-jump are the two things actually in use.
+   9c. FOOD LISTS (menu.html and the catering menu)
+   Two pages list food and both are built from the pieces below.
 
-     .menu-jump    the row of chips under the hero
-     .menu-list    a dish with one price            <- the menu page
-     .price-table  a dish with several tray sizes   <- NOT IN USE TODAY
+     .menu-jump    a row of chips that jump to a course
+     .menu-list    a dish with ONE price        - menu.html, and the
+                                                  by-the-piece items
+     .price-table  a dish with SEVERAL sizes    - the catering trays
 
-   ABOUT .price-table: nothing on the site uses it at the moment. It was
-   built for the a la carte tray pricing, which has been taken off the
-   menu page because trays are catering, not a menu. The tray pricing is
-   due to move to the catering page, and this is what it is styled with,
-   so it is kept here rather than deleted and written again. If that move
-   is dropped for good, .price-table, .price-serves, .menu-sub-title and
-   .menu-min can all go, along with the .price-table block in section 15.
+   WHICH PAGE USES WHICH
+   menu.html is individual meals - one dish, one price - so it is all
+   .menu-list. The catering menu is sold by the tray, and a tray comes in
+   three or four sizes, so it is .price-table. Trays are catering and
+   single servings are a menu; that is why they are on separate pages.
+
+   THE SIZES ARE NOT THE SAME FROM COURSE TO COURSE. Mains has four
+   (Small/Half/Med/Full), Sides and Salads have three, and Dips has its
+   own (Bowl/Half/Full) serving different numbers. Nothing here hard-codes
+   a set of sizes - each table carries its own headings - so do not add a
+   rule that assumes a column count.
    --------------------------------------------------------------------------- */
 
 /* --- The jump links ---
-   Sits right under the hero. On a phone it swipes sideways, the same way
-   the location pills do, so eight courses stay on one line. */
+   On menu.html this is a bar right under the hero. On the catering page
+   the same chips sit inside the section, under the heading - that is the
+   .menu-jump-inline version further down. Both swipe sideways on a phone,
+   the same way the location pills do, so the courses stay on one line. */
 .menu-jump {
   border-bottom: 1px solid var(--line);
   background: var(--paper);
@@ -1474,8 +1552,7 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-small);
   color: var(--text-muted);
 }
-/* "By the piece" and other headings inside a course.
-   Not in use today - see the note at the top of section 9c. */
+/* "By the piece" and other headings inside a course. */
 .menu-sub-title {
   margin-top: var(--sp-6);
   margin-bottom: var(--sp-3);
@@ -1506,8 +1583,7 @@ body.nav-is-open { overflow: hidden; }
   text-transform: uppercase;
   color: var(--plum-700);
 }
-/* The minimum-order line under a name ("Min. 12 pcs").
-   Not in use today - see the note at the top of section 9c. */
+/* The minimum-order line under a name ("Min. 12 pcs"). */
 .menu-min {
   display: block;
   font-family: var(--font-body);
@@ -1529,7 +1605,39 @@ body.nav-is-open { overflow: hidden; }
   color: var(--text-muted);
 }
 
-/* --- A dish with several tray sizes ---   NOT IN USE TODAY
+/* --- The same chips, inside a section ---
+   The catering page has no bar under its hero to put these in, so they
+   sit under the section heading instead. .menu-jump still styles the
+   chips themselves; this only undoes the bar around them and lets the
+   row bleed to the screen edge so it can be swiped.
+
+   The negative margin and the matching padding are a pair - the margin
+   pulls the row out through the .wrap gutter, the padding puts the space
+   back inside it, so the first chip still lines up with the heading and
+   the last one can scroll past the edge. Change one and change the other. */
+.menu-jump-inline {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--sp-2);
+  margin-inline: calc(var(--gutter) * -1);
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  padding-inline: var(--gutter);
+  padding-bottom: 0.2rem;
+  background: none;
+  border-bottom: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.menu-jump-inline::-webkit-scrollbar { display: none; }
+
+/* The four courses. Spacing between them is .menu-block + .menu-block
+   above; this only stops the tables running the full width of a big
+   screen, where a dish name ends up half a metre from its price. */
+.tray-courses { max-width: 56rem; }
+
+/* --- A dish with several tray sizes ---   THE CATERING TRAYS
    Kept for the tray pricing when it moves to the catering page. See the
    note at the top of section 9c before deleting any of it.
 
@@ -1549,14 +1657,15 @@ body.nav-is-open { overflow: hidden; }
   border-collapse: collapse;
 }
 .price-table thead { display: none; }
+/* A row, not a card. Nine salads as nine bordered cards is a wall of
+   boxes and doubles the height of the course; as hairline rows it reads
+   like a menu and takes about half the screen. */
 .price-table tr {
   display: block;
-  padding: var(--sp-4) var(--sp-5);
-  margin-bottom: var(--sp-3);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
+  padding-block: var(--sp-4);
+  border-bottom: 1px solid var(--line);
 }
+.price-table tbody tr:last-child { border-bottom: 0; }
 .price-table tbody th {
   display: block;
   margin-bottom: var(--sp-3);
@@ -2499,6 +2608,20 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Tablets (720px) --- */
 @media (min-width: 720px) {
   :root { --header-h: 5.75rem; }
+
+  /* Four short facts fit two across, so two rows of two. Every fact
+     already has a line above it; the bottom line of the block is the last
+     TWO, not just the last one, because they share the bottom row. */
+  .fact-row { grid-template-columns: repeat(2, 1fr); column-gap: var(--sp-6); }
+  .fact:nth-last-child(-n + 2) { border-bottom: 1px solid var(--line); }
+
+  /* The four course chips fit on one line now, so stop the row bleeding
+     out to the screen edge and let it sit inside the gutter again. */
+  .menu-jump-inline {
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow-x: visible;
+  }
   .brand-logo { height: 3.6rem; }
   .nav-toggle { width: 3rem; height: 3rem; }
   .footer-logo { height: 3.2rem; }
@@ -2543,9 +2666,8 @@ a.contact-value:hover { color: var(--gold-400); }
   }
   .form-head, .form-body { padding: var(--sp-6); }
 
-  /* --- The price tables become real tables ---   NOT IN USE TODAY
-     Goes with the .price-table block in section 9c; read the note there
-     before deleting either.
+  /* --- The price tables become real tables ---
+     Goes with the .price-table block in section 9c.
 
      Enough width now for the sizes to sit along the top and the prices to
      line up underneath them, which is far quicker to compare than the
@@ -2608,6 +2730,41 @@ a.contact-value:hover { color: var(--gold-400); }
   .hero-compact { min-height: min(30rem, 62vh); }
   .hero-actions .btn { flex: 0 1 auto; }
 
+  /* --- The split hero gets its second column and its photo ---
+     The copy column is held to 32rem so the headline keeps a sensible
+     measure however wide the screen goes; the photo takes what is left.
+
+     THIS IS THE ONLY PLACE THE PHOTO EXISTS. Being a background inside a
+     min-width query means a phone never downloads it. To change the
+     picture, change the url below - nothing in the HTML names a file. */
+  .hero-split .hero-inner {
+    grid-template-columns: minmax(0, 32rem) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .hero-split .hero-copy { margin-bottom: 0; }
+  .hero-photo {
+    display: block;
+    align-self: stretch;
+    min-height: 21rem;
+    border-radius: var(--r-lg);
+    /* assets/catering-hero.jpg - kebabs on the grill, taken from the
+       hero video. KEEP ANY REPLACEMENT LANDSCAPE: the panel is wider than
+       it is tall, so background-size: cover crops an upright photo down
+       to an unreadable close-up. Food only, no storefront shots - the
+       counter boards carry in-store prices, which are not the catering
+       prices listed further down this page. */
+    background-image: url("../assets/catering-hero.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* All four on one row now, so every one of them is on the bottom row
+     and carries the closing line. */
+  .fact-row { grid-template-columns: repeat(4, 1fr); column-gap: var(--sp-5); }
+  .fact { border-bottom: 1px solid var(--line); }
+
   .cta-band {
     grid-template-columns: 1fr auto;
     align-items: center;
@@ -2625,6 +2782,8 @@ a.contact-value:hover { color: var(--gold-400); }
   .choice { min-height: 13rem; padding: var(--sp-7) var(--sp-6); }
   .choice-title { font-size: 1.45rem; }
   .trust-bar { grid-template-columns: repeat(4, 1fr); }
+  /* The hero line is a flex row, not a four-column grid - see above. */
+  .trust-bar-hero { grid-template-columns: none; }
 
   /* Statement and picture on the left, steps on the right. */
   .book-grid { grid-template-columns: 1fr 1fr; }
