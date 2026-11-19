@@ -36,10 +36,18 @@
        600-400  bright violet - links, buttons, focus rings, anything you
                 click. #6B3FA0 is the wordmark violet from the brand site.
        300-050  pale violet tints for pills and soft panels           */
-  --plum-950: #150A24;   /* deepest - footer                        */
-  --plum-900: #1D0E30;   /* dark section backgrounds                */
-  --plum-800: #241338;   /* raised dark surfaces                    */
-  --plum-700: #2B1645;   /* THE deep plum - headings, dark bands    */
+  /* SOFTENED (client: "soften it up - elegance, luxury, bright"). The
+     dark end used to sit near black (#150A24-#2B1645), which read heavy.
+     It is now the same hue and saturation, lifted about one stop each, so
+     the dark bands feel like deep plum velvet rather than a black hole.
+     Same brand purple, same ordering, roughly double the luminance.
+     Text contrast on these is still 10:1 or better, so nothing below
+     needs its text colour changed. Do not take these darker again
+     without rechecking the scrims in section 7. */
+  --plum-950: #231434;   /* deepest - footer        (was #150A24)   */
+  --plum-900: #2D1943;   /* dark section backgrounds (was #1D0E30)  */
+  --plum-800: #361F51;   /* raised dark surfaces    (was #241338)   */
+  --plum-700: #402460;   /* THE deep plum - headings, dark bands    */
   --plum-600: #5A3289;   /* violet, pressed/hover                   */
   --plum-500: #6B3FA0;   /* THE brand violet - interactive          */
   --plum-400: #8A62B8;   /* lighter violet                          */
@@ -139,10 +147,10 @@
   --r-md: 16px;
   --r-lg: 24px;
   --r-pill: 999px;
-  --shadow-xs: 0 1px 2px rgba(43, 22, 69, 0.05);
-  --shadow-sm: 0 1px 2px rgba(43, 22, 69, 0.05), 0 3px 10px rgba(43, 22, 69, 0.05);
-  --shadow-md: 0 2px 6px rgba(43, 22, 69, 0.06), 0 12px 28px rgba(43, 22, 69, 0.08);
-  --shadow-lg: 0 6px 18px rgba(43, 22, 69, 0.08), 0 28px 64px rgba(43, 22, 69, 0.15);
+  --shadow-xs: 0 1px 2px rgba(64, 36, 96, 0.05);
+  --shadow-sm: 0 1px 2px rgba(64, 36, 96, 0.05), 0 3px 10px rgba(64, 36, 96, 0.05);
+  --shadow-md: 0 2px 6px rgba(64, 36, 96, 0.06), 0 12px 28px rgba(64, 36, 96, 0.08);
+  --shadow-lg: 0 6px 18px rgba(64, 36, 96, 0.08), 0 28px 64px rgba(64, 36, 96, 0.15);
 
   /* --- MOTION --------------------------------------------------------------
      Kept short and subtle on purpose. */
@@ -314,7 +322,7 @@ a:hover { color: var(--plum-700); }
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--plum-900);
+  background: linear-gradient(170deg, var(--plum-800) 0%, var(--plum-900) 100%);
   color: var(--text-on-dark);
 }
 .section-invert::before {
@@ -423,12 +431,12 @@ a:hover { color: var(--plum-700); }
 .btn-gold {
   background: var(--gold-500);
   color: var(--plum-950);
-  box-shadow: 0 1px 2px rgba(21, 10, 36, 0.12), 0 6px 18px rgba(142, 106, 27, 0.24);
+  box-shadow: 0 1px 2px rgba(35, 20, 52, 0.12), 0 6px 18px rgba(142, 106, 27, 0.24);
 }
 .btn-gold:hover {
   background: var(--gold-400);
   color: var(--plum-950);
-  box-shadow: 0 2px 4px rgba(21, 10, 36, 0.12), 0 10px 26px rgba(142, 106, 27, 0.32);
+  box-shadow: 0 2px 4px rgba(35, 20, 52, 0.12), 0 10px 26px rgba(142, 106, 27, 0.32);
 }
 
 /* Secondary on light backgrounds. */
@@ -447,7 +455,7 @@ a:hover { color: var(--plum-700); }
 .btn-dark {
   background: var(--plum-500);
   color: var(--paper);
-  box-shadow: 0 1px 2px rgba(21, 10, 36, 0.14), 0 8px 20px rgba(107, 63, 160, 0.28);
+  box-shadow: 0 1px 2px rgba(35, 20, 52, 0.14), 0 8px 20px rgba(107, 63, 160, 0.28);
 }
 .btn-dark:hover { background: var(--plum-600); color: var(--paper); }
 
@@ -578,7 +586,7 @@ a:hover { color: var(--plum-700); }
   position: fixed;
   inset: 0;
   z-index: 150;
-  background: rgba(21, 10, 36, 0.55);
+  background: rgba(35, 20, 52, 0.55);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity var(--t-base);
@@ -603,7 +611,7 @@ a:hover { color: var(--plum-700); }
   background:
     radial-gradient(70% 50% at 100% 0%, rgba(107, 63, 160, 0.55) 0%, transparent 65%),
     linear-gradient(170deg, var(--plum-800) 0%, var(--plum-950) 100%);
-  box-shadow: -18px 0 50px rgba(21, 10, 36, 0.4);
+  box-shadow: -18px 0 50px rgba(35, 20, 52, 0.4);
   overflow-y: auto;
   overscroll-behavior: contain;
   transform: translateX(100%);
@@ -793,11 +801,11 @@ body.nav-is-open { overflow: hidden; }
      then deepens again at the very bottom. */
   background:
     linear-gradient(to bottom,
-      rgba(21, 10, 36, 0.74) 0,
-      rgba(21, 10, 36, 0.66) var(--header-h),
-      rgba(21, 10, 36, 0.2) calc(var(--header-h) + 7rem),
-      rgba(21, 10, 36, 0.16) 62%,
-      rgba(21, 10, 36, 0.5) 100%);
+      rgba(35, 20, 52, 0.64) 0,
+      rgba(35, 20, 52, 0.56) var(--header-h),
+      rgba(35, 20, 52, 0.16) calc(var(--header-h) + 7rem),
+      rgba(35, 20, 52, 0.12) 62%,
+      rgba(35, 20, 52, 0.42) 100%);
 }
 
 
@@ -862,7 +870,7 @@ body.nav-is-open { overflow: hidden; }
   min-width: 0;
   padding-inline: 1rem;
   font-size: 1rem;
-  box-shadow: 0 6px 22px rgba(21, 10, 36, 0.45);
+  box-shadow: 0 6px 22px rgba(35, 20, 52, 0.45);
 }
 @media (min-width: 560px) {
   .hero-video-actions {
@@ -936,8 +944,8 @@ body.nav-is-open { overflow: hidden; }
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(100deg, rgba(21, 10, 36, 0.76) 0%, rgba(21, 10, 36, 0.58) 34%, rgba(21, 10, 36, 0.24) 72%, rgba(21, 10, 36, 0.2) 100%),
-    linear-gradient(to top, rgba(21, 10, 36, 0.55) 0%, transparent 30%);
+    linear-gradient(100deg, rgba(35, 20, 52, 0.66) 0%, rgba(35, 20, 52, 0.5) 34%, rgba(35, 20, 52, 0.2) 72%, rgba(35, 20, 52, 0.16) 100%),
+    linear-gradient(to top, rgba(35, 20, 52, 0.46) 0%, transparent 30%);
 }
 .hero-scrim::after {
   content: "";
@@ -1025,7 +1033,7 @@ body.nav-is-open { overflow: hidden; }
   border-color: rgba(217, 188, 119, 0.4);
   color: var(--paper);
   transform: translateY(-2px);
-  box-shadow: 0 12px 34px rgba(21, 10, 36, 0.3);
+  box-shadow: 0 12px 34px rgba(35, 20, 52, 0.3);
 }
 .choice:active { transform: translateY(0); }
 
@@ -2841,6 +2849,16 @@ a.contact-value:hover { color: var(--gold-400); }
 }
 
 /* --- Desktop (980px) --- */
+/* TIGHTER SECTIONS ON THE HOME PAGE, DESKTOP ONLY
+   The home page is the one with five stacked sections, so the default
+   8.5rem of air top and bottom turned into a lot of scrolling. This cuts
+   it by about a quarter on wide screens. It is scoped to .page-home (the
+   body class on index.html) and it lives inside a min-width query, so
+   phones keep the roomier original spacing. */
+@media (min-width: 900px) {
+  .page-home { --section-y: clamp(4rem, 7.5vw, 7rem); }
+}
+
 @media (min-width: 980px) {
   /* The nav stays a slide-out panel at every width, so there is no
      horizontal menu to switch to here. The menu button stays visible. */
