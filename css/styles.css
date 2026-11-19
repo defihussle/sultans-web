@@ -3053,20 +3053,31 @@ a.contact-value:hover { color: var(--gold-400); }
 .footer-social a {
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 3.1rem;
+  height: 3.1rem;
   border: 1px solid var(--line-dark);
   border-radius: var(--r-pill);
   color: rgba(239, 234, 246, 0.8);
   transition: color var(--t-fast), background-color var(--t-fast), border-color var(--t-fast);
 }
-.footer-social a:hover,
+/* The gold fill is split in two on purpose. A phone has no pointer to
+   move away, so a plain :hover rule stays lit on whichever icon was
+   tapped last - which is why one of these looked permanently gold on
+   iOS. (hover: hover) keeps the effect on machines with a mouse and
+   leaves touch screens alone. Keyboard focus is unaffected either way. */
+@media (hover: hover) {
+  .footer-social a:hover {
+    color: var(--plum-950);
+    background-color: var(--gold-500);
+    border-color: var(--gold-500);
+  }
+}
 .footer-social a:focus-visible {
   color: var(--plum-950);
   background-color: var(--gold-500);
   border-color: var(--gold-500);
 }
-.footer-social .icon { width: 1.1rem; height: 1.1rem; }
+.footer-social .icon { width: 1.5rem; height: 1.5rem; }
 
 
 /* ===========================================================================
