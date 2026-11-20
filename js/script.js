@@ -274,7 +274,7 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
 
   /* -------------------------------------------------------------------------
      3b. LOCATION ROW ARROWS
-     The location rows scroll and snap on their own - swiping works with no
+     The carousel scrolls and snaps on its own - swiping works with no
      JavaScript at all. This only drives the two round arrow buttons shown
      to mouse users, and greys them out at each end of the row.
      Safe to delete this whole block; the rows still swipe.
@@ -312,79 +312,6 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
       refresh();
     }
   );
-
-  /* -------------------------------------------------------------------------
-     3c. LOCATION FILTER PILLS (phones)
-     Each pill carries a data-filter; each card a data-area. Tapping a pill
-     shows only the cards whose area matches, and hides any group left with
-     nothing in it.
-
-     THERE IS NO "ALL" PILL. One area is always showing, and whichever pill
-     carries class="is-active" in the HTML is the one the page opens on.
-
-     The pills are hidden by CSS on wider screens, where the grouped rows
-     and their arrows do the same job. So the filter is applied only while
-     the pills are actually on screen: widen the window and everything is
-     shown again, because otherwise cards would stay hidden with no visible
-     way to bring them back. "all" is the internal name for that
-     show-everything state - it needs no pill of its own.
-     ------------------------------------------------------------------------- */
-  var locFilters = document.getElementById('locFilters');
-
-  if (locFilters) {
-    var locCards = Array.prototype.slice.call(document.querySelectorAll('.loc[data-area]'));
-    var locGroups = Array.prototype.slice.call(document.querySelectorAll('[data-loc-group]'));
-    var locEmpty = document.getElementById('locEmpty');
-
-    function applyFilter(area) {
-      locCards.forEach(function (card) {
-        card.hidden = !(area === 'all' || card.getAttribute('data-area') === area);
-      });
-
-      // Hide a group once every card inside it is hidden.
-      var anyShown = false;
-      locGroups.forEach(function (group) {
-        var shown = group.querySelectorAll('.loc[data-area]:not([hidden])').length > 0;
-        group.hidden = !shown;
-        if (shown) anyShown = true;
-        // Back to the start, so a filtered row does not open mid-scroll.
-        var row = group.querySelector('[data-scroller]');
-        if (row) row.scrollLeft = 0;
-      });
-
-      if (locEmpty) locEmpty.hidden = anyShown;
-
-      /* Light up the pill for this area. Skipped for "all", which has no
-         pill of its own - switching every pill off there would lose the
-         person's choice while the window is wide. */
-      if (area !== 'all') {
-        Array.prototype.forEach.call(locFilters.querySelectorAll('.loc-filter'), function (pill) {
-          pill.classList.toggle('is-active', pill.getAttribute('data-filter') === area);
-        });
-      }
-    }
-
-    locFilters.addEventListener('click', function (event) {
-      var pill = event.target.closest('.loc-filter');
-      if (pill) applyFilter(pill.getAttribute('data-filter'));
-    });
-
-    /* Pills on screen  -> filter to the pill that is switched on.
-       Pills hidden     -> show every location.
-       The chosen pill keeps its class either way, so widening the window
-       and narrowing it again returns to the same area. */
-    function syncFilters() {
-      var pillsVisible = getComputedStyle(locFilters).display !== 'none';
-      var active = locFilters.querySelector('.loc-filter.is-active') ||
-                   locFilters.querySelector('.loc-filter');
-      applyFilter(pillsVisible && active
-        ? active.getAttribute('data-filter')
-        : 'all');
-    }
-
-    syncFilters();
-    window.addEventListener('resize', syncFilters);
-  }
 
   /* -------------------------------------------------------------------------
      4. FOOTER YEAR - no need to update the copyright by hand

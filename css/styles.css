@@ -107,9 +107,12 @@
      unavailable, headings fall back to something close rather than to a
      system serif. Once Fertigo is confirmed live you can drop Fraunces from
      this line and remove its Google Fonts <link>.
-     Body = Inter, used for everything else. */
+     Body = Poppins, used for everything else. It loads from Google Fonts
+     through the <link> in the <head> of all three pages. Poppins runs a
+     little wider and rounder than the Inter it replaced, so if a label
+     ever looks crowded the fix is its letter-spacing, not its size. */
   --font-display: fertigo-pro, "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* --- TYPE SCALE ----------------------------------------------------------
      Fluid: these grow smoothly with the screen, so there is no jump between
@@ -211,38 +214,37 @@ h1, h2, h3, h4 {
    like a rendering fault. Italic is real and safe: .hero-title em uses it.
 
    Capitals need a little air between the letters or they look cramped, so
-   each of these carries a small positive letter-spacing. Inter is left
+   each of these carries a small positive letter-spacing. Poppins is left
    alone: body text, labels and numbers keep their normal case.
 
    THE THREE DELIBERATE EXCEPTIONS
-   These look like misses in an audit and are not. Leave them in Inter.
+   These look like misses in an audit and are not. Leave them in Poppins.
 
-   1. SMALL CAPS LABELS stay Inter, uppercase, around 11-14px. Fertigo at
+   1. SMALL CAPS LABELS stay Poppins, uppercase, around 11-14px. Fertigo at
       that size reads faint and loses the job of pointing at what follows.
       One typeface for every small label is what keeps them reading as a
       set. The full list, so an audit does not "fix" one of them:
 
         .eyebrow            .tag-label          .tag-row li
-        .dish-kind          .loc-filter         .menu-jump a
-        .pkg-badge          .pkg-meta           .pkg-aside-title
-        .pkg-row dt         .pay-label          .contact-label
-        .field > label       .field legend
+        .dish-kind          .menu-jump a        .pkg-badge
+        .pkg-meta           .pkg-aside-title    .pkg-row dt
+        .pay-label          .contact-label      .field > label
+        .field legend
 
-      Two of those are markup headings but design labels, and belong here
-      all the same: .loc-group-title ("DOWNTOWN TORONTO & THE PATH") and
-      the footer column headings (.footer-nav h2).
+      One of those is a markup heading but a design label, and belongs
+      here all the same: the footer column headings (.footer-nav h2).
 
       .loc-head .eyebrow is deliberately the one large label on the site,
       a size up from the rest. The client asked for that; it is still
-      Inter at 700, so it stays inside the set.
+      Poppins at 700, so it stays inside the set.
 
-   2. NUMERALS stay Inter: .stat-num and .menu-price. Fertigo Pro carries
+   2. NUMERALS stay Poppins: .menu-price. Fertigo Pro carries
       only old-style figures, where "1" looks like a small capital I, so
       "10" reads as "IO" and "$18" sits oddly low. The reason is repeated
       at the .stat-num rule. Note this is why a menu row is mixed on
-      purpose - .menu-item in Fertigo, the price beside it in Inter.
+      purpose - .menu-item in Fertigo, the price beside it in Poppins.
 
-   3. BUTTONS are Inter, except the three over the hero video. Those are
+   3. BUTTONS are Poppins, except the three over the hero video. Those are
       a brand statement; the rest are interface.
    --------------------------------------------------------------------------- */
 .choice-title,
@@ -256,7 +258,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.04em;
 }
 /* .hero-cta is the odd one out: it is also a .btn, and the button rules
-   further down set Inter at weight 600. Those rules come later in the
+   further down set Poppins at weight 600. Those rules come later in the
    file, so they would win here. The matching ".btn.hero-cta" rule in
    section 7a is deliberately more specific, and is what actually puts
    these three buttons into Fertigo Pro. Change it there, not here. */
@@ -440,17 +442,12 @@ a:hover { color: var(--plum-700); }
   box-shadow: 0 2px 4px rgba(35, 20, 52, 0.12), 0 10px 26px rgba(142, 106, 27, 0.32);
 }
 
-/* Secondary on light backgrounds. */
-.btn-outline {
-  background: var(--surface);
-  color: var(--plum-700);
-  border-color: rgba(107, 63, 160, 0.22);
-}
-.btn-outline:hover {
-  background: var(--plum-700);
-  border-color: var(--plum-700);
-  color: var(--paper);
-}
+/* RETIRED: .btn-outline, the pale outlined pill that used to sit on the
+   white package cards. Everything on a light background is the gold pill
+   now, so there is one answer to "what does a button look like here".
+   The two buttons that used it ("Order this platter") are .btn-gold.
+   If a quieter second button is ever needed on white, give it its own
+   class rather than bringing this one back under the same name. */
 
 /* Solid brand violet, for a strong action on a light background. */
 .btn-dark {
@@ -799,8 +796,20 @@ body.nav-is-open { overflow: hidden; }
      in percentages, so the strip behind the logo is darkened by the same
      amount whatever the screen height and whatever the film is showing at
      that moment. Below the bar it lifts quickly, so the food stays bright,
-     then deepens again at the very bottom. */
+     then deepens again at the very bottom.
+
+     The radial on top of it is for the pitch. The film runs through some
+     very pale frames - a tray of shredded salads, almost white - and the
+     top-to-bottom gradient is deliberately light through the middle to
+     keep the food bright, which is not enough behind white text. This
+     pool of shade sits under the headline and fades out well before the
+     edges, so the frame still reads as food rather than as a dark box.
+     If the headline ever moves, move this with it. */
   background:
+    radial-gradient(76% 52% at 50% 45%,
+      rgba(35, 20, 52, 0.62) 0%,
+      rgba(35, 20, 52, 0.38) 46%,
+      rgba(35, 20, 52, 0) 78%),
     linear-gradient(to bottom,
       rgba(35, 20, 52, 0.64) 0,
       rgba(35, 20, 52, 0.56) var(--header-h),
@@ -818,6 +827,48 @@ body.nav-is-open { overflow: hidden; }
    beneath it. That is two stacked rows, each centring whatever it holds,
    so moving a button between the rows in the HTML is all it takes to
    change the arrangement. */
+/* --- The pitch over the film ---
+   Sits above the three buttons, centred, in the middle of the frame. The
+   film behind it is busy and it moves, so the headline carries a shadow
+   of its own on top of the scrim - the scrim alone is tuned to keep the
+   food bright, and that is not enough contrast for text.
+
+   THE SUPPORTING LINE IS HIDDEN BELOW 900px. See the note in index.html.
+   The headline is ch-limited rather than px-limited so it breaks in the
+   same place whatever the screen is doing. */
+.hero-video-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-58%);
+  z-index: 1;
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+.hero-video-title {
+  max-width: 16ch;
+  margin: 0 auto;
+  font-size: clamp(2.3rem, 7.2vw, 4.4rem);
+  line-height: 1.04;
+  color: var(--paper);
+  text-shadow: 0 2px 10px rgba(35, 20, 52, 0.55), 0 14px 46px rgba(35, 20, 52, 0.45);
+}
+.hero-video-title em {
+  display: block;
+  font-style: normal;
+  color: var(--gold-400);
+}
+.hero-video-lede {
+  display: none;
+  max-width: 44ch;
+  margin: var(--sp-5) auto 0;
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 6px rgba(35, 20, 52, 0.6), 0 8px 30px rgba(35, 20, 52, 0.45);
+}
+
 .hero-video-actions {
   position: absolute;
   left: 0;
@@ -838,9 +889,9 @@ body.nav-is-open { overflow: hidden; }
 }
 /* The brand serif on the three buttons: uppercase, regular weight, like
    every other Fertigo Pro element on the site. Written as ".btn.hero-cta"
-   so it beats the plain .btn rules in section 5, which set Inter at
-   weight 600. Capitals in Fertigo sit slightly small beside Inter at the
-   same size, so these run a little larger. */
+   so it beats the plain .btn rules in section 5, which set Poppins at
+   weight 600. Capitals in Fertigo sit slightly small beside Poppins at
+   the same size, so these run a little larger. */
 .btn.hero-cta {
   font-family: var(--font-display);
   font-weight: 400;
@@ -1310,7 +1361,7 @@ body.nav-is-open { overflow: hidden; }
   min-width: 4.25rem;
   /* Big numerals use the body font on purpose. Fertigo Pro only carries
      old-style figures, where "1" looks like a small capital I - "10" reads
-     as "IO". Inter keeps them unambiguous. */
+     as "IO". The body font keeps them unambiguous. */
   font-family: var(--font-body);
   font-size: clamp(2.1rem, 5.5vw, 2.9rem);
   font-weight: 700;
@@ -2132,81 +2183,28 @@ body.nav-is-open { overflow: hidden; }
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   margin-bottom: 0;
 }
+/* The usual section gap left a hole here once the group titles went: the
+   next thing down is a thin bar of arrows, not a block of text. This
+   closes it up without touching any other section.
 
-/* --- Filter pills (phones only) ---
-   Hidden on wider screens, where the two groups and their arrows do the
-   same job with more room.
+   Written as two classes on purpose: the wide-screen block in section 15
+   sets .section-head again, later in the file, and a single class here
+   would lose to it. */
+.section-head.loc-head { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
 
-   The pills sit on one line and swipe sideways rather than wrapping onto
-   a second line, so the row keeps its height however many areas there
-   are. The negative margin and matching padding let the row run to both
-   edges of the screen, so a pill scrolling away is cut off by the edge
-   rather than by an invisible box, which is what tells people it moves. */
-.loc-filters {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-6);
-  margin-inline: calc(var(--gutter) * -1);
-  padding-inline: var(--gutter);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.loc-filters::-webkit-scrollbar { display: none; }
-.loc-filter {
-  flex: none;                  /* never squeeze a label onto two lines */
-  scroll-snap-align: start;
-  min-height: 2.5rem;
-  padding: 0.45rem 0.95rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-pill);
-  background: var(--paper);
-  color: var(--plum-700);
-  font-family: var(--font-body);
-  font-size: var(--fs-micro);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color var(--t-fast), border-color var(--t-fast),
-              color var(--t-fast);
-}
-.loc-filter:hover { border-color: var(--plum-500); }
-.loc-filter.is-active {
-  background: var(--plum-500);
-  border-color: var(--plum-500);
-  color: var(--paper);
-}
-
-/* A whole group hides itself when a filter empties it. */
-.loc-group[hidden] { display: none; }
-.loc-empty {
-  margin: 0;
-  font-size: var(--fs-small);
-  color: var(--text-muted);
-}
-
-/* The group heading, with its scroll arrows on the right. */
+/* --- The row of arrows above the carousel ---
+   There is no group heading any more, so this bar holds nothing but the
+   two arrows. On a phone you swipe and the arrows are hidden, which would
+   leave an empty ruled bar - so the bar itself only appears from 900px,
+   in section 15. */
 .loc-group-head {
-  display: flex;
+  display: none;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--sp-4);
   padding-bottom: var(--sp-3);
   margin-bottom: var(--sp-5);
   border-bottom: 1px solid var(--border);
-}
-.loc-group-title {
-  font-family: var(--font-body);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-400);
-  margin: 0;
 }
 
 /* Arrows are for mouse users. On a phone you just swipe, so they are
@@ -2239,16 +2237,15 @@ body.nav-is-open { overflow: hidden; }
   color: var(--plum-700);
 }
 
-/* --- The swipeable rows ---
-   On a phone the cards are laid out TWO DEEP and scroll sideways: one
-   column of two cards fills the view, and swiping brings the next column
-   across. Eight downtown locations are four swipes rather than eight,
-   which is the whole point of it.
+/* --- The carousel ---
+   Every location is in this one row. On a phone the cards are laid out
+   TWO DEEP and scroll sideways: one column of two cards fills the view,
+   and swiping brings the next column across. Eleven stores are six
+   swipes rather than eleven, which is the whole point of it.
 
    It is a grid with two rows, filled top to bottom and then left to
    right ("grid-auto-flow: column"). An odd number of cards simply leaves
-   the last column half full - the group of three fills one column and
-   starts another, which is correct.
+   the last column half full, which is correct.
 
    From 900px it goes back to being a single flex row: the arrows and the
    wider screen make two rows unnecessary there. See section 15.
@@ -2559,7 +2556,7 @@ a.contact-value:hover { color: var(--gold-400); }
 }
 /* #eatlikeasultan is a brand mark, not a UI label, so it is set in the
    brand serif - the same way it appears in the dish ticker. Fertigo caps
-   read smaller than Inter's at the same size, so it is nudged up a step.
+   read smaller than Poppins' at the same size, so it is nudged up a step.
 
    NOTE: the footer is shared with catering.html, so this sets the tag in
    both footers. That is the intention - the two are meant to match. */
@@ -2824,14 +2821,16 @@ a.contact-value:hover { color: var(--gold-400); }
   .book-grid { grid-template-columns: 1fr 1fr; }
   .book-steps { padding: var(--sp-7) var(--sp-6); }
 
-  /* Mouse users get arrows and the grouped rows, so the pills are not
-     needed - the groups already say which area is which. The script puts
-     every location back on screen as soon as they disappear. */
-  .loc-filters { display: none; }
+  /* The screen is wide enough for the supporting line now. */
+  .hero-video-lede { display: block; }
+  .hero-video-copy { transform: translateY(-62%); }
+
+  /* The arrow bar only exists where the arrows do. */
+  .loc-group-head { display: flex; }
 
   /* Back to one row of cards. Two rows are a phone measure, for fitting
-     eight downtown locations into a few swipes; here the row is wide and
-     the arrows do the work. */
+     eleven stores into a few swipes; here the row is wide and the arrows
+     do the work. */
   .loc-grid {
     display: flex;
     grid-auto-flow: row;
