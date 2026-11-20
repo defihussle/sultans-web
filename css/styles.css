@@ -804,9 +804,13 @@ body.nav-is-open { overflow: hidden; }
      keep the food bright, which is not enough behind white text. This
      pool of shade sits under the headline and fades out well before the
      edges, so the frame still reads as food rather than as a dark box.
-     If the headline ever moves, move this with it. */
+
+     IT FOLLOWS THE HEADLINE. --hero-shade-x is the only thing that moves
+     it: centred on a phone, over on the left from 900px where the pitch
+     is left-aligned. Change the one value, not the gradient. */
+  --hero-shade-x: 50%;
   background:
-    radial-gradient(76% 52% at 50% 45%,
+    radial-gradient(76% 52% at var(--hero-shade-x) 45%,
       rgba(35, 20, 52, 0.62) 0%,
       rgba(35, 20, 52, 0.38) 46%,
       rgba(35, 20, 52, 0) 78%),
@@ -828,7 +832,13 @@ body.nav-is-open { overflow: hidden; }
    so moving a button between the rows in the HTML is all it takes to
    change the arrangement. */
 /* --- The pitch over the film ---
-   Sits above the three buttons, centred, in the middle of the frame. The
+   Centred on a phone; from 900px it moves over to the left, lined up
+   with the gutter every other section uses, and the three buttons move
+   with it so the hero reads as one left-hand block. The buttons
+   themselves are untouched - same three, same order, same style, same
+   distance off the bottom. See the wide-screen block in section 15.
+
+   Sits above the three buttons, in the middle of the frame. The
    film behind it is busy and it moves, so the headline carries a shadow
    of its own on top of the scrim - the scrim alone is tuned to keep the
    food bright, and that is not enough contrast for text.
@@ -2823,7 +2833,41 @@ a.contact-value:hover { color: var(--gold-400); }
 
   /* The screen is wide enough for the supporting line now. */
   .hero-video-lede { display: block; }
-  .hero-video-copy { transform: translateY(-62%); }
+
+  /* LEFT-ALIGNED FROM HERE UP.
+     Both blocks are absolutely positioned across the full width, so a
+     max-width plus auto side margins drops them onto the same 1200px
+     column the rest of the site sits in, and the text then starts at the
+     same gutter as every heading further down the page. */
+  /* Sat on the middle of the screen while it was centred, which on a
+     short laptop window (1280x600, say) ran it straight through the
+     buttons. It now hangs off the SAME bottom edge they do, a fixed
+     distance above them - 10.25rem is the two rows of buttons plus the
+     gap - so the pitch and the buttons stay one block at every window
+     height. If a fourth button is ever added, this number grows with it. */
+  .hero-video-copy {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    top: auto;
+    bottom: calc(clamp(3.5rem, 14vh, 8rem) + 10.25rem);
+    transform: none;
+    text-align: left;
+  }
+  /* 18ch keeps "MAKE MEETINGS" on one line, so the headline is two
+     lines and not three. That is the reference shape, and on a short
+     laptop window it is also what keeps the first line clear of the
+     logo in the fixed bar. */
+  .hero-video-title { max-width: 18ch; margin-inline: 0; }
+  .hero-video-lede { max-width: 38ch; margin-inline: 0; }
+
+  .hero-video-actions {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    align-items: flex-start;
+  }
+
+  /* The shade follows the text over to the left. */
+  .hero-video-scrim { --hero-shade-x: 34%; }
 
   /* The arrow bar only exists where the arrows do. */
   .loc-group-head { display: flex; }
