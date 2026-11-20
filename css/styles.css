@@ -402,6 +402,40 @@ a:hover { color: var(--plum-700); }
   color: var(--text-muted);
 }
 
+/* --- TWO-LINE HEADINGS ---
+   A heading set over two lines takes two purples: the brand violet on the
+   top line, the deep plum under it. It is the one place the two brand
+   purples are used together, and it is what gives the headings their
+   weight without any bold - which Fertigo Pro does not have anyway.
+
+   HOW TO WRITE ONE. Add the class and wrap the second line in <em>:
+
+       <h2 class="section-title title-2line">Three ways <em>to cater.</em></h2>
+
+   The <em> is what breaks the line - it is display:block - so the heading
+   breaks in the same place at every screen width instead of wherever the
+   measure happens to run out. That is the point of doing it by hand. The
+   italics are turned off; <em> is used because it is the shortest tag that
+   marks a run of words, and the hero headlines already use it this way.
+
+   TO MAKE A HEADING ONE LINE AGAIN, take the class and the <em> off. Both,
+   not one: the class alone would leave the whole heading violet.
+
+   NOT ON THE DARK BANDS. On the solid purple band and the inverted one the
+   heading is cream, and purple-on-purple would disappear, so those two
+   headings stay one line and one colour. The last rule below is the guard,
+   in case the class is ever added to one by hand. */
+.title-2line { color: var(--plum-500); }
+.title-2line em {
+  display: block;
+  font-style: normal;
+  color: var(--plum-700);
+}
+.section-solid .title-2line,
+.section-solid .title-2line em,
+.section-invert .title-2line,
+.section-invert .title-2line em { color: inherit; }
+
 
 /* ---------------------------------------------------------------------------
    5. BUTTONS
@@ -482,8 +516,14 @@ a:hover { color: var(--plum-700); }
    at every screen size. It is see-through over the hero, then turns cream
    once you scroll (js/script.js adds the class "is-stuck").
 
-   Every nav link lives in the panel that slides in from the right, so the
-   header itself stays as quiet as possible and the logo does the talking.
+   From 900px the four links sit in the bar itself, two each side of the
+   logo. Below that they live only in the panel that slides in from the
+   right, and the round button on the right opens it.
+
+   So the links exist twice in the HTML, once per place. The panel and its
+   button are display:none from 900px and the inline lists are display:none
+   below it, so only one set is ever in the page - nothing is announced
+   twice and nothing is tabbed through twice.
    --------------------------------------------------------------------------- */
 .site-header {
   position: fixed;
@@ -578,6 +618,104 @@ a:hover { color: var(--plum-700); }
 .site-header.is-stuck .nav-toggle-bars,
 .site-header.is-stuck .nav-toggle-bars::before,
 .site-header.is-stuck .nav-toggle-bars::after { background: var(--plum-700); }
+
+/* --- THE HOME PAGE BAR STARTS PURPLE ---
+   Everywhere else the see-through bar sits over a dark photograph, so it
+   draws itself in white. The home page hero now carries a light veil
+   (section 7a), and white-on-light is invisible - so on that page the bar
+   wears its scrolled colours from the top of the page, before .is-stuck is
+   added. The white logo and white hamburger are not restyled; the purple
+   ones are simply shown in their place.
+
+   Measured against the darkest frame in the film (luma 6 behind the bar,
+   lifted to about 170 by the veil) the purple logo and bars read at about
+   5.4:1, so they hold even at the film's darkest moment.
+
+   Scoped to .page-home, which is the body class on index.html. If the
+   catering or menu hero is ever given a light treatment too, add its body
+   class to these selectors rather than widening them. */
+.page-home .brand-logo-on-dark { display: none; }
+.page-home .brand-logo-on-light { display: block; }
+.page-home .nav-toggle {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(107, 63, 160, 0.25);
+}
+.page-home .nav-toggle:hover { background: rgba(107, 63, 160, 0.08); }
+.page-home .nav-toggle-bars,
+.page-home .nav-toggle-bars::before,
+.page-home .nav-toggle-bars::after { background: var(--plum-700); }
+
+
+/* --- The nav links in the bar (900px and up) ---
+   Hidden on phones, where the round button and the panel do the job. Two
+   lists, one each side of the logo, and that is what keeps the logo dead
+   centre: the bar is a 1fr / auto / 1fr grid, so the middle column sits in
+   the middle of the bar however wide the two side columns turn out to be.
+   Four links fit at 900px with room to spare; a fifth belongs in the panel.
+
+   THE COLOURS FOLLOW THE BAR, NOT THE PAGE. While the bar is see-through
+   over a hero the links are white, which is right over the dark photographs
+   on the catering and menu pages - and wrong on the home page, whose hero
+   now carries a light overlay (section 7a), so there they start purple.
+   Once the bar turns cream on scroll they are purple everywhere. */
+.nav-inline { display: none; }
+.nav-inline-left { grid-column: 1; justify-self: start; }
+.nav-inline-right { grid-column: 3; justify-self: end; }
+.nav-inline ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-inline a {
+  position: relative;
+  display: block;
+  padding: 0.35rem 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--paper);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+
+/* The gold rule under a link. A pseudo-element rather than an underline so
+   it can sit clear of the descenders and grow in rather than blink on. The
+   current page keeps it shown. */
+.nav-inline a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.1rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--gold-500);
+  transform: scaleX(0);
+  transition: transform var(--t-base);
+}
+.nav-inline a:hover::after,
+.nav-inline a:focus-visible::after,
+.nav-inline a[aria-current="page"]::after { transform: scaleX(1); }
+.nav-inline a:hover,
+.nav-inline a:focus-visible { color: var(--gold-400); }
+
+/* Purple on cream, and on the home page from the start. The hover rules
+   have to come after the plain ones or they lose to them on equal weight. */
+.site-header.is-stuck .nav-inline a,
+.page-home .nav-inline a { color: var(--plum-700); }
+.site-header.is-stuck .nav-inline a::after,
+.page-home .nav-inline a::after { background: var(--gold-600); }
+.site-header.is-stuck .nav-inline a:hover,
+.site-header.is-stuck .nav-inline a:focus-visible,
+.page-home .nav-inline a:hover,
+.page-home .nav-inline a:focus-visible { color: var(--plum-500); }
 
 /* --- The dimmed layer behind the panel --- */
 .nav-backdrop {
@@ -731,8 +869,8 @@ body.nav-is-open { overflow: hidden; }
      So there is never a black or empty box. */
   background-image:
     url("../assets/hero-poster.jpg"),
-    radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.22) 0%, transparent 65%),
-    linear-gradient(160deg, var(--plum-600) 0%, var(--plum-950) 100%);
+    radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.3) 0%, transparent 65%),
+    linear-gradient(160deg, var(--plum-100) 0%, var(--sand-100) 100%);
   background-size: cover, auto, auto;
   background-position: center, center, center;
   background-repeat: no-repeat;
@@ -743,8 +881,8 @@ body.nav-is-open { overflow: hidden; }
   .hero-video {
     background-image:
       url("../assets/hero-poster-mobile.jpg"),
-      radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.22) 0%, transparent 65%),
-      linear-gradient(160deg, var(--plum-600) 0%, var(--plum-950) 100%);
+      radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.3) 0%, transparent 65%),
+      linear-gradient(160deg, var(--plum-100) 0%, var(--sand-100) 100%);
   }
 }
 
@@ -785,41 +923,64 @@ body.nav-is-open { overflow: hidden; }
 .hero-video-asset::-webkit-media-controls-play-button { display: none !important; }
 .hero-video-asset::-internal-media-controls-overlay-cast-button { display: none !important; }
 
-/* Darkens the film so the logo and menu button stay legible. Heaviest at
-   the very top, where the bar sits, and lifting through the middle so the
-   food is not dulled. */
+/* A LIGHT VEIL OVER THE FILM (client: a white / light overlay, not a dark
+   one). It used to be a wash of near-black; it is now the same shape in
+   white, so the hero reads bright instead of heavy.
+
+   THIS IS WHY THE TEXT OVER THE FILM IS PURPLE AND NOT WHITE. Inverting the
+   veil inverted the contrast problem with it. The old danger was the pale
+   frames - a tray of shredded salads, almost white - behind white text. The
+   danger now is the DARK frames: this film runs from luma 18 to 207 behind
+   the headline, measured frame by frame, and dark purple text needs the veil
+   to lift the darkest of them to roughly 155 before it reads. Hence the two
+   layers below, and hence the purple in .hero-video-title.
+
+   If the film is ever replaced, re-measure. A film that stays dark can take
+   a thinner veil; one that stays bright needs almost none.
+
+   THE LAYERS
+   The linear one runs top to bottom. Its first two stops are measured in the
+   height of the bar itself, not in percentages, so the strip behind the logo
+   is lifted by the same amount whatever the screen height and whatever the
+   film happens to be showing. Below the bar it thins out so the food keeps
+   its colour, and thickens again at the very bottom behind the buttons.
+
+   The radial on top of it is the pool the pitch sits in. The linear layer is
+   deliberately thin through the middle to keep the food bright, which is not
+   enough behind text, so this adds light just where the headline is and
+   fades out well before the edges - the frame still reads as food rather
+   than as a white box.
+
+   IT FOLLOWS THE HEADLINE. --hero-shade-x and --hero-shade-y are the only
+   things that move it: centred on a phone, and over to the left and a little
+   lower from 900px, where the pitch is left-aligned and hangs off the
+   bottom. Change those two values, not the gradient.
+
+   IT IS WIDE AND GENTLE RATHER THAN SMALL AND STRONG, and that is the
+   result of measuring rather than a matter of taste. A tighter pool put the
+   top-left corner of the headline out near its edge, where the light had
+   already faded, and the violet line fell to 2.9:1 over the darkest frame -
+   under the 3:1 a heading of this size needs. Opening the ellipse out until
+   the whole text block sits on the plateau fixed it without making the
+   middle any whiter, which is what a stronger pool would have done: a bright
+   spot on the food. Widen it before you deepen it. */
 .hero-video-scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* The first two stops are measured in the height of the bar itself, not
-     in percentages, so the strip behind the logo is darkened by the same
-     amount whatever the screen height and whatever the film is showing at
-     that moment. Below the bar it lifts quickly, so the food stays bright,
-     then deepens again at the very bottom.
-
-     The radial on top of it is for the pitch. The film runs through some
-     very pale frames - a tray of shredded salads, almost white - and the
-     top-to-bottom gradient is deliberately light through the middle to
-     keep the food bright, which is not enough behind white text. This
-     pool of shade sits under the headline and fades out well before the
-     edges, so the frame still reads as food rather than as a dark box.
-
-     IT FOLLOWS THE HEADLINE. --hero-shade-x is the only thing that moves
-     it: centred on a phone, over on the left from 900px where the pitch
-     is left-aligned. Change the one value, not the gradient. */
   --hero-shade-x: 50%;
+  --hero-shade-y: 47%;
   background:
-    radial-gradient(76% 52% at var(--hero-shade-x) 45%,
-      rgba(35, 20, 52, 0.62) 0%,
-      rgba(35, 20, 52, 0.38) 46%,
-      rgba(35, 20, 52, 0) 78%),
+    radial-gradient(92% 66% at var(--hero-shade-x) var(--hero-shade-y),
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(255, 255, 255, 0.58) 50%,
+      rgba(255, 255, 255, 0) 82%),
     linear-gradient(to bottom,
-      rgba(35, 20, 52, 0.64) 0,
-      rgba(35, 20, 52, 0.56) var(--header-h),
-      rgba(35, 20, 52, 0.16) calc(var(--header-h) + 7rem),
-      rgba(35, 20, 52, 0.12) 62%,
-      rgba(35, 20, 52, 0.42) 100%);
+      rgba(255, 255, 255, 0.66) 0,
+      rgba(255, 255, 255, 0.60) var(--header-h),
+      rgba(255, 255, 255, 0.38) calc(var(--header-h) + 7rem),
+      rgba(255, 255, 255, 0.36) 62%,
+      rgba(255, 255, 255, 0.54) 100%);
 }
 
 
@@ -856,18 +1017,26 @@ body.nav-is-open { overflow: hidden; }
   padding-inline: var(--gutter);
   text-align: center;
 }
+/* THE TWO-COLOUR HEADLINE. Brand violet on the top line, deep plum on the
+   bottom one - the same treatment every two-line heading on the site gets.
+   See "TWO-LINE HEADINGS" in section 4; this is that rule, written out by
+   hand because the hero headline is not a .section-title.
+
+   The shadow is a white halo, not a dark one. It is there for the moment a
+   dark frame passes under the edge of the pool, and it has to be white now
+   that the text is dark - a dark shadow under dark text just thickens it. */
 .hero-video-title {
   max-width: 16ch;
   margin: 0 auto;
   font-size: clamp(2.3rem, 7.2vw, 4.4rem);
   line-height: 1.04;
-  color: var(--paper);
-  text-shadow: 0 2px 10px rgba(35, 20, 52, 0.55), 0 14px 46px rgba(35, 20, 52, 0.45);
+  color: var(--plum-500);
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.75), 0 8px 34px rgba(255, 255, 255, 0.55);
 }
 .hero-video-title em {
   display: block;
   font-style: normal;
-  color: var(--gold-400);
+  color: var(--plum-700);
 }
 .hero-video-lede {
   display: none;
@@ -875,8 +1044,8 @@ body.nav-is-open { overflow: hidden; }
   margin: var(--sp-5) auto 0;
   font-size: var(--fs-lede);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 6px rgba(35, 20, 52, 0.6), 0 8px 30px rgba(35, 20, 52, 0.45);
+  color: var(--plum-700);
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.85), 0 6px 24px rgba(255, 255, 255, 0.6);
 }
 
 .hero-video-actions {
@@ -932,7 +1101,7 @@ body.nav-is-open { overflow: hidden; }
   min-width: 0;
   padding-inline: 1rem;
   font-size: 1rem;
-  box-shadow: 0 6px 22px rgba(35, 20, 52, 0.45);
+  box-shadow: 0 6px 22px rgba(35, 20, 52, 0.22);
 }
 @media (min-width: 560px) {
   .hero-video-actions {
@@ -2021,6 +2190,166 @@ body.nav-is-open { overflow: hidden; }
 
 
 /* ---------------------------------------------------------------------------
+   10b. THE GUEST COUNT SLIDER
+   One panel at the top of the by-the-tray menu: a slider for the headcount,
+   the four tray sizes under it, and a line of plain English that says which
+   one to start with.
+
+   IT IS A PANEL, NOT A WIDGET. The brief for this site has been "do not make
+   it feel like an app" from the start, so: no steppers, no counters, no
+   numbers that spin, no card that grows when it is picked. One native range
+   input, and the chosen tray simply fills with the brand violet, the same
+   fill the buttons use. The only thing that moves is the thumb under your
+   finger.
+   --------------------------------------------------------------------------- */
+.guests {
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.guests-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+.guests-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--plum-700);
+}
+/* The live number. Fertigo has no bold, so it carries its weight by being
+   bigger and violet rather than heavier. The numerals themselves stay in
+   Poppins and tabular, so the panel does not twitch sideways as the count
+   runs through 9 to 10 and 99 to 100. */
+.guests-count {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--plum-500);
+}
+.guests-count output {
+  font-family: var(--font-body);
+  font-size: 1.5em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  color: var(--plum-700);
+}
+
+/* --- The slider ---
+   A plain <input type="range">, left native on purpose: it already knows how
+   to be dragged, arrow-keyed, and made bigger for a touch screen, and every
+   one of those is easy to break by rebuilding it. accent-color is all it
+   takes to put it in brand violet in every current browser. */
+.guests-range {
+  display: block;
+  width: 100%;
+  margin: 0;
+  accent-color: var(--plum-500);
+  cursor: pointer;
+}
+.guests-range:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: var(--r-pill);
+}
+
+/* The three or four numbers printed under the track. Decorative - the live
+   count above says where the slider actually is. */
+.guests-scale {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--sp-2) 0 var(--sp-5);
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: var(--ink-400);
+}
+
+/* --- The four tray sizes ---
+   Two by two on a phone, one row of four from 560px. */
+.tray-sizes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tray-size {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: var(--sp-4) var(--sp-3);
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--sand-50);
+  transition: background-color var(--t-base), border-color var(--t-base),
+              color var(--t-base);
+}
+.tray-size-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: var(--plum-700);
+}
+.tray-size-serves {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* THE RECOMMENDED ONE. js/script.js block 3d puts .is-pick on it. The fill
+   is the same brand violet as the buttons, so "this one" is said in the
+   colour the site already uses for "press this".
+
+   Nothing here changes the size or the border width of the card, so the row
+   does not shift as the slider moves - only the colours change. */
+.tray-size.is-pick {
+  background: var(--plum-500);
+  border-color: var(--plum-500);
+  box-shadow: 0 1px 2px rgba(35, 20, 52, 0.14), 0 8px 20px rgba(107, 63, 160, 0.22);
+}
+.tray-size.is-pick .tray-size-name { color: var(--paper); }
+.tray-size.is-pick .tray-size-serves { color: rgba(255, 255, 255, 0.86); }
+
+/* --- The sentence the script writes, and the standing note under it --- */
+.guests-answer {
+  margin: var(--sp-5) 0 0;
+  font-size: var(--fs-lede);
+  line-height: 1.5;
+  color: var(--plum-700);
+}
+.guests-note {
+  margin: var(--sp-3) 0 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+@media (min-width: 560px) {
+  .tray-sizes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+
+/* ---------------------------------------------------------------------------
    11. HOW TO BOOK
    --------------------------------------------------------------------------- */
 .steps {
@@ -2768,6 +3097,20 @@ a.contact-value:hover { color: var(--gold-400); }
 
 /* --- Small desktop (900px) --- */
 @media (min-width: 900px) {
+
+  /* --- THE BAR SHOWS ITS LINKS AND DROPS THE HAMBURGER ---
+     Everything that was in the slide-out panel is in the bar itself from
+     here up, so the panel and its button are taken out of the page rather
+     than merely hidden: display:none keeps those duplicate links out of
+     the tab order and out of a screen reader's list. The overflow lock on
+     <body> is released with them, in case the panel happened to be open
+     at the moment the window was widened past this point. */
+  .nav-inline { display: block; }
+  .nav-toggle { display: none; }
+  .site-nav { display: none; }
+  .nav-backdrop { display: none; }
+  body.nav-is-open { overflow: visible; }
+
   .hero { min-height: min(46rem, 92vh); }
   .hero-compact { min-height: min(30rem, 62vh); }
   .hero-actions .btn { flex: 0 1 auto; }
@@ -2866,8 +3209,13 @@ a.contact-value:hover { color: var(--gold-400); }
     align-items: flex-start;
   }
 
-  /* The shade follows the text over to the left. */
-  .hero-video-scrim { --hero-shade-x: 34%; }
+  /* The pool of light follows the text: over to the left, and a little
+     lower, because the pitch hangs off the bottom edge here rather than
+     sitting in the middle of the frame as it does on a phone. */
+  .hero-video-scrim {
+    --hero-shade-x: 34%;
+    --hero-shade-y: 56%;
+  }
 
   /* The arrow bar only exists where the arrows do. */
   .loc-group-head { display: flex; }
@@ -2930,8 +3278,8 @@ a.contact-value:hover { color: var(--gold-400); }
 }
 
 @media (min-width: 980px) {
-  /* The nav stays a slide-out panel at every width, so there is no
-     horizontal menu to switch to here. The menu button stays visible. */
+  /* The bar switched to inline links back at 900px; nothing more to do
+     for the nav here. */
 
   .feature-grid { grid-template-columns: repeat(4, 1fr); }
   .steps { grid-template-columns: repeat(4, 1fr); gap: var(--sp-6); }
@@ -3129,7 +3477,10 @@ a.contact-value:hover { color: var(--gold-400); }
    =========================================================================== */
 @media print {
   .site-header, .ticker, .trust-bar, .request-form, .hero-media,
-  .hero-scrim, .nav-toggle, .back-to-top, .skip-link { display: none !important; }
+  .hero-scrim, .nav-toggle, .nav-inline, .back-to-top, .skip-link { display: none !important; }
+  /* The slider cannot be dragged on paper; the serving ranges under it
+     still read perfectly well, so only the control goes. */
+  .guests-range, .guests-scale, .guests-count { display: none !important; }
   .section-solid::after, .section-invert::after,
   .eyebrow-icon, .footer-social { display: none !important; }
 

@@ -1,11 +1,12 @@
 /* ===========================================================================
    SULTAN'S CATERING - SITE SCRIPT
    ===========================================================================
-   Kept deliberately small. Seven jobs only:
+   Kept deliberately small. A short list of jobs:
      0. Keeping the hero film playing, with no controls ever shown
      1. Starting every page load at the top of the page
      2. The mobile menu button
      3. Turning the header white once you scroll past the hero
+     3d. The guest count slider on the catering page
      4. The copyright year in the footer
      5. Highlighting the nav link for the section you are looking at
      6. The quote form (basic checks + an email fallback)
@@ -312,6 +313,98 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
       refresh();
     }
   );
+
+  /* -------------------------------------------------------------------------
+     3d. GUEST COUNT -> TRAY SIZE   (catering page only)
+
+     Drag the guest count, and the tray size that feeds that many people is
+     highlighted. Nothing happens anywhere else on the page: this does not
+     touch the price tables, add anything up, or quote a total.
+
+     THE NUMBERS BELOW ARE THE CATERING PDF'S, NOT OURS. "upTo" is the top of
+     the serving range printed for that tray, and "serves" is that range
+     written out, word for word as the page shows it. Nothing is averaged or
+     worked out from anything else.
+
+     THEY ARE WRITTEN IN THREE PLACES - here, the cards in catering.html, and
+     the table headings on that page. All three have to agree. If a new PDF
+     changes a range, change it in all three.
+
+     THE RULE, in one line: the smallest tray whose range reaches the count.
+     So 25 guests gets Med, which serves 25-30 - and so does 22, because a
+     Half tray stops at 20. Above 40, the top of the largest tray, it stops
+     recommending: the honest answer there is more than one tray, and how
+     many is a conversation, not arithmetic. It says that instead of
+     guessing. Below 8 the smallest tray is already bigger than the room,
+     so it says that too and points at the individual meals.
+
+     Safe to delete this whole block - the panel then shows the four ranges
+     and the sentence written into the HTML, which is still useful.
+     ------------------------------------------------------------------------- */
+  var guests = document.querySelector('[data-guests]');
+
+  if (guests) {
+    var guestRange = guests.querySelector('.guests-range');
+    var guestOut = guests.querySelector('output');
+    var guestAnswer = guests.querySelector('.guests-answer');
+    var trayCards = Array.prototype.slice.call(guests.querySelectorAll('.tray-size'));
+
+    var TRAYS = [
+      { name: 'Small', upTo: 10, serves: '8–10' },
+      { name: 'Half',  upTo: 20, serves: '15–20' },
+      { name: 'Med',   upTo: 30, serves: '25–30' },
+      { name: 'Full',  upTo: 40, serves: '35–40' }
+    ];
+
+    var pickTray = function (count) {
+      for (var i = 0; i < TRAYS.length; i++) {
+        if (count <= TRAYS[i].upTo) return TRAYS[i];
+      }
+      // Over the largest tray: show it, but say it is not the whole answer.
+      return TRAYS[TRAYS.length - 1];
+    };
+
+    var updateGuests = function () {
+      var count = Number(guestRange.value);
+      var top = Number(guestRange.max);
+      var tray = pickTray(count);
+
+      // "60+" at the end of the slider, because the scale stops there but
+      // the parties do not.
+      if (guestOut) {
+        guestOut.textContent = count >= top ? count + '+' : String(count);
+      }
+
+      trayCards.forEach(function (card) {
+        card.classList.toggle('is-pick', card.getAttribute('data-tray') === tray.name);
+      });
+
+      if (!guestAnswer) return;
+
+      if (count > TRAYS[TRAYS.length - 1].upTo) {
+        guestAnswer.textContent =
+          'A Full tray serves ' + tray.serves + ', so ' + count +
+          ' guests means more than one. Tell us the headcount and we will ' +
+          'build the order with you.';
+      } else if (count < 8) {
+        guestAnswer.textContent =
+          'A Small tray serves ' + TRAYS[0].serves + ', which is the ' +
+          'smallest we make. For ' + count + ', individual meals may suit ' +
+          'you better.';
+      } else {
+        guestAnswer.textContent =
+          'For ' + count + ' guests, start with a ' + tray.name +
+          ' tray. It serves ' + tray.serves + '.';
+      }
+    };
+
+    if (guestRange) {
+      // "input" fires all the way through a drag; "change" alone would wait
+      // for the finger to come off the screen.
+      guestRange.addEventListener('input', updateGuests);
+      updateGuests();
+    }
+  }
 
   /* -------------------------------------------------------------------------
      4. FOOTER YEAR - no need to update the copyright by hand

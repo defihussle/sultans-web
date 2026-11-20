@@ -98,6 +98,30 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
 
+    <!-- ==== EDIT: THE DESKTOP NAV LINKS ====
+         The four links sit in the bar itself from 900px up, two on each
+         side of the logo, which is what keeps the logo dead centre. Below
+         900px these are hidden and the round menu button to the right
+         takes over, opening the slide-out panel further down this file.
+
+         SO THESE FOUR LINKS EXIST TWICE on this page: once here for the
+         wide bar and once in that panel for phones. Rename or re-point one
+         in BOTH places or the two will disagree. The panel may carry a link
+         or two more - it has the room; this bar does not.
+
+         Two lists, not one, because they sit in different columns of the
+         bar. Keep two on each side; a fifth link belongs in the panel
+         only, or the logo stops being centred.
+
+         *** SHARED WITH the other two pages *** - each has its own copy,
+         with its own hrefs and its own aria-current="page". -->
+    <nav class="nav-inline nav-inline-left" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catering.html">Catering</a></li>
+      </ul>
+    </nav>
+
     <!-- The official logo. Two versions: the white one shows while the bar is
          see-through over the hero, the purple one once the bar turns cream.
          Both live in the assets folder. -->
@@ -105,6 +129,13 @@
       <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
       <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
     </a>
+
+    <nav class="nav-inline nav-inline-right" aria-label="Main, continued">
+      <ul>
+        <li><a href="menu.html" aria-current="page">Menu</a></li>
+        <li><a href="index.html#locations">Locations</a></li>
+      </ul>
+    </nav>
 
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
       <span class="nav-toggle-bars" aria-hidden="true"></span>

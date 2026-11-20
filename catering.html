@@ -82,6 +82,30 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
 
+    <!-- ==== EDIT: THE DESKTOP NAV LINKS ====
+         The four links sit in the bar itself from 900px up, two on each
+         side of the logo, which is what keeps the logo dead centre. Below
+         900px these are hidden and the round menu button to the right
+         takes over, opening the slide-out panel further down this file.
+
+         SO THESE FOUR LINKS EXIST TWICE on this page: once here for the
+         wide bar and once in that panel for phones. Rename or re-point one
+         in BOTH places or the two will disagree. The panel may carry a link
+         or two more - it has the room; this bar does not.
+
+         Two lists, not one, because they sit in different columns of the
+         bar. Keep two on each side; a fifth link belongs in the panel
+         only, or the logo stops being centred.
+
+         *** SHARED WITH the other two pages *** - each has its own copy,
+         with its own hrefs and its own aria-current="page". -->
+    <nav class="nav-inline nav-inline-left" aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#packages" aria-current="page">Catering</a></li>
+      </ul>
+    </nav>
+
     <!-- The official logo. Two versions: the white one shows while the bar is
          see-through over the hero, the purple one once the bar turns cream.
          Both live in the assets folder. -->
@@ -89,6 +113,13 @@
       <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
       <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
     </a>
+
+    <nav class="nav-inline nav-inline-right" aria-label="Main, continued">
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="index.html#locations">Locations</a></li>
+      </ul>
+    </nav>
 
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
       <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -217,7 +248,7 @@
 
     <header class="section-head section-head-wide">
       <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Catering packages</p>
-      <h2 class="section-title">Three ways to cater.</h2>
+      <h2 class="section-title title-2line">Three ways <em>to cater.</em></h2>
       <p class="section-lede">
         Send a guest count and we'll recommend one.
       </p>
@@ -365,11 +396,91 @@
 
     <header class="section-head section-head-wide">
       <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>By the tray</p>
-      <h2 class="section-title">The catering menu.</h2>
+      <h2 class="section-title title-2line">The catering <em>menu.</em></h2>
       <p class="section-lede">
         Build your own order, tray by tray. Prices are before HST.
       </p>
     </header>
+
+    <!-- ==== EDIT: THE GUEST COUNT SLIDER ====
+         Drag the guest count and the tray size that feeds that many people
+         lights up. It sits here, at the top of the by-the-tray menu, because
+         "how big a tray do I need" is the question the price tables below
+         immediately raise.
+
+         WHERE THE NUMBERS COME FROM. Every serving range below is the one
+         printed on the catering PDF (Sultans-Catering-2026-V3) for that tray,
+         and nothing else. Nothing here is averaged, rounded or worked out.
+
+         THEY ARE WRITTEN IN THREE PLACES and all three have to agree:
+           1. the cards below
+           2. the table headings further down this page
+           3. the TRAYS list in block 3d of js/script.js
+         Change a range in one and change it in all three, or the slider will
+         recommend a tray the menu then contradicts.
+
+         THE RULE THE SLIDER FOLLOWS, in one line: the smallest tray whose
+         printed range reaches the guest count. So 25 guests gets the Medium
+         tray, which serves 25-30, and 22 gets it too, because a Half tray
+         stops at 20. Above 40 - the top of the largest tray - it stops
+         recommending and says so, rather than inventing a number of trays.
+
+         TO CHANGE THE RANGE OF THE SLIDER, change min and max on the input
+         and the four numbers in .guests-scale to match. -->
+    <div class="guests" data-guests>
+
+      <div class="guests-head">
+        <label class="guests-label" for="guestCount">How many guests?</label>
+        <p class="guests-count"><output id="guestOut" for="guestCount">25</output> guests</p>
+      </div>
+
+      <input class="guests-range" type="range" id="guestCount"
+             min="5" max="60" step="1" value="25">
+
+      <ul class="guests-scale" aria-hidden="true">
+        <li>5</li>
+        <li>20</li>
+        <li>40</li>
+        <li>60+</li>
+      </ul>
+
+      <!-- The four tray sizes. data-tray must match the name in the TRAYS
+           list in js/script.js - that is how the script finds the card. -->
+      <ul class="tray-sizes">
+        <li class="tray-size" data-tray="Small">
+          <span class="tray-size-name">Small</span>
+          <span class="tray-size-serves">Serves 8&ndash;10</span>
+        </li>
+        <li class="tray-size" data-tray="Half">
+          <span class="tray-size-name">Half</span>
+          <span class="tray-size-serves">Serves 15&ndash;20</span>
+        </li>
+        <li class="tray-size" data-tray="Med">
+          <span class="tray-size-name">Med</span>
+          <span class="tray-size-serves">Serves 25&ndash;30</span>
+        </li>
+        <li class="tray-size" data-tray="Full">
+          <span class="tray-size-name">Full</span>
+          <span class="tray-size-serves">Serves 35&ndash;40</span>
+        </li>
+      </ul>
+
+      <!-- The script writes this line. role="status" is what makes a screen
+           reader read the new recommendation out as the slider moves, so the
+           highlight on the card can stay purely visual. The sentence here is
+           what shows if the script never runs. -->
+      <p class="guests-answer" id="guestAnswer" role="status">
+        For 25 guests, start with a Med tray. It serves 25&ndash;30.
+      </p>
+
+      <p class="guests-note">
+        Mains come in all four sizes. Sides and salads start at Half. Dips
+        have their own: a bowl serves 8&ndash;10, a half 18&ndash;20, a full
+        30&ndash;35. A quote from us is still the surest answer &mdash; how
+        much food a room gets through depends on what else is on the table.
+      </p>
+
+    </div>
 
     <!-- The chips jump to the four courses. Each href="#id" must match the
          id on a <div class="menu-block"> below. -->
@@ -644,7 +755,7 @@
 
     <header class="section-head">
       <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Good to know</p>
-      <h2 class="section-title">Before you order.</h2>
+      <h2 class="section-title title-2line">Before you <em>order.</em></h2>
     </header>
 
     <dl class="fact-row">

@@ -81,6 +81,30 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
 
+    <!-- ==== EDIT: THE DESKTOP NAV LINKS ====
+         The four links sit in the bar itself from 900px up, two on each
+         side of the logo, which is what keeps the logo dead centre. Below
+         900px these are hidden and the round menu button to the right
+         takes over, opening the slide-out panel further down this file.
+
+         SO THESE FOUR LINKS EXIST TWICE on this page: once here for the
+         wide bar and once in that panel for phones. Rename or re-point one
+         in BOTH places or the two will disagree. The panel may carry a link
+         or two more - it has the room; this bar does not.
+
+         Two lists, not one, because they sit in different columns of the
+         bar. Keep two on each side; a fifth link belongs in the panel
+         only, or the logo stops being centred.
+
+         *** SHARED WITH the other two pages *** - each has its own copy,
+         with its own hrefs and its own aria-current="page". -->
+    <nav class="nav-inline nav-inline-left" aria-label="Main">
+      <ul>
+        <li><a href="#top" aria-current="page">Home</a></li>
+        <li><a href="catering.html">Catering</a></li>
+      </ul>
+    </nav>
+
     <!-- The official logo. Two versions: the white one shows while the bar is
          see-through over the hero, the purple one once the bar turns cream.
          Both live in the assets folder. -->
@@ -88,6 +112,13 @@
       <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
       <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
     </a>
+
+    <nav class="nav-inline nav-inline-right" aria-label="Main, continued">
+      <ul>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="#locations">Locations</a></li>
+      </ul>
+    </nav>
 
     <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
       <span class="nav-toggle-bars" aria-hidden="true"></span>
@@ -175,7 +206,11 @@
     <source src="assets/hero.mp4" type="video/mp4">
   </video>
 
-  <!-- Dark overlay, so the logo, menu button and buttons stay readable. -->
+  <!-- The light veil over the film. It is what makes the hero read bright
+       rather than heavy, and it is also what lets the purple headline and
+       the purple logo be read over moving footage. Tuned in section 7a of
+       the stylesheet - and re-measured against the film, so if the video is
+       ever replaced, say so rather than assuming it still works. -->
   <div class="hero-video-scrim" aria-hidden="true"></div>
 
   <!-- ==== EDIT: THE PITCH OVER THE VIDEO ====
@@ -304,7 +339,7 @@
          stylesheet, not by the usual section sizes. -->
     <header class="section-head loc-head">
       <p class="eyebrow"><span class="icon icon-pin eyebrow-icon" aria-hidden="true"></span>Locations</p>
-      <h2 class="section-title">Eleven kitchens, one standard.</h2>
+      <h2 class="section-title title-2line">Eleven kitchens, <em>one standard.</em></h2>
     </header>
 
     <!-- ==== EDIT: THE LOCATIONS CAROUSEL ====
@@ -417,7 +452,7 @@
 
     <header class="section-head section-head-wide">
       <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>The menu</p>
-      <h2 class="section-title">The ones everyone orders.</h2>
+      <h2 class="section-title title-2line">The ones <em>everyone orders.</em></h2>
       <p class="section-lede">
         Bowls and wraps built one at a time, for the days a tray is more
         than you need.
