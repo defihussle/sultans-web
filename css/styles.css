@@ -972,62 +972,74 @@ body.nav-is-open { overflow: hidden; }
    film happens to be showing. Below the bar it thins out so the food keeps
    its colour, and thickens again at the very bottom behind the buttons.
 
-   The radial on top of it is the pool the pitch sits in. The linear layer is
-   deliberately thin through the middle to keep the food bright, which is not
-   enough behind text, so this adds light just where the headline is and
-   fades out well before the edges - the frame still reads as food rather
-   than as a white box.
+   The radial on top of it is the band of light the pitch sits in. The flat
+   layer is deliberately almost nothing through the middle of the frame so
+   the food keeps its own colour, which is not enough behind dark text, so
+   this puts light where the words are and nowhere else.
 
-   IT FOLLOWS THE HEADLINE. --hero-shade-x and --hero-shade-y are the only
-   things that move it: centred on a phone, and over to the left and a little
-   lower from 900px, where the pitch is left-aligned and hangs off the
-   bottom. Change those two values, not the gradient.
+   IT RUNS OFF THE EDGE OF THE FRAME IN THE DIRECTION IT IS NOT NEEDED, and
+   that is the whole trick. On a phone the pitch is centred, so the ellipse
+   is 140% of the width and 36% of the height: a band across the middle whose
+   left and right edges are off the screen, so only the top and bottom fade.
+   From 900px the pitch moves to the left-hand gutter, so the 900px block in
+   section 15 turns the band on its side - 72% wide, 130% tall, anchored at
+   22% - and only the right-hand side fades, over the food.
 
-   THE VEIL IS MUCH THINNER THAN IT WAS, and the text does not depend on it
-   any more. The first version was strong everywhere and the film came out
-   looking washed, which the client came back on twice. Both layers have been
-   cut hard through the middle of the frame since - the flat one from 0.38 to
-   0.08, the pool from 0.58 to 0.28 - so the food keeps its own colour and the
-   hero reads as a film rather than as a white panel.
+   WHY IT MATTERS: anything that lights the text has to run off the frame, or
+   you can see where it stops. What was here before was a blurred white
+   rectangle sitting behind the headline, and the client’s word for it was
+   fog. It had a visible edge down its right-hand side. A full-bleed gradient
+   has no edge to see.
 
-   WHAT HOLDS THE TEXT UP INSTEAD is a separate backing behind the headline
-   and the supporting line, which you will find a little further down this
-   section under .hero-video-title::before. That is the piece to adjust if
-   the words are ever hard to read - it costs nothing outside the text block,
-   where this veil costs the whole frame. THE VEIL IS NOW ONLY RESPONSIBLE
-   FOR THE BAR AT THE TOP: the logo and the four nav links are purple and
-   they have nothing else behind them, which is what sets the first two stops
-   of the flat layer. Do not take those two below about 0.58 without
-   re-measuring the links, which are small text and need 4.5:1.
+   THE VEIL IS MUCH THINNER THAN IT WAS. The first version was strong
+   everywhere and the film came out looking washed, which the client came
+   back on three times. The flat layer is now 0.05 through the middle of the
+   frame where it started at 0.38, and nothing is drawn behind the words at
+   all - the text-shadows on the headline and the supporting line are two
+   short offsets, not glows.
 
-   MEASURE AFTER ANY CHANGE. Against a pure black frame - darker than
-   anything in the film - the violet top line of the headline reads 3.68:1,
-   the deep plum line under it 6.97:1, the supporting line 4.55:1, and the
-   logo and nav links in the bar 4.67:1 and 4.50:1. On a 390px phone the two
-   headline lines read 3.68:1 and 6.39:1 and the logo and menu button 5.20:1
-   and 4.39:1. Those are the numbers to beat, and the thin ones are the top
-   line of the headline (3:1) and the nav links and supporting line (4.5:1 -
-   they are small text, so they need the higher floor). There is not much
-   room left in any of them: this is about as thin as the veil goes while the
-   text over it stays purple. */
+   THE BAR AT THE TOP IS THE ONE PLACE THAT CANNOT GIVE ANY MORE. The purple
+   logo and the four nav links have only the first two stops of the flat
+   layer behind them, and the links are small text, so they need 4.5:1. Do
+   not take 0.64 and 0.58 down without re-measuring them; at 0.62/0.56 the
+   links measured 4.22:1 against a black frame.
+
+   MEASURE AFTER ANY CHANGE, over the painted letters rather than the line
+   boxes - the headline’s box is 16ch wide and the words do not fill it, so
+   measuring the box reads 0.5:1 low. Against a pure black frame, darker than
+   anything in the film: the violet top line of the headline 3.68:1, the deep
+   plum line under it 6.60:1, the supporting line 6.75:1, the logo 7.98:1 and
+   the nav links 4.50:1. On a 390px phone, 3.80:1 and 6.67:1 for the headline
+   and 4.50:1 and 4.39:1 for the logo and the menu button. Those are the
+   numbers to beat, and the thin ones are the top line of the headline (3:1)
+   and the nav links (4.5:1). There is not much room left in either: this is
+   about as thin as the veil goes while the text over it stays purple. */
 .hero-video-scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
-  --hero-shade-x: 50%;
-  --hero-shade-y: 47%;
+
+  /* LAYER 1: the band of light the pitch sits in. On a phone the pitch is
+     centred, so the band is a wide, shallow ellipse across the middle - 140%
+     of the width, which puts its left and right edges off the screen, so
+     there is no edge to see. Only the top and bottom fade, and they fade over
+     a third of the height. The 900px block in section 15 swaps it for a
+     left-anchored one, where the pitch moves over to the gutter.
+
+     LAYER 2: the strip behind the bar, thinning to almost nothing through the
+     middle of the frame and lifting a little at the foot. */
   background:
-    radial-gradient(72% 60% at var(--hero-shade-x) var(--hero-shade-y),
-      rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.28) 46%,
-      rgba(255, 255, 255, 0.11) 74%,
-      rgba(255, 255, 255, 0) 90%),
+    radial-gradient(140% 36% at 50% 50%,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(255, 255, 255, 0.70) 50%,
+      rgba(255, 255, 255, 0.26) 72%,
+      rgba(255, 255, 255, 0) 92%),
     linear-gradient(to bottom,
       rgba(255, 255, 255, 0.64) 0,
       rgba(255, 255, 255, 0.58) var(--header-h),
-      rgba(255, 255, 255, 0.08) calc(var(--header-h) + 7rem),
-      rgba(255, 255, 255, 0.07) 62%,
-      rgba(255, 255, 255, 0.20) 100%);
+      rgba(255, 255, 255, 0.05) calc(var(--header-h) + 5rem),
+      rgba(255, 255, 255, 0.05) 72%,
+      rgba(255, 255, 255, 0.16) 100%);
 }
 
 
@@ -1069,69 +1081,24 @@ body.nav-is-open { overflow: hidden; }
    See "TWO-LINE HEADINGS" in section 4; this is that rule, written out by
    hand because the hero headline is not a .section-title.
 
-   The shadow is a white halo, not a dark one. It is there for the moment a
-   dark frame passes under the edge of the pool, and it has to be white now
-   that the text is dark - a dark shadow under dark text just thickens it. */
+   THE SHADOW IS TIGHT AND WHITE. White because the text is dark now, and a
+   dark shadow under dark text only thickens it. Tight because the wide soft
+   version that used to be here, and the blurred white panel that used to sit
+   behind the words with it, read as fog - which is the thing they were asked
+   to stop doing. What lights the words now is the band in the scrim above,
+   and nothing is drawn behind them at all. */
 .hero-video-title {
   max-width: 16ch;
   margin: 0 auto;
   font-size: clamp(2.3rem, 7.2vw, 4.4rem);
   line-height: 1.04;
   color: var(--plum-500);
-  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.75), 0 8px 34px rgba(255, 255, 255, 0.55);
+  /* A TIGHT SHADOW, NOT A HALO. Two short white offsets, no large blur: this
+     is here to keep the letter edges crisp where a highlight in the film runs
+     right up against them, and nothing more. The wide soft glows that used to
+     be on this line read as fog round the words and are gone. */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 0.8);
 }
-/* THE BACKING BEHIND THE WORDS. The pool in the scrim lifts the whole middle
-   of the frame a little; this lifts the text block and nothing else. It is
-   shaped like the text rather than like the hero - a soft-edged ellipse that
-   closes on the sides of the heading - so the contrast under the letters can
-   be high while the film either side of them stays untouched. That is what
-   lets the veil overall be as thin as it now is.
-
-   WHY ::before AND z-index: -1 WORK HERE. .hero-video-copy is positioned and
-   has z-index: 1, so it starts a stacking context of its own. A negative
-   z-index inside it therefore falls behind the words and stops there, above
-   the film - it cannot slide behind the video the way it would if the copy
-   block were an ordinary element.
-
-   IT IS A BLURRED RECTANGLE, NOT A GRADIENT, and that is deliberate. An
-   ellipse was tried first and failed where you would expect it to: a block
-   of text is a rectangle, and the corners of the top line - "MAKE" on the
-   left - fell outside the ellipse and measured 1.4:1. A rounded rectangle
-   put through a 26px blur is flat under the letters and soft at the edges,
-   which is both what the text needs and what keeps it from reading as a box.
-
-   The inset and the radius are in em, so the backing grows with the headline
-   and keeps the same margin round the letters at every screen size. */
-.hero-video-title,
-.hero-video-lede { position: relative; }
-
-.hero-video-title::before {
-  content: "";
-  position: absolute;
-  inset: -0.42em -0.5em;
-  z-index: -1;
-  pointer-events: none;
-  border-radius: 0.6em;
-  background: rgba(255, 255, 255, 0.74);
-  /* The blur is in em too, so the soft edge keeps the same proportion to the
-     letters whether the headline is 37px on a phone or 70px on a desktop. A
-     pixel blur was tried first and was far too soft at phone size, where it
-     ate most of the backing before the text got any of it. */
-  filter: blur(0.3em);
-}
-
-/* The supporting line gets the same thing, scaled to its own smaller text. */
-.hero-video-lede::before {
-  content: "";
-  position: absolute;
-  inset: -0.55em -1.2em;
-  z-index: -1;
-  pointer-events: none;
-  border-radius: 1.2em;
-  background: rgba(255, 255, 255, 0.78);
-  filter: blur(26px);
-}
-
 .hero-video-title em {
   display: block;
   font-style: normal;
@@ -1144,7 +1111,8 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-lede);
   line-height: 1.55;
   color: var(--plum-700);
-  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.85), 0 6px 24px rgba(255, 255, 255, 0.6);
+  /* The same tight pair as the headline, scaled down. */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
 .hero-video-actions {
@@ -3446,12 +3414,30 @@ a.contact-value:hover { color: var(--gold-400); }
     align-items: flex-start;
   }
 
-  /* The pool of light follows the text: over to the left, and a little
-     lower, because the pitch hangs off the bottom edge here rather than
-     sitting in the middle of the frame as it does on a phone. */
+  /* The band of light follows the text. From here up the pitch is over at the
+     left-hand gutter and hangs off the bottom of the frame rather than
+     sitting in the middle of it, so the band turns on its side: a tall
+     ellipse anchored left, 130% of the height so its top and bottom edges are
+     off the screen and only the right-hand side fades. The food on the right
+     of the frame is left alone.
+
+     IT IS A GRADIENT, FULL BLEED, AND THAT IS THE POINT. What used to light
+     the words was a blurred white rectangle sitting behind them, and it read
+     as fog with a visible edge on the right. Anything that lights the text
+     has to run off the side of the frame, or you can see where it stops. */
   .hero-video-scrim {
-    --hero-shade-x: 34%;
-    --hero-shade-y: 56%;
+    background:
+      radial-gradient(72% 130% at 22% 56%,
+        rgba(255, 255, 255, 0.74) 0%,
+        rgba(255, 255, 255, 0.70) 50%,
+        rgba(255, 255, 255, 0.24) 72%,
+        rgba(255, 255, 255, 0) 92%),
+      linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.64) 0,
+        rgba(255, 255, 255, 0.58) var(--header-h),
+        rgba(255, 255, 255, 0.05) calc(var(--header-h) + 5rem),
+        rgba(255, 255, 255, 0.05) 72%,
+        rgba(255, 255, 255, 0.16) 100%);
   }
 
   /* The arrow bar only exists where the arrows do. */
