@@ -577,7 +577,7 @@ a:hover { color: var(--plum-700); }
    it always did while the mark as a whole sits smaller in the bar. */
 .brand-logo {
   display: block;
-  height: 1.8rem;
+  height: 1.6rem;
   width: auto;
   max-width: 100%;
 }
@@ -984,12 +984,11 @@ body.nav-is-open { overflow: hidden; }
    bottom. Change those two values, not the gradient.
 
    THE VEIL IS MUCH THINNER THAN IT WAS, and the text does not depend on it
-   any more. The first version of this veil was strong everywhere and the
-   film came out looking washed, which is the one thing the client came back
-   on. Both layers have since been cut hard through the middle of the frame -
-   the flat one from 0.38 to 0.13, the pool from 0.58 to 0.44 - so the food
-   keeps its own colour and the hero reads as a film rather than as a white
-   panel.
+   any more. The first version was strong everywhere and the film came out
+   looking washed, which the client came back on twice. Both layers have been
+   cut hard through the middle of the frame since - the flat one from 0.38 to
+   0.08, the pool from 0.58 to 0.28 - so the food keeps its own colour and the
+   hero reads as a film rather than as a white panel.
 
    WHAT HOLDS THE TEXT UP INSTEAD is a separate backing behind the headline
    and the supporting line, which you will find a little further down this
@@ -1002,13 +1001,15 @@ body.nav-is-open { overflow: hidden; }
    re-measuring the links, which are small text and need 4.5:1.
 
    MEASURE AFTER ANY CHANGE. Against a pure black frame - darker than
-   anything in the film - the violet top line of the headline reads 4.32:1,
-   the deep plum line under it 8.22:1, the supporting line 4.84:1, and the
+   anything in the film - the violet top line of the headline reads 3.68:1,
+   the deep plum line under it 6.97:1, the supporting line 4.55:1, and the
    logo and nav links in the bar 4.67:1 and 4.50:1. On a 390px phone the two
-   headline lines read 4.19:1 and 7.27:1 and the logo and menu button 5.58:1
-   and 4.33:1. Those are the numbers to beat, and the thin ones are the top
-   line of the headline (3:1) and the nav links (4.5:1 - they are small text,
-   so they need the higher floor). */
+   headline lines read 3.68:1 and 6.39:1 and the logo and menu button 5.20:1
+   and 4.39:1. Those are the numbers to beat, and the thin ones are the top
+   line of the headline (3:1) and the nav links and supporting line (4.5:1 -
+   they are small text, so they need the higher floor). There is not much
+   room left in any of them: this is about as thin as the veil goes while the
+   text over it stays purple. */
 .hero-video-scrim {
   position: absolute;
   inset: 0;
@@ -1017,16 +1018,16 @@ body.nav-is-open { overflow: hidden; }
   --hero-shade-y: 47%;
   background:
     radial-gradient(72% 60% at var(--hero-shade-x) var(--hero-shade-y),
-      rgba(255, 255, 255, 0.50) 0%,
-      rgba(255, 255, 255, 0.44) 46%,
-      rgba(255, 255, 255, 0.18) 74%,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.28) 46%,
+      rgba(255, 255, 255, 0.11) 74%,
       rgba(255, 255, 255, 0) 90%),
     linear-gradient(to bottom,
       rgba(255, 255, 255, 0.64) 0,
       rgba(255, 255, 255, 0.58) var(--header-h),
-      rgba(255, 255, 255, 0.13) calc(var(--header-h) + 7rem),
-      rgba(255, 255, 255, 0.11) 62%,
-      rgba(255, 255, 255, 0.30) 100%);
+      rgba(255, 255, 255, 0.08) calc(var(--header-h) + 7rem),
+      rgba(255, 255, 255, 0.07) 62%,
+      rgba(255, 255, 255, 0.20) 100%);
 }
 
 
@@ -1127,7 +1128,7 @@ body.nav-is-open { overflow: hidden; }
   z-index: -1;
   pointer-events: none;
   border-radius: 1.2em;
-  background: rgba(255, 255, 255, 0.44);
+  background: rgba(255, 255, 255, 0.78);
   filter: blur(26px);
 }
 
@@ -3229,7 +3230,7 @@ a.contact-value:hover { color: var(--gold-400); }
     padding-inline: 0;
     overflow-x: visible;
   }
-  .brand-logo { height: 2rem; }
+  .brand-logo { height: 1.75rem; }
   .nav-toggle { width: 3rem; height: 3rem; }
   .footer-logo { height: 3.2rem; }
 
@@ -3561,7 +3562,7 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Large desktop (1180px) --- */
 @media (min-width: 1180px) {
   :root { --header-h: 6.5rem; }
-  .brand-logo { height: 2.2rem; }
+  .brand-logo { height: 1.9rem; }
   .section-head { margin-bottom: clamp(3rem, 5vw, 4.5rem); }
   .loc-grid { gap: var(--sp-5); }
 }
