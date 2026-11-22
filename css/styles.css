@@ -569,7 +569,7 @@ a:hover { color: var(--plum-700); }
    height below - the width follows on its own. */
 .brand-logo {
   display: block;
-  height: 3.2rem;
+  height: 2.7rem;
   width: auto;
   max-width: 100%;
 }
@@ -631,19 +631,34 @@ a:hover { color: var(--plum-700); }
    lifted to about 170 by the veil) the purple logo and bars read at about
    5.4:1, so they hold even at the film's darkest moment.
 
-   Scoped to .page-home, which is the body class on index.html. If the
-   catering or menu hero is ever given a light treatment too, add its body
-   class to these selectors rather than widening them. */
-.page-home .brand-logo-on-dark { display: none; }
-.page-home .brand-logo-on-light { display: block; }
-.page-home .nav-toggle {
+   Scoped by body class: .page-home on index.html and .page-catering on
+   catering.html, both of which now open on a light hero. The menu page is
+   NOT in this list - its hero is still a dark photograph and its bar is
+   still white. If that ever changes, add .page-menu to each selector
+   below rather than widening them to every page. */
+/* The alternating band on the catering page is a barely-there violet rather
+   than the warm grey the rest of the site uses. Same job - it separates one
+   section from the next - but it keeps the page bright, which is what the
+   client asked for, and it reads as brand colour rather than as dirt. */
+.page-catering .section-alt { background: var(--plum-050); }
+
+.page-home .brand-logo-on-dark,
+.page-catering .brand-logo-on-dark { display: none; }
+.page-home .brand-logo-on-light,
+.page-catering .brand-logo-on-light { display: block; }
+.page-home .nav-toggle,
+.page-catering .nav-toggle {
   background: rgba(255, 255, 255, 0.55);
   border-color: rgba(107, 63, 160, 0.25);
 }
-.page-home .nav-toggle:hover { background: rgba(107, 63, 160, 0.08); }
+.page-home .nav-toggle:hover,
+.page-catering .nav-toggle:hover { background: rgba(107, 63, 160, 0.08); }
 .page-home .nav-toggle-bars,
 .page-home .nav-toggle-bars::before,
-.page-home .nav-toggle-bars::after { background: var(--plum-700); }
+.page-home .nav-toggle-bars::after,
+.page-catering .nav-toggle-bars,
+.page-catering .nav-toggle-bars::before,
+.page-catering .nav-toggle-bars::after { background: var(--plum-700); }
 
 
 /* --- The nav links in the bar (900px and up) ---
@@ -709,11 +724,15 @@ a:hover { color: var(--plum-700); }
 /* Purple on cream, and on the home page from the start. The hover rules
    have to come after the plain ones or they lose to them on equal weight. */
 .site-header.is-stuck .nav-inline a,
+.page-catering .nav-inline a,
 .page-home .nav-inline a { color: var(--plum-700); }
 .site-header.is-stuck .nav-inline a::after,
+.page-catering .nav-inline a::after,
 .page-home .nav-inline a::after { background: var(--gold-600); }
 .site-header.is-stuck .nav-inline a:hover,
 .site-header.is-stuck .nav-inline a:focus-visible,
+.page-catering .nav-inline a:hover,
+.page-catering .nav-inline a:focus-visible,
 .page-home .nav-inline a:hover,
 .page-home .nav-inline a:focus-visible { color: var(--plum-500); }
 
@@ -956,14 +975,32 @@ body.nav-is-open { overflow: hidden; }
    lower from 900px, where the pitch is left-aligned and hangs off the
    bottom. Change those two values, not the gradient.
 
-   IT IS WIDE AND GENTLE RATHER THAN SMALL AND STRONG, and that is the
-   result of measuring rather than a matter of taste. A tighter pool put the
-   top-left corner of the headline out near its edge, where the light had
-   already faded, and the violet line fell to 2.9:1 over the darkest frame -
-   under the 3:1 a heading of this size needs. Opening the ellipse out until
-   the whole text block sits on the plateau fixed it without making the
-   middle any whiter, which is what a stronger pool would have done: a bright
-   spot on the food. Widen it before you deepen it. */
+   THE VEIL IS MUCH THINNER THAN IT WAS, and the text does not depend on it
+   any more. The first version of this veil was strong everywhere and the
+   film came out looking washed, which is the one thing the client came back
+   on. Both layers have since been cut hard through the middle of the frame -
+   the flat one from 0.38 to 0.13, the pool from 0.58 to 0.44 - so the food
+   keeps its own colour and the hero reads as a film rather than as a white
+   panel.
+
+   WHAT HOLDS THE TEXT UP INSTEAD is a separate backing behind the headline
+   and the supporting line, which you will find a little further down this
+   section under .hero-video-title::before. That is the piece to adjust if
+   the words are ever hard to read - it costs nothing outside the text block,
+   where this veil costs the whole frame. THE VEIL IS NOW ONLY RESPONSIBLE
+   FOR THE BAR AT THE TOP: the logo and the four nav links are purple and
+   they have nothing else behind them, which is what sets the first two stops
+   of the flat layer. Do not take those two below about 0.58 without
+   re-measuring the links, which are small text and need 4.5:1.
+
+   MEASURE AFTER ANY CHANGE. Against a pure black frame - darker than
+   anything in the film - the violet top line of the headline reads 4.32:1,
+   the deep plum line under it 8.22:1, the supporting line 4.84:1, and the
+   logo and nav links in the bar 4.67:1 and 4.50:1. On a 390px phone the two
+   headline lines read 4.19:1 and 7.27:1 and the logo and menu button 5.58:1
+   and 4.33:1. Those are the numbers to beat, and the thin ones are the top
+   line of the headline (3:1) and the nav links (4.5:1 - they are small text,
+   so they need the higher floor). */
 .hero-video-scrim {
   position: absolute;
   inset: 0;
@@ -971,16 +1008,17 @@ body.nav-is-open { overflow: hidden; }
   --hero-shade-x: 50%;
   --hero-shade-y: 47%;
   background:
-    radial-gradient(92% 66% at var(--hero-shade-x) var(--hero-shade-y),
-      rgba(255, 255, 255, 0.74) 0%,
-      rgba(255, 255, 255, 0.58) 50%,
-      rgba(255, 255, 255, 0) 82%),
+    radial-gradient(72% 60% at var(--hero-shade-x) var(--hero-shade-y),
+      rgba(255, 255, 255, 0.50) 0%,
+      rgba(255, 255, 255, 0.44) 46%,
+      rgba(255, 255, 255, 0.18) 74%,
+      rgba(255, 255, 255, 0) 90%),
     linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.66) 0,
-      rgba(255, 255, 255, 0.60) var(--header-h),
-      rgba(255, 255, 255, 0.38) calc(var(--header-h) + 7rem),
-      rgba(255, 255, 255, 0.36) 62%,
-      rgba(255, 255, 255, 0.54) 100%);
+      rgba(255, 255, 255, 0.64) 0,
+      rgba(255, 255, 255, 0.58) var(--header-h),
+      rgba(255, 255, 255, 0.13) calc(var(--header-h) + 7rem),
+      rgba(255, 255, 255, 0.11) 62%,
+      rgba(255, 255, 255, 0.30) 100%);
 }
 
 
@@ -1033,6 +1071,58 @@ body.nav-is-open { overflow: hidden; }
   color: var(--plum-500);
   text-shadow: 0 1px 10px rgba(255, 255, 255, 0.75), 0 8px 34px rgba(255, 255, 255, 0.55);
 }
+/* THE BACKING BEHIND THE WORDS. The pool in the scrim lifts the whole middle
+   of the frame a little; this lifts the text block and nothing else. It is
+   shaped like the text rather than like the hero - a soft-edged ellipse that
+   closes on the sides of the heading - so the contrast under the letters can
+   be high while the film either side of them stays untouched. That is what
+   lets the veil overall be as thin as it now is.
+
+   WHY ::before AND z-index: -1 WORK HERE. .hero-video-copy is positioned and
+   has z-index: 1, so it starts a stacking context of its own. A negative
+   z-index inside it therefore falls behind the words and stops there, above
+   the film - it cannot slide behind the video the way it would if the copy
+   block were an ordinary element.
+
+   IT IS A BLURRED RECTANGLE, NOT A GRADIENT, and that is deliberate. An
+   ellipse was tried first and failed where you would expect it to: a block
+   of text is a rectangle, and the corners of the top line - "MAKE" on the
+   left - fell outside the ellipse and measured 1.4:1. A rounded rectangle
+   put through a 26px blur is flat under the letters and soft at the edges,
+   which is both what the text needs and what keeps it from reading as a box.
+
+   The inset and the radius are in em, so the backing grows with the headline
+   and keeps the same margin round the letters at every screen size. */
+.hero-video-title,
+.hero-video-lede { position: relative; }
+
+.hero-video-title::before {
+  content: "";
+  position: absolute;
+  inset: -0.42em -0.5em;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 0.6em;
+  background: rgba(255, 255, 255, 0.74);
+  /* The blur is in em too, so the soft edge keeps the same proportion to the
+     letters whether the headline is 37px on a phone or 70px on a desktop. A
+     pixel blur was tried first and was far too soft at phone size, where it
+     ate most of the backing before the text got any of it. */
+  filter: blur(0.3em);
+}
+
+/* The supporting line gets the same thing, scaled to its own smaller text. */
+.hero-video-lede::before {
+  content: "";
+  position: absolute;
+  inset: -0.55em -1.2em;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 1.2em;
+  background: rgba(255, 255, 255, 0.44);
+  filter: blur(26px);
+}
+
 .hero-video-title em {
   display: block;
   font-style: normal;
@@ -1402,6 +1492,70 @@ body.nav-is-open { overflow: hidden; }
 .hero-compact { min-height: 0; }
 .hero-compact .hero-inner { padding-bottom: clamp(2rem, 6vw, 3.5rem); }
 
+/* --- THE LIGHT HERO -----------------------------------------------------
+   The same hero, inverted: cream and pale violet instead of deep plum, so
+   the catering page opens bright rather than heavy. Add .hero-light beside
+   .hero on the <section> and the whole block below takes over - background,
+   scrim, headline, lede, eyebrow, the tick list and the outline button.
+
+   THE BODY CLASS GOES WITH IT. A light hero needs the purple logo and the
+   purple nav from the first pixel, because the white ones vanish on cream.
+   That lives in section 6, keyed to .page-catering. If you put .hero-light
+   on some other page you have to add that page’s body class there as well,
+   or the bar will be white on white.
+
+   THE HEADLINE TAKES THE TWO-LINE TREATMENT. Brand violet on the top line,
+   deep plum on the <em> under it - the same pairing as every other two-line
+   heading on the site (section 4). The gold italic the dark hero used is
+   dropped here: gold on cream is not readable at heading size. */
+.hero-light { color: var(--text); }
+
+.hero-light .hero-media {
+  background:
+    radial-gradient(58% 68% at 88% 8%, rgba(217, 188, 119, 0.34) 0%, transparent 66%),
+    radial-gradient(70% 80% at 2% 96%, rgba(107, 63, 160, 0.13) 0%, transparent 64%),
+    linear-gradient(158deg, var(--paper) 0%, var(--sand-50) 52%, var(--plum-050) 100%);
+}
+
+/* A wash from the left so the words keep a clean field under them while the
+   gold corner on the right stays warm. No weave: the texture was there to
+   stop a large area of flat purple looking dead, and cream does not need it. */
+.hero-light .hero-scrim {
+  background: linear-gradient(100deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.45) 46%,
+    rgba(255, 255, 255, 0) 86%);
+}
+.hero-light .hero-scrim::after { opacity: 0; }
+
+.hero-light .hero-title { color: var(--plum-500); }
+.hero-light .hero-title em { font-style: normal; color: var(--plum-700); }
+.hero-light .hero-lede { color: var(--text-muted); }
+
+.hero-light .eyebrow-light { color: var(--accent-text); }
+.hero-light .eyebrow-light .eyebrow-rule { background: var(--gold-500); }
+
+.hero-light .trust-bar { border-top-color: var(--line); }
+.hero-light .trust-bar li { color: var(--text-muted); }
+.hero-light .trust-bar li::before {
+  border-left-color: var(--accent-text);
+  border-bottom-color: var(--accent-text);
+}
+
+/* The outline button was white-on-dark. On cream it becomes purple-on-white,
+   and loses the blur - there is nothing behind it to blur. */
+.hero-light .btn-ghost {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--plum-700);
+  border-color: rgba(107, 63, 160, 0.3);
+  backdrop-filter: none;
+}
+.hero-light .btn-ghost:hover {
+  background: var(--paper);
+  border-color: var(--plum-500);
+  color: var(--plum-600);
+}
+
 /* --- The split hero: pitch on the left, food photo on the right ---
    One column on a phone, and the photo is not there at all. Two columns
    from 900px, where there is room for the picture to be worth its space.
@@ -1507,6 +1661,13 @@ body.nav-is-open { overflow: hidden; }
   font-family: var(--font-display);
   font-size: 0.92rem;
   color: rgba(239, 234, 246, 0.6);
+}
+/* The hashtag inside the ticker is the artwork, not the words, so it sits
+   inline and rides the baseline with the dish names either side of it. */
+.ticker-group .tagmark {
+  display: inline-block;
+  height: 1.5em;
+  vertical-align: -0.34em;
 }
 .ticker-group i {
   font-style: normal;
@@ -1990,6 +2151,66 @@ body.nav-is-open { overflow: hidden; }
 
 
 /* ---------------------------------------------------------------------------
+   9d. WHY SULTAN’S - the opening paragraphs on the catering page
+   ---------------------------------------------------------------------------
+   Three short paragraphs between the hero and the packages, saying what the
+   service is before the page starts asking anyone to choose. Words only: no
+   cards, no icons, no columns of three. The whole point of the section is
+   that it reads like someone talking, so anything that turns it into a
+   feature grid undoes it.
+
+   THE TEXT IS THE CLIENT’S, WORD FOR WORD. Change the wording in
+   catering.html, not here.
+   --------------------------------------------------------------------------- */
+.why-copy {
+  max-width: 58ch;
+}
+
+/* The first paragraph is the promise, so it is set a size up and in the deep
+   plum - it carries the section the way a lede does. */
+/* Written as .why-copy .why-lead, not .why-lead: the rule below it sets the
+   colour of every paragraph in the block and would otherwise win on
+   specificity and grey this one out with the rest. */
+.why-copy .why-lead {
+  font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--plum-700);
+  margin-bottom: var(--sp-5);
+}
+.why-copy p {
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+.why-copy p + p { margin-top: var(--sp-5); }
+
+/* The PATH line is an offer rather than a sentence about the business, so it
+   is lifted out onto its own pale violet slab. It sizes to its words -
+   inline-flex, not a block - so it reads as a note pinned to the page and
+   not as another panel. */
+.why-note {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--r-md);
+  background: var(--plum-100);
+  color: var(--plum-700);
+  font-weight: 500;
+  line-height: 1.5;
+}
+/* The gold dot in front of it, drawn rather than fetched. */
+.why-note::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--gold-500);
+  transform: translateY(-0.15em);
+}
+
+/* ---------------------------------------------------------------------------
    10. CATERING PACKAGES
    The first card is the wide featured one; the rest sit in a grid below it.
    --------------------------------------------------------------------------- */
@@ -2008,7 +2229,9 @@ body.nav-is-open { overflow: hidden; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  box-shadow: var(--shadow-sm);
+  /* Barely a shadow. Three heavy cards in a row read as three slabs; the
+     lift on hover is what tells you they are things you can act on. */
+  box-shadow: var(--shadow-xs);
   overflow: hidden;
   transition: transform var(--t-base), box-shadow var(--t-base),
               border-color var(--t-base);
@@ -2016,7 +2239,7 @@ body.nav-is-open { overflow: hidden; }
 .pkg:hover {
   transform: translateY(-4px);
   border-color: rgba(107, 63, 160, 0.18);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Each card has three parts, in this order:
@@ -2031,7 +2254,10 @@ body.nav-is-open { overflow: hidden; }
 
 .pkg-aside {
   padding: var(--sp-5);
-  background: var(--sand-50);
+  /* White, divided by a hairline, rather than a tinted panel. The tint was
+     doing the job of a border and the card ended up looking like three
+     stacked boxes. */
+  background: var(--paper);
   border-block: 1px solid var(--border);
 }
 .pkg-aside-title {
@@ -2043,39 +2269,36 @@ body.nav-is-open { overflow: hidden; }
   color: var(--ink-400);
 }
 
-/* --- The featured package: the dark, menu-style card ---
-   Deep plum with light type and gold accents, the way the Sultan's Spread
-   is presented in the printed catering menu. Only this one card is dark;
-   the other packages stay white. */
+/* --- The featured package ------------------------------------------------
+   WAS A DARK CARD. Deep plum, light type, gold rules - a straight lift of
+   the way the printed menu presents the Sultan’s Spread, and on screen it
+   sat in the middle of a bright page like a hole. The client asked for
+   cleaner and brighter, so the card is white like the other two now and the
+   emphasis is carried by the things that cost nothing in weight: it is wider
+   than the rest, it keeps the gold rule along its top edge, it has a little
+   more shadow, and its "what’s included" panel is washed the faintest
+   violet. Nothing on it is dark except the words.
+
+   TO MOVE THE EMPHASIS to another package, move the class pkg-feature. The
+   card does not need anything else - the width, the rule and the shadow all
+   come with it. */
 .pkg-feature {
-  border-color: rgba(200, 162, 74, 0.4);
-  box-shadow: var(--shadow-lg);
+  border-color: rgba(107, 63, 160, 0.14);
+  box-shadow: var(--shadow-md);
   background:
-    radial-gradient(80% 90% at 85% 0%, rgba(200, 162, 74, 0.16) 0%, transparent 60%),
-    linear-gradient(155deg, var(--plum-700) 0%, var(--plum-950) 100%);
-  color: var(--text-on-dark);
+    radial-gradient(70% 80% at 92% 0%, rgba(200, 162, 74, 0.09) 0%, transparent 62%),
+    var(--paper);
 }
-.pkg-feature:hover { border-color: rgba(200, 162, 74, 0.65); }
+.pkg-feature:hover { border-color: rgba(107, 63, 160, 0.3); }
 
-.pkg-feature .pkg-name { color: var(--paper); }
-.pkg-feature .pkg-meta { color: var(--gold-400); }
-.pkg-feature .pkg-desc { color: rgba(239, 234, 246, 0.76); }
-.pkg-feature .pkg-price { color: var(--paper); }
-
-.pkg-feature .pkg-badge {
-  background: rgba(200, 162, 74, 0.2);
-  color: var(--gold-300);
-}
-
-/* The "what's included" panel, as a slightly lighter inset on the dark card. */
-.pkg-feature .pkg-aside {
-  background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-.pkg-feature .pkg-aside-title { color: var(--gold-400); }
-.pkg-feature .pkg-row { border-bottom-color: rgba(255, 255, 255, 0.1); }
-.pkg-feature .pkg-row dt { color: rgba(239, 234, 246, 0.5); }
-.pkg-feature .pkg-row dd { color: var(--text-on-dark); }
+/* The violet wash on the contents panel is the one thing that marks this card
+   out from the inside rather than the outside. It is plum-100 rather than the
+   fainter plum-050, which is the colour of the band the cards sit on - at 050
+   the panel and the page behind it were the same value and the wash
+   disappeared. */
+.pkg-feature .pkg-aside { background: var(--plum-100); }
+/* The gold rule along the top edge - the badge of the featured card now that
+   it is no longer dark. Its own rule because ::before cannot be merged. */
 .pkg-feature::before {
   content: "";
   position: absolute;
@@ -2899,6 +3122,11 @@ a.contact-value:hover { color: var(--gold-400); }
 
    NOTE: the footer is shared with catering.html, so this sets the tag in
    both footers. That is the intention - the two are meant to match. */
+/* Since the artwork went in, the only thing this rule still does is hold the
+   mark’s size and kill the paragraph margin - the type below it is what the
+   tag looked like before, and it is kept for the case where the image fails
+   and the alt text prints in its place. */
+.footer-tag .tagmark { height: 1.6rem; }
 .footer-tag {
   margin: 0;
   font-family: var(--font-display);
@@ -2993,7 +3221,7 @@ a.contact-value:hover { color: var(--gold-400); }
     padding-inline: 0;
     overflow-x: visible;
   }
-  .brand-logo { height: 3.6rem; }
+  .brand-logo { height: 3.05rem; }
   .nav-toggle { width: 3rem; height: 3rem; }
   .footer-logo { height: 3.2rem; }
 
@@ -3325,7 +3553,7 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Large desktop (1180px) --- */
 @media (min-width: 1180px) {
   :root { --header-h: 6.5rem; }
-  .brand-logo { height: 4.1rem; }
+  .brand-logo { height: 3.4rem; }
   .section-head { margin-bottom: clamp(3rem, 5vw, 4.5rem); }
   .loc-grid { gap: var(--sp-5); }
 }
@@ -3347,6 +3575,60 @@ a.contact-value:hover { color: var(--gold-400); }
    standard property. Safari still needs the prefixed one. Do not merge
    them into a shorthand list.
    =========================================================================== */
+/* --- The wordmark -------------------------------------------------------
+   The client’s "sultan’s" lettering. Wherever the brand name is SET IN
+   DISPLAY TYPE - a heading, a card title, the line of copy that introduces
+   the place - it is this picture rather than the word typed out. The name is
+   drawn artwork, so setting it in Fertigo would be a near-miss rather than
+   the real thing.
+
+   TWO FILES, ONE JOB, AND YOU PICK BY HAND. Purple on anything light, white
+   on anything purple. No CSS can tell what is behind an image, so there is
+   no rule here that will catch the wrong one for you:
+       <img class="wordmark" src="assets/wordmark-purple.png" alt="Sultan’s"
+            width="791" height="200">
+       <img class="wordmark" src="assets/wordmark-white.png"  alt="Sultan’s"
+            width="289" height="74">
+
+   IT SITS ON THE TEXT BASELINE. The artwork is cropped tight - the bottom of
+   the lettering is the bottom edge of the file, and there are no descenders -
+   so vertical-align: baseline drops it exactly where the word would have sat.
+   The height is in em, so it grows with whatever it is set inside and the one
+   rule covers a 3rem heading and a 1rem sentence alike.
+
+   IT STILL HAS TO READ AS A WORD. Give it alt="Sultan’s" every time, so a
+   screen reader says the name and a failed image prints it.
+
+   WHERE IT IS NOT USED: the <title>, the meta tags and the alt text itself,
+   which have to be real characters; and the header and footer, which carry
+   the full logo with MEDITERRANEAN GRILL under it rather than the wordmark
+   on its own. */
+.wordmark {
+  display: inline-block;
+  height: 0.86em;
+  width: auto;
+  vertical-align: baseline;
+  /* The lettering runs a little taller than the capitals it stands among,
+     so it is dropped a hair to stop the line looking lifted. */
+  margin-bottom: -0.03em;
+}
+
+/* In running body copy, where it sits among lower-case Poppins rather than
+   Fertigo capitals and reads large at the same height. */
+.wordmark-sm { height: 1.3em; margin-bottom: -0.24em; }
+
+/* --- The #eatlikeasultan mark -------------------------------------------
+   The hashtag is drawn artwork too, and it only exists in white, so it
+   belongs on purple: the footer and the dish ticker. If it is ever wanted on
+   cream, ask the client for a purple file rather than recolouring this one -
+   it is a picture, not a mask, and it will not take a colour. */
+.tagmark {
+  display: block;
+  width: auto;
+  height: 1.75rem;
+  max-width: 100%;
+}
+
 .icon {
   display: inline-block;
   flex: none;
@@ -3483,6 +3765,14 @@ a.contact-value:hover { color: var(--gold-400); }
   .guests-range, .guests-scale, .guests-count { display: none !important; }
   .section-solid::after, .section-invert::after,
   .eyebrow-icon, .footer-social { display: none !important; }
+
+  /* The brand artwork on paper. Both the white wordmark and the white
+     #eatlikeasultan mark live on purple on screen, and the rule below turns
+     every purple panel white for printing - which would leave white artwork
+     on white paper. brightness(0) paints whatever is in the file solid black
+     and leaves the transparency alone, so one line covers both files and the
+     purple one as well, which should be black on paper anyway. */
+  .wordmark, .tagmark { filter: brightness(0) !important; }
 
   body { color: #000; background: #fff; font-size: 11pt; }
   .hero, .section-invert, .site-footer, .section-alt {

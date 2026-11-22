@@ -66,7 +66,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body class="page-catering">
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- =========================================================================
@@ -174,12 +174,19 @@
      THE PHOTO IS DESKTOP ONLY. It is a CSS background in a media query
      rather than an <img>, which means a phone never downloads it at all.
      To change it, edit .hero-photo in section 15 of the stylesheet.
-     ========================================================================= -->
-<section class="hero hero-compact hero-split" id="top">
 
-  <!-- The two layers behind the words: the purple gradient, then the scrim
-       that darkens it so the headline and the logo stay readable. The
-       food photo is NOT here - it is the right-hand column below. -->
+     THIS HERO IS LIGHT. The class that does it is "hero-light" on the
+     <section> below, and the matching body class is "page-catering", which
+     is what makes the header bar wear its purple logo and purple menu
+     button from the first pixel instead of the white ones. The two go
+     together: take one off and the bar turns white on cream. Both are
+     explained in sections 6 and 7 of the stylesheet.
+     ========================================================================= -->
+<section class="hero hero-compact hero-split hero-light" id="top">
+
+  <!-- The two layers behind the words: the cream-and-violet gradient, then
+       the wash over it that clears a field for the headline. The food photo
+       is NOT here - it is the right-hand column below. -->
   <div class="hero-media" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
 
@@ -216,6 +223,45 @@
 
   </div>
 
+</section>
+
+<!-- =========================================================================
+     ==== EDIT: WHY SULTAN’S ====
+     Three paragraphs, in the client’s own words, between the hero and the
+     packages. It is here so that the page says what the service is before it
+     asks anyone to pick something.
+
+     KEEP IT TO WORDS. There are no cards, icons or columns in this section
+     on purpose - see the note on .why-copy in section 9d of the stylesheet.
+
+     THE $200 FIGURE IS THE CLIENT’S OWN and it is repeated in the hero’s
+     trust line and in the footer. If the threshold ever changes, those are
+     the other two places to change it.
+     ========================================================================= -->
+<section class="section" id="why">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Why us</p>
+      <h2 class="section-title">Why <img class="wordmark" src="assets/wordmark-purple.png" alt="Sultan’s" width="791" height="200">.</h2>
+    </header>
+
+    <div class="why-copy">
+      <p class="why-lead">
+        Catering for your events shouldn’t be another source of strain; it
+        should be simple, stunning, and sincerely welcoming to all.
+      </p>
+      <p>
+        We offer flexible catering packages to suit any occasion, including
+        corporate events, client meetings, and team lunches in Toronto’s
+        Financial District and surrounding areas.
+      </p>
+      <p class="why-note">
+        Enjoy complimentary PATH delivery on all orders over $200.
+      </p>
+    </div>
+
+  </div>
 </section>
 
 <!-- =========================================================================
@@ -261,7 +307,7 @@
 
         <div class="pkg-main">
           <span class="pkg-badge">Best-selling</span>
-          <h3 class="pkg-name">Sultan's Spread</h3>
+          <h3 class="pkg-name"><img class="wordmark" src="assets/wordmark-purple.png" alt="Sultan’s" width="791" height="200"> Spread</h3>
           <p class="pkg-meta">Buffet-style &middot; Per person &middot; Min. 20 guests</p>
           <p class="pkg-desc">
             Pick two proteins. We build the rest around them, with vegan,
@@ -958,7 +1004,7 @@
         Modern Mediterranean, fit for royalty. Catering across Toronto,
         North York, Waterloo and St. Catharines.
       </p>
-      <p class="footer-tag">#eatlikeasultan</p>
+      <p class="footer-tag"><img class="tagmark" src="assets/tag-white.png" alt="#eatlikeasultan" width="877" height="163"></p>
 
       <ul class="footer-social">
         <li>
@@ -1005,7 +1051,7 @@
 
     <div class="footer-bottom">
       <!-- The year fills itself in. Change the business name only. -->
-      <p>&copy; <span id="year">2026</span> Sultan's Mediterranean Grill. All rights reserved.</p>
+      <p>&copy; <span id="year">2026</span> <img class="wordmark wordmark-sm" src="assets/wordmark-white.png" alt="Sultan’s" width="289" height="74"> Mediterranean Grill. All rights reserved.</p>
       <a class="back-to-top" href="#top">Back to top &uarr;</a>
     </div>
 

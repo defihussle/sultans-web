@@ -98,3 +98,29 @@ wide, or the ring turns to mush.
 sheet. It repeats seamlessly, so it is a few KB instead of a few hundred. If a
 new pattern is supplied, the tile has to be cut on the pattern's own repeat or
 the joins will show.
+
+## The wordmark (added November 2026)
+
+| File | What it is | Where it shows |
+| --- | --- | --- |
+| `wordmark-purple.png` | The "sultan's" lettering in brand purple, 791x200 | Anywhere the brand name is set in display type on a light background: the "Why sultan's" heading and the "sultan's Spread" card title on the catering page |
+| `wordmark-white.png` | The same lettering in white, 289x74 | The same job on a purple background: the About band on the home page, and the copyright line in every footer |
+| `tag-white.png` | The `#eatlikeasultan` mark in white, 877x163 | The footer on all three pages, and the dish ticker on the home page |
+
+**These are pictures, not masks.** There is no CSS that can tell what colour
+is behind an image, so the right file has to be chosen by hand: purple on
+anything light, white on anything purple. Get it wrong and the mark simply
+disappears.
+
+**They are not the logo.** `logo-purple.png` and `logo-white.png` are the full
+lockup, with MEDITERRANEAN GRILL set under the name, and they stay in the
+header and at the top of the footer. The wordmark is the name on its own, for
+use inside a line of type.
+
+**Every one of them needs alt text.** It is a word, and it has to read as a
+word to a screen reader and when an image fails: `alt="Sultan's"` for the two
+wordmarks, `alt="#eatlikeasultan"` for the tag.
+
+There is no purple version of the hashtag mark. If it is ever wanted on cream,
+ask the client for one rather than recolouring the white file - it will not
+take a colour.
