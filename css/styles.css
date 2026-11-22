@@ -563,13 +563,21 @@ a:hover { color: var(--plum-700); }
   text-decoration: none;
 }
 
-/* --- The logo ---
-   Two files, one shown at a time. White while the bar is see-through over
-   the hero, purple once it turns cream. To resize the logo, change the
-   height below - the width follows on its own. */
+/* --- The mark in the bar ---
+   Two files, one shown at a time. White while the bar is see-through over a
+   dark hero, purple once it turns cream - and purple from the top of the page
+   on the home and catering pages, whose heroes are light. To resize it,
+   change the height below and the two steps in section 15; the width follows
+   on its own.
+
+   THE HEIGHTS DROPPED WHEN THE LOCKUP BECAME THE WORDMARK. The old file had
+   MEDITERRANEAN GRILL set under the name and about a third of its height was
+   that line, so the same numbers would have made the lettering half as big
+   again as it used to be. These are set so the name reads at roughly the size
+   it always did while the mark as a whole sits smaller in the bar. */
 .brand-logo {
   display: block;
-  height: 2.7rem;
+  height: 1.8rem;
   width: auto;
   max-width: 100%;
 }
@@ -3221,7 +3229,7 @@ a.contact-value:hover { color: var(--gold-400); }
     padding-inline: 0;
     overflow-x: visible;
   }
-  .brand-logo { height: 3.05rem; }
+  .brand-logo { height: 2rem; }
   .nav-toggle { width: 3rem; height: 3rem; }
   .footer-logo { height: 3.2rem; }
 
@@ -3553,7 +3561,7 @@ a.contact-value:hover { color: var(--gold-400); }
 /* --- Large desktop (1180px) --- */
 @media (min-width: 1180px) {
   :root { --header-h: 6.5rem; }
-  .brand-logo { height: 3.4rem; }
+  .brand-logo { height: 2.2rem; }
   .section-head { margin-bottom: clamp(3rem, 5vw, 4.5rem); }
   .loc-grid { gap: var(--sp-5); }
 }

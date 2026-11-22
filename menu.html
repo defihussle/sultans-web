@@ -122,12 +122,20 @@
       </ul>
     </nav>
 
-    <!-- The official logo. Two versions: the white one shows while the bar is
-         see-through over the hero, the purple one once the bar turns cream.
-         Both live in the assets folder. -->
+    <!-- The wordmark. Two versions: the white one shows while the bar is
+         see-through over a dark hero, the purple one once the bar turns cream
+         - and from the first pixel on the home and catering pages, whose
+         heroes are light. Both live in the assets folder.
+
+         THIS IS THE NAME ON ITS OWN, not the full lockup: MEDITERRANEAN GRILL
+         is no longer set under it. The footer still carries the lockup, so the
+         descriptor is still on every page, once. To size the bar mark, change
+         the height on .brand-logo in section 6 of the stylesheet - not the
+         width and height attributes here, which only tell the browser the
+         shape of the file so the bar does not jump while it loads. -->
     <a class="brand" href="index.html" aria-label="Sultan's Mediterranean Grill, home">
-      <img class="brand-logo brand-logo-on-dark" src="assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
-      <img class="brand-logo brand-logo-on-light" src="assets/logo-purple.png" alt="" aria-hidden="true" width="480" height="161">
+      <img class="brand-logo brand-logo-on-dark" src="assets/wordmark-white.png" alt="Sultan’s" width="289" height="74">
+      <img class="brand-logo brand-logo-on-light" src="assets/wordmark-purple.png" alt="" aria-hidden="true" width="791" height="200">
     </a>
 
     <nav class="nav-inline nav-inline-right" aria-label="Main, continued">
