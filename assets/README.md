@@ -124,3 +124,30 @@ wordmarks, `alt="#eatlikeasultan"` for the tag.
 There is no purple version of the hashtag mark. If it is ever wanted on cream,
 ask the client for one rather than recolouring the white file - it will not
 take a colour.
+
+## The food cut-outs (added November 2026)
+
+| File | What it is | Where it shows |
+| --- | --- | --- |
+| `tray-chicken-kebab.png` | A tray of chicken kebab, 900x460 | Beside the Mains rows on the catering page |
+| `tray-hummus-platter.png` | A hummus and vegetable tray, 560x910 | Beside the Dips rows on the catering page |
+| `platter-mediterranean.png` | The round mezze platter, 760x752 | The Mediterranean Platter package card |
+
+**These are cut-outs, and that is the whole point of them.** Each one is just
+the tray or the platter; everything around it — table, cloth, dip bowls,
+lemon wedges, background — is transparent. That is what lets them sit on the
+page with no frame, no border and no card. The stylesheet draws nothing
+behind them.
+
+**If you replace one, replace it with another cut-out PNG.** A normal
+rectangular photo will read as a pasted-on box, because there is no frame to
+excuse it.
+
+**They are 8-bit palette PNGs, not 24-bit.** A photo saved as a full-colour
+PNG with transparency runs to about 1.5 MB; the same picture on a 255-colour
+palette is about a fifth of that and, at the size these are shown, looks the
+same. If you export a new one, do the same — a 1.5 MB tray photo is three
+times the whole rest of the page.
+
+Sized for roughly twice their display size, which covers a retina screen.
+There is no point going larger.

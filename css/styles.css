@@ -2235,25 +2235,24 @@ body.nav-is-open { overflow: hidden; }
 }
 
 /* --- The one package photograph ---
-   NO FRAME, NO BORDER, NO CARD OF ITS OWN. Same treatment as the course
-   photographs in section 10c: the edges are masked away so a picture with a
-   white background of its own dissolves into the card instead of sitting in
-   a box on it. Only the Mediterranean Platter has one; the other two cards
-   have no photograph and need no rule.
+   A cut-out, like the two in section 10c: the platter is all there is in the
+   file and everything round it is transparent, so it sits on the card with
+   no frame and no box. Only the Mediterranean Platter has one; the other two
+   cards have no photograph and need no rule.
 
-   The negative top margin pulls it up into the padding of the card, so the
-   picture meets the top edge and the words start under it. */
+   It is sized as a share of the card rather than cropped to a fixed height.
+   A cut-out has no spare background to crop into - object-fit: cover on one
+   would cut the rim off the platter - so it keeps its own proportions and
+   the card gets as tall as it needs to be.
+
+   The negative bottom margin pulls the words up into the space the round
+   platter leaves at its corners, which would otherwise read as a gap. */
 .pkg-photo {
   display: block;
-  width: 100%;
-  height: 11rem;
-  margin-bottom: calc(var(--sp-5) * -1);
-  object-fit: cover;
-  object-position: center 42%;
-  -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 45%,
-    #000 0%, #000 58%, rgba(0, 0, 0, 0) 100%);
-          mask-image: radial-gradient(closest-side ellipse at 50% 45%,
-    #000 0%, #000 58%, rgba(0, 0, 0, 0) 100%);
+  width: 62%;
+  max-width: 16rem;
+  height: auto;
+  margin: 0 auto calc(var(--sp-6) * -1);
 }
 
 .pkg-aside {
@@ -2666,17 +2665,20 @@ body.nav-is-open { overflow: hidden; }
 }
 
 /* --- The photographs ---
-   NO FRAME, NO BORDER, NO CARD. The client asked for the food to sit on the
-   page rather than in a box, so there is no border, no radius and no shadow
-   here - and instead a mask that fades the picture out at its edges, which
-   is what lets a photograph with a pale background of its own dissolve into
-   the cream of the panel. Both properties are written out, -webkit- first:
-   Safari still wants the prefixed one, and in a comma-separated list one
-   name a browser does not know throws away the whole rule.
+   NO FRAME, NO BORDER, NO CARD, AND NOTHING BEHIND THEM. The files are
+   cut-outs: the tray is all there is in each one and everything round it is
+   transparent, so the panel shows through and the photograph sits on the
+   page rather than in a box on it. There is no border, no radius and no
+   shadow here, and nothing to add - the transparency is the whole effect.
+
+   THERE USED TO BE A MASK ON THIS RULE that faded the edges of a
+   rectangular photograph out into the panel. It has gone with the
+   rectangles: on a cut-out it would eat the rim of the tray.
 
    Hidden below 900px. There is no room beside the table at that width, and
    a photograph stacked above or below the prices pushes the thing people
-   came for off the screen. */
+   came for off the screen. Lazy-loaded and never in view, so a phone does
+   not pay for the file either. */
 .course-photo { display: none; }
 
 @media (min-width: 900px) {
@@ -2697,10 +2699,6 @@ body.nav-is-open { overflow: hidden; }
     height: auto;
     max-height: 26rem;
     object-fit: contain;
-    -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 50%,
-      #000 0%, #000 62%, rgba(0, 0, 0, 0) 100%);
-            mask-image: radial-gradient(closest-side ellipse at 50% 50%,
-      #000 0%, #000 62%, rgba(0, 0, 0, 0) 100%);
   }
 }
 
