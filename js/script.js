@@ -317,57 +317,87 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   /* -------------------------------------------------------------------------
      3d. GUEST COUNT -> TRAY SIZE   (catering page only)
 
-     Drag the guest count, and the tray size that feeds that many people is
-     highlighted. Nothing happens anywhere else on the page: this does not
-     touch the price tables, add anything up, or quote a total.
+     Drag the guest count and the column that feeds that many people lights
+     up, in every price table on the page at once. Nothing else happens: it
+     does not add anything up, quote a total, or change a price.
 
-     THE NUMBERS BELOW ARE THE CATERING PDF'S, NOT OURS. "upTo" is the top of
-     the serving range printed for that tray, and "serves" is that range
-     written out, word for word as the page shows it. Nothing is averaged or
-     worked out from anything else.
+     THE NUMBERS ARE NOT IN THIS FILE. Each table says what its own columns
+     feed, on the column headings, as data-size and data-max:
 
-     THEY ARE WRITTEN IN THREE PLACES - here, the cards in catering.html, and
-     the table headings on that page. All three have to agree. If a new PDF
-     changes a range, change it in all three.
+         <th data-size="Med" data-max="30">Med <span>25-30</span></th>
 
-     THE RULE, in one line: the smallest tray whose range reaches the count.
-     So 25 guests gets Med, which serves 25-30 - and so does 22, because a
-     Half tray stops at 20. Above 40, the top of the largest tray, it stops
-     recommending: the honest answer there is more than one tray, and how
-     many is a conversation, not arithmetic. It says that instead of
-     guessing. Below 8 the smallest tray is already bigger than the room,
-     so it says that too and points at the individual meals.
+     and every price cell under it carries the same data-size. So this block
+     reads the ranges off the page rather than holding a copy of them, which
+     is the whole point: Mains has four sizes, Dips has three of its own that
+     serve different numbers, and nothing here has to know that. Change a
+     range in the HTML and the slider follows with no edit here.
 
-     Safe to delete this whole block - the panel then shows the four ranges
-     and the sentence written into the HTML, which is still useful.
+     THE RULE, in one line: the first column whose data-max reaches the
+     count. So 25 guests gets Med, which serves 25-30 - and so does 22,
+     because a Half tray stops at 20. Past the largest column it lights that
+     column and says the order takes more than one tray: how many is a
+     conversation, not arithmetic, so it does not guess.
+
+     Safe to delete this whole block. The tables then show every price with
+     no column lit, which is still a readable menu.
      ------------------------------------------------------------------------- */
   var guests = document.querySelector('[data-guests]');
 
   if (guests) {
     var guestRange = guests.querySelector('.guests-range');
     var guestOut = guests.querySelector('output');
-    var guestAnswer = guests.querySelector('.guests-answer');
-    var trayCards = Array.prototype.slice.call(guests.querySelectorAll('.tray-size'));
+    var guestTray = guests.querySelector('.guests-tray');
+    var priceTables = Array.prototype.slice.call(
+      document.querySelectorAll('.price-table')
+    );
 
-    var TRAYS = [
-      { name: 'Small', upTo: 10, serves: '8–10' },
-      { name: 'Half',  upTo: 20, serves: '15–20' },
-      { name: 'Med',   upTo: 30, serves: '25–30' },
-      { name: 'Full',  upTo: 40, serves: '35–40' }
-    ];
+    // The name the readout uses for a column. The tables are headed with
+    // the short form, which is what fits a narrow column; the sentence
+    // under the slider has room for the word in full.
+    var TRAY_WORDS = { Small: 'Small', Half: 'Half', Med: 'Medium', Full: 'Full', Bowl: 'Bowl' };
 
-    var pickTray = function (count) {
-      for (var i = 0; i < TRAYS.length; i++) {
-        if (count <= TRAYS[i].upTo) return TRAYS[i];
+    // The columns of one table, in the order they are printed.
+    var columnsOf = function (table) {
+      return Array.prototype.slice.call(
+        table.querySelectorAll('thead th[data-size]')
+      ).map(function (th) {
+        return { size: th.getAttribute('data-size'), max: Number(th.getAttribute('data-max')), th: th };
+      });
+    };
+
+    // The first column that reaches the count, or the largest one there is.
+    var pickColumn = function (cols, count) {
+      for (var i = 0; i < cols.length; i++) {
+        if (count <= cols[i].max) return cols[i];
       }
-      // Over the largest tray: show it, but say it is not the whole answer.
-      return TRAYS[TRAYS.length - 1];
+      return cols[cols.length - 1];
+    };
+
+    var lightTable = function (table, count) {
+      var cols = columnsOf(table);
+      if (!cols.length) return null;
+      var pick = pickColumn(cols, count);
+
+      cols.forEach(function (col) {
+        col.th.classList.toggle('is-pick', col === pick);
+      });
+      Array.prototype.forEach.call(table.querySelectorAll('td[data-size]'), function (td) {
+        td.classList.toggle('is-pick', td.getAttribute('data-size') === pick.size);
+      });
+      return pick;
     };
 
     var updateGuests = function () {
       var count = Number(guestRange.value);
       var top = Number(guestRange.max);
-      var tray = pickTray(count);
+      var headline = null;
+
+      priceTables.forEach(function (table, n) {
+        var pick = lightTable(table, count);
+        // The first table on the page is Mains, and that is the one the
+        // readout speaks for - it is the only course with all four sizes.
+        if (n === 0) headline = pick;
+      });
 
       // "60+" at the end of the slider, because the scale stops there but
       // the parties do not.
@@ -375,26 +405,14 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
         guestOut.textContent = count >= top ? count + '+' : String(count);
       }
 
-      trayCards.forEach(function (card) {
-        card.classList.toggle('is-pick', card.getAttribute('data-tray') === tray.name);
-      });
+      if (!guestTray || !headline) return;
 
-      if (!guestAnswer) return;
-
-      if (count > TRAYS[TRAYS.length - 1].upTo) {
-        guestAnswer.textContent =
-          'A Full tray serves ' + tray.serves + ', so ' + count +
-          ' guests means more than one. Tell us the headcount and we will ' +
-          'build the order with you.';
+      if (count > headline.max) {
+        guestTray.textContent = 'more than one ' + TRAY_WORDS[headline.size] + ' tray';
       } else if (count < 8) {
-        guestAnswer.textContent =
-          'A Small tray serves ' + TRAYS[0].serves + ', which is the ' +
-          'smallest we make. For ' + count + ', individual meals may suit ' +
-          'you better.';
+        guestTray.textContent = TRAY_WORDS[headline.size] + ' tray, or individual meals';
       } else {
-        guestAnswer.textContent =
-          'For ' + count + ' guests, start with a ' + tray.name +
-          ' tray. It serves ' + tray.serves + '.';
+        guestTray.textContent = TRAY_WORDS[headline.size] + ' tray';
       }
     };
 

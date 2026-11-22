@@ -2058,14 +2058,21 @@ body.nav-is-open { overflow: hidden; }
   border-bottom: 1px solid var(--line);
 }
 .price-table tbody tr:last-child { border-bottom: 0; }
+/* THE DISH NAMES ARE POPPINS, SENTENCE CASE, which is the one place on this
+   site that is true of a name. Two reasons, and the second is the real one.
+   The reference the client sent sets them this way. And a course here can be
+   nine rows deep: nine lines of letter-spaced Fertigo capitals is a wall,
+   and the eye needs the word shapes to find "Tabouleh" in it. The course
+   headings above them are still Fertigo capitals, so the section still
+   reads as part of the site. */
 .price-table tbody th {
   display: block;
   margin-bottom: var(--sp-3);
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.05rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  letter-spacing: 0;
+  text-transform: none;
   text-align: left;
   color: var(--plum-700);
 }
@@ -2082,6 +2089,15 @@ body.nav-is-open { overflow: hidden; }
   font-weight: 600;
   color: var(--plum-700);
 }
+/* THE SIZE THE SLIDER PICKED. On a phone the table is a stack of chips, so
+   the "column" is one chip per dish: it goes gold while the rest stay violet.
+   js/script.js block 3d puts the class on, matching on data-size. */
+.price-table td.is-pick {
+  background: var(--gold-100);
+  color: var(--gold-700);
+}
+.price-table td.is-pick::before { color: var(--gold-600); opacity: 1; }
+
 /* The label is the cell's own data-size - see the note in the HTML. */
 .price-table td::before {
   content: attr(data-size);
@@ -2216,6 +2232,28 @@ body.nav-is-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   padding: var(--sp-6) var(--sp-5) var(--sp-5);
+}
+
+/* --- The one package photograph ---
+   NO FRAME, NO BORDER, NO CARD OF ITS OWN. Same treatment as the course
+   photographs in section 10c: the edges are masked away so a picture with a
+   white background of its own dissolves into the card instead of sitting in
+   a box on it. Only the Mediterranean Platter has one; the other two cards
+   have no photograph and need no rule.
+
+   The negative top margin pulls it up into the padding of the card, so the
+   picture meets the top edge and the words start under it. */
+.pkg-photo {
+  display: block;
+  width: 100%;
+  height: 11rem;
+  margin-bottom: calc(var(--sp-5) * -1);
+  object-fit: cover;
+  object-position: center 42%;
+  -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 45%,
+    #000 0%, #000 58%, rgba(0, 0, 0, 0) 100%);
+          mask-image: radial-gradient(closest-side ellipse at 50% 45%,
+    #000 0%, #000 58%, rgba(0, 0, 0, 0) 100%);
 }
 
 .pkg-aside {
@@ -2379,72 +2417,89 @@ body.nav-is-open { overflow: hidden; }
 
 
 /* ---------------------------------------------------------------------------
-   10b. THE GUEST COUNT SLIDER
-   One panel at the top of the by-the-tray menu: a slider for the headcount,
-   the four tray sizes under it, and a line of plain English that says which
-   one to start with.
+   10b. THE MENU SWITCH AND THE GUEST COUNT SLIDER
+   ---------------------------------------------------------------------------
+   Two controls at the top of the by-the-tray menu: the pair of pills that
+   says which half of the menu you are on, and the bar that lights a price
+   column in every table at once.
 
-   IT IS A PANEL, NOT A WIDGET. The brief for this site has been "do not make
+   IT IS A BAR, NOT A WIDGET. The brief for this site has been "do not make
    it feel like an app" from the start, so: no steppers, no counters, no
-   numbers that spin, no card that grows when it is picked. One native range
-   input, and the chosen tray simply fills with the brand violet, the same
-   fill the buttons use. The only thing that moves is the thumb under your
-   finger.
+   numbers that spin. One native range input and a line of type beside it.
+   The only thing that moves is the thumb under your finger - everything
+   else that changes is a column of prices quietly going warm.
    --------------------------------------------------------------------------- */
-.guests {
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-xs);
+
+/* --- The two pills ---
+   A la Carte and Individual Meals. They are two links, not a toggle: the
+   second one leaves for menu.html. The pair sits in a pale violet trough so
+   they read as the two halves of one thing. */
+.menu-switch {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  padding: 0.3rem;
+  border-radius: var(--r-pill);
+  background: var(--plum-100);
+}
+.menu-switch a {
+  display: block;
+  padding: 0.6rem 1.35rem;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--plum-700);
+  text-decoration: none;
+  transition: background-color var(--t-fast), color var(--t-fast);
+}
+.menu-switch a:hover { background: rgba(255, 255, 255, 0.7); }
+.menu-switch .menu-switch-on,
+.menu-switch .menu-switch-on:hover {
+  background: var(--plum-500);
+  color: var(--paper);
 }
 
-.guests-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-5);
+/* --- The slider bar ---
+   Stacked on a phone, one row from 720px: the two lines of copy on the left,
+   the track and the readout on the right. The wash runs violet to cream, the
+   two colours the highlighted column is drawn in further down the page. */
+.guests {
+  display: grid;
+  gap: var(--sp-4);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.1rem, 2.4vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--r-lg);
+  background: linear-gradient(100deg, var(--plum-100) 0%, var(--gold-100) 100%);
 }
 .guests-label {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--plum-700);
-}
-/* The live number. Fertigo has no bold, so it carries its weight by being
-   bigger and violet rather than heavier. The numerals themselves stay in
-   Poppins and tabular, so the panel does not twitch sideways as the count
-   runs through 9 to 10 and 99 to 100. */
-.guests-count {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--plum-500);
-}
-.guests-count output {
-  font-family: var(--font-body);
-  font-size: 1.5em;
+  display: block;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
+  line-height: 1.3;
   color: var(--plum-700);
+}
+.guests-hint {
+  margin: 0.2rem 0 0;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--text-muted);
 }
 
-/* --- The slider ---
-   A plain <input type="range">, left native on purpose: it already knows how
+.guests-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3) var(--sp-5);
+}
+
+/* A plain <input type="range">, left native on purpose: it already knows how
    to be dragged, arrow-keyed, and made bigger for a touch screen, and every
    one of those is easy to break by rebuilding it. accent-color is all it
    takes to put it in brand violet in every current browser. */
 .guests-range {
-  display: block;
-  width: 100%;
+  flex: 1 1 11rem;
+  min-width: 9rem;
   margin: 0;
   accent-color: var(--plum-500);
   cursor: pointer;
@@ -2455,88 +2510,199 @@ body.nav-is-open { overflow: hidden; }
   border-radius: var(--r-pill);
 }
 
-/* The three or four numbers printed under the track. Decorative - the live
-   count above says where the slider actually is. */
-.guests-scale {
-  display: flex;
-  justify-content: space-between;
-  margin: var(--sp-2) 0 var(--sp-5);
-  padding: 0;
-  list-style: none;
-  font-size: var(--fs-micro);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
-  color: var(--ink-400);
-}
-
-/* --- The four tray sizes ---
-   Two by two on a phone, one row of four from 560px. */
-.tray-sizes {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-3);
+/* The readout: "24 guests -> Medium tray". The count is Poppins and tabular,
+   so the line does not twitch sideways as it runs through 9 to 10 and 99 to
+   100, and the tray name is gold because it is the answer. */
+.guests-answer {
+  flex: none;
   margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.tray-size {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding: var(--sp-4) var(--sp-3);
-  text-align: center;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  background: var(--sand-50);
-  transition: background-color var(--t-base), border-color var(--t-base),
-              color var(--t-base);
-}
-.tray-size-name {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  color: var(--plum-700);
-}
-.tray-size-serves {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.04em;
+  font-size: var(--fs-small);
+  line-height: 1.4;
   color: var(--text-muted);
 }
-
-/* THE RECOMMENDED ONE. js/script.js block 3d puts .is-pick on it. The fill
-   is the same brand violet as the buttons, so "this one" is said in the
-   colour the site already uses for "press this".
-
-   Nothing here changes the size or the border width of the card, so the row
-   does not shift as the slider moves - only the colours change. */
-.tray-size.is-pick {
-  background: var(--plum-500);
-  border-color: var(--plum-500);
-  box-shadow: 0 1px 2px rgba(35, 20, 52, 0.14), 0 8px 20px rgba(107, 63, 160, 0.22);
-}
-.tray-size.is-pick .tray-size-name { color: var(--paper); }
-.tray-size.is-pick .tray-size-serves { color: rgba(255, 255, 255, 0.86); }
-
-/* --- The sentence the script writes, and the standing note under it --- */
-.guests-answer {
-  margin: var(--sp-5) 0 0;
-  font-size: var(--fs-lede);
-  line-height: 1.5;
+.guests-answer output {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: var(--plum-700);
 }
-.guests-note {
-  margin: var(--sp-3) 0 0;
+.guests-arrow { padding: 0 0.15rem; color: var(--ink-400); }
+.guests-tray { font-weight: 600; color: var(--gold-700); }
+
+@media (min-width: 720px) {
+  .guests {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: var(--sp-6);
+  }
+  .guests-control { justify-content: flex-end; flex-wrap: nowrap; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   10c. THE COURSES
+   ---------------------------------------------------------------------------
+   One panel per course - Mains, Sides, Salads, Dips - on a cream ground, with
+   the prices inside them as hairline rows rather than cards. Nine salads as
+   nine bordered cards is a wall of boxes; as rows it reads like a menu.
+
+   THE SHAPE OF THE GRID. One column on a phone. From 900px Sides and Salads
+   go side by side, because their tables are three columns wide and neither
+   fills the page on its own; Mains and Dips stay full width and take the
+   class "course-wide", which splits them into words on the left and a
+   photograph on the right.
+   --------------------------------------------------------------------------- */
+/* The band the courses sit on is white, not the page cream. The panels are
+   cream, and on a cream page a cream panel is invisible - the two have to
+   differ by something. White is also the brighter way round, which is what
+   the client asked this page for. */
+.section-paper { background: var(--paper); }
+
+.courses {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.course {
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+  border-radius: var(--r-lg);
+  background: var(--sand-50);
+}
+
+/* The course name, with the gold rule running off to the right of it. The
+   rule is a flex sibling drawn with a border, not an underline, so it sits
+   on the cap height rather than under the descenders. */
+.course-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 400;
+  color: var(--plum-700);
+}
+.course-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--gold-300);
+}
+
+.course-note {
+  max-width: 54ch;
+  margin-bottom: var(--sp-5);
   font-size: var(--fs-small);
   line-height: 1.6;
   color: var(--text-muted);
 }
-
-@media (min-width: 560px) {
-  .tray-sizes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.course-foot {
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-micro);
+  color: var(--ink-400);
 }
 
+/* --- Anything sold by the piece ---
+   Not a column in the table above it: a skewer is not a tray size, and
+   putting it in the table would mean a column that is empty for every other
+   row. Two up from 560px, white on the cream so they read as separate
+   things you can order. */
+.piece-grid {
+  display: grid;
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.piece-grid li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 0.75rem var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+.piece-name {
+  min-width: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--plum-700);
+}
+/* The minimum-order line under a name. */
+.piece-min {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-400);
+}
+/* POPPINS, NOT FERTIGO, AND THAT IS NOT A STYLE CHOICE. Fertigo Pro only
+   carries old-style figures: its "1" is a small capital I, so "$1" sets as
+   "$I" and "$16" as "$I6". Section 2 of this stylesheet says numerals stay
+   in the body font for exactly this reason. Do not "fix" this to match the
+   dish names. */
+.piece-price {
+  flex: none;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--plum-700);
+  white-space: nowrap;
+}
+/* "/ skewer", "/ dozen" - lighter, so the number stays the thing you see. */
+.piece-unit {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+@media (min-width: 560px) {
+  .piece-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .piece-grid-wide { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* --- The photographs ---
+   NO FRAME, NO BORDER, NO CARD. The client asked for the food to sit on the
+   page rather than in a box, so there is no border, no radius and no shadow
+   here - and instead a mask that fades the picture out at its edges, which
+   is what lets a photograph with a pale background of its own dissolve into
+   the cream of the panel. Both properties are written out, -webkit- first:
+   Safari still wants the prefixed one, and in a comma-separated list one
+   name a browser does not know throws away the whole rule.
+
+   Hidden below 900px. There is no room beside the table at that width, and
+   a photograph stacked above or below the prices pushes the thing people
+   came for off the screen. */
+.course-photo { display: none; }
+
+@media (min-width: 900px) {
+  .courses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .course-wide { grid-column: 1 / -1; }
+
+  /* The wide courses split: words on the left, picture on the right. */
+  .course-wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+  }
+
+  .course-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 26rem;
+    object-fit: contain;
+    -webkit-mask-image: radial-gradient(closest-side ellipse at 50% 50%,
+      #000 0%, #000 62%, rgba(0, 0, 0, 0) 100%);
+            mask-image: radial-gradient(closest-side ellipse at 50% 50%,
+      #000 0%, #000 62%, rgba(0, 0, 0, 0) 100%);
+  }
+}
 
 /* ---------------------------------------------------------------------------
    11. HOW TO BOOK
@@ -3284,9 +3450,40 @@ a.contact-value:hover { color: var(--gold-400); }
   .price-table td::before { content: none; }
   .price-table tbody tr:last-child th,
   .price-table tbody tr:last-child td { border-bottom: 0; }
+
+  /* --- THE COLUMN THE SLIDER PICKED ---
+     A warm band straight down one column, heading included, with the price
+     in it set in the deep plum rather than the body ink. There is no border
+     and no change of size anywhere in here, so the table does not move by a
+     pixel as the band travels across it - only the colours change.
+
+     The band is rounded at the top and the bottom, which takes the heading
+     cell and the last row's cell rather than the column: CSS has no way to
+     round a column, so the two ends are rounded and the middle is square.
+
+     IT HAS TO BEAT THE ROW HOVER, so it is written after it. Same weight,
+     later rule wins, and the column is the answer to the question the
+     slider was asked - the hover is only telling you where your mouse is. */
+  .price-table thead th.is-pick {
+    background: var(--gold-100);
+    color: var(--gold-700);
+    border-bottom-color: var(--gold-300);
+    border-radius: var(--r-sm) var(--r-sm) 0 0;
+  }
+  .price-table thead th.is-pick .price-serves { color: var(--gold-600); }
+  .price-table td.is-pick {
+    background: var(--gold-100);
+    color: var(--plum-700);
+    font-weight: 700;
+  }
+  .price-table tbody tr:last-child td.is-pick {
+    border-radius: 0 0 var(--r-sm) var(--r-sm);
+  }
+
   /* A quiet tint across the row being read. */
   .price-table tbody tr:hover th,
   .price-table tbody tr:hover td { background: var(--plum-050); }
+  .price-table tbody tr:hover td.is-pick { background: var(--gold-100); }
 }
 
 /* --- Small desktop (900px) --- */
@@ -3739,9 +3936,15 @@ a.contact-value:hover { color: var(--gold-400); }
 @media print {
   .site-header, .ticker, .trust-bar, .request-form, .hero-media,
   .hero-scrim, .nav-toggle, .nav-inline, .back-to-top, .skip-link { display: none !important; }
-  /* The slider cannot be dragged on paper; the serving ranges under it
-     still read perfectly well, so only the control goes. */
-  .guests-range, .guests-scale, .guests-count { display: none !important; }
+  /* The slider cannot be dragged on paper, and with it goes the only thing
+     it does - the warm band down one column of every table. The whole bar is
+     taken out, and the serving ranges on the column headings still say which
+     tray feeds how many, which is the part that matters in print.
+     The two pills go for the same reason: one is the page you are holding
+     and the other is a link you cannot follow. */
+  .guests, .menu-switch { display: none !important; }
+  .price-table thead th.is-pick,
+  .price-table td.is-pick { background: none !important; }
   .section-solid::after, .section-invert::after,
   .eyebrow-icon, .footer-social { display: none !important; }
 
@@ -3763,6 +3966,10 @@ a.contact-value:hover { color: var(--gold-400); }
   .hero-inner { padding-top: 0; }
   .hero-title, .section-title, .contact-value, .hero-lede { color: #000 !important; }
   .section { padding-block: 1.5rem; }
-  .pkg, .feature, .loc { break-inside: avoid; box-shadow: none; }
+  .pkg, .feature, .loc, .course { break-inside: avoid; box-shadow: none; }
+  .course { background: none !important; padding: 0; }
+  /* The photographs are mood, not information, and each one is a quarter of
+     a page of ink. */
+  .course-photo, .pkg-photo { display: none !important; }
   a { text-decoration: underline; color: #000; }
 }

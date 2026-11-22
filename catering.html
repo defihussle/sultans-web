@@ -355,6 +355,14 @@
 
       <!-- ---------- PACKAGE 2 ---------- -->
       <article class="pkg">
+        <!-- ==== EDIT: MEDITERRANEAN PLATTER PHOTO ====
+             No frame, no border, no card of its own. The file has a white
+             background and the stylesheet fades its edges, so it sits on the
+             card rather than in a box on it. It is the only package with a
+             photograph; the other two have none yet. -->
+        <img class="pkg-photo" src="assets/platter-mediterranean.jpg"
+             alt="A round platter of falafel, stuffed grape leaves, feta, pickled vegetables, pita and tahini"
+             width="1200" height="900" loading="lazy" decoding="async">
         <div class="pkg-main">
           <span class="pkg-badge pkg-badge-new">New</span>
           <h3 class="pkg-name">Mediterranean Platter</h3>
@@ -422,7 +430,8 @@
      WHAT BELONGS HERE
      Everything sold by the tray, pan or piece - the a la carte half of the
      catering PDF. Single servings are NOT here: bowls, wraps, dessert and
-     drinks are individual meals and live on menu.html.
+     drinks are individual meals and live on menu.html, which is what the
+     second pill at the top of this section links to.
 
      WHERE IT CAME FROM
      Every item, size and price below is taken from the "A la Carte" pages
@@ -430,141 +439,113 @@
      PDF lists them: Mains, Sides, Salads, Dips. Nothing is invented. When
      a new PDF is issued, update this section and the PDF link together.
 
-     HOW A PRICE TABLE WORKS
-     Each course is one <table class="price-table">. The sizes go across
-     the <thead>; each dish is one <tr> with its name in the <th> and one
-     <td> per size.
+     HOW A COURSE IS BUILT
+     One <section class="course"> per course. Inside it:
+         <h3 class="course-title">      the name, with the gold rule
+         <p class="course-note">        the line under it, if there is one
+         <table class="price-table">    the tray sizes and prices
+         <ul class="piece-grid">        anything sold by the piece
+         <img class="course-photo">     the photograph, if there is one
+
+     THE COLUMN THAT LIGHTS UP IS DRIVEN BY THE SLIDER at the top of the
+     section. Each <th scope="col"> carries data-size and data-max: the
+     size’s name, and the largest number of guests it feeds. The script
+     (js/script.js, block 3d) picks the first column whose data-max reaches
+     the guest count and lights it, column by column, table by table. The
+     courses do not share one set of sizes - Mains has four and Dips has
+     its own - which is exactly why each table carries its own numbers.
 
      EVERY <td> CARRIES data-size, AND IT MUST MATCH ITS COLUMN HEADING.
-     On a phone the table is too wide to read, so the stylesheet turns each
-     price into a small chip and prints the data-size on it as the label.
-     Get it wrong and the phone shows the right price under the wrong size.
-     The courses do not all use the same sizes - Mains has four, Dips has
-     its own - so copy the row above rather than a row from another course.
+     That is what the script matches on, and on a phone the table becomes a
+     stack of labelled chips that take their labels from the same attribute.
+     Get it wrong and the phone shows the right price under the wrong size
+     and the slider lights the wrong column.
 
      TO ADD A DISH     copy a whole <tr>, change the name and the prices.
      TO REMOVE A DISH  delete its whole <tr>.
      ========================================================================= -->
-<section class="section" id="menu">
+<section class="section section-paper" id="menu">
   <div class="wrap">
 
     <header class="section-head section-head-wide">
-      <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>By the tray</p>
-      <h2 class="section-title title-2line">The catering <em>menu.</em></h2>
-      <p class="section-lede">
-        Build your own order, tray by tray. Prices are before HST.
-      </p>
+      <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>Catering menu &amp; prices</p>
+      <h2 class="section-title title-2line">Trays for the table, <em>meals for one.</em></h2>
     </header>
+
+    <!-- ==== EDIT: THE TWO PILLS ====
+         A la Carte is this page. Individual Meals is menu.html - the bowls,
+         wraps and drinks that are sold one at a time. They look like a
+         toggle because they are the two halves of one menu, but they are
+         two links, and the one you are on carries aria-current="page". -->
+    <div class="menu-switch">
+      <a class="menu-switch-on" href="#menu" aria-current="page">&Agrave; la Carte</a>
+      <a href="menu.html">Individual Meals</a>
+    </div>
 
     <!-- ==== EDIT: THE GUEST COUNT SLIDER ====
          Drag the guest count and the tray size that feeds that many people
-         lights up. It sits here, at the top of the by-the-tray menu, because
-         "how big a tray do I need" is the question the price tables below
-         immediately raise.
+         lights up in every table below. It sits here, at the top of the
+         by-the-tray menu, because "how big a tray do I need" is the question
+         the prices underneath immediately raise.
 
-         WHERE THE NUMBERS COME FROM. Every serving range below is the one
-         printed on the catering PDF (Sultans-Catering-2026-V3) for that tray,
-         and nothing else. Nothing here is averaged, rounded or worked out.
+         WHERE THE NUMBERS COME FROM. Every serving range is the one printed
+         on the catering PDF (Sultans-Catering-2026-V3) for that tray, and
+         nothing else. Nothing here is averaged, rounded or worked out.
 
-         THEY ARE WRITTEN IN THREE PLACES and all three have to agree:
-           1. the cards below
-           2. the table headings further down this page
-           3. the TRAYS list in block 3d of js/script.js
-         Change a range in one and change it in all three, or the slider will
-         recommend a tray the menu then contradicts.
+         THEY LIVE ON THE COLUMN HEADINGS NOW, as data-max, and that is the
+         only place they are written: the script reads them off the table it
+         is lighting. Change a range in the heading and the slider follows it
+         with no second edit anywhere.
 
          THE RULE THE SLIDER FOLLOWS, in one line: the smallest tray whose
-         printed range reaches the guest count. So 25 guests gets the Medium
+         printed range reaches the guest count. So 25 guests gets the Med
          tray, which serves 25-30, and 22 gets it too, because a Half tray
          stops at 20. Above 40 - the top of the largest tray - it stops
          recommending and says so, rather than inventing a number of trays.
 
-         TO CHANGE THE RANGE OF THE SLIDER, change min and max on the input
-         and the four numbers in .guests-scale to match. -->
+         TO CHANGE THE RANGE OF THE SLIDER, change min and max on the input. -->
     <div class="guests" data-guests>
-
-      <div class="guests-head">
-        <label class="guests-label" for="guestCount">How many guests?</label>
-        <p class="guests-count"><output id="guestOut" for="guestCount">25</output> guests</p>
+      <div class="guests-copy">
+        <label class="guests-label" for="guestCount">Not sure which tray size?</label>
+        <p class="guests-hint">Slide to your guest count and we&rsquo;ll highlight the right column.</p>
       </div>
 
-      <input class="guests-range" type="range" id="guestCount"
-             min="5" max="60" step="1" value="25">
-
-      <ul class="guests-scale" aria-hidden="true">
-        <li>5</li>
-        <li>20</li>
-        <li>40</li>
-        <li>60+</li>
-      </ul>
-
-      <!-- The four tray sizes. data-tray must match the name in the TRAYS
-           list in js/script.js - that is how the script finds the card. -->
-      <ul class="tray-sizes">
-        <li class="tray-size" data-tray="Small">
-          <span class="tray-size-name">Small</span>
-          <span class="tray-size-serves">Serves 8&ndash;10</span>
-        </li>
-        <li class="tray-size" data-tray="Half">
-          <span class="tray-size-name">Half</span>
-          <span class="tray-size-serves">Serves 15&ndash;20</span>
-        </li>
-        <li class="tray-size" data-tray="Med">
-          <span class="tray-size-name">Med</span>
-          <span class="tray-size-serves">Serves 25&ndash;30</span>
-        </li>
-        <li class="tray-size" data-tray="Full">
-          <span class="tray-size-name">Full</span>
-          <span class="tray-size-serves">Serves 35&ndash;40</span>
-        </li>
-      </ul>
-
-      <!-- The script writes this line. role="status" is what makes a screen
-           reader read the new recommendation out as the slider moves, so the
-           highlight on the card can stay purely visual. The sentence here is
-           what shows if the script never runs. -->
-      <p class="guests-answer" id="guestAnswer" role="status">
-        For 25 guests, start with a Med tray. It serves 25&ndash;30.
-      </p>
-
-      <p class="guests-note">
-        Mains come in all four sizes. Sides and salads start at Half. Dips
-        have their own: a bowl serves 8&ndash;10, a half 18&ndash;20, a full
-        30&ndash;35. A quote from us is still the surest answer &mdash; how
-        much food a room gets through depends on what else is on the table.
-      </p>
-
+      <div class="guests-control">
+        <input class="guests-range" type="range" id="guestCount"
+               min="5" max="60" step="1" value="24">
+        <!-- The script writes this line. role="status" is what makes a screen
+             reader read the new recommendation out as the slider moves, so
+             the highlight on the columns can stay purely visual. The words
+             here are what shows if the script never runs. -->
+        <p class="guests-answer" id="guestAnswer" role="status">
+          <output id="guestOut" for="guestCount">24</output> guests
+          <span class="guests-arrow" aria-hidden="true">&rarr;</span>
+          <span class="guests-tray">Medium tray</span>
+        </p>
+      </div>
     </div>
 
-    <!-- The chips jump to the four courses. Each href="#id" must match the
-         id on a <div class="menu-block"> below. -->
-    <nav class="menu-jump menu-jump-inline" aria-label="Jump to a course">
-      <a href="#trays-mains">Mains</a>
-      <a href="#trays-sides">Sides</a>
-      <a href="#trays-salads">Salads</a>
-      <a href="#trays-dips">Dips</a>
-    </nav>
-
-    <div class="tray-courses">
+    <div class="courses">
 
       <!-- ---------- MAINS ---------- -->
-      <div class="menu-block" id="trays-mains">
-        <h3 class="menu-block-title">Mains</h3>
-        <p class="menu-block-note">
-          Proteins only. Served with a side of shawarma sauce or tahini sauce.
-        </p>
+      <section class="course course-wide" id="trays-mains" aria-labelledby="trays-mains-t">
+        <div class="course-body">
+          <h3 class="course-title" id="trays-mains-t">Mains</h3>
+          <p class="course-note">
+            Proteins only. Served with a side of shawarma sauce or tahini sauce.
+          </p>
 
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th scope="col">Tray</th>
-              <th scope="col">Small <span class="price-serves">Serves 8&ndash;10</span></th>
-              <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
-              <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
-              <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
-            </tr>
-          </thead>
-          <tbody>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
+                <th scope="col" data-size="Small" data-max="10">Small <span class="price-serves">8&ndash;10</span></th>
+                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
+                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+              </tr>
+            </thead>
+            <tbody>
             <tr>
               <th scope="row">Chicken Shawarma</th>
               <td data-size="Small">$70</td>
@@ -586,45 +567,56 @@
               <td data-size="Med">$185</td>
               <td data-size="Full">$250</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
 
-        <!-- Sold by the piece rather than by the tray, so a plain list. -->
-        <p class="menu-sub-title">By the piece</p>
-        <ul class="menu-list">
-          <li>
-            <span class="menu-item">Chicken Kebab<span class="menu-min">Min. 12 pcs</span></span>
-            <span class="menu-price">$6.25 <span class="menu-unit">/ skewer</span></span>
-          </li>
-          <li>
-            <span class="menu-item">Kofta Kebab<span class="menu-min">Min. 12 pcs</span></span>
-            <span class="menu-price">$6.25 <span class="menu-unit">/ skewer</span></span>
-          </li>
-          <li>
-            <span class="menu-item">Quarter Chicken<span class="menu-min">Min. 12 pcs</span></span>
-            <span class="menu-price">$6.25 <span class="menu-unit">/ pc</span></span>
-          </li>
-          <li>
-            <span class="menu-item">Falafel<span class="menu-min">Min. 12 pcs</span></span>
-            <span class="menu-price">$1 <span class="menu-unit">/ ball</span></span>
-          </li>
-        </ul>
-      </div>
+          <!-- Sold by the piece rather than by the tray, so a small grid of
+               rows rather than a column in the table above. -->
+          <ul class="piece-grid">
+            <li>
+              <span class="piece-name">Chicken Kebab<span class="piece-min">Min. 12 pcs</span></span>
+              <span class="piece-price">$6.25 <span class="piece-unit">/ skewer</span></span>
+            </li>
+            <li>
+              <span class="piece-name">Kofta Kebab<span class="piece-min">Min. 12 pcs</span></span>
+              <span class="piece-price">$6.25 <span class="piece-unit">/ skewer</span></span>
+            </li>
+            <li>
+              <span class="piece-name">Quarter Chicken<span class="piece-min">Min. 12 pcs</span></span>
+              <span class="piece-price">$6.25 <span class="piece-unit">/ pc</span></span>
+            </li>
+            <li>
+              <span class="piece-name">Falafel<span class="piece-min">Min. 12 pcs</span></span>
+              <span class="piece-price">$1 <span class="piece-unit">/ ball</span></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ==== EDIT: MAINS PHOTO ====
+             No frame, no border, no card. The file has a pale background of
+             its own and the stylesheet fades its edges out, so it sits on
+             the page rather than in a box. Replace the file to change the
+             picture; keep it roughly this shape (about 2:1, landscape). -->
+        <img class="course-photo" src="assets/tray-chicken-kebab.jpg"
+             alt="A full tray of chicken kebab skewers with lemon and dips"
+             width="1400" height="732" loading="lazy" decoding="async">
+      </section>
 
       <!-- ---------- SIDES ---------- -->
-      <div class="menu-block" id="trays-sides">
-        <h3 class="menu-block-title">Sides</h3>
+      <section class="course" id="trays-sides" aria-labelledby="trays-sides-t">
+        <div class="course-body">
+          <h3 class="course-title" id="trays-sides-t">Sides</h3>
 
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th scope="col">Tray</th>
-              <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
-              <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
-              <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
-            </tr>
-          </thead>
-          <tbody>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
+                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
+                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+              </tr>
+            </thead>
+            <tbody>
             <tr>
               <th scope="row">Seasoned Rice</th>
               <td data-size="Half">$50</td>
@@ -649,35 +641,37 @@
               <td data-size="Med">$80</td>
               <td data-size="Full">$80</td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
 
-        <ul class="menu-list">
-          <li>
-            <span class="menu-item">Veggie Samosas</span>
-            <span class="menu-price">$16 <span class="menu-unit">/ dozen</span></span>
-          </li>
-          <li>
-            <span class="menu-item">Pita Bread</span>
-            <span class="menu-price">$1 <span class="menu-unit">/ pc</span></span>
-          </li>
-        </ul>
-      </div>
+          <ul class="piece-grid piece-grid-wide">
+            <li>
+              <span class="piece-name">Veggie Samosas <span class="piece-unit">/ dozen</span></span>
+              <span class="piece-price">$16</span>
+            </li>
+            <li>
+              <span class="piece-name">Pita Bread <span class="piece-unit">/ pc</span></span>
+              <span class="piece-price">$1</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <!-- ---------- SALADS ---------- -->
-      <div class="menu-block" id="trays-salads">
-        <h3 class="menu-block-title">Salads</h3>
+      <section class="course" id="trays-salads" aria-labelledby="trays-salads-t">
+        <div class="course-body">
+          <h3 class="course-title" id="trays-salads-t">Salads</h3>
 
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th scope="col">Tray</th>
-              <th scope="col">Half <span class="price-serves">Serves 15&ndash;20</span></th>
-              <th scope="col">Med <span class="price-serves">Serves 25&ndash;30</span></th>
-              <th scope="col">Full <span class="price-serves">Serves 35&ndash;40</span></th>
-            </tr>
-          </thead>
-          <tbody>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
+                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
+                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+              </tr>
+            </thead>
+            <tbody>
             <tr>
               <th scope="row">Greek</th>
               <td data-size="Half">$55</td>
@@ -732,27 +726,29 @@
               <td data-size="Med">$85</td>
               <td data-size="Full">$95</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <!-- ---------- DIPS ----------
            Note the sizes: Bowl / Half / Full, and they serve different
-           numbers from the trays above. Do not copy a row from another
-           course into this table. -->
-      <div class="menu-block" id="trays-dips">
-        <h3 class="menu-block-title">Dips</h3>
+           numbers from the trays above - which is why this table carries its
+           own data-max values. Do not copy a row in from another course. -->
+      <section class="course course-wide" id="trays-dips" aria-labelledby="trays-dips-t">
+        <div class="course-body">
+          <h3 class="course-title" id="trays-dips-t">Dips</h3>
 
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th scope="col">Size</th>
-              <th scope="col">Bowl <span class="price-serves">Serves 8&ndash;10</span></th>
-              <th scope="col">Half <span class="price-serves">Serves 18&ndash;20</span></th>
-              <th scope="col">Full <span class="price-serves">Serves 30&ndash;35</span></th>
-            </tr>
-          </thead>
-          <tbody>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th scope="col" class="price-head-name">Size <span class="price-serves">serves</span></th>
+                <th scope="col" data-size="Bowl" data-max="10">Bowl <span class="price-serves">8&ndash;10</span></th>
+                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">18&ndash;20</span></th>
+                <th scope="col" data-size="Full" data-max="35">Full <span class="price-serves">30&ndash;35</span></th>
+              </tr>
+            </thead>
+            <tbody>
             <tr>
               <th scope="row">Hummus w/ Pita</th>
               <td data-size="Bowl">$18</td>
@@ -771,14 +767,22 @@
               <td data-size="Half">$20</td>
               <td data-size="Full">$40</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+
+          <p class="course-foot">*Plus HST</p>
+        </div>
+
+        <!-- ==== EDIT: DIPS PHOTO ====   Same rules as the Mains photo. -->
+        <img class="course-photo" src="assets/tray-hummus-platter.jpg"
+             alt="A tray of hummus with pita chips, cucumber, carrots, peppers and tomatoes"
+             width="1000" height="1322" loading="lazy" decoding="async">
+      </section>
 
     </div>
 
     <!-- ==== EDIT: THE SMALL PRINT ====
-         The catering PDF's own wording. Keep it: it is what covers the
+         The catering PDF’s own wording. Keep it: it is what covers the
          prices above changing between one location and the next. -->
     <p class="fineprint">
       Prices may vary from one location to another. Items are subject to
