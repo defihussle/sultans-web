@@ -639,31 +639,25 @@ a:hover { color: var(--plum-700); }
    lifted to about 170 by the veil) the purple logo and bars read at about
    5.4:1, so they hold even at the film's darkest moment.
 
-   Scoped by body class: .page-home on index.html and .page-catering on
-   catering.html, both of which now open on a light hero. The menu page is
-   NOT in this list - its hero is still a dark photograph and its bar is
-   still white. If that ever changes, add .page-menu to each selector
-   below rather than widening them to every page. */
+   Scoped by body class to .page-catering, whose hero is cream. THE HOME PAGE
+   IS NO LONGER IN THIS LIST. Its film is shaded rather than washed now (see
+   section 7a), so the bar over it is white like the menu page’s and needs no
+   override at all. The menu page has never been here, for the same reason.
+   If another page is ever given a light hero, add its body class to each
+   selector below rather than widening them to every page. */
 /* The alternating band on the catering page is a barely-there violet rather
    than the warm grey the rest of the site uses. Same job - it separates one
    section from the next - but it keeps the page bright, which is what the
    client asked for, and it reads as brand colour rather than as dirt. */
 .page-catering .section-alt { background: var(--plum-050); }
 
-.page-home .brand-logo-on-dark,
 .page-catering .brand-logo-on-dark { display: none; }
-.page-home .brand-logo-on-light,
 .page-catering .brand-logo-on-light { display: block; }
-.page-home .nav-toggle,
 .page-catering .nav-toggle {
   background: rgba(255, 255, 255, 0.55);
   border-color: rgba(107, 63, 160, 0.25);
 }
-.page-home .nav-toggle:hover,
 .page-catering .nav-toggle:hover { background: rgba(107, 63, 160, 0.08); }
-.page-home .nav-toggle-bars,
-.page-home .nav-toggle-bars::before,
-.page-home .nav-toggle-bars::after,
 .page-catering .nav-toggle-bars,
 .page-catering .nav-toggle-bars::before,
 .page-catering .nav-toggle-bars::after { background: var(--plum-700); }
@@ -732,17 +726,13 @@ a:hover { color: var(--plum-700); }
 /* Purple on cream, and on the home page from the start. The hover rules
    have to come after the plain ones or they lose to them on equal weight. */
 .site-header.is-stuck .nav-inline a,
-.page-catering .nav-inline a,
-.page-home .nav-inline a { color: var(--plum-700); }
+.page-catering .nav-inline a { color: var(--plum-700); }
 .site-header.is-stuck .nav-inline a::after,
-.page-catering .nav-inline a::after,
-.page-home .nav-inline a::after { background: var(--gold-600); }
+.page-catering .nav-inline a::after { background: var(--gold-600); }
 .site-header.is-stuck .nav-inline a:hover,
 .site-header.is-stuck .nav-inline a:focus-visible,
 .page-catering .nav-inline a:hover,
-.page-catering .nav-inline a:focus-visible,
-.page-home .nav-inline a:hover,
-.page-home .nav-inline a:focus-visible { color: var(--plum-500); }
+.page-catering .nav-inline a:focus-visible { color: var(--plum-500); }
 
 /* --- The dimmed layer behind the panel --- */
 .nav-backdrop {
@@ -897,7 +887,7 @@ body.nav-is-open { overflow: hidden; }
   background-image:
     url("../assets/hero-poster.jpg"),
     radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.3) 0%, transparent 65%),
-    linear-gradient(160deg, var(--plum-100) 0%, var(--sand-100) 100%);
+    linear-gradient(160deg, var(--plum-600) 0%, var(--plum-950) 100%);
   background-size: cover, auto, auto;
   background-position: center, center, center;
   background-repeat: no-repeat;
@@ -909,7 +899,7 @@ body.nav-is-open { overflow: hidden; }
     background-image:
       url("../assets/hero-poster-mobile.jpg"),
       radial-gradient(60% 60% at 70% 20%, rgba(200, 162, 74, 0.3) 0%, transparent 65%),
-      linear-gradient(160deg, var(--plum-100) 0%, var(--sand-100) 100%);
+      linear-gradient(160deg, var(--plum-600) 0%, var(--plum-950) 100%);
   }
 }
 
@@ -950,96 +940,93 @@ body.nav-is-open { overflow: hidden; }
 .hero-video-asset::-webkit-media-controls-play-button { display: none !important; }
 .hero-video-asset::-internal-media-controls-overlay-cast-button { display: none !important; }
 
-/* A LIGHT VEIL OVER THE FILM (client: a white / light overlay, not a dark
-   one). It used to be a wash of near-black; it is now the same shape in
-   white, so the hero reads bright instead of heavy.
+/* THE SHADE OVER THE FILM. The brief was a bright hero and a film you can
+   actually see, and what follows is the lightest treatment that delivers
+   both: almost nothing over the middle of the frame, and a soft shade under
+   the words.
 
-   THIS IS WHY THE TEXT OVER THE FILM IS PURPLE AND NOT WHITE. Inverting the
-   veil inverted the contrast problem with it. The old danger was the pale
-   frames - a tray of shredded salads, almost white - behind white text. The
-   danger now is the DARK frames: this film runs from luma 18 to 207 behind
-   the headline, measured frame by frame, and dark purple text needs the veil
-   to lift the darkest of them to roughly 155 before it reads. Hence the two
-   layers below, and hence the purple in .hero-video-title.
+   THE FILM IS SHADED, NOT WASHED. This went the other way for three rounds
+   and it is worth writing down why, because the next person will be tempted
+   to try it again.
 
-   If the film is ever replaced, re-measure. A film that stays dark can take
-   a thinner veil; one that stays bright needs almost none.
+   A white veil and dark text need each other. The film runs from luma 18 to
+   207 behind the headline, measured frame by frame, so a white veil has to
+   lift the darkest of those to about 155 before dark purple reads on it -
+   that is roughly 0.70 white, and 0.70 white over the middle of a frame is a
+   sheet of paper with a photograph faintly behind it. Every attempt to thin
+   it failed the same way, because it is arithmetic and not taste: the pitch
+   is a block of type half the width of the frame, and whatever lights the
+   type lights half the frame with it.
+
+   SO THE TEXT IS LIGHT AND THE SHADE IS DARK, which is the other half of the
+   same arithmetic and much the kinder one. The numbers are not far apart -
+   0.62 of a dark wash against 0.70 of a white one - but what they do to the
+   picture is nothing like. A white veil flattens a frame towards paper and
+   takes its colour with it. A dark one only dims it: under this scrim the
+   rice is still yellow, the glass still has its highlights, and you can read
+   every edge in the shot. Under 0.70 white you could read none of them.
+
+   AND IT ONLY COVERS THE WORDS. The flat layer is 0.06 from just below the
+   bar to the bottom of the frame, so the right-hand half of the picture,
+   where the food actually is, has nothing over it worth measuring.
+
+   The wash is plum-950 rather than black, so the shade carries the brand
+   colour instead of going grey.
 
    THE LAYERS
-   The linear one runs top to bottom. Its first two stops are measured in the
+   The flat one runs top to bottom. Its first two stops are measured in the
    height of the bar itself, not in percentages, so the strip behind the logo
-   is lifted by the same amount whatever the screen height and whatever the
-   film happens to be showing. Below the bar it thins out so the food keeps
-   its colour, and thickens again at the very bottom behind the buttons.
+   is shaded by the same amount whatever the screen height. That strip is the
+   one place that cannot give: the logo and the four nav links are white and
+   have nothing else behind them. Below the bar it drops to almost nothing -
+   0.06, which is the whole middle of the frame - and lifts again at the foot
+   behind the three buttons.
 
-   The radial on top of it is the band of light the pitch sits in. The flat
-   layer is deliberately almost nothing through the middle of the frame so
-   the food keeps its own colour, which is not enough behind dark text, so
-   this puts light where the words are and nowhere else.
+   The radial on top of it is the shade the pitch sits in, and it runs off
+   the edge of the frame in the direction it is not needed, so there is no
+   edge to see. On a phone the pitch is centred, so it is 150% of the width
+   and 40% of the height: a band across the middle whose left and right edges
+   are off screen. From 900px the pitch moves to the left-hand gutter, so the
+   900px block in section 15 turns the band on its side - 74% wide, 130%
+   tall, anchored at 20% - and only its right-hand side fades, over the food.
 
-   IT RUNS OFF THE EDGE OF THE FRAME IN THE DIRECTION IT IS NOT NEEDED, and
-   that is the whole trick. On a phone the pitch is centred, so the ellipse
-   is 140% of the width and 36% of the height: a band across the middle whose
-   left and right edges are off the screen, so only the top and bottom fade.
-   From 900px the pitch moves to the left-hand gutter, so the 900px block in
-   section 15 turns the band on its side - 72% wide, 130% tall, anchored at
-   22% - and only the right-hand side fades, over the food.
+   MEASURE AFTER ANY CHANGE, against the BRIGHTEST frame in the film now and
+   not the darkest: that is the way round the danger runs with light type.
+   And measure over the painted letters rather than the line boxes - the
+   headline’s box is 16ch wide and the words do not fill it.
 
-   WHY IT MATTERS: anything that lights the text has to run off the frame, or
-   you can see where it stops. What was here before was a blurred white
-   rectangle sitting behind the headline, and the client’s word for it was
-   fog. It had a visible edge down its right-hand side. A full-bleed gradient
-   has no edge to see.
+   HOW IT WAS MEASURED, so it can be done again: render the page with the
+   film replaced by solid white, which gives the scrim’s alpha at every
+   pixel; sample the film at 2fps (72 frames); composite each frame through
+   that alpha; and take the BRIGHTEST pixel under each run of letters. The
+   results, against the worst frame of the 72:
 
-   THE VEIL IS MUCH THINNER THAN IT WAS. The first version was strong
-   everywhere and the film came out looking washed, which the client came
-   back on three times. The flat layer is now 0.05 through the middle of the
-   frame where it started at 0.38, and nothing is drawn behind the words at
-   all - the text-shadows on the headline and the supporting line are two
-   short offsets, not glows.
+       headline, cream line        5.20:1   (needs 3:1)
+       headline, gold line         3.86:1   (needs 3:1)
+       supporting line             4.70:1   (needs 4.5:1)
+       logo in the bar             7.88:1   (needs 3:1)
+       nav links in the bar        4.51:1   (needs 4.5:1)
 
-   THE BAR AT THE TOP IS THE ONE PLACE THAT CANNOT GIVE ANY MORE. The purple
-   logo and the four nav links have only the first two stops of the flat
-   layer behind them, and the links are small text, so they need 4.5:1. Do
-   not take 0.64 and 0.58 down without re-measuring them; at 0.62/0.56 the
-   links measured 4.22:1 against a black frame.
+   and on a 390px phone, against the upright film: 5.40, 3.97, 4.45 and
+   4.45:1. The two with no room in them are the nav links and the supporting
+   line, both small text at the 4.5:1 floor. */
 
-   MEASURE AFTER ANY CHANGE, over the painted letters rather than the line
-   boxes - the headline’s box is 16ch wide and the words do not fill it, so
-   measuring the box reads 0.5:1 low. Against a pure black frame, darker than
-   anything in the film: the violet top line of the headline 3.68:1, the deep
-   plum line under it 6.60:1, the supporting line 6.75:1, the logo 7.98:1 and
-   the nav links 4.50:1. On a 390px phone, 3.80:1 and 6.67:1 for the headline
-   and 4.50:1 and 4.39:1 for the logo and the menu button. Those are the
-   numbers to beat, and the thin ones are the top line of the headline (3:1)
-   and the nav links (4.5:1). There is not much room left in either: this is
-   about as thin as the veil goes while the text over it stays purple. */
 .hero-video-scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
-
-  /* LAYER 1: the band of light the pitch sits in. On a phone the pitch is
-     centred, so the band is a wide, shallow ellipse across the middle - 140%
-     of the width, which puts its left and right edges off the screen, so
-     there is no edge to see. Only the top and bottom fade, and they fade over
-     a third of the height. The 900px block in section 15 swaps it for a
-     left-anchored one, where the pitch moves over to the gutter.
-
-     LAYER 2: the strip behind the bar, thinning to almost nothing through the
-     middle of the frame and lifting a little at the foot. */
   background:
-    radial-gradient(140% 36% at 50% 50%,
-      rgba(255, 255, 255, 0.74) 0%,
-      rgba(255, 255, 255, 0.70) 50%,
-      rgba(255, 255, 255, 0.26) 72%,
-      rgba(255, 255, 255, 0) 92%),
+    radial-gradient(150% 40% at 50% 52%,
+      rgba(35, 20, 52, 0.66) 0%,
+      rgba(35, 20, 52, 0.62) 50%,
+      rgba(35, 20, 52, 0.20) 76%,
+      rgba(35, 20, 52, 0) 94%),
     linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.64) 0,
-      rgba(255, 255, 255, 0.58) var(--header-h),
-      rgba(255, 255, 255, 0.05) calc(var(--header-h) + 5rem),
-      rgba(255, 255, 255, 0.05) 72%,
-      rgba(255, 255, 255, 0.16) 100%);
+      rgba(35, 20, 52, 0.62) 0,
+      rgba(35, 20, 52, 0.58) var(--header-h),
+      rgba(35, 20, 52, 0.06) calc(var(--header-h) + 5rem),
+      rgba(35, 20, 52, 0.06) 70%,
+      rgba(35, 20, 52, 0.26) 100%);
 }
 
 
@@ -1076,33 +1063,35 @@ body.nav-is-open { overflow: hidden; }
   padding-inline: var(--gutter);
   text-align: center;
 }
-/* THE TWO-COLOUR HEADLINE. Brand violet on the top line, deep plum on the
-   bottom one - the same treatment every two-line heading on the site gets.
-   See "TWO-LINE HEADINGS" in section 4; this is that rule, written out by
-   hand because the hero headline is not a .section-title.
+/* CREAM AND GOLD, NOT THE TWO PURPLES. The two-line heading rule in section
+   4 puts brand violet over deep plum, and the last line of that rule says it
+   does not apply on the dark bands, where the heading is cream. The film is
+   now one of those: see the note on .hero-video-scrim above for why it had
+   to be. So this headline takes the same cream-over-gold the catering and
+   menu heroes take, and the site stays consistent with itself.
 
-   THE SHADOW IS TIGHT AND WHITE. White because the text is dark now, and a
-   dark shadow under dark text only thickens it. Tight because the wide soft
-   version that used to be here, and the blurred white panel that used to sit
-   behind the words with it, read as fog - which is the thing they were asked
-   to stop doing. What lights the words now is the band in the scrim above,
-   and nothing is drawn behind them at all. */
+   THE SHADOW IS TIGHT AND DARK. Dark because the text is light again. Tight
+   - two short offsets, no wide blur - because a soft glow round the letters
+   is the fog the client asked three times to be rid of. It is there to hold
+   the letter edges where a highlight in the film runs up against them, and
+   the shade in the scrim does the rest. Nothing is drawn behind the words. */
 .hero-video-title {
   max-width: 16ch;
   margin: 0 auto;
   font-size: clamp(2.3rem, 7.2vw, 4.4rem);
   line-height: 1.04;
-  color: var(--plum-500);
-  /* A TIGHT SHADOW, NOT A HALO. Two short white offsets, no large blur: this
-     is here to keep the letter edges crisp where a highlight in the film runs
-     right up against them, and nothing more. The wide soft glows that used to
-     be on this line read as fog round the words and are gone. */
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 0.8);
+  color: var(--paper);
+  text-shadow: 0 1px 2px rgba(35, 20, 52, 0.55), 0 0 1px rgba(35, 20, 52, 0.45);
 }
+/* gold-300, not the gold-400 the other two heroes use. Those sit on a flat
+   dark panel; this one sits on moving film, and the film goes to near-white
+   in places. Over the brightest frame in it gold-400 measured 2.93:1 against
+   the 3:1 a heading this size needs, and gold-300 measures 3.75:1. It is the
+   next step up the same scale, so the line still reads gold. */
 .hero-video-title em {
   display: block;
   font-style: normal;
-  color: var(--plum-700);
+  color: var(--gold-300);
 }
 .hero-video-lede {
   display: none;
@@ -1110,9 +1099,9 @@ body.nav-is-open { overflow: hidden; }
   margin: var(--sp-5) auto 0;
   font-size: var(--fs-lede);
   line-height: 1.55;
-  color: var(--plum-700);
-  /* The same tight pair as the headline, scaled down. */
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 1px rgba(255, 255, 255, 0.8);
+  color: var(--text-on-dark);
+  /* The same tight pair as the headline. */
+  text-shadow: 0 1px 2px rgba(35, 20, 52, 0.55), 0 0 1px rgba(35, 20, 52, 0.45);
 }
 
 .hero-video-actions {
@@ -3414,30 +3403,25 @@ a.contact-value:hover { color: var(--gold-400); }
     align-items: flex-start;
   }
 
-  /* The band of light follows the text. From here up the pitch is over at the
+  /* The shade follows the text. From here up the pitch is over at the
      left-hand gutter and hangs off the bottom of the frame rather than
      sitting in the middle of it, so the band turns on its side: a tall
      ellipse anchored left, 130% of the height so its top and bottom edges are
      off the screen and only the right-hand side fades. The food on the right
-     of the frame is left alone.
-
-     IT IS A GRADIENT, FULL BLEED, AND THAT IS THE POINT. What used to light
-     the words was a blurred white rectangle sitting behind them, and it read
-     as fog with a visible edge on the right. Anything that lights the text
-     has to run off the side of the frame, or you can see where it stops. */
+     of the frame is left alone. */
   .hero-video-scrim {
     background:
-      radial-gradient(72% 130% at 22% 56%,
-        rgba(255, 255, 255, 0.74) 0%,
-        rgba(255, 255, 255, 0.70) 50%,
-        rgba(255, 255, 255, 0.24) 72%,
-        rgba(255, 255, 255, 0) 92%),
+      radial-gradient(74% 130% at 20% 56%,
+        rgba(35, 20, 52, 0.66) 0%,
+        rgba(35, 20, 52, 0.62) 48%,
+        rgba(35, 20, 52, 0.19) 74%,
+        rgba(35, 20, 52, 0) 92%),
       linear-gradient(to bottom,
-        rgba(255, 255, 255, 0.64) 0,
-        rgba(255, 255, 255, 0.58) var(--header-h),
-        rgba(255, 255, 255, 0.05) calc(var(--header-h) + 5rem),
-        rgba(255, 255, 255, 0.05) 72%,
-        rgba(255, 255, 255, 0.16) 100%);
+        rgba(35, 20, 52, 0.62) 0,
+        rgba(35, 20, 52, 0.58) var(--header-h),
+        rgba(35, 20, 52, 0.06) calc(var(--header-h) + 5rem),
+        rgba(35, 20, 52, 0.06) 70%,
+        rgba(35, 20, 52, 0.26) 100%);
   }
 
   /* The arrow bar only exists where the arrows do. */
