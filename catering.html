@@ -823,8 +823,9 @@
 <!-- =========================================================================
      ==== EDIT: GOOD TO KNOW ====
      The four things people ask before they order, one line each. The id is
-     "how" because the footer link on all three pages points at it - if you
-     rename it, rename it in those three footers too.
+     "how". The footer used to link to it from all three pages; that link has
+     gone, so nothing points here any more and the id is kept only so that a
+     catering.html#how someone has bookmarked still lands in the right place.
 
      These numbers must match the package cards above and the contact
      details below. Change a minimum or a notice period in BOTH places.
@@ -910,28 +911,6 @@
       <p class="section-lede">
         Send a date and a guest count. We'll do the rest.
       </p>
-
-      <!-- ==== EDIT: CONTACT DETAILS ==== -->
-      <ul class="contact-list">
-        <li>
-          <span class="contact-label">Call or text</span>
-          <a class="contact-value" href="tel:+16479293924">647-929-3924</a>
-        </li>
-        <li>
-          <span class="contact-label">Email</span>
-          <!-- If this address changes, update it here, in the footer, and as
-               CATERING_EMAIL at the top of js/script.js -->
-          <a class="contact-value" href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a>
-        </li>
-        <li>
-          <span class="contact-label">Instagram</span>
-          <a class="contact-value" href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">@sultans.ca</a>
-        </li>
-        <li>
-          <span class="contact-label">Notice needed</span>
-          <span class="contact-value">48 hours standard &middot; 4 days for platters</span>
-        </li>
-      </ul>
     </div>
 
     <!-- ==== EDIT: THE FORM ====
@@ -1028,6 +1007,33 @@
       </div>
     </form>
 
+    <!-- ==== EDIT: CONTACT DETAILS ====
+         Under the form, not beside it: this is what you reach for when you
+         would rather not fill a form in, so it reads as the alternative to
+         the form rather than as a column next to it. It spans the whole
+         section from 900px up and goes four across; below that it stacks,
+         which is what it did before it moved. -->
+    <ul class="contact-list">
+      <li>
+        <span class="contact-label">Call or text</span>
+        <a class="contact-value" href="tel:+16479293924">647-929-3924</a>
+      </li>
+      <li>
+        <span class="contact-label">Email</span>
+        <!-- If this address changes, update it here, in the footer, and as
+             CATERING_EMAIL at the top of js/script.js -->
+        <a class="contact-value" href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a>
+      </li>
+      <li>
+        <span class="contact-label">Instagram</span>
+        <a class="contact-value" href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">@sultans.ca</a>
+      </li>
+      <li>
+        <span class="contact-label">Notice needed</span>
+        <span class="contact-value">48 hours standard &middot; 4 days for platters</span>
+      </li>
+    </ul>
+
   </div>
 </section>
 
@@ -1069,7 +1075,6 @@
         <h2>Catering</h2>
         <ul>
           <li><a href="#packages">Packages</a></li>
-          <li><a href="#how">How to book</a></li>
           <li><a href="#request">Request a quote</a></li>
           <li><a href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">Catering menu (PDF)</a></li>
         </ul>
@@ -1078,7 +1083,6 @@
         <h2>Company</h2>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="https://sultansgrill.ca/about/" target="_blank" rel="noopener">Our story</a></li>
           <li><a href="index.html#locations">Locations</a></li>
         </ul>
       </div>

@@ -3061,9 +3061,14 @@ body.nav-is-open { overflow: hidden; }
   gap: clamp(2.5rem, 6vw, 4rem);
 }
 
+/* The contact details. They sit UNDER the form, as their own row of the
+   section, rather than in the column beside it - this is what you reach for
+   when you would rather not fill a form in, so it belongs after the form and
+   not next to it. Stacked on a phone; four across from 900px, where it has
+   the full width and four tall rows would be a lot of nothing. */
 .contact-list {
   display: grid;
-  margin-top: var(--sp-6);
+  margin-top: 0;
   border-top: 1px solid var(--line-dark);
 }
 .contact-list li {
@@ -3682,11 +3687,21 @@ a.contact-value:hover { color: var(--gold-400); }
     gap: var(--sp-8);
     align-items: start;
   }
-  /* The contact details follow you down while the taller form scrolls. */
+  /* The heading follows you down while the taller form scrolls. */
   .request-copy {
     position: sticky;
     top: calc(var(--header-h) + var(--sp-6));
   }
+
+  /* The contact details take the whole width, under both columns, and the
+     four of them go side by side. The hairline that divided them when they
+     were stacked becomes the line above the row. */
+  .contact-list {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+  .contact-list li { border-bottom: 0; }
 
   .footer-inner { grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr); }
   .footer-bottom { grid-column: 1 / -1; }
