@@ -1678,13 +1678,27 @@ body.nav-is-open { overflow: hidden; }
    resize this by hand to match.
 
    If the file ever goes missing the mask does not apply and the box shows as
-   a small gold square, which is wrong but not broken. */
+   a small gold square, which is wrong but not broken.
+
+   overflow: hidden IS LOAD-BEARING, and it is not there to clip anything.
+   An inline-block takes its baseline from its own last line of text, and the
+   character still inside this one is set at font-size: 0, so that baseline
+   sits at the top of the box - which left the diamond hanging below the
+   words. overflow: hidden switches the baseline to the bottom edge of the
+   box, so the figure below means what it reads as.
+
+   0.09rem is the measured offset that centres the diamond on the CAPITALS,
+   not on the baseline: the ticker is set in capitals, the cap height is
+   about 11px at this size, the diamond is 8.3px, so its bottom edge has to
+   clear the baseline by (11 - 8.3) / 2. Resize the ticker type or the
+   diamond and this has to be measured again. */
 .ticker-group i {
   display: inline-block;
+  overflow: hidden;
   width: 0.52rem;
   height: 0.52rem;
   margin: 0 0.55rem;
-  vertical-align: 0.14rem;
+  vertical-align: 0.09rem;
   font-size: 0;
   background-color: var(--gold-500);
   -webkit-mask-image: url("../assets/icon-diamond.png");
