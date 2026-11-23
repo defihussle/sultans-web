@@ -9,7 +9,7 @@
      3d. The guest count slider on the catering page
      4. The copyright year in the footer
      5. Highlighting the nav link for the section you are looking at
-     6. The quote form (basic checks, then EmailJS)
+     6. The quote form (basic checks, then EmailJS - nothing else)
 
    THE ONLY LINE MOST PEOPLE NEED TO EDIT IS THE NEXT ONE.
    =========================================================================== */
@@ -33,8 +33,9 @@ var EMAILJS_PUBLIC_KEY  = '1SZ-kimtx32LCUexe';
 var EMAILJS_SERVICE_ID  = 'service_sl8fzmb';
 var EMAILJS_TEMPLATE_ID = 'template_v3nkwdq';
 
-/* ==== EDIT: the address the form falls back to if EmailJS cannot load.
-   Keep it the same as the one in the footer and beside the form. ==== */
+/* ==== EDIT: the address the form names if a send ever fails. Nothing is
+   sent to it by this file - it is a line of text in a message. Keep it the
+   same as the one in the footer and beside the form. ==== */
 var CATERING_EMAIL = 'info@sultansgrill.ca';
 
 (function () {
@@ -482,14 +483,21 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   /* -------------------------------------------------------------------------
      6. QUOTE FORM
 
-     The submit is always stopped: nothing on this page reloads, whichever
-     way the request goes out. In order:
+     IT SENDS THROUGH EMAILJS AND THROUGH NOTHING ELSE. There is no mailto in
+     this block and there must not be one. There was: if the SDK had not
+     loaded, the form used to open the visitor's own mail app with the
+     answers filled in. That sounded like a courtesy and behaved like a bug -
+     the SDK was coming from a CDN, the CDN is blocked more often than anyone
+     expects, and what people got was a mail window they had not asked for
+     instead of the confirmation they had. The SDK is served from this site
+     now (see the bottom of catering.html) and this block does one thing.
 
+     The submit is always stopped, so nothing on this page ever reloads.
+     In order:
        1. the required fields are checked here rather than by the browser,
           so the message under the button can name what is missing
-       2. EmailJS sends the form, if it loaded
-       3. if it did not, the visitor's own email app opens with the answers
-          filled in, addressed to CATERING_EMAIL
+       2. EmailJS sends the form
+       3. the line under the button says which of those two happened
 
      EMAILJS READS THE FORM ITSELF. sendForm() walks the <form> and takes
      every field by its name attribute - including the service radios, which
@@ -501,6 +509,12 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
      THE BUTTON IS DISABLED WHILE IT SENDS, and a flag blocks a second
      submit, because a slow network is exactly when someone presses again.
      Both are released whichever way the send ends.
+
+     IF THE SDK IS MISSING ANYWAY - someone deletes the script tag, or an
+     extension is aggressive enough to block a same-origin file - the form
+     says so and names the phone number. It does not invent a second way to
+     send. A visitor who is told "that did not work, here is the number" has
+     been dealt with honestly; one who is handed a half-written email has not.
      ------------------------------------------------------------------------- */
   var form = document.getElementById('requestForm');
   var status = document.getElementById('formStatus');
@@ -512,13 +526,21 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
     status.setAttribute('data-state', state || 'ok');
   }
 
+  function cannotSend() {
+    say(
+      'Sorry, the form is not working just now. Please call 647-929-3924 or ' +
+      'email ' + CATERING_EMAIL + '.',
+      'error'
+    );
+  }
+
   if (form) {
     // Hand the public key over once, at load, rather than on every submit.
     if (window.emailjs && EMAILJS_PUBLIC_KEY) {
       try {
         window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
       } catch (err) {
-        // An old copy of the SDK takes the key as a bare string instead.
+        // An older copy of the SDK takes the key as a bare string instead.
         try { window.emailjs.init(EMAILJS_PUBLIC_KEY); } catch (err2) {}
       }
     }
@@ -549,61 +571,40 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
         return;
       }
 
+      if (!window.emailjs || !window.emailjs.sendForm ||
+          !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+        cannotSend();
+        return;
+      }
+
       var button = form.querySelector('button[type="submit"]');
       var release = function () {
         sending = false;
         if (button) button.disabled = false;
       };
 
-      if (window.emailjs && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID) {
-        sending = true;
-        if (button) button.disabled = true;
-        say('Sending your request...', 'ok');
+      sending = true;
+      if (button) button.disabled = true;
+      say('Sending your request...', 'ok');
 
-        window.emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-          .then(function () {
-            release();
-            form.reset();
-            say('Request sent. We will be in touch.', 'ok');
-          })
-          .catch(function () {
-            release();
-            // Deliberately not the raw error. It would say something like
-            // "412 Gmail_API: invalid grant", which tells a visitor nothing
-            // and worries them. The two ways to reach us do.
-            say(
-              'Sorry, that did not send. Please call 647-929-3924 or ' +
-              'email ' + CATERING_EMAIL + '.',
-              'error'
-            );
-          });
-        return;
-      }
-
-      // EmailJS did not load. Build an email instead, so the answers are not
-      // lost - the visitor just presses send in their own mail app.
-      if (form.getAttribute('data-mailto-fallback') !== 'true') {
-        say('Sorry, the form is not available. Please call 647-929-3924.', 'error');
-        return;
-      }
-
-      var data = new FormData(form);
-      var lines = [];
-      data.forEach(function (value, key) {
-        if (String(value).trim()) {
-          lines.push(key.charAt(0).toUpperCase() + key.slice(1) + ': ' + value);
-        }
-      });
-
-      var subject = 'Catering request - ' + (data.get('name') || 'new enquiry');
-      var body = 'Catering request from the website\n\n' + lines.join('\n') + '\n';
-
-      window.location.href =
-        'mailto:' + CATERING_EMAIL +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
-      say('Opening your email app with the details filled in.', 'ok');
+      window.emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+        .then(function () {
+          release();
+          form.reset();
+          say('Request sent. We will be in touch.', 'ok');
+        })
+        .catch(function () {
+          release();
+          // Deliberately not the raw error. It would say something like
+          // "412 Gmail_API: invalid grant", which tells a visitor nothing and
+          // worries them. The two ways to reach us do. The fields are left
+          // filled in, so nothing has to be typed twice.
+          say(
+            'Sorry, that did not send. Please call 647-929-3924 or ' +
+            'email ' + CATERING_EMAIL + '.',
+            'error'
+          );
+        });
     });
   }
 })();

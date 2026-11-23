@@ -891,10 +891,12 @@
      package, location, service, notes. Rename one here and that line goes
      missing from the email - rename it in the EmailJS template as well.
 
-     IF EMAILJS CANNOT LOAD - blocked, offline, CDN down - the form falls back
-     to opening the visitor's own email app with the answers filled in,
-     addressed to CATERING_EMAIL. That is what data-mailto-fallback="true" on
-     the <form> below switches on. Nobody loses their enquiry.
+     IT NEVER OPENS THE MAIL APP. It used to, as a fallback, and the fallback
+     was what people actually got: the SDK was coming from a CDN and when the
+     CDN was blocked the form quietly did something else instead. The SDK is
+     part of this site now (see the bottom of this file) and the mail-app path
+     is gone. If a send fails, the form says so and leaves the answers in the
+     fields, with the phone number and the address to use instead.
 
      This form is the only one on the site. Keep the phone number and email
      the same here, in the header and in the footer.
@@ -935,7 +937,7 @@
     <!-- ==== EDIT: THE FORM ====
          To add a field, copy a whole <p class="field"> block.
          To add a package choice, copy one <option> line. -->
-    <form class="request-form" id="requestForm" data-mailto-fallback="true" novalidate>
+    <form class="request-form" id="requestForm" novalidate>
 
       <div class="form-head">
         <h3 class="form-title">Request a quote</h3>
@@ -1099,13 +1101,22 @@
 </footer>
 
 <!-- EmailJS, which is what carries the quote form's answers to the inbox.
-     Pinned to an exact version with an integrity hash: jsDelivr serves a
-     given version forever and unchanged, so if the file ever comes back
-     different the browser refuses to run it rather than running something
-     nobody wrote. Loaded before our own script, which needs it. -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"
-        integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS"
-        crossorigin="anonymous"></script>
+
+     IT IS SERVED FROM THIS SITE, NOT A CDN, and that is the whole reason the
+     form stopped falling back to the mail app. On a CDN the file is one
+     blocked request away from not existing: an ad blocker, a privacy
+     extension, a corporate proxy or a bad minute at the CDN and the script
+     never runs. The form is on a page aimed at office managers behind
+     company networks, which is exactly where that happens. The whole SDK is
+     4 KB - smaller than any photograph on the page - so there was nothing to
+     gain by fetching it from somewhere else.
+
+     TO UPGRADE IT, download a new build over js/emailjs.min.js:
+         https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js
+     and change the version in that URL. Do not edit the file by hand.
+
+     It loads before js/script.js, which needs it. -->
+<script src="js/emailjs.min.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
