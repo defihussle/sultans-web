@@ -2240,18 +2240,24 @@ body.nav-is-open { overflow: hidden; }
    no frame and no box. Only the Mediterranean Platter has one; the other two
    cards have no photograph and need no rule.
 
-   It is sized as a share of the card rather than cropped to a fixed height.
-   A cut-out has no spare background to crop into - object-fit: cover on one
-   would cut the rim off the platter - so it keeps its own proportions and
-   the card gets as tall as it needs to be.
+   IT IS NEVER CROPPED. A cut-out has no spare background to crop into -
+   object-fit: cover on one would cut the rim off the platter - so it keeps
+   its own proportions and the card gets as tall as it needs to be.
 
-   The negative bottom margin pulls the words up into the space the round
+   A CEILING ON BOTH SIDES, because the two cards that have a photograph do
+   not agree on shape: the Mediterranean platter is as good as square and the
+   hummus tray is tall. max-width alone would make the tall one enormous and
+   max-height alone would leave the square one small, so both are set and the
+   browser scales each picture down until it satisfies the pair.
+
+   The negative bottom margin pulls the words up into the space a round
    platter leaves at its corners, which would otherwise read as a gap. */
 .pkg-photo {
   display: block;
-  width: 62%;
-  max-width: 16rem;
+  width: auto;
   height: auto;
+  max-width: 68%;
+  max-height: 15rem;
   margin: 0 auto calc(var(--sp-6) * -1);
 }
 
