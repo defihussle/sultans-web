@@ -2670,6 +2670,24 @@ body.nav-is-open { overflow: hidden; }
   .piece-grid-wide { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* --- The picture that closes the menu ---
+   A cut-out, like the two beside the course tables, and the same rules: no
+   border, no radius, no shadow, nothing drawn behind it. It is centred and
+   capped rather than stretched, because a tray blown up to 1200px reads as a
+   banner, and this is a full stop, not a headline.
+
+   IT SHOWS AT EVERY WIDTH, where the two course photographs are hidden below
+   900px. They are hidden because they sit beside a price table and there is
+   no room for them next to one on a phone. This one sits on its own line, so
+   that does not apply - it just gets narrower. */
+.menu-photo {
+  display: block;
+  width: 100%;
+  max-width: 44rem;
+  height: auto;
+  margin: clamp(2rem, 4vw, 3.25rem) auto 0;
+}
+
 /* --- The photographs ---
    NO FRAME, NO BORDER, NO CARD, AND NOTHING BEHIND THEM. The files are
    cut-outs: the tray is all there is in each one and everything round it is
@@ -3974,6 +3992,6 @@ a.contact-value:hover { color: var(--gold-400); }
   .course { background: none !important; padding: 0; }
   /* The photographs are mood, not information, and each one is a quarter of
      a page of ink. */
-  .course-photo, .pkg-photo { display: none !important; }
+  .course-photo, .pkg-photo, .menu-photo { display: none !important; }
   a { text-decoration: underline; color: #000; }
 }
