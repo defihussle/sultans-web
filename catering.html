@@ -63,6 +63,20 @@
   <!-- Fertigo Pro (Adobe Fonts). Headings and the brand use this. -->
   <link rel="stylesheet" href="https://use.typekit.net/kht7bch.css">
 
+  <!-- ==== EDIT: THE TAB ICON ====
+       The purple shawarma mark. Three files, and each one is answering a
+       different browser:
+         favicon.png        512x512, transparent. Every desktop browser.
+         apple-touch-icon   180x180, ON WHITE. iOS ignores transparency on a
+                            home-screen icon and fills it black, so this one
+                            carries its own white tile. The name is what iOS
+                            looks for; do not rename it.
+       No .ico: nothing still in use needs one. To change the mark, replace
+       all three files - a browser caches a tab icon hard, so expect to see
+       the old one for a while. -->
+  <link rel="icon" href="assets/favicon.png" sizes="any" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -356,13 +370,12 @@
       <!-- ---------- PACKAGE 2 ---------- -->
       <article class="pkg">
         <!-- ==== EDIT: MEDITERRANEAN PLATTER PHOTO ====
-             A cut-out, like the two in the menu below: the platter is all
-             there is in the file and everything round it is transparent, so
-             it sits on the card with no frame and no box. It is the only
-             package with a photograph; the other two have none yet. -->
-        <img class="pkg-photo" src="assets/platter-mediterranean.png"
+             Placed as supplied, like the two in the menu below. No frame and
+             no box: the file fades to transparent at its edges and meets the
+             card softly. -->
+        <img class="pkg-photo" src="assets/platter-mediterranean.webp"
              alt="A round platter of falafel, stuffed grape leaves, feta, pickled vegetables, pita and tahini"
-             width="760" height="752" loading="lazy" decoding="async">
+             width="900" height="674" loading="lazy" decoding="async">
         <div class="pkg-main">
           <span class="pkg-badge pkg-badge-new">New</span>
           <h3 class="pkg-name">Mediterranean Platter</h3>
@@ -395,12 +408,12 @@
       <!-- ---------- PACKAGE 3 ---------- -->
       <article class="pkg">
         <!-- ==== EDIT: HUMMUS DIP PLATTER PHOTO ====
-             The same cut-out that sits beside the Dips rows further down the
-             page. One file, two places: this card and that one are the same
-             platter, so they should not be two different photographs. -->
-        <img class="pkg-photo" src="assets/tray-hummus-platter.png"
+             The same file that sits beside the Dips rows further down the
+             page. One picture, two places: this card and that one are the
+             same platter, so they should not be two different photographs. -->
+        <img class="pkg-photo" src="assets/tray-hummus-platter.webp"
              alt="A tray of hummus with pita chips, cucumber, carrots, peppers and tomatoes"
-             width="560" height="910" loading="lazy" decoding="async">
+             width="700" height="934" loading="lazy" decoding="async">
         <div class="pkg-main">
           <span class="pkg-badge pkg-badge-new">New</span>
           <h3 class="pkg-name">Hummus Dip Platter</h3>
@@ -600,17 +613,18 @@
         </div>
 
         <!-- ==== EDIT: MAINS PHOTO ====
-             No frame, no border, no card - and nothing behind it either. The
-             file is a CUT-OUT: the tray is all there is in it and everything
-             round it is transparent, so the page shows through and the
-             photograph sits on the page instead of in a box on it.
+             The client’s photograph, placed as supplied - the whole frame,
+             table and all, not cut out. It needs no frame of its own because
+             the file already fades to transparent at its edges, so it meets
+             the panel softly rather than at a hard line. No border, no
+             radius, no shadow: see .course-photo in section 10c.
 
-             IF YOU REPLACE IT, replace it with another cut-out PNG. A
-             rectangular photograph with its own background will read as a
-             pasted-on box here, because there is no frame to excuse it. -->
-        <img class="course-photo" src="assets/tray-chicken-kebab.png"
-             alt="A full tray of chicken kebab skewers"
-             width="900" height="460" loading="lazy" decoding="async">
+             WEBP, NOT PNG. The same picture as a transparent PNG is 950 KB;
+             this is 105 KB and nothing was changed to get there. Every
+             browser that can run the rest of this site can read it. -->
+        <img class="course-photo" src="assets/tray-chicken-kebab.webp"
+             alt="A full tray of chicken kebab skewers, with lemon, parsley and dips"
+             width="1100" height="508" loading="lazy" decoding="async">
       </section>
 
       <!-- ---------- SIDES ---------- -->
@@ -784,10 +798,10 @@
           <p class="course-foot">*Plus HST</p>
         </div>
 
-        <!-- ==== EDIT: DIPS PHOTO ====   A cut-out too. Same rules as Mains. -->
-        <img class="course-photo" src="assets/tray-hummus-platter.png"
+        <!-- ==== EDIT: DIPS PHOTO ====   Same rules as the Mains photo. -->
+        <img class="course-photo" src="assets/tray-hummus-platter.webp"
              alt="A tray of hummus with pita chips, cucumber, carrots, peppers and tomatoes"
-             width="560" height="910" loading="lazy" decoding="async">
+             width="700" height="934" loading="lazy" decoding="async">
       </section>
 
     </div>
@@ -1052,7 +1066,7 @@
         Modern Mediterranean, fit for royalty. Catering across Toronto,
         North York, Waterloo and St. Catharines.
       </p>
-      <p class="footer-tag"><img class="tagmark" src="assets/tag-white.png" alt="#eatlikeasultan" width="877" height="163"></p>
+      <p class="footer-tag"><span class="tagmark" role="img" aria-label="#eatlikeasultan"></span></p>
 
       <ul class="footer-social">
         <li>

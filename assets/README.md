@@ -156,3 +156,33 @@ There is no point going larger.
 menu, under the four courses. It is the only one of the four that shows on a
 phone as well: the other three sit beside something, and this one sits on its
 own line.
+
+## The tab icon and the diamond (added November 2026)
+
+| File | What it is | Where it shows |
+| --- | --- | --- |
+| `favicon.png` | The purple shawarma mark, 512x512, transparent | The browser tab, every desktop browser |
+| `apple-touch-icon.png` | The same mark, 180x180, **on white** | The iOS home screen |
+| `icon-diamond.png` | One diamond from the brand's four, 96x96 | Between the dish names in the ticker on the home page |
+
+**The Apple icon carries its own white tile and the other does not.** iOS
+ignores transparency on a home-screen icon and fills it black, so that one is
+flattened onto white on purpose. The filename is what iOS looks for; do not
+rename it. There is no `.ico` - nothing still in use needs one.
+
+**The diamond is used as a mask, like the other icons above**, so the gold
+comes from the stylesheet and not from the file. The source artwork is four
+diamonds in a cluster; only one was wanted, so it is cut out of the top one.
+
+## The three tray photographs
+
+`tray-chicken-kebab.webp`, `tray-hummus-platter.webp` and
+`platter-mediterranean.webp` are the client's own photographs, placed as
+supplied: nothing cropped, masked or cut out. Each file already fades to
+transparent at its edges, which is why they need no frame.
+
+**They are WebP, not PNG, and that is the only change made to them.** The same
+three as transparent PNGs come to 3.5 MB; as WebP they are 390 KB together and
+look identical. Every browser that can run the rest of this site can read
+WebP. If you ever need PNG, re-export from the originals at the same pixel
+sizes - do not convert these.

@@ -58,6 +58,20 @@
   <!-- Fertigo Pro (Adobe Fonts). Headings and the brand use this. -->
   <link rel="stylesheet" href="https://use.typekit.net/kht7bch.css">
 
+  <!-- ==== EDIT: THE TAB ICON ====
+       The purple shawarma mark. Three files, and each one is answering a
+       different browser:
+         favicon.png        512x512, transparent. Every desktop browser.
+         apple-touch-icon   180x180, ON WHITE. iOS ignores transparency on a
+                            home-screen icon and fills it black, so this one
+                            carries its own white tile. The name is what iOS
+                            looks for; do not rename it.
+       No .ico: nothing still in use needs one. To change the mark, replace
+       all three files - a browser caches a tab icon hard, so expect to see
+       the old one for a while. -->
+  <link rel="icon" href="assets/favicon.png" sizes="any" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -283,8 +297,8 @@
      ========================================================================= -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <img class="tagmark" src="assets/tag-white.png" alt="#eatlikeasultan" width="877" height="163"> <i>&#10022;</i> </span>
-    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <img class="tagmark" src="assets/tag-white.png" alt="#eatlikeasultan" width="877" height="163"> <i>&#10022;</i> </span>
+    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <span class="tagmark" role="img" aria-label="#eatlikeasultan"></span> <i>&#10022;</i> </span>
+    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <span class="tagmark" role="img" aria-label="#eatlikeasultan"></span> <i>&#10022;</i> </span>
   </div>
 </div>
 
@@ -534,7 +548,7 @@
       <p class="footer-blurb">
         Catering across Toronto, North York, Waterloo and St. Catharines.
       </p>
-      <p class="footer-tag"><img class="tagmark" src="assets/tag-white.png" alt="#eatlikeasultan" width="877" height="163"></p>
+      <p class="footer-tag"><span class="tagmark" role="img" aria-label="#eatlikeasultan"></span></p>
 
       <ul class="footer-social">
         <li>
