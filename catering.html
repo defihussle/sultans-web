@@ -875,22 +875,29 @@
 <!-- =========================================================================
      ==== EDIT: REQUEST A QUOTE / CONTACT ====
 
-     IMPORTANT - THE FORM CANNOT SEND EMAIL BY ITSELF.
-     A plain HTML page has no way to send mail. Choose one option:
+     THE FORM SENDS THROUGH EMAILJS. A plain HTML page cannot send mail on
+     its own, so the submit goes to EmailJS, which posts it on to the inbox
+     set up in the EmailJS account. Nothing reloads: the page stays where it
+     is and a line under the button says what happened.
 
-       OPTION A (no setup, working right now)
-         On submit the form opens the visitor's own email app with every
-         answer filled in, addressed to the address set as CATERING_EMAIL
-         at the top of js/script.js.
+     THE THREE IDS ARE AT THE TOP OF js/script.js, next to CATERING_EMAIL.
+     The public key is called public for a reason - it is meant to sit in the
+     page where anyone can read it, and it only lets a browser send through
+     this one account. The template and service ids are not secrets either.
+     Change all three in that one place if the account ever changes.
 
-       OPTION B (recommended once live)
-         Create a free form endpoint (Formspree, Basin, Netlify Forms), then
-         on the <form> tag below add:
-             action="https://formspree.io/f/YOURCODE" method="post"
-         and delete  data-mailto-fallback="true".
+     THE FIELD NAMES BELOW ARE THE TEMPLATE'S. Each name="..." on an input is
+     what the EmailJS template reads: name, phone, email, event_date, guests,
+     package, location, service, notes. Rename one here and that line goes
+     missing from the email - rename it in the EmailJS template as well.
 
-     This form is the only one on the site now. Keep the phone number and
-     email the same here, in the header and in the footer.
+     IF EMAILJS CANNOT LOAD - blocked, offline, CDN down - the form falls back
+     to opening the visitor's own email app with the answers filled in,
+     addressed to CATERING_EMAIL. That is what data-mailto-fallback="true" on
+     the <form> below switches on. Nobody loses their enquiry.
+
+     This form is the only one on the site. Keep the phone number and email
+     the same here, in the header and in the footer.
      ========================================================================= -->
 <section class="section section-invert" id="request">
   <div class="wrap request-inner">
@@ -956,7 +963,7 @@
         <div class="field-pair">
           <p class="field">
             <label for="f-date">Event date</label>
-            <input id="f-date" name="date" type="date">
+            <input id="f-date" name="event_date" type="date">
           </p>
           <p class="field">
             <label for="f-guests">Guests</label>
@@ -1091,6 +1098,14 @@
   </div>
 </footer>
 
+<!-- EmailJS, which is what carries the quote form's answers to the inbox.
+     Pinned to an exact version with an integrity hash: jsDelivr serves a
+     given version forever and unchanged, so if the file ever comes back
+     different the browser refuses to run it rather than running something
+     nobody wrote. Loaded before our own script, which needs it. -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"
+        integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS"
+        crossorigin="anonymous"></script>
 <script src="js/script.js"></script>
 </body>
 </html>

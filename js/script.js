@@ -9,13 +9,32 @@
      3d. The guest count slider on the catering page
      4. The copyright year in the footer
      5. Highlighting the nav link for the section you are looking at
-     6. The quote form (basic checks + an email fallback)
+     6. The quote form (basic checks, then EmailJS)
 
    THE ONLY LINE MOST PEOPLE NEED TO EDIT IS THE NEXT ONE.
    =========================================================================== */
 
-/* ==== EDIT: where quote requests go when no form service is connected.
-   See the big comment above the form in index.html. ==== */
+/* ==== EDIT: WHERE QUOTE REQUESTS GO ====
+
+   THE FORM SENDS THROUGH EMAILJS. These three ids are the whole of the
+   setup; change them here and nowhere else. They belong to the EmailJS
+   account that owns the template, and the template is what decides which
+   inbox the request lands in - not this file.
+
+   THE PUBLIC KEY IS MEANT TO BE PUBLIC. It sits in the page where anyone
+   can read it, which is how EmailJS works in a browser: it identifies the
+   account, it does not unlock it. The service and template ids are not
+   secrets either. There is nothing here to hide and nothing to rotate.
+
+   WHAT IT DOES NOT DO is stop someone sending the form a hundred times. If
+   that ever starts happening, EmailJS has a reCAPTCHA option and rate
+   limits in its dashboard - both are settings over there, not code here. */
+var EMAILJS_PUBLIC_KEY  = '1SZ-kimtx32LCUexe';
+var EMAILJS_SERVICE_ID  = 'service_sl8fzmb';
+var EMAILJS_TEMPLATE_ID = 'template_v3nkwdq';
+
+/* ==== EDIT: the address the form falls back to if EmailJS cannot load.
+   Keep it the same as the one in the footer and beside the form. ==== */
 var CATERING_EMAIL = 'info@sultansgrill.ca';
 
 (function () {
@@ -462,13 +481,30 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
 
   /* -------------------------------------------------------------------------
      6. QUOTE FORM
-     If the form has a real action="..." (a form service), this script stays
-     out of the way and the browser submits it normally.
-     If it does not, we check the required fields and open the visitor's email
-     app with everything filled in, addressed to CATERING_EMAIL above.
+
+     The submit is always stopped: nothing on this page reloads, whichever
+     way the request goes out. In order:
+
+       1. the required fields are checked here rather than by the browser,
+          so the message under the button can name what is missing
+       2. EmailJS sends the form, if it loaded
+       3. if it did not, the visitor's own email app opens with the answers
+          filled in, addressed to CATERING_EMAIL
+
+     EMAILJS READS THE FORM ITSELF. sendForm() walks the <form> and takes
+     every field by its name attribute - including the service radios, which
+     a hand-built object would have had to special-case. So the names in
+     catering.html are the contract with the EmailJS template: name, phone,
+     email, event_date, guests, package, location, service, notes. Change one
+     in the page and change it in the template, or that line arrives empty.
+
+     THE BUTTON IS DISABLED WHILE IT SENDS, and a flag blocks a second
+     submit, because a slow network is exactly when someone presses again.
+     Both are released whichever way the send ends.
      ------------------------------------------------------------------------- */
   var form = document.getElementById('requestForm');
   var status = document.getElementById('formStatus');
+  var sending = false;
 
   function say(message, state) {
     if (!status) return;
@@ -477,8 +513,20 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
   }
 
   if (form) {
+    // Hand the public key over once, at load, rather than on every submit.
+    if (window.emailjs && EMAILJS_PUBLIC_KEY) {
+      try {
+        window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      } catch (err) {
+        // An old copy of the SDK takes the key as a bare string instead.
+        try { window.emailjs.init(EMAILJS_PUBLIC_KEY); } catch (err2) {}
+      }
+    }
+
     form.addEventListener('submit', function (event) {
-      var usesMailto = form.getAttribute('data-mailto-fallback') === 'true';
+      // Always. The page does not reload, whatever happens next.
+      event.preventDefault();
+      if (sending) return;
 
       // Check the required fields ourselves, so the message is friendly.
       var missing = [];
@@ -495,21 +543,49 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
       );
 
       if (missing.length) {
-        event.preventDefault();
         say('Please fill in: ' + missing.join(', ') + '.', 'error');
         var firstBad = form.querySelector('[aria-invalid="true"]');
         if (firstBad) firstBad.focus();
         return;
       }
 
-      if (!usesMailto) {
-        // A form service is connected - let the browser post it.
+      var button = form.querySelector('button[type="submit"]');
+      var release = function () {
+        sending = false;
+        if (button) button.disabled = false;
+      };
+
+      if (window.emailjs && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID) {
+        sending = true;
+        if (button) button.disabled = true;
         say('Sending your request...', 'ok');
+
+        window.emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+          .then(function () {
+            release();
+            form.reset();
+            say('Request sent. We will be in touch.', 'ok');
+          })
+          .catch(function () {
+            release();
+            // Deliberately not the raw error. It would say something like
+            // "412 Gmail_API: invalid grant", which tells a visitor nothing
+            // and worries them. The two ways to reach us do.
+            say(
+              'Sorry, that did not send. Please call 647-929-3924 or ' +
+              'email ' + CATERING_EMAIL + '.',
+              'error'
+            );
+          });
         return;
       }
 
-      // No form service: build an email instead.
-      event.preventDefault();
+      // EmailJS did not load. Build an email instead, so the answers are not
+      // lost - the visitor just presses send in their own mail app.
+      if (form.getAttribute('data-mailto-fallback') !== 'true') {
+        say('Sorry, the form is not available. Please call 647-929-3924.', 'error');
+        return;
+      }
 
       var data = new FormData(form);
       var lines = [];
