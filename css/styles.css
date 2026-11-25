@@ -2332,6 +2332,32 @@ body.nav-is-open { overflow: hidden; }
   box-shadow: var(--shadow-sm);
 }
 
+/* THE SAME LIFT ON EVERY CARD AND CONTAINER on the catering and menu pages,
+   so they all answer the mouse the way the package cards above do.
+     Catering: the tray-menu panels (.course), the guest-count panel
+               (.guests), the PATH note (.why-note) and the quote form
+               (.request-form - it already has a big shadow, so it only
+               lifts).
+     Menu:     each block of dishes (.menu-block). These have no box behind
+               them, so they lift without a shadow - a shadow would draw a
+               rectangle round a list that has no edge.
+   None of these classes are used on the home page. */
+.course,
+.guests,
+.why-note,
+.request-form,
+.menu-block {
+  transition: transform var(--t-base), box-shadow var(--t-base);
+}
+.course:hover,
+.guests:hover,
+.why-note:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+.request-form:hover,
+.menu-block:hover { transform: translateY(-4px); }
+
 /* Each card has three parts, in this order:
      .pkg-main   badge, name, meta line, description
      .pkg-aside  the tinted "what's included" panel
