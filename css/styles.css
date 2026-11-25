@@ -1076,10 +1076,14 @@ body.nav-is-open { overflow: hidden; }
    is the fog the client asked three times to be rid of. It is there to hold
    the letter edges where a highlight in the film runs up against them, and
    the shade in the scrim does the rest. Nothing is drawn behind the words. */
+/* TWICE THE SIZE IT WAS (the ceiling went from 4.4rem to 8.8rem). It still
+   follows the window: 12.5vw so "MEMORABLE." fits across a phone, and 13vh
+   so on a short laptop window the headline stays clear of the bar at the
+   top. Whichever of the two is smaller wins. */
 .hero-video-title {
   max-width: 16ch;
   margin: 0 auto;
-  font-size: clamp(2.3rem, 7.2vw, 4.4rem);
+  font-size: clamp(2.3rem, min(12.5vw, 13vh), 8.8rem);
   line-height: 1.04;
   color: var(--paper);
   text-shadow: 0 1px 2px rgba(35, 20, 52, 0.55), 0 0 1px rgba(35, 20, 52, 0.45);
@@ -1512,11 +1516,12 @@ body.nav-is-open { overflow: hidden; }
    dropped here: gold on cream is not readable at heading size. */
 .hero-light { color: var(--text); }
 
+/* The backdrop is a picture: assets/catering-hero-bg.jpg, the soft violet
+   and gold wash with the geometric pattern, supplied by the client. It is
+   only on the catering page, which is the only page with .hero-light. The
+   cream colour underneath shows for the moment before the picture loads. */
 .hero-light .hero-media {
-  background:
-    radial-gradient(58% 68% at 88% 8%, rgba(217, 188, 119, 0.34) 0%, transparent 66%),
-    radial-gradient(70% 80% at 2% 96%, rgba(107, 63, 160, 0.13) 0%, transparent 64%),
-    linear-gradient(158deg, var(--paper) 0%, var(--sand-50) 52%, var(--plum-050) 100%);
+  background: var(--paper) url("../assets/catering-hero-bg.jpg") center / cover no-repeat;
 }
 
 /* A wash from the left so the words keep a clean field under them while the
@@ -2384,36 +2389,88 @@ body.nav-is-open { overflow: hidden; }
   color: var(--ink-400);
 }
 
-/* --- The featured package ------------------------------------------------
-   WAS A DARK CARD. Deep plum, light type, gold rules - a straight lift of
-   the way the printed menu presents the Sultan’s Spread, and on screen it
-   sat in the middle of a bright page like a hole. The client asked for
-   cleaner and brighter, so the card is white like the other two now and the
-   emphasis is carried by the things that cost nothing in weight: it is wider
-   than the rest, it keeps the gold rule along its top edge, it has a little
-   more shadow, and its "what’s included" panel is washed the faintest
-   violet. Nothing on it is dark except the words.
+/* --- The featured package (the Sultan’s Spread) --------------------------
+   THE SAME PURPLE AS "LET’S PLAN YOUR NEXT EVENT" AND ABOUT US: the same
+   170deg gradient, the same violet and gold glow, and the same pattern at 7%.
+   If you change that band, change this too: search for 170deg.
 
-   TO MOVE THE EMPHASIS to another package, move the class pkg-feature. The
-   card does not need anything else - the width, the rule and the shadow all
-   come with it. */
+   THE CONTENTS ARE FOUR COLUMNS - Proteins, Salads, Sides, Dips - laid out
+   like the printed catering menu. Two by two on a phone, four across from
+   980px. Each column is a <div class="pkg-col"> in catering.html.
+
+   The wordmark in the name is the white one (wordmark-white.png), because
+   the purple one disappears on this background. */
 .pkg-feature {
-  border-color: rgba(107, 63, 160, 0.14);
+  isolation: isolate;
+  border-color: transparent;
   box-shadow: var(--shadow-md);
   background:
-    radial-gradient(70% 80% at 92% 0%, rgba(200, 162, 74, 0.09) 0%, transparent 62%),
-    var(--paper);
+    radial-gradient(60% 70% at 12% 0%, rgba(107, 63, 160, 0.75) 0%, transparent 65%),
+    radial-gradient(50% 60% at 95% 100%, rgba(200, 162, 74, 0.16) 0%, transparent 70%),
+    linear-gradient(170deg, var(--plum-800) 0%, var(--plum-900) 100%);
+  color: var(--text-on-dark);
 }
-.pkg-feature:hover { border-color: rgba(107, 63, 160, 0.3); }
+.pkg-feature:hover { border-color: rgba(217, 188, 119, 0.45); }
+.pkg-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-color: #FFFFFF;
+  -webkit-mask-image: url("../assets/pattern-tile.png");
+          mask-image: url("../assets/pattern-tile.png");
+  -webkit-mask-repeat: repeat;
+          mask-repeat: repeat;
+  -webkit-mask-size: 226px auto;
+          mask-size: 226px auto;
+}
+.pkg-feature .pkg-name { color: var(--paper); }
+.pkg-feature .pkg-meta { color: var(--gold-300); }
+.pkg-feature .pkg-desc { color: rgba(255, 255, 255, 0.84); max-width: 62ch; }
+.pkg-feature .pkg-price { color: var(--paper); }
 
-/* The violet wash on the contents panel is the one thing that marks this card
-   out from the inside rather than the outside. It is plum-100 rather than the
-   fainter plum-050, which is the colour of the band the cards sit on - at 050
-   the panel and the page behind it were the same value and the wash
-   disappeared. */
-.pkg-feature .pkg-aside { background: var(--plum-100); }
-/* The gold rule along the top edge - the badge of the featured card now that
-   it is no longer dark. Its own rule because ::before cannot be merged. */
+.pkg-feature .pkg-aside {
+  background: transparent;
+  border-block: 1px solid rgba(255, 255, 255, 0.16);
+}
+.pkg-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6) var(--sp-5);
+}
+.pkg-col-title {
+  margin-bottom: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--gold-400);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+.pkg-col-note {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.7);
+}
+.pkg-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pkg-col-list li {
+  padding-block: 0.2rem;
+  font-size: var(--fs-small);
+  line-height: 1.45;
+  color: var(--paper);
+}
+/* The gold rule along the top edge of the featured card. Its own rule
+   because ::before cannot be merged. */
 .pkg-feature::before {
   content: "";
   position: absolute;
@@ -3726,14 +3783,13 @@ a.contact-value:hover { color: var(--gold-400); }
   /* Sat on the middle of the screen while it was centred, which on a
      short laptop window (1280x600, say) ran it straight through the
      buttons. It now hangs off the SAME bottom edge they do, a fixed
-     distance above them - 10.25rem is the two rows of buttons plus the
-     gap - so the pitch and the buttons stay one block at every window
-     height. If a fourth button is ever added, this number grows with it. */
+     distance above them - 6rem is the one row of buttons plus the gap -
+     so the pitch and the buttons stay one block at every window height. */
   .hero-video-copy {
     max-width: var(--maxw);
     margin-inline: auto;
     top: auto;
-    bottom: calc(clamp(3.5rem, 14vh, 8rem) + 10.25rem);
+    bottom: calc(clamp(3.5rem, 14vh, 8rem) + 6rem);
     transform: none;
     text-align: left;
   }
@@ -3855,31 +3911,20 @@ a.contact-value:hover { color: var(--gold-400); }
      .pkg-img-left puts it on the left (that class is on the <article>). */
   .pkg-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
 
-  .pkg-feature {
-    display: grid;
-    grid-template-columns: 1fr 1.08fr;
-    grid-template-rows: auto 1fr;
-  }
-  .pkg-feature .pkg-main {
-    grid-column: 1;
-    grid-row: 1;
-    padding: var(--sp-7) var(--sp-7) var(--sp-4);
-  }
+  /* The Spread: name and description on top, the four columns across the
+     middle, price and button on one line at the foot. */
+  .pkg-feature .pkg-main { padding: var(--sp-7) var(--sp-7) var(--sp-5); }
+  .pkg-feature .pkg-aside { padding: var(--sp-6) var(--sp-7); }
+  .pkg-feature .pkg-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-6); }
   .pkg-feature .pkg-foot {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: end;
-    margin-top: 0;
-    padding: 0 var(--sp-7) var(--sp-7);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-5);
+    padding: var(--sp-6) var(--sp-7) var(--sp-7);
   }
+  .pkg-feature .pkg-price { margin-bottom: 0; }
   .pkg-feature .pkg-foot .btn { width: auto; display: inline-flex; }
-  .pkg-feature .pkg-aside {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    padding: var(--sp-7);
-    border-block: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-  }
   .pkg-feature .pkg-name { font-size: 2.1rem; }
 
   /* The words - name, "what's included" and the button - stack in one
