@@ -195,7 +195,11 @@ h1, h2, h3, h4 {
   font-weight: 400;
   line-height: 1.18;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
+  /* Headings show exactly as typed in the HTML - no forced capitals (the
+     client asked for them out of all-caps). Type them in sentence case.
+     The small label headings (footer columns, the Spread's Proteins /
+     Salads / Sides / Dips) set their own capitals and are unaffected. */
+  text-transform: none;
   margin: 0 0 var(--sp-4);
   text-wrap: balance;
 }
@@ -1077,13 +1081,13 @@ body.nav-is-open { overflow: hidden; }
    the letter edges where a highlight in the film runs up against them, and
    the shade in the scrim does the rest. Nothing is drawn behind the words. */
 /* TWICE THE SIZE IT WAS (the ceiling went from 4.4rem to 8.8rem). It still
-   follows the window: 12.5vw so "MEMORABLE." fits across a phone, and 13vh
+   follows the window: 11vw so "Mediterranean" fits across a phone, and 13vh
    so on a short laptop window the headline stays clear of the bar at the
    top. Whichever of the two is smaller wins. */
 .hero-video-title {
   max-width: 16ch;
   margin: 0 auto;
-  font-size: clamp(2.3rem, min(12.5vw, 13vh), 8.8rem);
+  font-size: clamp(2.3rem, min(11vw, 13vh), 8.8rem);
   line-height: 1.04;
   color: var(--paper);
   text-shadow: 0 1px 2px rgba(35, 20, 52, 0.55), 0 0 1px rgba(35, 20, 52, 0.45);
@@ -2254,6 +2258,30 @@ body.nav-is-open { overflow: hidden; }
    --------------------------------------------------------------------------- */
 .why-copy {
   max-width: 58ch;
+}
+
+/* The photo beside the words, added at the client's request: photo on the
+   left, heading and paragraphs on the right from 900px; on a phone the
+   photo sits above them. No frame, corners or shadow - the file already
+   fades into the page cream. */
+.why-inner {
+  display: grid;
+  gap: var(--sp-6);
+  align-items: center;
+}
+.why-photo {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  margin-inline: auto;
+}
+@media (min-width: 900px) {
+  .why-inner {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .why-photo { max-width: none; }
 }
 
 /* The first paragraph is the promise, so it is set a size up and in the deep
