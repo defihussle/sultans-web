@@ -1066,7 +1066,9 @@ body.nav-is-open { overflow: hidden; }
   transform: translateY(-58%);
   z-index: 1;
   padding-inline: var(--gutter);
-  text-align: center;
+  /* Left-aligned at every size, on the same left edge as the buttons
+     below it (it used to be centred below 900px). */
+  text-align: left;
 }
 /* CREAM AND GOLD, NOT THE TWO PURPLES. The two-line heading rule in section
    4 puts brand violet over deep plum, and the last line of that rule says it
@@ -1080,14 +1082,14 @@ body.nav-is-open { overflow: hidden; }
    is the fog the client asked three times to be rid of. It is there to hold
    the letter edges where a highlight in the film runs up against them, and
    the shade in the scrim does the rest. Nothing is drawn behind the words. */
-/* TWICE THE SIZE IT WAS (the ceiling went from 4.4rem to 8.8rem). It still
-   follows the window: 11vw so "Mediterranean" fits across a phone, and 13vh
-   so on a short laptop window the headline stays clear of the bar at the
-   top. Whichever of the two is smaller wins. */
+/* SIZE: large, but not so large it takes over the film - at most 5.25rem
+   (it was briefly 8.8rem, which the client found too dominant). It follows
+   the window: 8.5vw on a phone, and 9vh so on a short laptop window it
+   stays well clear of the bar at the top. Whichever is smaller wins. */
 .hero-video-title {
   max-width: 16ch;
-  margin: 0 auto;
-  font-size: clamp(2.3rem, min(11vw, 13vh), 8.8rem);
+  margin: 0;
+  font-size: clamp(2.1rem, min(8.5vw, 9vh), 5.25rem);
   line-height: 1.04;
   color: var(--paper);
   text-shadow: 0 1px 2px rgba(35, 20, 52, 0.55), 0 0 1px rgba(35, 20, 52, 0.45);
@@ -1105,7 +1107,7 @@ body.nav-is-open { overflow: hidden; }
 .hero-video-lede {
   display: none;
   max-width: 44ch;
-  margin: var(--sp-5) auto 0;
+  margin: var(--sp-5) 0 0;
   font-size: var(--fs-lede);
   line-height: 1.55;
   color: var(--text-on-dark);
@@ -1121,7 +1123,7 @@ body.nav-is-open { overflow: hidden; }
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--sp-3);
   padding-inline: var(--gutter);
 }
@@ -1132,7 +1134,7 @@ body.nav-is-open { overflow: hidden; }
 .hero-video-row {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--sp-2);
   width: min(100%, calc(3 * var(--cta-w) + 2 * var(--sp-2)));
 }
