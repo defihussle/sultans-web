@@ -1117,11 +1117,16 @@ body.nav-is-open { overflow: hidden; }
   gap: var(--sp-3);
   padding-inline: var(--gutter);
 }
+/* ONE ROW OF THREE, never wrapping. The row is as wide as three full-size
+   buttons, or the screen if that is narrower, and the buttons share it
+   equally - so on a small phone they shrink together rather than one
+   dropping onto a second line. */
 .hero-video-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: var(--sp-3);
+  gap: var(--sp-2);
+  width: min(100%, calc(3 * var(--cta-w) + 2 * var(--sp-2)));
 }
 /* The brand serif on the three buttons: uppercase, regular weight, like
    every other Fertigo Pro element on the site. Written as ".btn.hero-cta"
@@ -1136,22 +1141,16 @@ body.nav-is-open { overflow: hidden; }
 }
 
 /* ALL THREE BUTTONS ARE THE SAME SIZE.
-   --cta-w is the one width they share, so the top of the triangle is no
-   bigger than its base. It is sized for the longest label, LOCATIONS, and
-   has to let two sit side by side on the narrowest phone: at 320px that
-   is 40vw each, 128px, plus the gap between them.
+   --cta-w is the full width of one button, sized for the longest label,
+   LOCATIONS. On a phone narrower than three of those, the buttons share
+   the row equally instead (flex: 1 1 0), and the label size follows the
+   screen width (3.6vw) so LOCATIONS still fits inside its button on a
+   320px screen - the narrowest phone still in use.
 
-   THE 8rem FLOOR IS LOAD-BEARING. On a 320px screen - the narrowest
-   phone still in use - two buttons plus the gap between them come to
-   268px against 283px of room. Raise that floor and the pair wraps onto
-   two lines, and the triangle collapses into a column.
-
-   CHANGING THE LABELS? If a longer word is added, raise the 11rem
-   ceiling. Buttons never wrap their text, so a label too long for the
-   width makes the button grow instead of breaking - the three would stop
-   matching, which is the thing to watch for. */
+   CHANGING THE LABELS? A longer word needs a smaller label size on
+   phones, or it will run past the edge of its button. */
 .hero-video-actions {
-  --cta-w: clamp(8rem, 40vw, 11rem);
+  --cta-w: 11rem;
 }
 /* GOLD OUTLINE, NO FILL. They were solid violet, which put three blocks of
    flat colour over the one piece of moving film on the site. An outline lets
@@ -1170,10 +1169,12 @@ body.nav-is-open { overflow: hidden; }
    The shadow stays. It is not decoration here - it is what separates a
    see-through button from the food behind it. */
 .hero-video-actions .btn {
-  width: var(--cta-w);
+  flex: 1 1 0;
+  width: auto;
+  max-width: var(--cta-w);
   min-width: 0;
-  padding-inline: 1rem;
-  font-size: 1rem;
+  padding-inline: 0.5rem;
+  font-size: clamp(0.78rem, 3.6vw, 1rem);
   background: transparent;
   border: 2px solid var(--gold-400);
   color: var(--paper);
@@ -1190,9 +1191,12 @@ body.nav-is-open { overflow: hidden; }
     --cta-w: 11.5rem;
     gap: var(--sp-4);
   }
-  .hero-video-row { gap: var(--sp-4); }
+  .hero-video-row {
+    gap: var(--sp-4);
+    width: min(100%, calc(3 * var(--cta-w) + 2 * var(--sp-4)));
+  }
   .hero-video-actions .btn {
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
     font-size: 1.08rem;
   }
 }
@@ -2359,6 +2363,9 @@ body.nav-is-open { overflow: hidden; }
   max-height: 15rem;
   margin: 0 auto calc(var(--sp-6) * -1);
 }
+/* The Hummus Dip Platter photo sits at an angle, at every screen size. The
+   tilt is on the card with .pkg-img-left only. */
+.pkg-img-left .pkg-photo { transform: rotate(-8deg); }
 
 .pkg-aside {
   padding: var(--sp-5);
@@ -3841,10 +3848,11 @@ a.contact-value:hover { color: var(--gold-400); }
   .feature-grid { grid-template-columns: repeat(4, 1fr); }
   .steps { grid-template-columns: repeat(4, 1fr); gap: var(--sp-6); }
 
-  /* Packages: one card per row, all three full width and stacked. In every
-     card the "what's included" panel moves to the right-hand column and runs
-     the full height of the card. The two platter cards keep their photo at
-     the top of the left column, above the name. */
+  /* Packages: one card per row, all three full width and stacked. In the
+     featured card the "what's included" panel moves to the right-hand column
+     and runs the full height of the card. The two platter cards split into
+     words and photo instead: .pkg-img-right puts the photo on the right,
+     .pkg-img-left puts it on the left (that class is on the <article>). */
   .pkg-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
 
   .pkg-feature {
@@ -3874,32 +3882,54 @@ a.contact-value:hover { color: var(--gold-400); }
   }
   .pkg-feature .pkg-name { font-size: 2.1rem; }
 
-  .pkg:not(.pkg-feature) {
+  /* The words - name, "what's included" and the button - stack in one
+     column; the photo has the other column to itself, centred top to
+     bottom. */
+  .pkg-img-right,
+  .pkg-img-left {
     display: grid;
-    grid-template-columns: 1fr 1.08fr;
     grid-template-rows: auto auto 1fr;
   }
-  .pkg:not(.pkg-feature) .pkg-photo { grid-column: 1; grid-row: 1; }
-  .pkg:not(.pkg-feature) .pkg-main {
-    grid-column: 1;
-    grid-row: 2;
-    padding: var(--sp-6) var(--sp-7) var(--sp-4);
+  .pkg-img-right { grid-template-columns: 1.15fr 1fr; }
+  .pkg-img-left  { grid-template-columns: 1fr 1.15fr; }
+
+  .pkg-img-right .pkg-photo,
+  .pkg-img-left .pkg-photo {
+    grid-row: 1 / -1;
+    align-self: center;
+    max-width: 78%;
+    max-height: 22rem;
+    margin: var(--sp-6) auto;
   }
-  .pkg:not(.pkg-feature) .pkg-foot {
-    grid-column: 1;
+  .pkg-img-right .pkg-photo { grid-column: 2; }
+  .pkg-img-left .pkg-photo  { grid-column: 1; }
+
+  .pkg-img-right .pkg-main,
+  .pkg-img-right .pkg-aside,
+  .pkg-img-right .pkg-foot { grid-column: 1; }
+  .pkg-img-left .pkg-main,
+  .pkg-img-left .pkg-aside,
+  .pkg-img-left .pkg-foot { grid-column: 2; }
+
+  .pkg-img-right .pkg-main,
+  .pkg-img-left .pkg-main {
+    grid-row: 1;
+    padding: var(--sp-7) var(--sp-7) var(--sp-5);
+  }
+  .pkg-img-right .pkg-aside,
+  .pkg-img-left .pkg-aside {
+    grid-row: 2;
+    padding: var(--sp-5) var(--sp-7);
+  }
+  .pkg-img-right .pkg-foot,
+  .pkg-img-left .pkg-foot {
     grid-row: 3;
     align-self: end;
     margin-top: 0;
-    padding: 0 var(--sp-7) var(--sp-7);
+    padding: var(--sp-6) var(--sp-7) var(--sp-7);
   }
-  .pkg:not(.pkg-feature) .pkg-foot .btn { width: auto; display: inline-flex; }
-  .pkg:not(.pkg-feature) .pkg-aside {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    padding: var(--sp-7);
-    border-block: 0;
-    border-left: 1px solid var(--border);
-  }
+  .pkg-img-right .pkg-foot .btn,
+  .pkg-img-left .pkg-foot .btn { width: auto; display: inline-flex; }
 }
 
 /* --- Large desktop (1180px) --- */
