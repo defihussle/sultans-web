@@ -328,6 +328,9 @@ a:hover { color: var(--plum-700); }
   background: linear-gradient(170deg, var(--plum-800) 0%, var(--plum-900) 100%);
   color: var(--text-on-dark);
 }
+/* The violet and gold glow over the gradient. Shared with .section-solid
+   (About Us) so the two bands are the exact same purple. */
+.section-solid::before,
 .section-invert::before {
   content: "";
   position: absolute;
@@ -1220,10 +1223,10 @@ body.nav-is-open { overflow: hidden; }
    purpose: no gradient, no glow, no photo behind it. Used on About Us.
    Everything below just re-colours the text that sits on it; the layout
    is untouched. */
-/* THE SAME DEEP PLUM AS THE REQUEST BAND at the foot of the catering page -
-   the one gradient, written out in both places rather than shared, because
-   .section-invert also carries a pattern and a vignette that this band does
-   not want. If you change one, change the other: search for 170deg. It used
+/* THE EXACT SAME PURPLE AS THE REQUEST BAND at the foot of the catering page -
+   the same gradient, the same glow (shared with .section-invert in section 3)
+   and the same pattern (section 16). The menu hero (.hero-plum) matches it
+   too. If you change one, change the others: search for 170deg. It used
    to be the bright violet, which made About Us the loudest thing on the home
    page and left the footer looking like a different site. */
 .section-solid {
@@ -1551,6 +1554,30 @@ body.nav-is-open { overflow: hidden; }
   color: var(--plum-600);
 }
 
+/* --- THE PLUM HERO (menu page) -----------------------------------------
+   The exact purple of the request band at the foot of the catering page
+   (.section-invert) and of About Us (.section-solid): the same 170deg
+   gradient, the same violet and gold glow over it, and the same pattern at
+   7%. The scrim's darkening and weave are switched off so nothing shifts
+   the colour. If you change that band, change this too: search for 170deg. */
+.hero-plum .hero-media {
+  background:
+    radial-gradient(60% 70% at 12% 0%, rgba(107, 63, 160, 0.75) 0%, transparent 65%),
+    radial-gradient(50% 60% at 95% 100%, rgba(200, 162, 74, 0.16) 0%, transparent 70%),
+    linear-gradient(170deg, var(--plum-800) 0%, var(--plum-900) 100%);
+}
+.hero-plum .hero-scrim { background: none; }
+.hero-plum .hero-scrim::after {
+  opacity: 0.07;
+  background: #FFFFFF;
+  -webkit-mask-image: url("../assets/pattern-tile.png");
+          mask-image: url("../assets/pattern-tile.png");
+  -webkit-mask-repeat: repeat;
+          mask-repeat: repeat;
+  -webkit-mask-size: 226px auto;
+          mask-size: 226px auto;
+}
+
 /* --- The split hero: pitch on the left, food photo on the right ---
    One column on a phone, and the photo is not there at all. Two columns
    from 900px, where there is room for the picture to be worth its space.
@@ -1671,27 +1698,28 @@ body.nav-is-open { overflow: hidden; }
    typed character - a four-pointed star - which was never the right shape
    and rendered differently in every font.
 
-   THE BOX IS IN rem, NOT em, and that is not a slip. font-size: 0 is what
-   hides the character that is still in the HTML, and an em is a share of the
-   element’s OWN font-size - which is now zero, so an em is zero and the
-   diamond would have no size at all. If the ticker type is ever resized,
-   resize this by hand to match.
+   THE BOX IS IN rem, NOT em. The character still in the HTML is hidden
+   (transparent, and clipped by the fixed box), and the diamond is sized on
+   its own. If the ticker type is ever resized, resize this by hand to match.
 
    If the file ever goes missing the mask does not apply and the box shows as
    a small gold square, which is wrong but not broken.
 
-   overflow: hidden IS LOAD-BEARING, and it is not there to clip anything.
-   An inline-block takes its baseline from its own last line of text, and the
-   character still inside this one is set at font-size: 0, so that baseline
-   sits at the top of the box - which left the diamond hanging below the
-   words. overflow: hidden switches the baseline to the bottom edge of the
-   box, so the figure below means what it reads as.
+   overflow: hidden IS LOAD-BEARING. An inline-block takes its baseline from
+   its own last line of text, which here is the hidden character, so the
+   diamond would ride wherever that glyph happens to sit. overflow: hidden switches the baseline to the bottom edge of the
+   box, so the vertical-align below measures from the diamond's bottom.
 
-   0.09rem is the measured offset that centres the diamond on the CAPITALS,
-   not on the baseline: the ticker is set in capitals, the cap height is
-   about 11px at this size, the diamond is 8.3px, so its bottom edge has to
-   clear the baseline by (11 - 8.3) / 2. Resize the ticker type or the
-   diamond and this has to be measured again. */
+   CENTRED ON THE CAPITALS, measured by the browser. The ticker is set in
+   capitals, so the middle of the line is half the cap height above the
+   baseline. 0.5cap is exactly that, read from whichever font actually
+   loaded; subtracting half the diamond (0.26rem) puts the diamond's centre
+   on it. The old fixed 0.09rem guessed the cap height and left the diamond
+   sitting low. The first vertical-align is only for browsers too old to
+   know the cap unit, which skip the second line.
+
+   0.5cap needs the element's own font-size, so the character inside is
+   hidden by colour, not by font-size: 0. The box is still in rem. */
 .ticker-group i {
   display: inline-block;
   overflow: hidden;
@@ -1699,7 +1727,8 @@ body.nav-is-open { overflow: hidden; }
   height: 0.52rem;
   margin: 0 0.55rem;
   vertical-align: 0.09rem;
-  font-size: 0;
+  vertical-align: calc(0.5cap - 0.26rem);
+  color: transparent;
   background-color: var(--gold-500);
   -webkit-mask-image: url("../assets/icon-diamond.png");
           mask-image: url("../assets/icon-diamond.png");
@@ -2264,7 +2293,7 @@ body.nav-is-open { overflow: hidden; }
 
 /* ---------------------------------------------------------------------------
    10. CATERING PACKAGES
-   The first card is the wide featured one; the rest sit in a grid below it.
+   The first card is the featured one; all three are full width, stacked.
    --------------------------------------------------------------------------- */
 /* align-items defaults to stretch, so side-by-side cards match heights and
    their buttons line up (each .pkg-foot has margin-top:auto). */
@@ -3619,21 +3648,35 @@ a.contact-value:hover { color: var(--gold-400); }
     gap: clamp(2.5rem, 5vw, 4.5rem);
   }
   .hero-split .hero-copy { margin-bottom: 0; }
+  /* NO BOX. The photo has no frame, corners or shadow: it melts into the
+     cream behind it, so the trays read as sitting on the page.
+     Two things do that:
+       mix-blend-mode: multiply   the photo's white marble counter takes on
+                                  the hero's cream instead of showing as a
+                                  white block
+       the mask                   fades every edge to nothing, most of all
+                                  the left one, which meets the headline
+     assets/catering-hero-trays.jpg - catering trays from above. A
+     replacement should be shot on a light surface, or multiply will show
+     its background as a dark patch. Food only, no storefront shots - the
+     counter boards carry in-store prices, which are not the catering
+     prices listed further down this page. */
   .hero-photo {
     display: block;
     align-self: stretch;
-    min-height: 21rem;
-    border-radius: var(--r-lg);
-    /* assets/catering-hero.jpg - kebabs on the grill, taken from the
-       hero video. KEEP ANY REPLACEMENT LANDSCAPE: the panel is wider than
-       it is tall, so background-size: cover crops an upright photo down
-       to an unreadable close-up. Food only, no storefront shots - the
-       counter boards carry in-store prices, which are not the catering
-       prices listed further down this page. */
-    background-image: url("../assets/catering-hero.jpg");
+    min-height: 26rem;
+    background-image: url("../assets/catering-hero-trays.jpg");
     background-size: cover;
-    background-position: center;
-    box-shadow: var(--shadow-lg);
+    background-position: center 62%;
+    mix-blend-mode: multiply;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 26%, #000 90%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+            mask-image:
+      linear-gradient(to right, transparent 0%, #000 26%, #000 90%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
   }
 
   /* All four on one row now, so every one of them is on the bottom row
@@ -3798,13 +3841,13 @@ a.contact-value:hover { color: var(--gold-400); }
   .feature-grid { grid-template-columns: repeat(4, 1fr); }
   .steps { grid-template-columns: repeat(4, 1fr); gap: var(--sp-6); }
 
-  /* Packages: the wide featured card on top, the other two side by side.
-     In the wide card the "what's included" panel moves to the right-hand
-     column and runs the full height of the card. */
-  .pkg-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+  /* Packages: one card per row, all three full width and stacked. In every
+     card the "what's included" panel moves to the right-hand column and runs
+     the full height of the card. The two platter cards keep their photo at
+     the top of the left column, above the name. */
+  .pkg-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
 
   .pkg-feature {
-    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr 1.08fr;
     grid-template-rows: auto 1fr;
@@ -3831,9 +3874,32 @@ a.contact-value:hover { color: var(--gold-400); }
   }
   .pkg-feature .pkg-name { font-size: 2.1rem; }
 
-  .pkg:not(.pkg-feature) .pkg-main { padding: var(--sp-6) var(--sp-6) var(--sp-5); }
-  .pkg:not(.pkg-feature) .pkg-aside,
-  .pkg:not(.pkg-feature) .pkg-foot { padding: var(--sp-6); }
+  .pkg:not(.pkg-feature) {
+    display: grid;
+    grid-template-columns: 1fr 1.08fr;
+    grid-template-rows: auto auto 1fr;
+  }
+  .pkg:not(.pkg-feature) .pkg-photo { grid-column: 1; grid-row: 1; }
+  .pkg:not(.pkg-feature) .pkg-main {
+    grid-column: 1;
+    grid-row: 2;
+    padding: var(--sp-6) var(--sp-7) var(--sp-4);
+  }
+  .pkg:not(.pkg-feature) .pkg-foot {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: end;
+    margin-top: 0;
+    padding: 0 var(--sp-7) var(--sp-7);
+  }
+  .pkg:not(.pkg-feature) .pkg-foot .btn { width: auto; display: inline-flex; }
+  .pkg:not(.pkg-feature) .pkg-aside {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    padding: var(--sp-7);
+    border-block: 0;
+    border-left: 1px solid var(--border);
+  }
 }
 
 /* --- Large desktop (1180px) --- */
