@@ -2423,8 +2423,15 @@ body.nav-is-open { overflow: hidden; }
   margin: 0 auto calc(var(--sp-6) * -1);
 }
 /* The Hummus Dip Platter photo sits at an angle, at every screen size. The
-   tilt is on the card with .pkg-img-left only. */
-.pkg-img-left .pkg-photo { transform: rotate(-8deg); }
+   tilt is on the card with .pkg-img-left only.
+   THE FILE HAS A WIDE PALE MARGIN round the tray (most of it on the left),
+   and the same file is used further down the page, so it is cropped here
+   rather than in the file: clip-path trims the margin and scale() blows the
+   tray up to fill the space the margin took. */
+.pkg-img-left .pkg-photo {
+  clip-path: inset(7% 10% 6% 18% round 14px);
+  transform: rotate(-8deg) scale(1.18);
+}
 
 .pkg-aside {
   padding: var(--sp-5);
@@ -2489,10 +2496,31 @@ body.nav-is-open { overflow: hidden; }
   background: transparent;
   border-block: 1px solid rgba(255, 255, 255, 0.16);
 }
+/* One box per row on a phone (two across is too narrow once each has an
+   outline and padding), two across from 560px, four across from 980px. */
 .pkg-cols {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-6) var(--sp-5);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-4);
+}
+@media (min-width: 560px) {
+  .pkg-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-5); }
+}
+/* Each category is its own outlined box, and lifts on hover the same way
+   the package cards do - the outline is what makes the lift visible on
+   the purple. */
+.pkg-col {
+  padding: var(--sp-5);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.03);
+  transition: transform var(--t-base), box-shadow var(--t-base),
+              border-color var(--t-base);
+}
+.pkg-col:hover {
+  transform: translateY(-4px);
+  border-color: rgba(217, 188, 119, 0.7);
+  box-shadow: 0 12px 30px rgba(20, 10, 32, 0.35);
 }
 .pkg-col-title {
   margin-bottom: var(--sp-3);
@@ -2562,6 +2590,23 @@ body.nav-is-open { overflow: hidden; }
   text-transform: uppercase;
   color: var(--accent-text);
   margin-bottom: var(--sp-4);
+}
+/* The gold person and clock in front of "Serves ..." and "... days notice".
+   Each fact is a little row of its own - icon then words - and the two
+   wrap as whole pieces on a narrow card. */
+.pkg-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  white-space: nowrap;
+  /* Centred on the line, so the "·" between the two sits level with the
+     words rather than on the icon's bottom edge. */
+  vertical-align: middle;
+}
+.pkg-meta-item .icon {
+  width: 1.35em;
+  height: 1.35em;
+  background-color: var(--gold-500);
 }
 .pkg-desc {
   font-size: var(--fs-small);
@@ -3966,7 +4011,17 @@ a.contact-value:hover { color: var(--gold-400); }
   .pkg-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
 
   /* The Spread: name and description on top, the four columns across the
-     middle, price and button on one line at the foot. */
+     middle, price and button on one line at the foot.
+     ALMOST THE FULL WINDOW WIDTH, not the 1200px column the rest of the
+     page sits in: it is as wide as the window less the page gutter each
+     side (capped at 1680px on very large screens), centred on the page.
+     left + translate does the centring rather than transform, so the lift
+     on hover (which is a transform) still works. */
+  .pkg-feature {
+    width: min(calc(100vw - 2 * var(--gutter)), 1680px);
+    left: 50%;
+    translate: -50% 0;
+  }
   .pkg-feature .pkg-main { padding: var(--sp-7) var(--sp-7) var(--sp-5); }
   .pkg-feature .pkg-aside { padding: var(--sp-6) var(--sp-7); }
   .pkg-feature .pkg-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-6); }
@@ -4001,7 +4056,7 @@ a.contact-value:hover { color: var(--gold-400); }
     margin: var(--sp-6) auto;
   }
   .pkg-img-right .pkg-photo { grid-column: 2; }
-  .pkg-img-left .pkg-photo  { grid-column: 1; }
+  .pkg-img-left .pkg-photo  { grid-column: 1; max-height: 27rem; }
 
   .pkg-img-right .pkg-main,
   .pkg-img-right .pkg-aside,
@@ -4159,6 +4214,17 @@ a.contact-value:hover { color: var(--gold-400); }
 .icon-facebook {
   -webkit-mask-image: url("../assets/icon-facebook.png");
           mask-image: url("../assets/icon-facebook.png");
+}
+/* Person and clock, on the catering package cards ("Serves ..." and
+   "... days notice"). SVG rather than PNG so they stay sharp at a small
+   size; they work the same way - the file is the shape, CSS the colour. */
+.icon-person {
+  -webkit-mask-image: url("../assets/icon-person.svg");
+          mask-image: url("../assets/icon-person.svg");
+}
+.icon-clock {
+  -webkit-mask-image: url("../assets/icon-clock.svg");
+          mask-image: url("../assets/icon-clock.svg");
 }
 
 /* --- An icon standing in for the little gold rule in a section label ----
