@@ -336,6 +336,87 @@
 
 
 <!-- =========================================================================
+     ==== EDIT: MENU TEASER ====
+     A short, visual taste of the menu - not the menu itself. These are the
+     best-known individual items from the catering menu, taken from the
+     "Individual Meals" page of the catering PDF.
+
+     DELIBERATELY NO PRICES. They change, they differ by location, and the
+     rest of the site keeps pricing in one place (the PDF, and soon the
+     menu page). Do not add them here.
+
+     ONE <li class="dish"> IS ONE ITEM:
+       <span class="dish-kind">  the small gold label - Bowl, Wrap, Dessert
+       <h3>                      the item name, exactly as the menu spells it
+       <p>                       one short line, no more
+
+     Six is the right number: it fills two rows on a computer and swipes
+     neatly on a phone. Adding a seventh leaves a gap on the last row.
+     ========================================================================= -->
+<section class="section" id="menu-teaser">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>The menu</p>
+      <h2 class="section-title title-2line">The ones <em>everyone orders.</em></h2>
+      <p class="section-lede">
+        Bowls and wraps built one at a time, for the days a tray is more
+        than you need.
+      </p>
+    </header>
+
+    <ul class="dish-row">
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Chicken Shawarma</h3>
+        <p>Seasoned rice, two salads, garlic potatoes, hummus and garlic dip.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Mix Shawarma</h3>
+        <p>Chicken and beef in one bowl, with the full set of sides.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Chicken Kebab</h3>
+        <p>Off the skewer, on rice, with salads and dips.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Wrap</span>
+        <h3>Kofta Kebab</h3>
+        <p>Wrapped whole to carry, or cut in three to share.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Bowl</span>
+        <h3>Falafel</h3>
+        <p>The vegan one. Same rice, salads, potatoes and dips.</p>
+      </li>
+
+      <li class="dish">
+        <span class="dish-kind">Dessert</span>
+        <h3>Pistachio Baklava</h3>
+        <p>By the piece. Orders of any size.</p>
+      </li>
+
+    </ul>
+
+    <!-- ==== EDIT: THE BUTTON UNDER THE ITEMS ====
+         Goes to menu.html, the full menu page. The Menu button over the
+         video and the Menu link in the slide-out panel go to the same
+         place - change all three together. -->
+    <div class="dish-cta">
+      <a class="btn btn-gold btn-lg" href="menu.html">See the full menu</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
      ==== EDIT: LOCATIONS ====
      One <li class="loc"> block per location. Copy a block to add a store,
      delete a block to close one.
@@ -439,87 +520,6 @@
       </ul>
     </div>
 
-
-  </div>
-</section>
-
-<!-- =========================================================================
-     ==== EDIT: MENU TEASER ====
-     A short, visual taste of the menu - not the menu itself. These are the
-     best-known individual items from the catering menu, taken from the
-     "Individual Meals" page of the catering PDF.
-
-     DELIBERATELY NO PRICES. They change, they differ by location, and the
-     rest of the site keeps pricing in one place (the PDF, and soon the
-     menu page). Do not add them here.
-
-     ONE <li class="dish"> IS ONE ITEM:
-       <span class="dish-kind">  the small gold label - Bowl, Wrap, Dessert
-       <h3>                      the item name, exactly as the menu spells it
-       <p>                       one short line, no more
-
-     Six is the right number: it fills two rows on a computer and swipes
-     neatly on a phone. Adding a seventh leaves a gap on the last row.
-     ========================================================================= -->
-<section class="section" id="menu-teaser">
-  <div class="wrap">
-
-    <header class="section-head section-head-wide">
-      <p class="eyebrow"><span class="icon icon-shawarma eyebrow-icon" aria-hidden="true"></span>The menu</p>
-      <h2 class="section-title title-2line">The ones <em>everyone orders.</em></h2>
-      <p class="section-lede">
-        Bowls and wraps built one at a time, for the days a tray is more
-        than you need.
-      </p>
-    </header>
-
-    <ul class="dish-row">
-
-      <li class="dish">
-        <span class="dish-kind">Bowl</span>
-        <h3>Chicken Shawarma</h3>
-        <p>Seasoned rice, two salads, garlic potatoes, hummus and garlic dip.</p>
-      </li>
-
-      <li class="dish">
-        <span class="dish-kind">Bowl</span>
-        <h3>Mix Shawarma</h3>
-        <p>Chicken and beef in one bowl, with the full set of sides.</p>
-      </li>
-
-      <li class="dish">
-        <span class="dish-kind">Bowl</span>
-        <h3>Chicken Kebab</h3>
-        <p>Off the skewer, on rice, with salads and dips.</p>
-      </li>
-
-      <li class="dish">
-        <span class="dish-kind">Wrap</span>
-        <h3>Kofta Kebab</h3>
-        <p>Wrapped whole to carry, or cut in three to share.</p>
-      </li>
-
-      <li class="dish">
-        <span class="dish-kind">Bowl</span>
-        <h3>Falafel</h3>
-        <p>The vegan one. Same rice, salads, potatoes and dips.</p>
-      </li>
-
-      <li class="dish">
-        <span class="dish-kind">Dessert</span>
-        <h3>Pistachio Baklava</h3>
-        <p>By the piece. Orders of any size.</p>
-      </li>
-
-    </ul>
-
-    <!-- ==== EDIT: THE BUTTON UNDER THE ITEMS ====
-         Goes to menu.html, the full menu page. The Menu button over the
-         video and the Menu link in the slide-out panel go to the same
-         place - change all three together. -->
-    <div class="dish-cta">
-      <a class="btn btn-gold btn-lg" href="menu.html">See the full menu</a>
-    </div>
 
   </div>
 </section>

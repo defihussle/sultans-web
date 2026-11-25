@@ -327,13 +327,23 @@
 
     <header class="section-head section-head-wide">
       <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span>Catering packages</p>
-      <h2 class="section-title title-2line">Three ways <em>to cater.</em></h2>
+      <h2 class="section-title title-2line">Feed the whole room <em>effortlessly.</em></h2>
       <p class="section-lede">
         Send a guest count and we'll recommend one.
       </p>
     </header>
 
-    <div class="pkg-grid">
+    <!-- ==== EDIT: SHORTCUT LINKS ====
+         Packages jumps to the cards just below, À la carte to the by-the-tray
+         menu further down this page, and Individual boxes to the individual
+         meals on menu.html (they are not on this page). -->
+    <nav class="menu-jump menu-jump-inline" aria-label="Jump to a way to order">
+      <a href="#package-list">Packages</a>
+      <a href="#menu">&Agrave; la carte</a>
+      <a href="menu.html#individual">Individual boxes</a>
+    </nav>
+
+    <div class="pkg-grid" id="package-list">
 
       <!-- ---------- PACKAGE 1 (the wide featured one) ---------- -->
       <article class="pkg pkg-feature">
@@ -837,16 +847,6 @@
       </section>
 
     </div>
-
-    <!-- ==== EDIT: THE SALAD PHOTO ====
-         The picture that closes the menu. A cut-out like the two beside the
-         course tables: the tray is all there is in the file and everything
-         round it is transparent, so it sits on the page with no frame and no
-         box. Unlike those two it shows at every screen size - it is not
-         squeezed in beside a price table, so a phone has room for it. -->
-    <img class="menu-photo" src="assets/tray-salad.png"
-         alt="A full tray of chopped parsley salad with tomatoes, onion and radish"
-         width="1000" height="500" loading="lazy" decoding="async">
 
     <!-- ==== EDIT: THE SMALL PRINT ====
          The catering PDF’s own wording. Keep it: it is what covers the

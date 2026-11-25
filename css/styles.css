@@ -2241,7 +2241,7 @@ body.nav-is-open { overflow: hidden; }
   font-size: var(--fs-small);
   color: var(--text-muted);
 }
-.menu-columns { display: grid; gap: clamp(2.75rem, 6vw, 4rem); }
+.menu-columns { display: grid; gap: var(--sp-5); }
 /* Inside the two-column layout the blocks are already spaced by the grid. */
 .menu-columns .menu-block + .menu-block { margin-top: 0; }
 
@@ -2368,15 +2368,12 @@ body.nav-is-open { overflow: hidden; }
                (.guests), the PATH note (.why-note) and the quote form
                (.request-form - it already has a big shadow, so it only
                lifts).
-     Menu:     each block of dishes (.menu-block). These have no box behind
-               them, so they lift without a shadow - a shadow would draw a
-               rectangle round a list that has no edge.
+     Menu:     each block of dishes (.menu-block) - see just below.
    None of these classes are used on the home page. */
 .course,
 .guests,
 .why-note,
-.request-form,
-.menu-block {
+.request-form {
   transition: transform var(--t-base), box-shadow var(--t-base);
 }
 .course:hover,
@@ -2385,8 +2382,30 @@ body.nav-is-open { overflow: hidden; }
   transform: translateY(-4px);
   box-shadow: var(--shadow-sm);
 }
-.request-form:hover,
-.menu-block:hover { transform: translateY(-4px); }
+.request-form:hover { transform: translateY(-4px); }
+
+/* THE MENU PAGE'S GROUPS ARE CARDS, laid out like the catering packages:
+   Bowls, Wraps, Dessert and Drinks each sit in a rounded box with a pale
+   violet fill (the page itself is white) and lift on hover exactly as a
+   package card does - same distance, same border tint, same shadow.
+   .menu-block is used on menu.html only. */
+.menu-block {
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--plum-050);
+  border: 1px solid rgba(107, 63, 160, 0.12);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--t-base), box-shadow var(--t-base),
+              border-color var(--t-base);
+}
+.menu-block:hover {
+  transform: translateY(-4px);
+  border-color: rgba(107, 63, 160, 0.22);
+  box-shadow: var(--shadow-sm);
+}
+@media (min-width: 900px) {
+  .menu-block { padding: var(--sp-7); }
+}
 
 /* Each card has three parts, in this order:
      .pkg-main   badge, name, meta line, description
@@ -3942,7 +3961,7 @@ a.contact-value:hover { color: var(--gold-400); }
   /* Bowls, wraps, dessert and drinks sit two across on the menu page. */
   .menu-columns {
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(2.75rem, 5vw, 4rem) var(--sp-8);
+    gap: var(--sp-5);
   }
 
   /* The dish cards stop swiping and lay out three across, two rows deep.

@@ -152,10 +152,10 @@ times the whole rest of the page.
 Sized for roughly twice their display size, which covers a retina screen.
 There is no point going larger.
 
-`tray-salad.png` (1000x500) was added the same way and closes the catering
-menu, under the four courses. It is the only one of the four that shows on a
-phone as well: the other three sit beside something, and this one sits on its
-own line.
+`tray-salad.png` (1000x500) was added the same way and used to close the
+catering menu, under the four courses. The client asked for it to come off
+the page (November 2026), so nothing uses it now; the file is kept in case it
+is wanted back.
 
 ## The tab icon and the diamond (added November 2026)
 
