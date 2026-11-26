@@ -248,6 +248,20 @@
 </section>
 
 <!-- =========================================================================
+     ==== EDIT: DISH TICKER (the slow scrolling line of dish names) ====
+     The same strip as on the home page, under the hero. It is a copy, not
+     shared: change the dishes on the home page and change them here too.
+     Add or remove dishes in BOTH copies below so the loop stays seamless.
+     To remove the ticker entirely, delete this whole <div>.
+     ========================================================================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <span class="tagmark" role="img" aria-label="#eatlikeasultan"></span> <i>&#10022;</i> </span>
+    <span class="ticker-group">Chicken Shawarma <i>&#10022;</i> Kofta Kebab <i>&#10022;</i> Falafel <i>&#10022;</i> Fattoush <i>&#10022;</i> Tabouleh <i>&#10022;</i> Hummus <i>&#10022;</i> Garlic Potatoes <i>&#10022;</i> Seasoned Rice <i>&#10022;</i> <span class="tagmark" role="img" aria-label="#eatlikeasultan"></span> <i>&#10022;</i> </span>
+  </div>
+</div>
+
+<!-- =========================================================================
      ==== EDIT: WHY SULTAN’S ====
      Three paragraphs, in the client’s own words, between the hero and the
      packages. It is here so that the page says what the service is before it
@@ -412,12 +426,12 @@
       <!-- ---------- PACKAGE 2 (words left, photo right) ---------- -->
       <article class="pkg pkg-img-right">
         <!-- ==== EDIT: MEDITERRANEAN PLATTER PHOTO ====
-             Placed as supplied, like the two in the menu below. No frame and
-             no box: the file fades to transparent at its edges and meets the
-             card softly. -->
-        <img class="pkg-photo" src="assets/platter-mediterranean.webp"
+             The client's cropped version (November 2026), flattened onto the
+             card's white so it can be a small JPEG. No frame and no box: its
+             edges fade into the card. -->
+        <img class="pkg-photo" src="assets/pkg-mediterranean-platter.jpg"
              alt="A round platter of falafel, stuffed grape leaves, feta, pickled vegetables, pita and tahini"
-             width="900" height="674" loading="lazy" decoding="async">
+             width="1000" height="895" loading="lazy" decoding="async">
         <div class="pkg-main">
           <span class="pkg-badge pkg-badge-new">New</span>
           <h3 class="pkg-name">Mediterranean Platter</h3>
@@ -450,12 +464,13 @@
       <!-- ---------- PACKAGE 3 (photo left at an angle, words right) ---------- -->
       <article class="pkg pkg-img-left">
         <!-- ==== EDIT: HUMMUS DIP PLATTER PHOTO ====
-             The same file that sits beside the Dips rows further down the
-             page. One picture, two places: this card and that one are the
-             same platter, so they should not be two different photographs. -->
-        <img class="pkg-photo" src="assets/tray-hummus-platter.webp"
+             The client's cropped version (November 2026): the same platter as
+             the photo beside the Dips rows further down, already shot at an
+             angle, so the stylesheet no longer tilts or crops it. Flattened
+             onto the card's white so it can be a small JPEG. -->
+        <img class="pkg-photo" src="assets/pkg-hummus-platter.jpg"
              alt="A tray of hummus with pita chips, cucumber, carrots, peppers and tomatoes"
-             width="700" height="934" loading="lazy" decoding="async">
+             width="800" height="924" loading="lazy" decoding="async">
         <div class="pkg-main">
           <span class="pkg-badge pkg-badge-new">New</span>
           <h3 class="pkg-name">Hummus Dip Platter</h3>

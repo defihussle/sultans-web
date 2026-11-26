@@ -1542,6 +1542,11 @@ body.nav-is-open { overflow: hidden; }
 .hero-light .hero-scrim::after { opacity: 0; }
 
 .hero-light .hero-title { color: var(--plum-500); }
+/* "Make meetings memorable" runs larger than the standard hero headline
+   (--fs-hero), at the client's request. Catering page only - it is the
+   only page with .hero-light. 4.25rem is the most that keeps "Make
+   meetings" on one line in the 32rem copy column on a computer. */
+.hero-light .hero-title { font-size: clamp(2.5rem, 5.8vw, 4.25rem); }
 .hero-light .hero-title em { font-style: normal; color: var(--plum-700); }
 .hero-light .hero-lede { color: var(--text-muted); }
 
@@ -2443,16 +2448,8 @@ body.nav-is-open { overflow: hidden; }
   max-height: 15rem;
   margin: 0 auto calc(var(--sp-6) * -1);
 }
-/* The Hummus Dip Platter photo sits at an angle, at every screen size. The
-   tilt is on the card with .pkg-img-left only.
-   THE FILE HAS A WIDE PALE MARGIN round the tray (most of it on the left),
-   and the same file is used further down the page, so it is cropped here
-   rather than in the file: clip-path trims the margin and scale() blows the
-   tray up to fill the space the margin took. */
-.pkg-img-left .pkg-photo {
-  clip-path: inset(7% 10% 6% 18% round 14px);
-  transform: rotate(-8deg) scale(1.18);
-}
+/* The Hummus Dip Platter photo (assets/pkg-hummus-platter.jpg) is already
+   cropped close and shot at an angle, so it needs no tilt or crop here. */
 
 .pkg-aside {
   padding: var(--sp-5);
@@ -2499,7 +2496,9 @@ body.nav-is-open { overflow: hidden; }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.07;
+  /* Half the 7% the purple bands use, so the pattern stays behind the
+     words on this card rather than competing with them. */
+  opacity: 0.035;
   background-color: #FFFFFF;
   -webkit-mask-image: url("../assets/pattern-tile.png");
           mask-image: url("../assets/pattern-tile.png");
@@ -2508,7 +2507,10 @@ body.nav-is-open { overflow: hidden; }
   -webkit-mask-size: 226px auto;
           mask-size: 226px auto;
 }
-.pkg-feature .pkg-name { color: var(--paper); }
+/* The Spread's name is set larger than the other package names - it is
+   the headline package. The wordmark in it scales with it (it is sized in
+   em). 3rem from 980px, in section 15. */
+.pkg-feature .pkg-name { color: var(--paper); font-size: clamp(2rem, 7vw, 2.6rem); }
 .pkg-feature .pkg-meta { color: var(--gold-300); }
 .pkg-feature .pkg-desc { color: rgba(255, 255, 255, 0.84); max-width: 62ch; }
 .pkg-feature .pkg-price { color: var(--paper); }
@@ -4055,7 +4057,7 @@ a.contact-value:hover { color: var(--gold-400); }
   }
   .pkg-feature .pkg-price { margin-bottom: 0; }
   .pkg-feature .pkg-foot .btn { width: auto; display: inline-flex; }
-  .pkg-feature .pkg-name { font-size: 2.1rem; }
+  .pkg-feature .pkg-name { font-size: 3rem; }
 
   /* The words - name, "what's included" and the button - stack in one
      column; the photo has the other column to itself, centred top to
