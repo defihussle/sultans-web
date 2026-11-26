@@ -312,6 +312,49 @@
 </section>
 
 <!-- =========================================================================
+     ==== EDIT: HOW TO BOOK - FOUR SIMPLE STEPS ====
+     Between Why Sultan's and the packages, on the same dark purple as the
+     "Let's plan your next event" band (class "section-invert").
+
+     One <li class="step"> per step. The gold 01-04 numbers are drawn by the
+     stylesheet, in order, so there is nothing to renumber: copy, delete or
+     move a whole <li> and they follow. Four across on a computer, two on a
+     tablet, one under the other on a phone.
+
+     The phone number here must match the header, the contact list and the
+     footer.
+     ========================================================================= -->
+<section class="section section-invert" id="steps">
+  <div class="wrap">
+
+    <header class="section-head section-head-wide">
+      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>How to book catering</p>
+      <h2 class="section-title">Four simple steps.</h2>
+    </header>
+
+    <ol class="steps steps-dark">
+      <li class="step">
+        <h3>Browse the menu</h3>
+        <p>Pick a spread, platters or boxed meals for your guest count.</p>
+      </li>
+      <li class="step">
+        <h3>Submit your order</h3>
+        <p>Call <a href="tel:+16479293924">647-929-3924</a> or send the request form below.</p>
+      </li>
+      <li class="step">
+        <h3>Confirm details</h3>
+        <p>We send an invoice. Approve it and a payment link locks in the date.</p>
+      </li>
+      <li class="step">
+        <h3>Eat &amp; enjoy</h3>
+        <p>Prepared fresh for pickup or hot delivery at your time.</p>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+<!-- =========================================================================
      ==== EDIT: CATERING PACKAGES ====   *** THE MOST-EDITED SECTION ***
 
      The first package is the featured one. All three are full width and
@@ -565,9 +608,10 @@
          by-the-tray menu, because "how big a tray do I need" is the question
          the prices underneath immediately raise.
 
-         WHERE THE NUMBERS COME FROM. Every serving range is the one printed
-         on the catering PDF (Sultans-Catering-2026-V3) for that tray, and
-         nothing else. Nothing here is averaged, rounded or worked out.
+         WHERE THE NUMBERS COME FROM. The tray ranges are the client's
+         (updated November 2026): Small 5-8, Half 10-15, Med 15-20, Full
+         25-30. The Dips sizes are separate and still the catering PDF's.
+         Nothing here is averaged, rounded or worked out.
 
          THEY LIVE ON THE COLUMN HEADINGS NOW, as data-max, and that is the
          only place they are written: the script reads them off the table it
@@ -575,10 +619,11 @@
          with no second edit anywhere.
 
          THE RULE THE SLIDER FOLLOWS, in one line: the smallest tray whose
-         printed range reaches the guest count. So 25 guests gets the Med
-         tray, which serves 25-30, and 22 gets it too, because a Half tray
-         stops at 20. Above 40 - the top of the largest tray - it stops
-         recommending and says so, rather than inventing a number of trays.
+         range reaches the guest count. So 20 guests gets the Med tray, which
+         serves 15-20, and 18 gets it too; 24 gets the Full tray, because a
+         Med tray stops at 20. Above 30 - the top of the largest tray - it
+         stops recommending and says so, rather than inventing a number of
+         trays.
 
          TO CHANGE THE RANGE OF THE SLIDER, change min and max on the input. -->
     <div class="guests" data-guests>
@@ -597,7 +642,7 @@
         <p class="guests-answer" id="guestAnswer" role="status">
           <output id="guestOut" for="guestCount">24</output> guests
           <span class="guests-arrow" aria-hidden="true">&rarr;</span>
-          <span class="guests-tray">Medium tray</span>
+          <span class="guests-tray">Full tray</span>
         </p>
       </div>
     </div>
@@ -616,10 +661,10 @@
             <thead>
               <tr>
                 <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
-                <th scope="col" data-size="Small" data-max="10">Small <span class="price-serves">8&ndash;10</span></th>
-                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
-                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
-                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+                <th scope="col" data-size="Small" data-max="8">Small <span class="price-serves">5&ndash;8</span></th>
+                <th scope="col" data-size="Half" data-max="15">Half <span class="price-serves">10&ndash;15</span></th>
+                <th scope="col" data-size="Med" data-max="20">Med <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Full" data-max="30">Full <span class="price-serves">25&ndash;30</span></th>
               </tr>
             </thead>
             <tbody>
@@ -693,9 +738,9 @@
             <thead>
               <tr>
                 <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
-                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
-                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
-                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+                <th scope="col" data-size="Half" data-max="15">Half <span class="price-serves">10&ndash;15</span></th>
+                <th scope="col" data-size="Med" data-max="20">Med <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Full" data-max="30">Full <span class="price-serves">25&ndash;30</span></th>
               </tr>
             </thead>
             <tbody>
@@ -748,9 +793,9 @@
             <thead>
               <tr>
                 <th scope="col" class="price-head-name">Tray <span class="price-serves">serves</span></th>
-                <th scope="col" data-size="Half" data-max="20">Half <span class="price-serves">15&ndash;20</span></th>
-                <th scope="col" data-size="Med" data-max="30">Med <span class="price-serves">25&ndash;30</span></th>
-                <th scope="col" data-size="Full" data-max="40">Full <span class="price-serves">35&ndash;40</span></th>
+                <th scope="col" data-size="Half" data-max="15">Half <span class="price-serves">10&ndash;15</span></th>
+                <th scope="col" data-size="Med" data-max="20">Med <span class="price-serves">15&ndash;20</span></th>
+                <th scope="col" data-size="Full" data-max="30">Full <span class="price-serves">25&ndash;30</span></th>
               </tr>
             </thead>
             <tbody>
@@ -1160,7 +1205,7 @@
 
     <div class="footer-bottom">
       <!-- The year fills itself in. Change the business name only. -->
-      <p>&copy; <span id="year">2026</span> <img class="wordmark wordmark-sm" src="assets/wordmark-white.png" alt="Sultan’s" width="289" height="74"> Mediterranean Grill. All rights reserved.</p>
+      <p>&copy; <span id="year">2026</span> Sultan’s Mediterranean Grill. All rights reserved.</p>
       <a class="back-to-top" href="#top">Back to top &uarr;</a>
     </div>
 

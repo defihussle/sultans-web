@@ -3062,6 +3062,21 @@ body.nav-is-open { overflow: hidden; }
   margin: 0;
 }
 
+/* --- The same steps on the dark purple band (catering page, "Four simple
+   steps") - cream words, brighter gold numbers, a light joining line. */
+.steps-dark { margin-bottom: 0; }
+.steps-dark .step::before { color: var(--gold-300); }
+.steps-dark .step:not(:last-child)::after {
+  background: linear-gradient(rgba(255, 255, 255, 0.28), transparent);
+}
+.steps-dark .step h3 { color: var(--paper); }
+.steps-dark .step p { color: rgba(255, 255, 255, 0.8); }
+.steps-dark .step a {
+  color: var(--gold-300);
+  text-decoration-color: rgba(217, 188, 119, 0.5);
+}
+.steps-dark .step a:hover { color: var(--paper); }
+
 .pay-note {
   display: flex;
   flex-wrap: wrap;
