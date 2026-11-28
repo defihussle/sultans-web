@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  SULTAN'S MEDITERRANEAN GRILL - STORE PAGE: Waterloo
+  ============================================================================
+  One of eleven store pages in this folder, one per card in the Locations
+  carousel on the home page. All eleven are the same page with different
+  details, so a change to the layout has to be made in every one of them.
+
+  WHAT COMES FROM GOOGLE
+  The hours, phone number and address are read live from Google Places by
+  js/location.js, using the Place ID on the <main> tag below. Change the
+  hours on the Google Business Profile and this page follows - there is
+  nothing to edit here. The address typed below is only what shows if
+  Google cannot be reached.
+
+  The map is a Google Maps embed of the same Place ID.
+
+  TO ADD A STORE: copy this file, rename it, change the name, address, Place
+  ID and map below, then add a card to the carousel in index.html that
+  links to it. Find a Place ID at
+  https://developers.google.com/maps/documentation/places/web-service/place-id
+  ============================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ==== EDIT: PAGE TITLE & SEARCH DESCRIPTION ==== -->
+  <title>Waterloo | Sultan's Mediterranean Grill</title>
+  <meta name="description" content="Sultan's Mediterranean Grill at Waterloo, 253 King St N, Unit FC2, Waterloo, ON N2J 2Y8. Hours, directions and a map.">
+  <meta name="theme-color" content="#2D1943">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Waterloo | Sultan's Mediterranean Grill">
+  <meta property="og:description" content="253 King St N, Unit FC2, Waterloo, ON N2J 2Y8. Hours, directions and a map.">
+  <meta property="og:site_name" content="Sultan's Mediterranean Grill">
+  <meta property="og:url" content="https://sultansgrill.ca/locations/waterloo.html">
+  <meta property="og:image" content="https://sultansgrill.ca/assets/share-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Sultan's Mediterranean Grill">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/kht7bch.css">
+
+  <link rel="icon" href="../assets/favicon.png" sizes="any" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="page-location">
+<a class="skip-link" href="#main">Skip to content</a>
+
+
+<!-- =========================================================================
+     ==== EDIT: HEADER & NAVIGATION ====   *** SHARED WITH index.html, catering.html and menu.html ***
+     Any change here must be repeated on every page, store pages included.
+
+     The bar holds the logo in the middle and the menu button on the right.
+     Every nav link lives in the slide-out panel below, at all screen sizes.
+
+     These are the store pages, one per location, so no nav link is marked
+     as the current page.
+     ========================================================================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+
+    <!-- ==== EDIT: THE DESKTOP NAV LINKS ====
+         The four links sit in the bar itself from 900px up, two on each
+         side of the logo, which is what keeps the logo dead centre. Below
+         900px these are hidden and the round menu button to the right
+         takes over, opening the slide-out panel further down this file.
+
+         SO THESE FOUR LINKS EXIST TWICE on this page: once here for the
+         wide bar and once in that panel for phones. Rename or re-point one
+         in BOTH places or the two will disagree. The panel may carry a link
+         or two more - it has the room; this bar does not.
+
+         Two lists, not one, because they sit in different columns of the
+         bar. Keep two on each side; a fifth link belongs in the panel
+         only, or the logo stops being centred.
+
+         *** SHARED WITH the other two pages *** - each has its own copy,
+         with its own hrefs and its own. -->
+    <nav class="nav-inline nav-inline-left" aria-label="Main">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../catering.html">Catering</a></li>
+      </ul>
+    </nav>
+
+    <!-- The wordmark. Two versions: the white one shows while the bar is
+         see-through over a dark hero, the purple one once the bar turns cream
+         - and from the first pixel on the home and catering pages, whose
+         heroes are light. Both live in the assets folder.
+
+         THIS IS THE NAME ON ITS OWN, not the full lockup: MEDITERRANEAN GRILL
+         is no longer set under it. The footer still carries the lockup, so the
+         descriptor is still on every page, once. To size the bar mark, change
+         the height on .brand-logo in section 6 of the stylesheet - not the
+         width and height attributes here, which only tell the browser the
+         shape of the file so the bar does not jump while it loads. -->
+    <a class="brand" href="../index.html" aria-label="Sultan's Mediterranean Grill, home">
+      <img class="brand-logo brand-logo-on-dark" src="../assets/wordmark-white.png" alt="Sultan’s" width="289" height="74">
+      <img class="brand-logo brand-logo-on-light" src="../assets/wordmark-purple.png" alt="" aria-hidden="true" width="791" height="200">
+    </a>
+
+    <nav class="nav-inline nav-inline-right" aria-label="Main, continued">
+      <ul>
+        <li><a href="../menu.html">Menu</a></li>
+        <li><a href="../index.html#locations">Locations</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- =========================================================================
+     ==== EDIT: SLIDE-OUT MENU ====   *** SHARED WITH index.html, catering.html and menu.html ***
+     The panel that slides in from the right when the menu button is tapped.
+     ========================================================================= -->
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<nav class="site-nav" id="siteNav" aria-label="Main">
+
+  <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+  <ul class="nav-list">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../catering.html">Catering</a></li>
+    <li><a href="../menu.html">Menu</a></li>
+    <li><a href="../index.html#locations">Locations</a></li>
+    <li><a href="../index.html#about">About Us</a></li>
+  </ul>
+
+</nav>
+
+
+<!-- ==== EDIT: THE GOOGLE PLACE ID ====
+     data-place-id is the store on Google. js/location.js reads it to fetch
+     the hours, phone and address. -->
+<main id="main" data-place-id="ChIJba4MXA7zK4gR25s89i37OyY">
+
+<!-- =========================================================================
+     ==== EDIT: STORE HERO ====
+     The same purple as the menu page hero (class "hero-plum").
+     ========================================================================= -->
+<section class="hero hero-compact hero-plum" id="top">
+
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow eyebrow-light"><span class="eyebrow-rule" aria-hidden="true"></span>Sultan&rsquo;s Mediterranean Grill</p>
+
+      <h1 class="hero-title">Waterloo</h1>
+    </div>
+
+    <p class="hero-aside">
+      <a href="../index.html#locations">&larr; All locations</a>
+    </p>
+  </div>
+
+</section>
+
+<!-- =========================================================================
+     ==== EDIT: ADDRESS, HOURS AND MAP ====
+     Hours and phone fill themselves in from Google (see the note at the top
+     of this file). The address below is replaced by Google's copy when it
+     loads; it stays as written if Google cannot be reached.
+     ========================================================================= -->
+<section class="section" id="store">
+  <div class="wrap store">
+
+    <div class="store-info">
+
+      <div class="store-block">
+        <h2 class="store-label">Address</h2>
+        <p class="store-addr" data-place-address>253 King St N, Unit FC2<br>Waterloo, ON N2J 2Y8</p>
+        <p class="store-directions">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Sultan%27s+Mediterranean+Grill+253+King+St+N%2C+Unit+FC2+Waterloo%2C+ON+N2J+2Y8&amp;query_place_id=ChIJba4MXA7zK4gR25s89i37OyY" target="_blank" rel="noopener" data-place-maps>Get directions</a>
+        </p>
+      </div>
+
+      <div class="store-block">
+        <h2 class="store-label">Hours <span class="store-open" data-place-open hidden></span></h2>
+        <ul class="store-hours" data-place-hours>
+          <li class="store-hours-note">Loading hours from Google&hellip;</li>
+        </ul>
+      </div>
+
+      <div class="store-block" data-place-phone-block hidden>
+        <h2 class="store-label">Phone</h2>
+        <p class="store-phone"><a href="#" data-place-phone></a></p>
+      </div>
+
+    </div>
+
+    <div class="store-map">
+      <iframe
+        title="Map showing Sultan&rsquo;s Waterloo"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNU9_quQisZD_KVUIjlWhZG9QEjmOOnIk&amp;q=place_id:ChIJba4MXA7zK4gR25s89i37OyY"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+
+  </div>
+</section>
+
+
+</main>
+
+<!-- =========================================================================
+     ==== EDIT: FOOTER ====   *** SHARED WITH index.html AND catering.html ***
+     Any change here must be repeated in the footer of the other two pages,
+     which each have their own copy of this block.
+     ========================================================================= -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+
+    <div class="footer-brand">
+      <img class="footer-logo" src="../assets/logo-white.png" alt="Sultan's Mediterranean Grill" width="480" height="165">
+      <p class="footer-blurb">
+        Catering across Toronto, North York, Waterloo and St. Catharines.
+      </p>
+      <p class="footer-tag"><span class="tagmark" role="img" aria-label="#eatlikeasultan"></span></p>
+
+      <ul class="footer-social">
+        <li>
+          <a href="https://www.instagram.com/sultans.ca/" target="_blank" rel="noopener">
+            <span class="icon icon-instagram" aria-hidden="true"></span>
+            <span class="sr-only">Sultan&#39;s on Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/sultans.ca" target="_blank" rel="noopener">
+            <span class="icon icon-facebook" aria-hidden="true"></span>
+            <span class="sr-only">Sultan&#39;s on Facebook</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <h2>Catering</h2>
+        <ul>
+          <li><a href="../catering.html#packages">Packages</a></li>
+          <li><a href="../catering.html#request">Request a quote</a></li>
+          <li><a href="https://sultansgrill.ca/wp-content/uploads/Sultans-Catering-2026-V3-opt.pdf" target="_blank" rel="noopener">Catering menu (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#locations">Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="tel:+16479293924">647-929-3924</a></li>
+          <li><a href="mailto:info@sultansgrill.ca">info@sultansgrill.ca</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer-bottom">
+      <!-- The year fills itself in. Change the business name only. -->
+      <p>&copy; <span id="year">2026</span> Sultan’s Mediterranean Grill. All rights reserved.</p>
+      <a class="back-to-top" href="#top">Back to top &uarr;</a>
+    </div>
+
+  </div>
+</footer>
+
+<script src="../js/script.js"></script>
+<script src="../js/location.js"></script>
+</body>
+</html>

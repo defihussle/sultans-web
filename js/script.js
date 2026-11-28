@@ -6,6 +6,7 @@
      1. Starting every page load at the top of the page
      2. The mobile menu button
      3. Turning the header white once you scroll past the hero
+     3c. "Use my location" - sorting the store cards by distance
      3d. The guest count slider on the catering page
      4. The copyright year in the footer
      5. Highlighting the nav link for the section you are looking at
@@ -333,6 +334,74 @@ var CATERING_EMAIL = 'info@sultansgrill.ca';
       refresh();
     }
   );
+
+  /* -------------------------------------------------------------------------
+     3c. USE MY LOCATION   (home page only)
+     The button above the carousel asks the browser where the visitor is.
+     If they allow it, the cards are put in order of distance, closest
+     first, using the data-lat / data-lng on each card. The position is
+     only used here, on their device; it is not sent anywhere or saved.
+
+     The button is hidden in the HTML and only shown here, so a browser
+     without location support never sees a button that does nothing.
+     Safe to delete this whole block; the cards keep their typed order.
+     ------------------------------------------------------------------------- */
+  var locate = document.querySelector('[data-locate]');
+  var locGrid = document.querySelector('.loc-grid');
+  if (locate && locGrid && navigator.geolocation) {
+    var locateBtn = locate.querySelector('[data-locate-btn]');
+    var locateStatus = locate.querySelector('[data-locate-status]');
+    locate.hidden = false;
+
+    // Straight-line distance in km between two points on the globe.
+    var distanceKm = function (lat1, lng1, lat2, lng2) {
+      var rad = Math.PI / 180;
+      var dLat = (lat2 - lat1) * rad;
+      var dLng = (lng2 - lng1) * rad;
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * rad) * Math.cos(lat2 * rad) *
+              Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    };
+
+    locateBtn.addEventListener('click', function () {
+      locateBtn.disabled = true;
+      locateStatus.textContent = 'Finding you…';
+
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          var lat = pos.coords.latitude;
+          var lng = pos.coords.longitude;
+          var cards = Array.prototype.slice.call(locGrid.querySelectorAll('.loc[data-lat]'));
+
+          cards
+            .map(function (card) {
+              return {
+                card: card,
+                km: distanceKm(lat, lng, parseFloat(card.getAttribute('data-lat')),
+                               parseFloat(card.getAttribute('data-lng')))
+              };
+            })
+            .sort(function (a, b) { return a.km - b.km; })
+            .forEach(function (item) { locGrid.appendChild(item.card); });
+
+          // Back to the start of the row, so the closest store is in view.
+          locGrid.scrollLeft = 0;
+          locGrid.dispatchEvent(new Event('scroll'));
+
+          locateBtn.disabled = false;
+          locateStatus.textContent = 'Sorted by distance, closest first.';
+        },
+        function (err) {
+          locateBtn.disabled = false;
+          locateStatus.textContent = err.code === 1
+            ? 'Location access was turned off, so the list is in its usual order.'
+            : 'We could not find your location. Please try again.';
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+      );
+    });
+  }
 
   /* -------------------------------------------------------------------------
      3d. GUEST COUNT -> TRAY SIZE   (catering page only)

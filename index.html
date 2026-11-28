@@ -438,6 +438,20 @@
       <h2 class="section-title title-2line">Eleven kitchens, <em>one standard.</em></h2>
     </header>
 
+    <!-- ==== EDIT: USE MY LOCATION ====
+         Asks the browser for the visitor's location and, if they allow it,
+         puts the cards below in order of distance, closest first. The
+         location never leaves their device: the distances are worked out
+         from the data-lat / data-lng on each card. See block 3c in
+         js/script.js. The button stays hidden on browsers that cannot do
+         this, so it never appears broken. -->
+    <div class="loc-locate" data-locate hidden>
+      <button type="button" class="btn btn-dark btn-sm loc-locate-btn" data-locate-btn>
+        <span class="icon icon-pin" aria-hidden="true"></span>Use my location
+      </button>
+      <p class="loc-locate-status" data-locate-status aria-live="polite"></p>
+    </div>
+
     <!-- ==== EDIT: THE LOCATIONS CAROUSEL ====
          ONE row for every location, in one carousel. There are no areas
          and no filter: a list of eleven is short enough to swipe.
@@ -451,9 +465,11 @@
          one long row with the arrows driving it. Both come from
          .loc-grid in section 12 of the stylesheet.
 
-         NOTE: the main site publishes no phone numbers or opening hours
-         per location. When you have them, add a line inside a block:
-             <p class="loc-meta">Mon&ndash;Fri 10am&ndash;7pm</p>
+         EACH CARD LINKS TO ITS OWN STORE PAGE in the locations folder,
+         where the hours and phone come live from Google. The data-lat and
+         data-lng on each card are the store's position, used only by the
+         "Use my location" button above. A new store needs both, plus its
+         own page in the locations folder.
          ==================================================== -->
     <div class="loc-group">
       <div class="loc-group-head">
@@ -464,58 +480,58 @@
       </div>
       <ul class="loc-grid" data-scroller tabindex="0" aria-label="All Sultan&#39;s locations">
 
-        <li class="loc">
-          <h4>TD Centre</h4>
+        <li class="loc" data-lat="43.6470615" data-lng="-79.3827201">
+          <h4><a class="loc-link" href="locations/td-centre.html">TD Centre</a></h4>
           <p class="loc-addr">100 Wellington St W<br>Toronto, ON M5J 2R2</p>
         </li>
 
-        <li class="loc">
-          <h4>Royal Bank Plaza</h4>
+        <li class="loc" data-lat="43.6465300" data-lng="-79.3801380">
+          <h4><a class="loc-link" href="locations/royal-bank-plaza.html">Royal Bank Plaza</a></h4>
           <p class="loc-addr">200 Bay St, Unit F4<br>Toronto, ON M5J 2T6</p>
         </li>
 
-        <li class="loc">
-          <h4>Commerce Court</h4>
+        <li class="loc" data-lat="43.6481326" data-lng="-79.3795089">
+          <h4><a class="loc-link" href="locations/commerce-court.html">Commerce Court</a></h4>
           <p class="loc-addr">199 Bay St<br>Toronto, ON M5L 1G9</p>
         </li>
 
-        <li class="loc">
-          <h4>Exchange Tower</h4>
+        <li class="loc" data-lat="43.6490554" data-lng="-79.3836085">
+          <h4><a class="loc-link" href="locations/exchange-tower.html">Exchange Tower</a></h4>
           <p class="loc-addr">130 King St W<br>Toronto, ON M5X 2A2</p>
         </li>
 
-        <li class="loc">
-          <h4>Victoria St</h4>
+        <li class="loc" data-lat="43.6505595" data-lng="-79.3773468">
+          <h4><a class="loc-link" href="locations/victoria-st.html">Victoria St</a></h4>
           <p class="loc-addr">44 Victoria St<br>Toronto, ON M5C 3A1</p>
         </li>
 
-        <li class="loc">
-          <h4>Simcoe Place</h4>
+        <li class="loc" data-lat="43.6449355" data-lng="-79.3861510">
+          <h4><a class="loc-link" href="locations/simcoe-place.html">Simcoe Place</a></h4>
           <p class="loc-addr">200 Front St W<br>Toronto, ON M5V 3G5</p>
         </li>
 
-        <li class="loc">
-          <h4>Southcore Financial Centre</h4>
+        <li class="loc" data-lat="43.6430721" data-lng="-79.3833333">
+          <h4><a class="loc-link" href="locations/southcore-financial-centre.html">Southcore Financial Centre</a></h4>
           <p class="loc-addr">120 Bremner Blvd<br>Toronto, ON M5J 0B2</p>
         </li>
 
-        <li class="loc">
-          <h4>700 University</h4>
+        <li class="loc" data-lat="43.6591917" data-lng="-79.3910104">
+          <h4><a class="loc-link" href="locations/700-university.html">700 University</a></h4>
           <p class="loc-addr">700 University Ave, Unit HSC01<br>Toronto, ON M5G 1X6</p>
         </li>
 
-        <li class="loc">
-          <h4>North York Centre</h4>
+        <li class="loc" data-lat="43.7684641" data-lng="-79.4140170">
+          <h4><a class="loc-link" href="locations/north-york-centre.html">North York Centre</a></h4>
           <p class="loc-addr">5150 Yonge St, Unit F-6<br>North York, ON M2N 6L7</p>
         </li>
 
-        <li class="loc">
-          <h4>Waterloo</h4>
+        <li class="loc" data-lat="43.4767107" data-lng="-80.5253592">
+          <h4><a class="loc-link" href="locations/waterloo.html">Waterloo</a></h4>
           <p class="loc-addr">253 King St N, Unit FC2<br>Waterloo, ON N2J 2Y8</p>
         </li>
 
-        <li class="loc">
-          <h4>St. Catharines</h4>
+        <li class="loc" data-lat="43.1417631" data-lng="-79.2402166">
+          <h4><a class="loc-link" href="locations/st-catharines.html">St. Catharines</a></h4>
           <p class="loc-addr">224 Glenridge Ave, Unit 10<br>St. Catharines, ON L2T 3J9</p>
         </li>
       </ul>
